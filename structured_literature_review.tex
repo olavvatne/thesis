@@ -1,0 +1,79 @@
+\section{Structured Literature Review}
+The purpose of conducting a \ac{SLR} is to get an overview of the field of remote image sensing, as well as the research related to curriculum learning and dealing with noisy labels. The \ac{SLR} method has been chosen to investigate these topics, and provides a formal way of identifying the information available.
+
+\subsection{Identification of research}
+This section outlines the strategy that was utilized to search for primary studies. By utilizing a search strategy, literature relevant to the defined research questions can be identified and collected. Search terms have been defined, as well as literature resources.
+
+\subsubsection{Literature resources}
+\label{sec:literature_resources}
+The following resources was searched in order to identify and collect relevant material:
+\begin{itemize}
+	\item ACM digital library
+	\item IEEExplore
+	\item ScienceDirect
+	\item CiteSeer
+	\item Springer Link
+	\item ECCV (conference)
+	\item NIPS (conference)
+\end{itemize}
+
+\subsubsection{Key terms and groupings}
+Table \ref{tab:search_terms} describes the different word groups employed by the search strategy. Each group specifies a number of terms that are either synonyms or related to each other. Additional terms have been appended, as a result of a search strategy validation.
+
+
+\begin{table}[htp]
+
+\caption{The terms and groups}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{|c|c|c|c|c|c|c|c}\hline
+ 		& Group 1 & Group 2 & Group 3 & Group 4 & Group 5 & Group 6\\\hline
+Term 1 	& \pbox{20cm}{Aerial \\ images} & \pbox{2cm}{Curriculum learning} & \pbox{2cm}{Noisy \\ labels} & \pbox{2cm}{Neural \\ network} & Segmentation & Roads\\\hline
+Term 2 	& \pbox{20cm}{Satellite \\ images} & \pbox{2cm}{Guided learning} & \pbox{2cm}{Missing labels} & \pbox{3cm}{Convolutional \\ neural network} & Classification & \\\hline
+Term 3 	& \pbox{20cm}{Remote \\ sensing} & \pbox{2cm}{Example ordering} & \pbox{2cm}{Semi-supervised} & \pbox{3cm}{Machine learning} & & \\\hline
+Term 4 	& \pbox{20cm}{Images} & & \pbox{2cm}{Noisy data \\ (appended)} & \pbox{3cm}{Deep neural \\ networks \\ (appended)} & & \\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:search_terms}
+\end{table}
+
+\subsubsection{Search strategy}
+Based on Table \ref{tab:search_terms} several search expressions were devised. Each of these expressions were run for each of the resources listed in the literature resources section. 
+
+\begin{itemize}
+	\item (aerial images OR satellite images) AND (segmentation OR classification)
+	\item (remote sensing OR aerial images) AND (noisy labels OR missing labels OR semi-supervised OR noisy data)
+	\item (neural network OR machine learning OR convolutional neural networks) AND (aerial images OR satellite images)
+	\item (curriculum learning OR guided learning) AND (machine learning OR neural networks OR deep neural networks OR  convolutional neural network) 
+	\item (segmentation OR classification) AND (roads)
+	\item (Noisy labels OR missing labels OR semi-supervised OR noisy data) AND (machine learning OR neural network OR convolutional neural network)
+	\item (aerial) AND (noisy labels OR missing labels OR semi-supervised OR noisy data) AND roads
+\end{itemize}
+
+\subsection{Selection process}
+The search expressions resulted in a large number of hits for each resource. The top 15 results for each expression were stored, and a  selection process was created to reduce the over 400 studies to a more manageable number. At first, the title of each study was evaluated. If the title seemed unrelated to the research goal or the research questions found in Section \ref{sec:Goals and Research Questions}
+the study was removed. Then the title and the abstract were evaluated using the inclusion criteria defined in Table \ref{tab:selection_critera}. Finally, the remaining studies were read while considering both the inclusion and quality criteria.
+
+\begin{table}[htp]
+\caption{Inclusion and quality criteria for the selection process}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{|l|l|l|}\hline
+Id & Criteria & Screening step\\\hline
+IC 1 & \pbox{10cm}{The study's main concern is curriculum learning, dealing with noisy labels or road extraction systems}  & 1\\\hline
+IC 2 & The study is presenting empirical results & 1\\\hline
+IC 3 & The study preferably involve machine learning & 1\\\hline
+QC 1 & The research has a clear aim & 2\\\hline
+QC 2 & Is there an adequate description of related works? & 2\\\hline
+QC 3 & How rigorously has the method or technique been tested? & 2\\\hline
+QC 4 & Is there a future work section?
+ & 2\\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:selection_critera}
+\end{table}
+
+\subsection{Other resources}
+By conducting a \ac{SLR}, a number of relevant studies were identified. Additional literature was discovered by finding works citing the \ac{SLR} papers on Google Scholar, and reading survey papers on road extraction systems \citep{Mena_GIS_state_of_the_art} \citep{Trinder_towards_automation} and label noise \citep{Frenay_label_noise_survey}. The surveys provided a comprehensive overview of these topics and enabled further identification of relevant literature.

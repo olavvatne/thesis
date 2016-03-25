@@ -21,7 +21,8 @@
 *.mtc1
 *.out
 *.tdo
-*.pdf
+thesis.pdf
 *.synctex.gz
 .DS_Store
 .svn
+Thumbs.db
