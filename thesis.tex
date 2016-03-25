@@ -23,8 +23,8 @@
 % Fill in here, and use commands in the text. 
 \newcommand{\thesisAuthor}{Olav Kåre Vatne}
 \newcommand{\thesisTitle}{Road detection in aerial images}
-\newcommand{\thesisType}{Preliminary thesis report (Informatics)}
-\newcommand{\thesisDate}{autumn 2015}
+\newcommand{\thesisType}{master project}
+\newcommand{\thesisDate}{spring 2016}
 
 % PDF info
 \hypersetup{pdfauthor={\thesisAuthor}}
@@ -94,11 +94,33 @@
 \acro{SVM}{support vector machines}
 \end{acronym}
 
+\clearpage
+
+\section*{Abstract}
+\todo[inline]{Abstract- Sales pitch}
+\todo[inline]{field of research, brief motivation for the work, what the research topic is, the research approach(es) applied. contributions}
+\todo[inline]{Half a page of text - no lists tables or figures}
+
+\clearpage
+
+\section*{Preface}
+\vspace{1cm}
+\todo[inline]{Preface -facts}
+\todo[inline]{Preface -what type of project, where it is conducted, who supervised and any acknowledgements you wish to give. }
+
+\vfill
+
+\hfill \thesisAuthor
+
+\hfill Trondheim, \today
+
+\clearpage
+
 \tableofcontents
 
-%\listoffigures
+\listoffigures
 
-%\listoftables
+\listoftables
 
 \mainmatter
 
@@ -123,14 +145,25 @@ This chapter aims at giving an introduction to the report. Section \ref{sec:Back
 \label{sec:researchMethod}
 \input{research_methods}
 
-%\section{Contributions}
-%\label{sec:IntroContributions}
+\section{Contributions}
+\label{sec:IntroContributions}
+\todo[inline]{Brief main contributions (mainly in chapter~\ref{cont} }
+\todo[inline]{Can be left out}
 
+The format of this section will generally follow the following format:
+{\it
+Donec non turpis nec neque egestas faucibus nec id neque. Etiam consectetur, odio vitae gravida tempus, diam velit sagittis turpis, a molestie ligula tellus at nunc. Nam convallis consequat vestibulum. Proin dolor neque, dapibus a pellentesque a, commodo a nibh.}
+
+\begin{enumerate}
+\item {\it Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\item {\it Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\item {\it Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+\end{enumerate}
 
 
 %\section{Thesis Structure}
 %\label{sec:thesisStructure}
-\section{Preliminary thesis report structure}
+\section{Thesis Structure}
 \label{sec:thesisStructure}
 The report is divided into three chapters. In Chapter \ref{cha:TheoryAndBackground}, sections describing the background theory, the structured literature review, and related work can be found. In Chapter \ref{cha:Preliminary work}, current system implementation and experiments are outlined, as well as future work.
 
@@ -145,10 +178,68 @@ The report is divided into three chapters. In Chapter \ref{cha:TheoryAndBackgrou
 
 \input{related_works}
 
-\chapter{Preliminary work}
-\label{cha:Preliminary work}
+
+\chapter{Architecture/Model}
+\label{sec:architectureAndModel}
+\todo[inline]{Present architecture of model.}
+\todo[inline]{No code, only figures and maybe pseudocode}
 \input{preliminary_work}
 
+\chapter{Experiments and Results}
+\label{cha:ResearchAndResults}
+\todo[inline]{Introduction to experiments and results}
+
+\section{Experimental Plan}
+\label{sec:experimentalPlan}
+\todo[inline]{Plan for experimental research. Include experiments and series of experiments planned.}
+\todo[inline]{Planned experiments and what questions the experiements aim to answer. Connected to research questions}
+\begin{itemize}
+\item Comparison baseline model and curriculum model
+\item Comparison crossentropy and bootstrapping for several
+levels of label degradation. 
+\item Test curriculum for different dataset sizes. Will advantage of curriculum disappear for larger datasets?
+\item Larger dataset for bootstrapping?
+\item Can curriculum learning combined with bootstrapping loss function further improve results for label noise?
+\item How much does the competence of the curriculum teacher affect the results of curriculum learning?
+\end{itemize}
+
+\section{Experimental Setup}
+\label{sec:experimentalSetup}
+\todo[inline]{The experimental setup should include all data - parameters etc, that would allow a person to repeat your experiments.}
+\begin{itemize}
+\item ml-monitor. Json file for every experiment.
+\end{itemize}
+
+\section{Experimental Results}
+\label{sec:experimentalResults}
+\todo[inline]{Display results in suitable representation.}
+\todo[inline]{Choose what to present}
+
+
+\chapter{Evaluation and Conclusion}
+\label{cha:evaluationAndConclusion}
+\todo[inline]{Introduction to evaluation and conclusion}
+
+
+\section{Evaluation}
+\label{sec:Evaluation}
+\todo[inline]{Avoid drawing grand conclusions. Only what your data can support}
+\todo[inline]{Study tables graphs for unusual things that might raise questions with the reader}
+
+
+\section{Discussion}
+\label{sec:Discussion}
+\todo[inline]{Merits and limitations}
+
+\section{Contributions}~\label{cont}
+\label{sec:Contributions}
+\todo[inline]{Main contributions to the field and how significant}
+
+
+\section{Future Work}
+\label{sec:futureWork}
+\todo[inline]{How to extend yout eotk. Directions that became obvious during work}
+\todo[inline]{Possible solutions for limitations in the work conducted}
 
 
 \backmatter
