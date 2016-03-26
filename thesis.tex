@@ -79,7 +79,36 @@
 
 \clearpage
 
-\section*{Acronyms}
+\section*{Abstract}
+\todo[inline]{Abstract- Sales pitch}
+\todo[inline]{field of research, brief motivation for the work, what the research topic is, the research approach(es) applied. contributions}
+\todo[inline]{Half a page of text - no lists tables or figures}
+
+\clearpage
+
+\section*{Preface}
+\vspace{1cm}
+\todo[inline]{Preface -reword}
+This project is the authors master thesis at the Department of Computer and Information
+Science, Norwegian University of Science and Technology. \\
+
+Special thanks to supervisor Professor Keith Downing, at the Department of Computer
+and Information Science, Norwegian University of Science and Technology, for his
+helpful advice and guidance throughout this project. \\
+
+I would also like to thank Ingvild Olaussen for tirelessly correcting my grammar, and make me sound somewhat eloquent throughout this thesis.
+
+
+\vfill
+
+\hfill \thesisAuthor
+
+\hfill Trondheim, \today
+
+\clearpage
+
+\section*{List of Abbreviations}
+\vspace{1cm}
 \begin{acronym}
 \acro{CNN}{convolutional neural network}
 \acro{CPU}{central processing unit}
@@ -94,33 +123,14 @@
 \acro{SVM}{support vector machines}
 \end{acronym}
 
-\clearpage
 
-\section*{Abstract}
-\todo[inline]{Abstract- Sales pitch}
-\todo[inline]{field of research, brief motivation for the work, what the research topic is, the research approach(es) applied. contributions}
-\todo[inline]{Half a page of text - no lists tables or figures}
-
-\clearpage
-
-\section*{Preface}
-\vspace{1cm}
-\todo[inline]{Preface -facts}
-\todo[inline]{Preface -what type of project, where it is conducted, who supervised and any acknowledgements you wish to give. }
-
-\vfill
-
-\hfill \thesisAuthor
-
-\hfill Trondheim, \today
-
-\clearpage
 
 \tableofcontents
 
 \listoffigures
 
 \listoftables
+
 
 \mainmatter
 
@@ -129,7 +139,7 @@
 \label{cha:Introduction}
 In this report, the state of the art for road extraction is explored. This particular area is a part of the field of Photogrammetry. Additionally, research into topics such as curriculum learning, and how to handle label noise have been conducted. This research will be useful in the development of a road detection system.\\
 
-This chapter aims at giving an introduction to the report. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Research methods are described in Section \ref{sec:researchMethod}, and Section \ref{sec:thesisStructure} gives an overview over the thesis structure.
+This chapter aims at giving an introduction to the report. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Research methods are described in Section \ref{sec:researchMethod}, Section \ref{sec:IntroContributions} presents the thesis' contributions \todo{Weird way of putting it} and Section \ref{sec:thesisStructure} gives an overview over the thesis structure.
 
 
 \section{Background and Motivation}\label{cit}
@@ -178,11 +188,61 @@ The report is divided into three chapters. In Chapter \ref{cha:TheoryAndBackgrou
 
 \input{related_works}
 
+\section{Background discussion}
+\label{sec:backgroundDiscussion}
+\todo[inline]{Is this part necessary?}
+In this section a brief discussion of what elements in this chapter have influenced the thesis project.
 
+\begin{itemize}
+\item Training with datasets with unreliable supervision signal
+\item Using a curriculum to improve performance of models. Estimating reliability of 
+examples in dataset to create a transition from easy to hard samples. Based on 
+evidence that samples earlier in training have bigger influence than examples seen later in training process. As well as inconsistent labels having an adverse effect on 
+training.
+\item Curriculum teacher (Alternatives for this)
+\item Solutions for inconsistent labelling in aerial dataset already tested. These methods kind of hand-made \todo{Need better word for expressing this} for dataset.
+Experiment with other more general techniques to achieve robustness.
+\item find roads in images require structured output. CNN 
+\end{itemize}
 \chapter{Architecture/Model}
-\label{sec:architectureAndModel}
-\todo[inline]{Present architecture of model.}
+\label{cha:architectureAndModel}
 \todo[inline]{No code, only figures and maybe pseudocode}
+In this chapter the architecture and methods used to investigate the research questions are presented. An overview of the system can be found in Section.  In section ...
+
+\section{System Overview}
+\label{sec:systemOverview}
+\todo[inline]{Super overview.
+Dataset loader (Pre generated or otherwise) Convolutional neural network. Storage. webGUI and in file
+}
+
+\subsection{Data loader}
+\todo[inline]{Data loader and network loosely coupled. Can adapt system to other image problems easily. All hyperparameters can be changed in a config file. From number of layers, epochs etc etc. What backpropagation method}
+
+\subsection{Convolutional neural network}
+\begin{itemize}
+\item leaky relu
+\item dropout
+\item sdg nesterov
+\item L2 regularization
+\item Large datasets, swap from memory to gpu (maybe)
+\item Curriculum stage loading and swapping.
+\item Bootstrapping loss
+\item Curriculum teacher and dataset example evaluator.
+\end{itemize}
+\subsection{Web Interface}
+
+\section{Datasets}
+\label{sec:datasets}
+\begin{itemize}
+\item Massachusetts Roads Dataset (Write stats, show example)
+\item Massachusetts Buildings Dataset
+(Write stats and show example)
+\item Norwegian Roads Dataset
+(Write stats and show example)
+\end{itemize}
+
+
+
 \input{preliminary_work}
 
 \chapter{Experiments and Results}
@@ -240,8 +300,8 @@ levels of label degradation.
 \label{sec:futureWork}
 \todo[inline]{How to extend yout eotk. Directions that became obvious during work}
 \todo[inline]{Possible solutions for limitations in the work conducted}
-
-
+incorporate conditional random fields. Will yield further improvements.
+\todo[inline]{Some larger tests but runtime too large for extensive testing with these quantities}
 \backmatter
 
 \addcontentsline{toc}{chapter}{Bibliography}
