@@ -1,5 +1,6 @@
 % (C) Anders Kofod-Petersen
 \documentclass[a4paper]{book}
+\usepackage{listings}
 \usepackage{todonotes}
 \presetkeys{todonotes}{color=blue!20, bordercolor=white}{}
 \usepackage[printonlyused]{acronym}
@@ -219,6 +220,8 @@ Dataset loader (Pre generated or otherwise) Convolutional neural network. Storag
 \todo[inline]{Data loader and network loosely coupled. Can adapt system to other image problems easily. All hyperparameters can be changed in a config file. From number of layers, epochs etc etc. What backpropagation method}
 
 \subsection{Convolutional neural network}
+\todo[inline]{Reasons to use CNN. Related work , compelling results. CNN extract features. Suited for image task. }
+\todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
 \begin{itemize}
 \item leaky relu
 \item dropout
@@ -274,7 +277,11 @@ levels of label degradation.
 \label{sec:experimentalResults}
 \todo[inline]{Display results in suitable representation.}
 \todo[inline]{Choose what to present}
-
+\begin{itemize}
+\item For each experiment
+\item Present setup.
+\item model layering. Same. Reasons. Gave good results on their own.
+\end{itemize}
 
 \chapter{Evaluation and Conclusion}
 \label{cha:evaluationAndConclusion}
@@ -303,6 +310,8 @@ levels of label degradation.
 incorporate conditional random fields. Will yield further improvements.
 \todo[inline]{Some larger tests but runtime too large for extensive testing with these quantities}
 \backmatter
+
+\input{appendix}
 
 \addcontentsline{toc}{chapter}{Bibliography}
 \bibliography{./bibtex/bibliography}

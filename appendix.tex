@@ -1,0 +1,85 @@
+\appendix
+\chapter*{Appendices}
+\addcontentsline{toc}{chapter}{Appendices}
+\renewcommand{\thesection}{\Alph{section}}
+
+\section{System instructions}
+In order to run the core system the following dependencies are required:
+\begin{itemize}
+\item Python 2.7
+\item Theano
+\item Numpy
+\item Unirest
+\end{itemize}
+
+The system have only been tested on Ubuntu 14.04, but should be able to run on both Windows and Linux as long as the listed dependencies have been installed. Ubuntu is highly recommended because of more convenient installation process. 
+
+A Nvidia GPU is also highly recommended for running the system. Especially for large datasets and big networks. In order for Theano to use your GPU while training, CUDA Toolkit has to be installed. 
+
+A complete installation guide for Ubuntu can be found in Appendix \ref{app:ubuntuInstall}
+
+
+
+To monitor experiments, node.js is needed.
+
+
+\section{Ubuntu Installation Guide}
+\label{app:ubuntuInstall}
+This guide will install all dependencies required for running Theano with a GPU. This guide can also be found in the repository's README file (https://github.com/olavvatne/CNN).
+\\
+
+\noindent Install all dependencies:
+\begin{lstlisting}[language=bash]
+  $ sudo apt-get install -y gcc g++ gfortran build-essential git
+   wget linux-image-generic libopenblas-dev python-dev python-pip 
+   python-nose python-numpy python-scipy  
+\end{lstlisting}
+
+
+\noindent Install Theano:
+\begin{lstlisting}[language=bash]
+  $ sudo pip install --upgrade --no-deps 
+  git+git://github.com/Theano/Theano.git
+\end{lstlisting}
+
+
+\noindent Download Cuda 7 toolkit:
+\begin{lstlisting}[language=bash]
+  $ sudo wget 
+  http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.0-28_amd64.deb
+\end{lstlisting}
+
+
+\noindent Depackage Cuda:
+\begin{lstlisting}[language=bash]
+  $ sudo dpkg -i cuda-repo-ubuntu1404_7.0-28_amd64.deb  
+\end{lstlisting}
+
+
+\noindent Install the cuda driver:
+\begin{lstlisting}[language=bash]
+  $ sudo apt-get update
+  $ sudo apt-get install -y cuda  
+\end{lstlisting}
+
+\noindent Update the path to include cuda nvcc and ld\_library\_path, and then reboot:
+\begin{lstlisting}[language=bash]
+  $ echo -e "\nexport PATH=/usr/local/cuda/bin:
+  $PATH\n\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> .bashrc  
+\end{lstlisting}
+
+\noindent  Create a theano config file. Name this file .theanorc and place it in the home directory:\todo{FIX file}\\
+\begin{tabular}{ l }
+  \hline			
+  ~[global] \\
+  floatX=float32 \\
+  device=gpu \\
+  mode=FAST\_RUN \\
+  \\
+  ~[nvcc] \\
+  fastmath=True \\
+  \\
+  ~[cuda] \\
+  root=/usr/local/cuda \\
+  \hline  
+\end{tabular}
