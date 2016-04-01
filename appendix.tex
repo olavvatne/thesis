@@ -1,8 +1,3 @@
-\appendix
-\chapter*{Appendices}
-\addcontentsline{toc}{chapter}{Appendices}
-\renewcommand{\thesection}{\Alph{section}}
-
 \section{System instructions}
 In order to run the core system the following dependencies are required:
 \begin{itemize}
@@ -29,13 +24,17 @@ Utilizing this monitoring system requires these dependencies:
 \item MongoDB
 \end{itemize}
 
-For an installation instructions, see Appendix \ref{app:monitorInstall}.
+For installation instructions, see Appendix \ref{app:monitorInstall} and Appendix \ref{app:ubuntuInstall}. Alternatively, installation guides are included in the README files of the repositories. The URL of these repositories are listed below:
+
+\begin{itemize}
+\item https://github.com/olavvatne/CNN
+\item https://github.com/olavvatne/ml-monitor
+\end{itemize} 
 
 
-\section{Ubuntu Installation Guide}
+\section{System Installation Guide Ubuntu}
 \label{app:ubuntuInstall}
-This guide will install all dependencies required for running Theano with a GPU. This guide can also be found in the repository's README file (https://github.com/olavvatne/CNN).
-\\
+This guide will install all dependencies required for running Theano with a GPU, which is required to run the system. \\
 
 \noindent Install all dependencies:
 \begin{lstlisting}[language=bash]
@@ -54,8 +53,9 @@ This guide will install all dependencies required for running Theano with a GPU.
 
 \noindent Download Cuda 7 toolkit:
 \begin{lstlisting}[language=bash]
-  $ sudo wget 
-  http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.0-28_amd64.deb
+  $ sudo wget http://developer.download.nvidia.com/
+  compute/cuda/repos/ubuntu1404/x86_64/
+  cuda-repo-ubuntu1404_7.0-28_amd64.deb
 \end{lstlisting}
 
 
@@ -71,14 +71,32 @@ This guide will install all dependencies required for running Theano with a GPU.
   $ sudo apt-get install -y cuda  
 \end{lstlisting}
 
-\noindent Update the path to include cuda nvcc and ld\_library\_path, and then reboot:
-\begin{lstlisting}[language=bash]
-  $ echo -e "
-  export PATH=/usr/local/cuda/bin:$PATH
-  export LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> .bashrc  
-\end{lstlisting}
+\noindent Include the paths to cuda nvcc and ld\_library\_path in the .bashrc file, and then reboot \todo{Actually how the bashrc file looks like}:
 
-\noindent  Create a theano config file. Name this file .theanorc and place it in your home directory:\todo{FIX file}\\
+\FloatBarrier
+\begin{table}[!htbp]
+\caption{Paths to include}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{ l }
+  \hline			
+  export PATH=/usr/local/cuda/bin:\$PATH \\
+  export LD\_LIBRARY\_PATH=/usr/local/cuda/lib64 \\
+  \hline  
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:install_bash_paths}
+\end{table}
+\FloatBarrier
+
+\noindent  Create a theano config file. Name this file .theanorc and place it in your home directory:\\
+
+\FloatBarrier
+\begin{table}[!htbp]
+\caption{Theano config file}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{ l }
   \hline			
   ~[global] \\
@@ -93,6 +111,16 @@ This guide will install all dependencies required for running Theano with a GPU.
   root=/usr/local/cuda \\
   \hline  
 \end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:install_theano_config_file}
+\end{table}
+\FloatBarrier
+
+\noindent Clone CNN repository, which contains the core system:
+\begin{lstlisting}[language=bash]
+  $ git clone https://github.com/olavvatne/CNN.git 
+\end{lstlisting}
 
 \section{Monitoring Interface Installation Guide}
 \label{app:monitorInstall}

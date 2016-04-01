@@ -9,6 +9,8 @@
 \usepackage{subfigure}
 \usepackage[utf8]{inputenc}						% Allow for non-English letters
 \usepackage{graphicx}							% To include graphics
+\usepackage{placeins}
+%Float barriers
 \usepackage{natbib}								% Correct citations
 \usepackage{pbox}								% Adjust new line for cells
 \usepackage{adjustbox}
@@ -311,6 +313,10 @@ incorporate conditional random fields. Will yield further improvements.
 \todo[inline]{Some larger tests but runtime too large for extensive testing with these quantities}
 \backmatter
 
+\appendix
+\chapter*{Appendices}
+\addcontentsline{toc}{chapter}{Appendices}
+\renewcommand{\thesection}{\Alph{section}}
 \input{appendix}
 
 \addcontentsline{toc}{chapter}{Bibliography}
