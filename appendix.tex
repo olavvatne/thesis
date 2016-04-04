@@ -24,7 +24,7 @@ Utilizing this monitoring system requires these dependencies:
 \item MongoDB
 \end{itemize}
 
-For installation instructions, see Appendix \ref{app:monitorInstall} and Appendix \ref{app:ubuntuInstall}. Alternatively, installation guides are included in the README files of the repositories. The URL of these repositories are listed below:
+For installation instructions, see Appendix \ref{app:monitorInstall} and Appendix \ref{app:ubuntuInstall}. Alternatively, installation guides have been included in the README files of the repositories. The URL of these repositories are listed below:
 
 \begin{itemize}
 \item https://github.com/olavvatne/CNN
@@ -71,7 +71,7 @@ This guide will install all dependencies required for running Theano with a GPU,
   $ sudo apt-get install -y cuda  
 \end{lstlisting}
 
-\noindent Include the paths to cuda nvcc and ld\_library\_path in the .bashrc file, and then reboot \todo{Actually how the bashrc file looks like}:
+\noindent Append path for Cuda nvcc in PATH and add LD\_LIBRARY\_PATH in the .bashrc file (see Table \ref{tab:install_bash_paths}). Then do a reboot:
 
 \FloatBarrier
 \begin{table}[!htbp]
@@ -80,7 +80,7 @@ This guide will install all dependencies required for running Theano with a GPU,
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{ l }
   \hline			
-  export PATH=/usr/local/cuda/bin:\$PATH \\
+  export PATH=(...):/usr/local/cuda/bin  \\
   export LD\_LIBRARY\_PATH=/usr/local/cuda/lib64 \\
   \hline  
 \end{tabular}
@@ -90,7 +90,7 @@ This guide will install all dependencies required for running Theano with a GPU,
 \end{table}
 \FloatBarrier
 
-\noindent  Create a theano config file. Name this file .theanorc and place it in your home directory:\\
+\noindent  Create a theano config file as illustrated in Table \ref{tab:install_theano_config_file}. Name this file .theanorc and place it in your home directory:\\
 
 \FloatBarrier
 \begin{table}[!htbp]

@@ -26,3 +26,48 @@ Nonetheless, the center image in Figure \ref{fig:result} illustrates the current
 \caption{Aerial image, model prediction and label image. The aerial image is part of test set in Massachusetts Roads Dataset}
 \label{fig:result}
 \end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/curr50/loss_compare_validation.png}
+\caption{Comparison of validation loss.} \label{fig:curr50_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/curr50/validation_precision_recall_curve.png}
+\caption{Precision and recall comparison.} \label{fig:curr50_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{Curriculum learning, with switch after 60 epochs. Models trained with 110800 examples. 10 runs, averaged. Baseline and curriculum} \label{fig:curr50}
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/curr100/validation_loss_curve.png}
+\caption{Comparison of validation loss.} \label{fig:curr100_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/curr100/validation_precision_recall.png}
+\caption{Precision and recall comparison.} \label{fig:curr100_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{Curriculum learning, with switch after 50 epochs. Models trained with 221600 examples. 10 runs, averaged} \label{fig:curr100}
+\end{figure}
+
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/curr100/validation_loss_curve.png}
+\caption{Curriculum loss.} \label{fig:curr100_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/curr100/baseline_loss_curves.png}
+\caption{Baseline loss.} \label{fig:curr100_epochs_baseline}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{Loss for training, validation and test dataset. 221600 examples.} \label{fig:curr100_loss_epochs}
+\end{figure}
