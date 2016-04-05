@@ -11,12 +11,9 @@ The system have only been tested on Ubuntu 14.04, but should be able to run on b
 
 A Nvidia GPU is also highly recommended for running the system. In most instances a GPU can give considerable speed improvements when training compared to a CPU. This is critical when having to deal with large datasets and models with millions of parameters. In order for Theano to efficiently use your GPU while training, CUDA Toolkit has to be installed. \\
 
-A complete installation guide for Ubuntu can be found in Appendix \ref{app:ubuntuInstall}
+A graphical user interface can also be utilized for monitoring training. Running experiments can be stopped from this user interface, as well as a debugging option \todo{Not entirely debugging exactly}. In addition all experiment data is stored as JSON, and can be viewed in the user interface. This includes, loss curve, precision and recall curve and hyperparameters used while training. \\
 
-
-A graphical user interface can also be utilized for monitoring training. Running experiments can also be stopped from this user interface. In addition all experiment data is stored as JSON, and can be viewed in the user interface. This includes, loss curve, precision recall curve and hyperparameters used while training. \\
-
-The monitoring system can either be run locally, or installed on a server. All communication between the core system and the monitoring system is done by http. To enable monitoring, enable\_gui should be set to true in the core system's config file.
+The monitoring system can either be run locally, or installed on a server. All communication between the core system and the monitoring system is done by HTTP. To enable monitoring, enable\_gui should be set to true in the core system's config file.
 
 Utilizing this monitoring system requires these dependencies:
 \begin{itemize}
