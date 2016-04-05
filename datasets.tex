@@ -9,12 +9,12 @@ Each aerial image have an accompanying identically sized binary label image whic
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/datasets/Mass_roads_data_example.png}
+\includegraphics[width=\linewidth]{figs/datasets/Mass_roads_data_example2.png}
 \caption{Aerial image} \label{fig:mass_roads_example_data}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/datasets/Mass_roads_label_example.png}
+\includegraphics[width=\linewidth]{figs/datasets/Mass_roads_label_example2.png}
 \caption{Label image} \label{fig:mass_roads_example_label}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
@@ -42,29 +42,21 @@ Currently, the dataset contains 221 RGB images that are 1536 pixels in width and
 
 \begin{figure}
 \begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\linewidth]{figs/datasets/Norwegian_roads_data_example.png}
+\includegraphics[width=\linewidth]{figs/datasets/Norwegian_roads_data_example2.png}
 \caption{Aerial image} \label{fig:norwegian_roads_example_data}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\linewidth]{figs/datasets/Norwegian_roads_label_example.png}
+\includegraphics[width=\linewidth]{figs/datasets/Norwegian_roads_label_example2.png}
 \caption{Label image} \label{fig:norwegian_roads_example_label}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\linewidth]{figs/datasets/Norwegian_roads_overlay_example.png}
+\includegraphics[width=\linewidth]{figs/datasets/Norwegian_roads_overlay_example2.png}
 \caption{Overlay} \label{fig:norwegian_roads_example_overlay}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \caption{Example taken from test set in Norwegian Roads Dataset} \label{fig:norwegian_roads_example}
-\end{figure}
-
-\begin{figure}[t]
-\begin{center}
-\includegraphics[width=1\columnwidth]{figs/norwegian_dataset.png}
-\caption[Norwegian road dataset example]{Example aerial image with the label image as an overlay.}
-\label{fig:aerialimage_norwegian}
-\end{center}
 \end{figure}
 
 The Norwegian Roads Dataset has been constructed by using QGIS, an open source geographic information system application. The application enables viewing and editing of map data, but also provides a Python interface. A script to create label images was developed, which takes the map coordinates associated with each corner of an aerial image, and generates a raster image of road center-line vectors found inside that area. These raster images can be used as label data in supervised learning. \\
