@@ -32,7 +32,14 @@ Each aerial image have an accompanying identically sized binary label image whic
 In addition to the Massachusetts Roads Dataset \citep{MnihThesis}, the proposed methods have been tested with the Norwegian Roads Dataset. This dataset was constructed from aerial images retrieved from Kartverket, which depicts both rural, suburban and urban areas from different locations in Norway. The entire dataset consists of 1225 aerial images, each being $1536\times 1536$ pixels in size. 1100 of the images have been randomly assigned to the training set, 75 the test set, and the remaining images were put in the validation set. Even though there are more aerial the images in this dataset compared to the Massachusetts Roads Dataset, it only covers an area of 1910 square kilometers. This is because of a much lower \ac{GSD} of about 0.66 meters per pixel. \\
 
 
-The label images for this dataset have been generated from road centerline vectors found in the publicly available topographic vector database, N50, provided by \cite{Kartverket}\todo{Cite or not?}. Unlike the Massachusetts Roads Dataset, the centerline vectors have been rasterized with a variable line thickness. This is possible because all road segment in N50 have different properties, which can be utilized when setting the line thickness. \todo[inline]{Referer til produktspesificasjon og vegvesenet. 10}. The different type of roads, rules and line thickness for each road type are listed in Table \ref{tab:road_rules}. Roads which are underground and can not be seen from aerial imagery, have also been removed from the rasterized label images. \todo{Find property in table}\\
+The label images for this dataset have been generated from road centerline vectors found in the publicly available topographic vector database, N50, provided by \cite{Kartverket}\todo{Cite or not?}. Unlike the Massachusetts Roads Dataset, the centerline vectors have been rasterized with a variable line thickness. This is possible because all road segment in N50 have different properties, which can be utilized when setting the line thickness. The actual thickness for each road types have been based on numbers found in a Road specification manual published by  The Norwegian Public Roads Administration \citep{Norwegian_road_manual}. The different type of roads, rules and line thickness for each road type are listed in Table \ref{tab:road_rules}. Roads which are underground and can not be seen from aerial imagery, have also been removed from the rasterized label images. \todo{Find property in table}\\
+
+\todo[inline]{Topographic properties. What dissimilarities exists. Mountains, snow?}
+\todo[inline]{Technical difficulties. More variety in color balance. Image quality differences}
+\todo[inline]{Technical difficulties. Map data resolution ,lower. Center-line for highway way off.}
+\todo[inline]{Aerial images takes from over 30 different locations in norway. Cultivated land, mountains, ice, forest areas. Images also range in quality.}
+
+\todo[inline]{Similar to mass. Problem parking areas, private roads not marked. But have very high spectral similarity to roads}
 
 \begin{table}[htp]
 \caption{Raster line thickness and road segment filtering rule for each type of road. }
@@ -47,7 +54,7 @@ The label images for this dataset have been generated from road centerline vecto
  		 Highway & MOTORVEGTYPE=motorveg & 10.80 m\\\hline
  		 International E-road network & VEGKATEGORI=E & 6.30 m\\\hline
  		 Norwegian national road & VEGKATEGORI=R & 5.85 m\\\hline
- 		 municipal road & VEGKATEGORI=R & 4.95 m\\\hline
+ 		 municipal road & VEGKATEGORI=K & 4.95 m\\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
@@ -76,20 +83,3 @@ The dataset were constructed by using QGIS, an open source geographic informatio
 \end{figure}
 
 An aerial image and it's corresponding label image from the Norwegian Roads Dataset can be seen in Figure \ref{fig:norwegian_roads_example}, and Figure \ref{fig:norwegian_roads_example_overlay} shows the same label image superimposed on the aerial image. Observe that some roads are missing from the label image, as well as the ground truth not covering the roads properly. \\
-
-\todo[inline]{This dataset presents some challenges in terms of label resolution. Road labels registration errors. Fewer omission errors.
-Road labels not generated with uniform breadth. Road labels more accurate in terms of road breadth. Images taken mainly from urban and suburban areas throughout norway. In terms of typograhy (Right word?). Cultivated land, mountains, ice, forest areas. Images also range in quality. Different color hues. Vegvesenet --
-Ground sampling distance of 0.66. 
-The dataset covers an area of approximately 
-1200 km2.\\
-
-Spectral similarity to roads - problem}
-
-
-
-
-Oppskrift
-teknisk fakta om datasettet. Hvor store, gi et eksempel, hvor mange og hvordan de er fordelt i test , trainnig og validation 
-Geo-teknisk. Hvor stort område dekker datasettet, og hvor tykke er vei linjene
-Utfordringer - omission etc etc.
-random utvalg - gir 25\% med vei -etc etc
