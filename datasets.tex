@@ -1,11 +1,11 @@
 \section{Datasets}
 \label{sec:datasets}
-For testing the bootstrapping technique and curriculum learning as well as measuring the performance of the aerial patch framework, two datasets have been used. Both datasets involve learning structured output predictions from images, specifically the task of extracting roads from aerial images \todo{Weird sentence, do datasets involve or learning from these involve}. The first dataset, Massachusetts Roads Dataset, is provided by \cite{MnihThesis} and have been used in other works. The second dataset, Norwegian Roads Dataset, have been created from publicly available source specifically for this thesis. Differences, similarities and challenges of employing these datasets will be further discussed below.\\
+For testing the bootstrapping technique and curriculum learning as well as measuring the performance of the aerial patch framework, two datasets have been used. Both datasets involve the task of learning structured output predictions from images, specifically the task of extracting roads from aerial images. The first dataset, Massachusetts Roads Dataset, is provided by \cite{MnihThesis} and have been used in other works. The second dataset, Norwegian Roads Dataset, have been created from publicly available source specifically for this thesis. Differences, similarities and challenges of employing these datasets will be further discussed below.\\
 
 \subsection{Massachusetts Roads Dataset}
 The Massachusetts Roads Dataset contains aerial images depicting urban, suburban and rural areas in the state of Massachusetts, USA. In all the dataset consists of 1171 aerial images, where each image is $1500\times 1500$ pixels in size. The main bulk, or 1108 of these images have been randomly assigned to the training set. The remaining 49 and 14 images can be found in the test and validation set. The dataset covers an area of 2600 square kilometers in total, which gives a \ac{GSD} of 1.0 meter per pixel.\\
 
-Each aerial image have an accompanying identically sized binary label image which indicate whether a pixel in the aerial image contains a road or not \todo{rewrite this sentence}. Road centerline vectors retrieved from the OpenStreetMap project were used to generate the labels images \citep{MnihThesis}. The vectors were rasterized as white lines with a line thickness of 7 pixels. An example from this dataset can be seen in Figure \ref{fig:mass_roads_example}.  \\
+Each aerial image have an accompanying identically sized binary label image which indicate whether a pixel in the aerial image contains a road or not \todo{rewrite this sentence}. Road centerline vectors retrieved from the OpenStreetMap project were used to generate the labels images. The vectors were rasterized as white lines with a line thickness of 7 pixels \citep{MnihThesis}, which based on the \ac{GSD} is equivalent to 7 meters on the ground . An example from this dataset can be seen in Figure \ref{fig:mass_roads_example}.\\
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
@@ -22,7 +22,13 @@ Each aerial image have an accompanying identically sized binary label image whic
 \end{figure}
 
 
-\todo[inline]{Challenges with this particular dataset. And why it has been chosen}
+\todo[inline]{CRAPPY REWRITE. In regards to, dafuq!}
+There are many reasons for using this dataset for conducting experiments related to the research questions.  The task involve semantic segmentation of roads based exclusively on aerial color images which is arguable a hard task, and might justify the use of a large model for training, such as a \ac{CNN}. Additionally, the labels have been generated from existing map data, and therefore contains many instances of naturally occurring inconsistent labelling. This is compelling in regards to the research questions of this thesis. The dataset has also been used in other works, which enables comparisons between the results obtained in this thesis and results obtained in other works. \\
+
+\todo[inline]{Make into sentences}
+Challenges \\
+	Omission noise. Missing roads. Example\\
+	Registration noise. Labels do not cover the roads in many instances.\\
 
 
 
@@ -32,17 +38,22 @@ Each aerial image have an accompanying identically sized binary label image whic
 In addition to the Massachusetts Roads Dataset \citep{MnihThesis}, the proposed methods have been tested with the Norwegian Roads Dataset. This dataset was constructed from aerial images retrieved from Kartverket, which depicts both rural, suburban and urban areas from different locations in Norway. The entire dataset consists of 1225 aerial images, each being $1536\times 1536$ pixels in size. 1100 of the images have been randomly assigned to the training set, 75 the test set, and the remaining images were put in the validation set. Even though there are more aerial the images in this dataset compared to the Massachusetts Roads Dataset, it only covers an area of 1910 square kilometers. This is because of a much lower \ac{GSD} of about 0.66 meters per pixel. \\
 
 
-The label images for this dataset have been generated from road centerline vectors found in the publicly available topographic vector database, N50, provided by \cite{Kartverket}\todo{Cite or not?}. Unlike the Massachusetts Roads Dataset, the centerline vectors have been rasterized with a variable line thickness. This is possible because all road segment in N50 have different properties, which can be utilized when setting the line thickness. The actual thickness for each road types have been based on numbers found in a Road specification manual published by  The Norwegian Public Roads Administration \citep{Norwegian_road_manual}. The different type of roads, rules and line thickness for each road type are listed in Table \ref{tab:road_rules}. Roads which are underground and can not be seen from aerial imagery, have also been removed from the rasterized label images. \todo{Find property in table}\\
+The label images for this dataset have been generated from road centerline vectors found in the publicly available topographic vector database, N50, provided by \cite{Kartverket}. Unlike the Massachusetts Roads Dataset, the centerline vectors have been rasterized with a variable line thickness. This is possible because all road segment in N50 have different properties, which can be utilized when setting the line thickness. The actual thickness for each road types have been based on numbers found in a road specification manual published by The Norwegian Public Roads Administration \citep{Norwegian_road_manual}. The different type of roads, rules and line thickness for each road type are listed in Table \ref{tab:road_rules}. Roads which are underground and can not be seen from aerial imagery, have also been removed from the rasterized label images. \todo{Find property in table}\\
 
-\todo[inline]{Topographic properties. What dissimilarities exists. Mountains, snow?}
-\todo[inline]{Technical difficulties. More variety in color balance. Image quality differences}
+The aerial images have been taken from over 30 different locations in Norway, and offers a large variety of topographical features. There are images depicting coastline, rivers, mountain terrain, snow, cultivated land and forests. Compared to Massachusetts Roads Dataset the aerial images of this dataset have been sampled from a much larger areas. \\
+
+Furthermore, the aerial images might present a challenge in terms of image quality. Some of the images have a lower quality, and differs in color balance, and contrast. There are also images which have been stitched together by from  images captured by different flyovers \todo{CHECK what the heck this should be. OUTRAGEOUS}.\\  
+
+
 \todo[inline]{Technical difficulties. Map data resolution ,lower. Center-line for highway way off.}
-\todo[inline]{Aerial images takes from over 30 different locations in norway. Cultivated land, mountains, ice, forest areas. Images also range in quality.}
+
+\todo[inline]{Fortid eller nåtid. You dummy?}
 
 \todo[inline]{Similar to mass. Problem parking areas, private roads not marked. But have very high spectral similarity to roads}
 
+\todo[inline]{rewrite last sentence}
 \begin{table}[htp]
-\caption{Raster line thickness and road segment filtering rule for each type of road. }
+\caption{Raster line thickness and road segment filtering rule for each type of road. The line thicknesses include a margin of 10\% compared to the numbers found in the road specification manual.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{|c|l|r|}\hline
