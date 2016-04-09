@@ -35,6 +35,7 @@ Challenges \\
 %\subsection{Massachusetts Roads Dataset}
 \todo[inline]{Include buildings dataset or not?}
 \subsection{Norwegian Roads Dataset}
+\todo[inline]{Fortid eller nåtid. You dummy?}
 In addition to the Massachusetts Roads Dataset \citep{MnihThesis}, the proposed methods have been tested with the Norwegian Roads Dataset. This dataset was constructed from aerial images retrieved from Kartverket, which depicts both rural, suburban and urban areas from different locations in Norway. The entire dataset consists of 1225 aerial images, each being $1536\times 1536$ pixels in size. 1100 of the images have been randomly assigned to the training set, 75 the test set, and the remaining images were put in the validation set. Even though there are more aerial the images in this dataset compared to the Massachusetts Roads Dataset, it only covers an area of 1910 square kilometers. This is because of a much lower \ac{GSD} of about 0.66 meters per pixel. \\
 
 
@@ -42,16 +43,50 @@ The label images for this dataset have been generated from road centerline vecto
 
 The aerial images have been taken from over 30 different locations in Norway, and offers a large variety of topographical features. There are images depicting coastline, rivers, mountain terrain, snow, cultivated land and forests. Compared to Massachusetts Roads Dataset the aerial images of this dataset have been sampled from a much larger areas. \\
 
-Furthermore, the aerial images might present a challenge in terms of image quality. Some of the images have a lower quality, and differs in color balance, and contrast. There are also images which have been stitched together by from  images captured by different flyovers \todo{CHECK what the heck this should be. OUTRAGEOUS}.\\  
+Furthermore, the aerial images might present a challenge in terms of image quality. Some of the images have a lower quality, and differs in color balance, and contrast. There are also images which have been stitched together from  images captured by different flyovers \todo{CHECK what the heck this should be. OUTRAGEOUS}.\\  
 
+The quality of the the generated label maps might also present a challenge to a machine learning algorithm. There are both omission and registration errors present in many of the label images. Compared to Massachusetts Roads Dataset there are a much higher degree of registration errors. The road centerlines in N50 generally appear more coarse, and result in less overlap between roads in the aerial image and the raster lines in the label image. This is especially evident in road centerline vectors for divided highways. Instead of having centerline vectors for both roadways, there are only one placed between the roadways on the median. Visual examples of missing and misplaced labels can be seen in Figure \ref{fig:norwegian_roads_examples_n50}.\\
 
-\todo[inline]{Technical difficulties. Map data resolution ,lower. Center-line for highway way off.}
+\begin{figure}[h]
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\linewidth]{figs/datasets/nor_examples/1191_highway_n50.png}
+\caption{Divided highways} \label{fig:norwegian_roads_highway_n50}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\linewidth]{figs/datasets/nor_examples/1177_roundabout_n50.png}
+\caption{Roundabout} \label{fig:norwegian_roads_roundabout_n50}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\linewidth]{figs/datasets/nor_examples/1157_missing_n50.png}
+\caption{Private road} \label{fig:norwegian_roads_missing_n50}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{Examples of label inconsistent labelling found in the Norwegian Roads Dataset N50} \label{fig:norwegian_roads_examples_n50}
+\end{figure}
 
-\todo[inline]{Fortid eller nåtid. You dummy?}
+In addition to the set of label images generated from N50, the dataset also include an alternate set of label images generated from the topographic vector database, Vbase, which have more accurate road centerline vectors. There are still omission and registration errors present in this label image set, but to a less extent. Surfaces that share spectral similarities to asphalt, such as private roads and parking areas have not been marked, similar to the Massachusetts Roads Dataset. The difference in accuracy between N50 and Vbase, can be seen by comparing Figure \ref{fig:norwegian_roads_examples_n50} and Figure \ref{fig:norwegian_roads_examples_vbase}. A minor downside of using this vector database is that Vbase provide fewer road segment properties, which result in coarser raster line thicknesses \todo{My god, how dull!}.\\
 
-\todo[inline]{Similar to mass. Problem parking areas, private roads not marked. But have very high spectral similarity to roads}
+\begin{figure}[h]
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\linewidth]{figs/datasets/nor_examples/1191_highway_vbase.png}
+\caption{Divided highways} \label{fig:norwegian_roads_highway_vbase}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\linewidth]{figs/datasets/nor_examples/1177_roundabout_vbase.png}
+\caption{Roundabout} \label{fig:norwegian_roads_roundabout_vbase}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\linewidth]{figs/datasets/nor_examples/1157_missing_vbase.png}
+\caption{Private road} \label{fig:norwegian_roads_missing_vbase}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{Examples of road centerline vector quality in Vbase} \label{fig:norwegian_roads_examples_vbase}
+\end{figure}
 
-\todo[inline]{rewrite last sentence}
 \begin{table}[htp]
 \caption{Raster line thickness and road segment filtering rule for each type of road. The line thicknesses include a margin of 10\% compared to the numbers found in the road specification manual.}
 \begin{center}
@@ -90,7 +125,7 @@ The dataset were constructed by using QGIS, an open source geographic informatio
 \caption{Overlay image} \label{fig:norwegian_roads_example_overlay}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Example taken from test set in Norwegian Roads Dataset} \label{fig:norwegian_roads_example}
+\caption{Example taken from test set in Norwegian Roads Dataset N50} \label{fig:norwegian_roads_example}
 \end{figure}
 
 An aerial image and it's corresponding label image from the Norwegian Roads Dataset can be seen in Figure \ref{fig:norwegian_roads_example}, and Figure \ref{fig:norwegian_roads_example_overlay} shows the same label image superimposed on the aerial image. Observe that some roads are missing from the label image, as well as the ground truth not covering the roads properly. \\
