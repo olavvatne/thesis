@@ -1,14 +1,36 @@
 \section{Semantic Segmentation with Convolutional Neural Network}
 \label{sec:network}
-\todo[inline]{Patch based approach}
-\todo[inline]{Leaky relu}
-\todo[inline]{Contrast normalization ,rotation, klasse utjevning 50/50}
-\todo[inline]{Dropout}
+\todo[inline]{Suggested subsections listed below}
 
+\subsection{Patch-based architecture}
+\todo[inline]{Outline what this thing actually predict. Patch based approach}
+\todo[inline]{Input bigger than output. Context, etc}
+\todo[inline]{Explain layering etc. show image}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\columnwidth]{figs/network/Filter_unblurred.png}
+\caption[Visualization of filter map]{Visualization of filter maps from the first convolutional layer of a trained network.}
+\label{fig:convoluional_first_layer_visualization}
+\end{center}
+\end{figure}
+
+\subsection{Optimization}
 \todo[inline]{Sdg nesterov}
+\subsection{Regularization}
+\todo[inline]{Dropout}
 \todo[inline]{L2 regularization}
+\todo[inline]{Early stopping}
+\todo[inline]{Leaky ReLu}
 
-\todo[inline]{Large datasets, swap from memory to gpu (maybe)}
+\subsection{Data preprocessing}
+\todo[inline]{Rotation of aerial images}
+\todo[inline]{Contrast normalization}
+\todo[inline]{Flipping vertical|horizontal}
+\todo[inline]{Class normalization. 50/50}
+
+
+
 
 The system is based on the deep neural network outlined by \cite{Mnih_aerial_images_noisy}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. After the network is trained, it can predict whether or not roads are present in a $16 \times 16$ pixel area contained in the center of a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
 
@@ -22,3 +44,4 @@ The model parameters are optimized with a special form of \ac{SGD}, called RMSPr
 Before training occurs, a patch dataset suitable for the model is constructed. Each data and label image is rotated by a random amount, and a predefined number of image and label patches are extracted from the images. Before adding the sample to the training set, contrast normalization is applied. The mean pixel value in a patch is subtracted from each pixel, and divided by the standard deviation found for all pixels in the dataset.\\
 
 \todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
+\todo[inline]{Large datasets, swap from memory to gpu (maybe)}
