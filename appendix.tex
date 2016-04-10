@@ -29,10 +29,10 @@ For installation instructions, see Appendix \ref{app:monitorInstall} and Appendi
 \end{itemize} 
 
 
-\section{System Installation Guide Ubuntu}
+\section{System Installation Guide - Ubuntu}
 \label{app:ubuntuInstall}
-This guide will install all dependencies required for running Theano with a GPU, which is required to run the system. \\
-
+This guide will help you install all dependencies required for running Theano with a GPU, which should be done in order to run the system. \\
+\todo[inline]{Test it, and unirest. how to install?}
 \noindent Install all dependencies:
 \begin{lstlisting}[language=bash]
   $ sudo apt-get install -y gcc g++ gfortran build-essential git
@@ -119,5 +119,70 @@ This guide will install all dependencies required for running Theano with a GPU,
   $ git clone https://github.com/olavvatne/CNN.git 
 \end{lstlisting}
 
-\section{Monitoring Interface Installation Guide}
+\noindent Navigate to the root of the cloned repository. Create a secret.py file, and put the token created for the Monitoring Interface in a variable. See Appendix \ref{app:monitorInstall}:
+\begin{lstlisting}[language=bash]
+  token = "Bearer " + ml-monitor-token
+\end{lstlisting}
+
+\section{Monitoring Interface Installation Guide - Ubuntu}
 \label{app:monitorInstall}
+This guide outlines the steps required for setting up the monitoring interface. This guide can also be found in the repository's README file. Some of the steps are slightly different for Windows. \\
+\todo[inline]{Test it, and unirest. how to install?}
+
+\noindent Clone the ml-monitor repository:
+\begin{lstlisting}[language=bash]
+  $ git clone https://github.com/olavvatne/ml-monitor.git
+\end{lstlisting}
+
+\noindent Install Node.js on your system:
+\begin{lstlisting}[language=bash]
+  $ sudo apt-get update
+  $ sudo apt-get install nodejs
+\end{lstlisting}
+
+\noindent Install npm package manager:
+\begin{lstlisting}[language=bash]
+    Install npm package manager:
+\end{lstlisting}
+
+\noindent Install MongoDB:
+\noindent Navigate to ml-monitor, and install the dependencies of ml-monitor:
+\begin{lstlisting}[language=bash]
+    $ npm install
+\end{lstlisting}
+
+\noindent Before running ml-monitor, some database collections and a user have to be created in Mongo Shell:
+\begin{lstlisting}[language=bash]
+    $ export LC_ALL=C (Optional. Might be necessary)
+    $ mongo
+\end{lstlisting}
+
+
+\noindent Inside Mongo Shell, first create a new database:
+\begin{lstlisting}[language=bash]
+    > use ml-monitor
+\end{lstlisting}
+
+\noindent Then create the database collections required by ml-monitor:
+\begin{lstlisting}[language=bash]
+    > db.createCollection('experimentlist')
+    > db.createCollection('userlist')
+    > db.createCollection('grouplist')
+\end{lstlisting}
+
+\noindent Create a user. The authentication system is very simple, so remember to create a long random string of characters as token:
+\begin{lstlisting}[language=bash]> 
+    db.userlist.insert(
+    {"user": "ola", "password": "password", "token": "String"})
+\end{lstlisting}
+
+\noindent Finally, insert the default group, that new experiments will be assigned to:
+\begin{lstlisting}[language=bash]
+    > db.grouplist.insert(
+    {"name": "unassigned", "gid": "0", "date_created": new Date()})
+\end{lstlisting}
+
+\noindent To start the system, run:
+\begin{lstlisting}[language=bash]
+    $ npm run start
+\end{lstlisting}
