@@ -26,7 +26,8 @@ Table \ref{tab:search_terms} describes the different word groups employed by the
 \caption{The terms and groups}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{|c|c|c|c|c|c|c|c}\hline
+\begin{tabular}{|+c|^c|^c|^c|^c|^c|^c|}\hline
+\rowstyle{\bfseries}
  		& Group 1 & Group 2 & Group 3 & Group 4 & Group 5 & Group 6\\\hline
 Term 1 	& \pbox{20cm}{Aerial \\ images} & \pbox{2cm}{Curriculum learning} & \pbox{2cm}{Noisy \\ labels} & \pbox{2cm}{Neural \\ network} & Segmentation & Roads\\\hline
 Term 2 	& \pbox{20cm}{Satellite \\ images} & \pbox{2cm}{Guided learning} & \pbox{2cm}{Missing labels} & \pbox{3cm}{Convolutional \\ neural network} & Classification & \\\hline
@@ -59,14 +60,16 @@ the study was removed. Then the title and the abstract were evaluated using the 
 \caption{Inclusion and quality criteria for the selection process}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{|l|l|l|}\hline
+\begin{tabular}{+l ^l ^l}\hline
+\rowstyle{\bfseries}
 Id & Criteria & Screening step\\\hline
-IC 1 & \pbox{10cm}{The study's main concern is curriculum learning, dealing with noisy labels or road extraction systems}  & 1\\\hline
-IC 2 & The study is presenting empirical results & 1\\\hline
-IC 3 & The study preferably involve machine learning & 1\\\hline
-QC 1 & The research has a clear aim & 2\\\hline
-QC 2 & Is there an adequate description of related works? & 2\\\hline
-QC 3 & How rigorously has the method or technique been tested? & 2\\\hline
+
+IC 1 & \pbox{10cm}{The study's main concern is curriculum learning, dealing with noisy labels or road extraction systems}  & 1\\
+IC 2 & The study is presenting empirical results & 1\\
+IC 3 & The study preferably involve machine learning & 1\\
+QC 1 & The research has a clear aim & 2\\
+QC 2 & Is there an adequate description of related works? & 2\\
+QC 3 & How rigorously has the method or technique been tested? & 2\\
 QC 4 & Is there a future work section?
  & 2\\\hline
 \end{tabular}

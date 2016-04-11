@@ -53,6 +53,13 @@
 \bibliographystyle{apalike}
 \bibpunct{[}{]}{;}{a}{,}{,}
 
+\renewcommand{\arraystretch}{1.55} % A bit more spacing between rows
+\usepackage{array}
+\newcolumntype{+}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+#1\ignorespaces
+}
 \begin{document}
 
 %Title page (This is generate automatically from the commands above)
