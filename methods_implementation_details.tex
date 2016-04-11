@@ -1,7 +1,14 @@
 \section{Implementation Details}
 \label{sec:methods_implementation_details}
-The road extraction system was written with Python, and uses the open source library Theano. Theano enables the user to define and evaluate mathematical expressions involving tensors. The library implements several useful features for developing \ac{CNN}s, such as back-propagation, convolution, and max pooling. Training deep neural networks on a \ac{GPU} can be considerably faster than on a \ac{CPU}. Theano can utilize both the \ac{CPU} and \ac{GPU} without making any modifications to the code.\\
+\todo[inline]{Theano licensing? Done at B-master}
+The road detection system was written with the Python programming language, and uses the open source library Theano. Theano enables the developer to define and evaluate mathematical expressions involving tensors. The library implements several useful features for developing \ac{CNN}s, such as back-propagation, convolution, and max pooling. Training deep neural networks on a \ac{GPU} can be considerably faster than on a \ac{CPU}. Theano can utilize both the \ac{CPU} and \ac{GPU} without making any modifications to the code.\\
 
-\todo[inline]{What GPU experiments were run on}
-\todo[inline]{Code for CNN and ml-monitor available under MIT licence and found on Github}
-\todo[inline]{Config file. Most of settings changed from config file. Give examples}
+However, the use of a \ac{GPU} was key in making the experiments feasible to run. The system has a a lot of learnable \todo{Is this a word at all?} parameters and require a big dataset in order to generalize well to the task of road extraction. The experiments were conducted on a machine with a Nvidia GTX 980 \ac{GPU} with 4 gigabytes of video memory \todo{acronym?}. \\
+
+Because the training set size often exceeded the capacity of the video memory, the video memory only contains the model, validation and test set, and a subset of the training set at any given time during an experiment. A switching mechanism has been implemented, where chunks from the training set residing in main memory are loaded onto the \ac{GPU} sequentially during an epoch of back-propagation \todo{epoch does not seem to be the right word here. Fix.}.\\
+
+The system also have a large number of hyperparameters which can be changed by the user. This includes learning rate, network architecture, back-propagation method, dropout rates, curriculum and bootstrapping specific parameters and more. These values can accessed and modified with ease in the system's config.py file. \\
+
+The code for the road detection system as well as the machine learning monitoring interface are publicly available at 
+\url{https://github.com/olavvatne/CNN} and \url{https://github.com/olavvatne/ml-monitor}. The tools used to create to Norwegian Roads Dataset can be found at \url{https://github.com/olavvatne/MapDataset} \todo{Should I include this?}. Instructions and installation guides for these projects can be found in Appendix \ref{app:system_instructions}, \ref{app:ubuntuInstall} and \ref{app:monitorInstall}. Additionally, all experiments conducted for this thesis can be examined at \url{http://www.interface.ml/experiments}. All the projects above are licensed under the \emph{MIT} license \todo{What the hell does MIT licence entail.Can i do that?}.
+
