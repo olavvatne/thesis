@@ -143,7 +143,7 @@ I would also like to thank Ingvild Olaussen for tirelessly correcting my grammar
 \label{cha:Introduction}
 In this report, the state of the art for road extraction is explored. This particular area is a part of the field of Photogrammetry. Additionally, research into topics such as curriculum learning, and how to handle label noise have been conducted. This research will be useful in the development of a road detection system.\\
 
-This chapter aims at giving an introduction to the report. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Research methods are described in Section \ref{sec:researchMethod}, Section \ref{sec:IntroContributions} presents the thesis' contributions \todo{Weird way of putting it} and Section \ref{sec:thesisStructure} gives an overview over the thesis structure.
+This chapter aims at giving an introduction to the report. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Research methods are described in Section \ref{sec:researchMethod}, Section \ref{sec:IntroContributions} outlines the contributions of this thesis and Section \ref{sec:thesisStructure} presents an overview of the thesis structure.
 
 \input{motivation}
 
@@ -198,7 +198,8 @@ This chapter will describe the architecture, and the methods needed in order to 
 
 \input{experimental_results}
 
-
+\section{Analysis}
+The \ac{CNN} and these methods can each be seen as one of the approaches dealing with label noise as described in \ref{sec:background_label_noise}. Curriculum learning in some ways be be characterized as a data cleansing method, while bootstrapping loss is a noise-tolerant algorithm. Because of regularizers the \ac{CNN} can be seen as a noise-robust model. \todo{Really better suited in the discussion. Move there}
 
 \chapter{Conclusion}
 \label{cha:evaluationAndConclusion}

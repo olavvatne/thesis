@@ -13,6 +13,7 @@ A challenge for curriculum learning is defining a sorting measure that enables a
 
 
 \subsection{Label noise}
+\label{sec:background_label_noise}
 There are several reasons for the presence of inconsistent labels in real-world datasets. For instance, the labeller was presented with insufficient information, or the dataset was automatically generated from a source with poor quality labels. Additionally, the samples could be ambiguous and therefore hard to label correctly by a human expert. Label noise, can in many cases, lead to negative consequences for a classifier. This can include reduced accuracy, increased model complexity, and more samples required for learning a target concept. Approaches for dealing with noisy labels can generally be divided into three groups: Noise-robust models, data cleansing methods and noise-tolerant algorithms \citep{Frenay_label_noise_survey}. These three groups are presented below.  \\
 
 %\subsubsection{Types of noisy labels}
@@ -26,6 +27,7 @@ There are several reasons for the presence of inconsistent labels in real-world 
 
 
 \subsubsection{Data cleansing methods}
+
 Data cleansing methods are filtering techniques applied to the training data in order to remove noisy samples before training. Noisy labels are first identified and then either relabelled or removed. An obstacle encountered by these methods is that harmful mislabelled samples can be difficult to distinguish from informative, but hard samples. Another problem is that filtering often relies on predictions from a classifier to automatically identify mislabelled samples. Such filtering techniques also run the risk of removing too many samples from the training set, which can also cause harm to the accuracy. Voting ensembles of several classifiers have been suggested to further improve classification filtering.\\ 
 
 Another filtering technique is to simply remove the class label of samples deemed suspicious, and employ semi-supervised learning. This way, the distribution of samples are preserved while simultaneously reducing the consequences of inconsistent labels.\\

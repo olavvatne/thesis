@@ -1,19 +1,20 @@
 \section{System Overview}
 \label{sec:systemOverview}
-\todo[inline]{Super overview.
-Dataset loader (Pre generated or otherwise) Convolutional neural network. Storage. webGUI and in file
-}
-\todo[inline]{In big terms, talk about finding roads, but as mnih. Datasets contain two label noise. Investigate ways of mitigating the impact label noise have. Also the aerial image datasets contain large variety of images. Some are much harder. Epecially when inconsistent labelling. Curriculum learning. }
+\todo[inline]{Beta 0.0.01 REWRITE here. It's kind of not good yet}
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=1\columnwidth]{figs/system_overview.png}
+\caption[Components of the system]{Components of the system}
+\label{fig:system_components}
+\end{center}
+\end{figure}
 
-\todo[inline]{Too many details presented here. This should be much shorter and give a birds view of the entire system }
+The objective of the system is to detect roads found in aerial color images by supervised learning. To do so, a \ac{CNN} has been chosen for this learning task. \ac{CNN} have lately been applied to many computer vision tasks and given great results, outperforming other approaches \citep{Krizhevsky_imagenet} \todo{Really bad sentence}. As discussed in Section \ref{sec:background_theory}, these networks reduce need for feature engineering by letting the network learning to extract suitable features from raw pixel values, and are therefore a good choice for tasks involving images. Additionally, an important part of making a supervised learning algorithm competent, is by having a large dataset containing aerial images and label images showing exactly which pixels represent roads.\\
 
-\todo[inline]{dataloader short intro}
-\todo[inline]{Data loader and network loosely coupled. Can adapt system to other image problems easily. All hyperparameters can be changed in a config file. From number of layers, epochs etc etc. What backpropagation method}
-
-\todo[inline]{Short intro to CNN}
-\todo[inline]{Reasons to use CNN. Related work , compelling results. CNN extract features. Suited for image task. }
+\todo[inline]{Rewrite this junk}
+This system shares many similarities to the patch-based approached presented by \cite{Mnih_aerial_images_noisy}. The system produces a patch of predictions given a patch of pixel values, where each value indicate the probability of the input pixel depicting a road. Given a $64 \times 64$ aerial image patch the system produce a $16 \times 16$ patch of predictions.\\
 
 
-\todo[inline]{Mention the webgui. Store results and display stuff}
+The actual implementation consists of two primary components, and a optional web storage and graphical web user interface component. The components and how they related, can be seen in Figure \ref{fig:system_components}. The storage and user interface component is not necessarily \todo{Informal?} integral to the task of road detection, but has been a helpful aid when conducting experiments. Additionally, the patch dataset creator component is interchangeable, and can easily accommodate other kinds of semantic segmentation datasets. In relation to the research questions the patch dataset creator component is altered when investigating curriculum learning, and the loss function of the \ac{CNN}  component is replaced when bootstrapping loss is applied. \\
 
-\todo[inline]{Maybe frame it as three different way to combat label noise. CNN -robustness, bootstrapping -- and curriculum learning filtering technique}
+
