@@ -7,9 +7,12 @@
 \caption{Hyperparameters for curriculum learning}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{l l l}\hline
+\begin{tabular}{+l ^l ^l}\hline
+\rowstyle{\bfseries}
  		 Parameter & Description & Value\\\hline
- 		 lol & abc & 5.2 \\\hline
+ 		 $D_\theta$ & Threshold value for difficulty estimate & 0.25 \\
+ 		 $t_start$ & What epoch to load stage 1 & 50 \\\hline
+ 		 $t_stage$ & Load new stage after every $t_stage$ epoch & 50 \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
