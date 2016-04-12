@@ -46,14 +46,27 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 \end{table}
 
 \subsection{Optimization}
-\todo[inline]{Really bad, explanation. But something}
+\todo[inline]{BETA 0.0.0.1 Really bad, explanation. But something}
 %\url{http://cs231n.github.io/neural-networks-3/}
 %http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}
-\todo[inline]{Mathematical detail}
-\todo[inline]{paper}
-The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and can help the network reach convergence faster compared to standard \ac{SGD}. The standard momentum approach extend the gradient update step, by introducing velocity and friction. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the particle or loss optimization is gaining velocity, it will stop doing steepest decent, and result in a smoother decent with less oscillations. Basically, instead of using the gradient to move in the landscape, the gradient will influence the velocity. Unlike standard momentum, the Nesterov method \todo{Need better word than that} first makes a step in the direction of the previous accumulated gradient, and then makes a correction using the current gradient. \todo{Is this true?}\\
+%http://arxiv.org/pdf/1212.0901v2.pdf
+%http://stats.stackexchange.com/questions/179915/whats-the-difference-between-momentum-based-gradient-descent-and-nesterovs-ac
+The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and have an improved stability and faster convergence compared to standard \ac{SGD} \citep{Bengio_advances_optimizing}. The standard momentum approach extend the gradient update step, by introducing velocity. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the loss optimization is gaining velocity, it will stop doing steepest decent, and result in a smoother decent with less oscillations. Basically, instead of directly using the gradient to move in the landscape, the gradient will influence the velocity. The only hyperparameter associated with momentum is $m$, which damps the velocity, and can be interpreted as friction. \\
 
-Furthermore, the system also suppoert RMSProp which keeps a running average of the gradient magnitude for every weight. This is used to adaptively adjust the learning rate of each weight. Compared to regular \ac{SGD}, this will result in a faster convergence. The system also support regular \ac{SGD}. \todo{Paper detailing RMSprop}\\ 
+%Nesterov momentum is a minor variation of momentum. Unlike standard momentum, the Nesterov method first makes a step in the direction of the previous accumulated gradient, and then makes a correction using the current gradient.  \\
+
+Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nesterov method first makes a step in the direction of the accumulated velocity, and then makes a correction of the velocity based on the new location. In standard momentum a correction to the velocity is made before taking a step. The Nesterov gradient is defined by the following update rule:
+
+\begin{flalign*}
+     &v_{t} = mv_{t-1} - a \nabla f(\theta_{t-1} + m v_{t-1}) \\
+     &\theta_t = \theta_{t-1} + v_t,
+\end{flalign*}
+
+\noindent where $\theta_t$ is the model parameters, $v_t$ the velocity, $m$ the momentum decay, $a$ the current learning rate and $\nabla f(\theta)$ is the gradient.\\
+
+Furthermore, the system also support RMSProp which keeps a running average of the gradient magnitude for every weight. This is used to adaptively adjust the learning rate of each weight. Compared to regular \ac{SGD}, this will result in a faster convergence. \todo{Paper detailing RMSprop}\\ 
+
+All the above mentioned optimization approaches have a important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in regular intervals of epochs by some factor $a_{decrease}$ during optimization. \\
 
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 
