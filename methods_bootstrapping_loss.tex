@@ -1,7 +1,7 @@
 \section{Bootstrapping loss}
 \label{sec:bootstrapping_loss}
 \todo[inline]{Bootstrapping loss}
-
+\todo{Mix factor. Check paper for correct}
 \begin{table}[htp]
 \caption{Hyperparameters for bootstrapping}
 \begin{center}
@@ -9,7 +9,9 @@
 \begin{tabular}{+l ^l ^l}\hline
 \rowstyle{\bfseries}
  		 Parameter & Description & Value\\\hline
- 		 $\beta$ & Factor & 0.95 \\\hline
+ 		 $\beta$ & Mix factor  & 0.95 \\
+ 		 $\beta_{min}$ & Minimum mix factor & 0.90 \\\hline
+ 		 $\beta_{start}$ & When to start mixing & 60 \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}

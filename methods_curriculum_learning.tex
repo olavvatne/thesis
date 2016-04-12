@@ -10,9 +10,10 @@
 \begin{tabular}{+l ^l ^l}\hline
 \rowstyle{\bfseries}
  		 Parameter & Description & Value\\\hline
- 		 $D_\theta$ & Threshold value for difficulty estimate & 0.25 \\
- 		 $t_start$ & What epoch to load stage 1 & 50 \\\hline
- 		 $t_stage$ & Load new stage after every $t_stage$ epoch & 50 \\\hline
+ 		 $S$ & Number of stages & 2 \\
+ 		 $D_\theta$ & Threshold value for difficulty estimate for stage $\theta$ & 0.25 \\
+ 		 $t_{start}$ & What epoch to load stage 1 & 50 \\
+ 		 $t_{stage}$ & Load subsequent stage after every $t_{stage}$ epoch & 10 \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}

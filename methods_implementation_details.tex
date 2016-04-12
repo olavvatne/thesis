@@ -1,6 +1,5 @@
 \section{Implementation Details}
 \label{sec:methods_implementation_details}
-\todo[inline]{Theano licensing? Done at B-master}
 The road detection system was written with the Python programming language, and uses the open source library Theano. Theano enables the developer to define and evaluate mathematical expressions involving tensors. The library implements several useful features for developing \ac{CNN}s, such as back-propagation, convolution, and max pooling. Training deep neural networks on a \ac{GPU} can be considerably faster than on a \ac{CPU}. Theano can utilize both the \ac{CPU} and \ac{GPU} without making any modifications to the code.\\
 
 However, the use of a \ac{GPU} was key in making the experiments feasible to run. The system has a a lot of learnable \todo{Is this a word at all?} parameters and require a big dataset in order to generalize well to the task of road extraction. The experiments were conducted on a machine with a Nvidia GTX 980 \ac{GPU} with 4 gigabytes of video memory \todo{acronym?}. \\

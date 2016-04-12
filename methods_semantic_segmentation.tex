@@ -27,14 +27,18 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 \rowstyle{\bfseries}
   Parameter & Description & Value\\\hline
   $K_i$ & Number of kernels for convolutional layer i & 64, 112, 80 \\
-  $CF_i$ & Filter size of convolutional layer i & (13,13),(4,4),(3,3) \\
+  $CLF_i$ & Filter size of convolutional layer $i$ & (13,13),(4,4),(3,3) \\
+  $CLS_i$ & Stride amount of convolutional layer $i$ & (4,4),(1,1),(1,1) \\
+  $CLP_i$ & Pool size of convolutional layer $i$ & (2,2),(1,1),(1,1) \\
   Cost function & Function that is minimzed each iteration & Cross entropy \\
   Epochs & How many epochs \ac{CNN} will train for. & 100 \\
   $\theta_i$ & Transfer function for each value & Leaky ReLU x4, sigmoid x1 \\
-  $b$ & Batch size & 64 \\
-  $p_i$ & Dropout rate for a layer i & 1.0, 0.9 0.8 0.5 1.0 \\
+  $h$ & Number of neurons in hidden layer. & 4096 \\
+  $p_i$ & Dropout rate for a layer $i$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
   $a$ & Learning rate & 0.0014 \\
-  $b$ & Batch size & 64 \\
+  $L_2$ & Weight decay & 0.0001 \\
+  $m$ & Momentum & 0.9 \\
+  $b$ & Batch size & 64 \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
@@ -42,10 +46,16 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 \end{table}
 
 \subsection{Optimization}
-\todo[inline]{Sdg nesterov}
-\todo[inline]{Talk about nesterov sgd, and mention RMSProp and regular prop supported via config}
-\todo[inline]{Learning and negative log likelihood?}
-The model parameters are optimized with a special form of \ac{SGD}, called RMSProp. RMSProp keeps a running average of the gradient magnitude for every weight which is used to adaptively adjust the learning rate of each weight. Compared to \ac{SGD}, this will result in a faster convergence. Other optimizers, such as Nesterov momentum, have also been implemented.\\ 
+\todo[inline]{Really bad, explanation. But something}
+%\url{http://cs231n.github.io/neural-networks-3/}
+%http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}
+\todo[inline]{Mathematical detail}
+\todo[inline]{paper}
+The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and can help the network reach convergence faster compared to standard \ac{SGD}. The standard momentum approach extend the gradient update step, by introducing velocity and friction. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the particle or loss optimization is gaining velocity, it will stop doing steepest decent, and result in a smoother decent with less oscillations. Basically, instead of using the gradient to move in the landscape, the gradient will influence the velocity. Unlike standard momentum, the Nesterov method \todo{Need better word than that} first makes a step in the direction of the previous accumulated gradient, and then makes a correction using the current gradient. \todo{Is this true?}\\
+
+Furthermore, the system also suppoert RMSProp which keeps a running average of the gradient magnitude for every weight. This is used to adaptively adjust the learning rate of each weight. Compared to regular \ac{SGD}, this will result in a faster convergence. The system also support regular \ac{SGD}. \todo{Paper detailing RMSprop}\\ 
+
+\todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 
 \subsection{Regularization}
 \todo[inline]{Dropout}
