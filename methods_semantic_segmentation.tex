@@ -36,6 +36,7 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
   $h$ & Number of neurons in hidden layer. & 4096 \\
   $p_i$ & Dropout rate for a layer $i$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
   $a$ & Learning rate & 0.0014 \\
+  $a_{decrease}$ & learning rate decrease factor & 0.95 \\
   $L_2$ & Weight decay & 0.0001 \\
   $m$ & Momentum & 0.9 \\
   $b$ & Batch size & 64 \\\hline
@@ -51,9 +52,8 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 %http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}
 %http://arxiv.org/pdf/1212.0901v2.pdf
 %http://stats.stackexchange.com/questions/179915/whats-the-difference-between-momentum-based-gradient-descent-and-nesterovs-ac
-The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and have an improved stability and faster convergence compared to standard \ac{SGD} \citep{Bengio_advances_optimizing}. The standard momentum approach extend the gradient update step, by introducing velocity. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the loss optimization is gaining velocity, it will stop doing steepest decent, and result in a smoother decent with less oscillations. Basically, instead of directly using the gradient to move in the landscape, the gradient will influence the velocity. The only hyperparameter associated with momentum is $m$, which damps the velocity, and can be interpreted as friction. \\
+The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and have an improved stability and faster convergence compared to standard \ac{SGD} \citep{Bengio_advances_optimizing}. The standard momentum approach extend the gradient update step, by introducing velocity. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the loss optimization is gaining velocity, it will stop doing steepest decent, and results in a smoother decent with less oscillations. Basically, instead of directly using the gradient to move in the landscape, the gradient will influence the velocity. The only hyperparameter associated with momentum is $m$, which damps the velocity, and can be interpreted as friction. \\
 
-%Nesterov momentum is a minor variation of momentum. Unlike standard momentum, the Nesterov method first makes a step in the direction of the previous accumulated gradient, and then makes a correction using the current gradient.  \\
 
 Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nesterov method first makes a step in the direction of the accumulated velocity, and then makes a correction of the velocity based on the new location. In standard momentum a correction to the velocity is made before taking a step. The Nesterov gradient is defined by the following update rule:
 
@@ -71,6 +71,7 @@ All the above mentioned optimization approaches have a important hyperparameter 
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 
 \subsection{Regularization}
+\todo[inline]{Samll introduction}
 \todo[inline]{Dropout}
 \todo[inline]{L2 regularization}
 \todo[inline]{Early stopping}
@@ -79,9 +80,16 @@ To avoid overfitting the training data, and hopefully achieve better generalizat
 
 
 \subsection{Data preprocessing}
-\todo[inline]{Rotation of aerial images}
+\todo[inline]{Beta 0.0.0.01 Rubbish}
+Several preprocessing steps are applied to the data before training. These steps and the reasoning behind them will be presented here. \\
+
+The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to training with. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
+
+However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This might be necessary because of directional bias in the road networks depicted on the a. Road networks in bigger cities are often constructed with a grid pattern. By rotating the each image randomly, the constructed patch dataset will exhibit more rotational invariance \todo[inline]{NEEDS TO BE FIXED. Dataset will exhibit more what?}\todo{Paper with reasoning , cite}\\
+
+Since the dataset contains aerial imagery that depict landscape from a top-down perspective, there is no evident upward direction\todo{God dammit}. In addition to flipping patches randomly in the horizontal direction, which is often used to increase variability, the patches can also be flipped vertically.\cite{Vertical, and horizontal flipping. And a well formulated sentence about why this is a great idea.}
+
 \todo[inline]{Contrast normalization}
-\todo[inline]{Flipping vertical and horizontal}
 \todo[inline]{Class normalization. 50/50}
 
 Before training occurs, a patch dataset suitable for the model is constructed. Each data and label image is rotated by a random amount, and a predefined number of image and label patches are extracted from the images. Before adding the sample to the training set, contrast normalization is applied. The mean pixel value in a patch is subtracted from each pixel, and divided by the standard deviation found for all pixels in the dataset.\\
