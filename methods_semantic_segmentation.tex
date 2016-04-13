@@ -6,6 +6,7 @@ This section will present the convolutional neural network in detail. \todo[inli
 \todo[inline]{Outline what this thing actually predict. Patch based approach}
 \todo[inline]{Input bigger than output. Context, etc}
 \todo[inline]{Explain layering etc. show image}
+\todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
 
 The system is based on the deep neural network outlined by \cite{Mnih_aerial_images_noisy}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. After the network is trained, it can predict whether or not roads are present in a $16 \times 16$ pixel area contained in the center of a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
 
@@ -66,7 +67,7 @@ Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nest
 
 Furthermore, the system also support RMSProp which keeps a running average of the gradient magnitude for every weight. This is used to adaptively adjust the learning rate of each weight. Compared to regular \ac{SGD}, this will result in a faster convergence. \todo{Paper detailing RMSprop}\\ 
 
-All the above mentioned optimization approaches have a important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in regular intervals of epochs by some factor $a_{decrease}$ during optimization. \\
+All the above mentioned optimization approaches have an important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in regular intervals of epochs by some factor $a_{decrease}$ during optimization. \\
 
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 
@@ -81,18 +82,14 @@ To avoid overfitting the training data, and hopefully achieve better generalizat
 
 \subsection{Data preprocessing}
 \todo[inline]{Beta 0.0.0.01 Rubbish}
-Several preprocessing steps are applied to the data before training. These steps and the reasoning behind them will be presented here. \\
+Several preprocessing steps are applied to the data before training. These steps and the reasoning behind them are presented here. \\
 
 The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to training with. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
 
-However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This might be necessary because of directional bias in the road networks depicted on the a. Road networks in bigger cities are often constructed with a grid pattern. By rotating the each image randomly, the constructed patch dataset will exhibit more rotational invariance \todo[inline]{NEEDS TO BE FIXED. Dataset will exhibit more what?}\todo{Paper with reasoning , cite}\\
+However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias exhibited by the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by random angles before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation.\\
 
-Since the dataset contains aerial imagery that depict landscape from a top-down perspective, there is no evident upward direction\todo{God dammit}. In addition to flipping patches randomly in the horizontal direction, which is often used to increase variability, the patches can also be flipped vertically.\cite{Vertical, and horizontal flipping. And a well formulated sentence about why this is a great idea.}
+Another data augmentation method utilized when constructing the patch training set is flipping. This is a common method for artificially increase the size of the dataset \citep{Krizhevsky_imagenet}. Since the dataset contains aerial imagery that depict landscape from a top-down perspective, the patches can both be flipped vertically and horizontally \todo{Something missing here}.\\
 
-\todo[inline]{Contrast normalization}
-\todo[inline]{Class normalization. 50/50}
+Contrast normalization is also applied to every patch. each patch is normalized by subtracting the mean pixel value from the pixels of a patch, and then dividing the result by the standard deviation found for all pixels in the dataset.\\
 
-Before training occurs, a patch dataset suitable for the model is constructed. Each data and label image is rotated by a random amount, and a predefined number of image and label patches are extracted from the images. Before adding the sample to the training set, contrast normalization is applied. The mean pixel value in a patch is subtracted from each pixel, and divided by the standard deviation found for all pixels in the dataset.\\
-
-\todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
-\todo[inline]{Large datasets, swap from memory to gpu (maybe)}
+Additionally, the datasets used exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. The proportion of patches containing road according to the labelling, range between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by simply artificially increasing the proportion of road examples, when sampling the patch dataset. This method is not applied to the test and validation patch set, and will therefore retain their natural class distribution\todo{Improve language}.\\
