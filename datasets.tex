@@ -26,15 +26,13 @@ Each aerial image have an accompanying identically sized binary label image whic
 \todo[inline]{CRAPPY REWRITE. In regards to, dafuq!}
 There are many reasons for using this dataset for conducting experiments related to the research questions.  The task involve semantic segmentation of roads based exclusively on aerial color images which is arguable a hard task, and might justify the use of a large model for training, such as a \ac{CNN}. Additionally, the labels have been generated from existing map data, and therefore contains many instances of naturally occurring inconsistent labelling. This is compelling in regards to the research questions of this thesis. The dataset has also been used in other works, which enables comparisons between the results obtained in this thesis and results obtained in other works. \\
 
-\todo[inline]{Make into sentences}
-Challenges \\
-	Omission noise. Missing roads. Example\\
-	Registration noise. Labels do not cover the roads in many instances.\\
+Aerial image dataset typically suffer from two distinct types of label noise, which \cite{Mnih_aerial_images_noisy} have labelled omission and registration noise. The dataset is generated from existing map data, and have some deficiencies when coupled with supervised learning. There are many instances of omission noise in this dataset, where smaller roads and parking areas have not been marked as roads in the label images. These omissions are most likely perfectly acceptable for map purposes, but might negatively impact the performance of a classifier.  Because unlabelled paved areas share a high spectral similarity to roads, this type of inconsistent labelling might compel the model to minimize the loss by learning complicated distinctions between surfaces that are essentially the same thing \todo{Long and a little better, bad sentence}.\\
 
-
+ .
+\todo[inline]{Example of these types of noises found in the dataset}
 
 %\subsection{Massachusetts Roads Dataset}
-\todo[inline]{Include buildings dataset or not?}
+
 \subsection{Norwegian Roads Dataset}
 In addition to the Massachusetts Roads Dataset \citep{MnihThesis}, the proposed methods have been tested with the Norwegian Roads Dataset. This dataset was constructed from aerial images retrieved from Kartverket, which depicts both rural, suburban and urban areas from different locations in Norway. The entire dataset consists of 1225 aerial images, each being $1536\times 1536$ pixels in size. 1100 of the images have been randomly assigned to the training set, 75 the test set, and the remaining images were put in the validation set. Even though there are more aerial the images in this dataset compared to the Massachusetts Roads Dataset, it only covers an area of 1910 square kilometers. This is because of a much lower \ac{GSD} of about 0.66 meters per pixel. \\
 
@@ -129,4 +127,4 @@ The dataset were constructed by using QGIS, an open source geographic informatio
 \caption{Example taken from test set in Norwegian Roads Dataset N50} \label{fig:norwegian_roads_example}
 \end{figure}
 
-An aerial image and it's corresponding label image from the Norwegian Roads Dataset can be seen in Figure \ref{fig:norwegian_roads_example}, and Figure \ref{fig:norwegian_roads_example_overlay} shows the same label image superimposed on the aerial image. Observe that some roads are missing from the label image, as well as the ground truth not covering the roads properly. \\
+An aerial image and it's corresponding label image from the Norwegian Roads Dataset N50 can be seen in Figure \ref{fig:norwegian_roads_example}, and Figure \ref{fig:norwegian_roads_example_overlay} shows the same label image superimposed on the aerial image. Observe that some roads are missing from the label image, as well as the ground truth not covering the roads properly. \\

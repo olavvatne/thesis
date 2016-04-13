@@ -71,3 +71,31 @@ Nonetheless, the center image in Figure \ref{fig:result} illustrates the current
 \hspace*{\fill} % separation between the subfigures
 \caption{Loss for training, validation and test dataset. 221600 examples.} \label{fig:curr100_loss_epochs}
 \end{figure}
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E1/E1-lc-test.png}
+\caption{Comparison of test loss} \label{fig:E1_curr_norway_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E1/E1-pr-test.png}
+\caption{Precision and recall comparisons.} \label{fig:E1_curr_norway_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{E1 - Performance of curriculum learning at different thresholds, $D_{0}$ for Norwegian Roads Dataset Vbase} \label{fig:E1_curriculum_norway}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E2/anticurr100_lc_comparison.png}
+\caption{Comparison of test loss} \label{fig:E2_curr_mass_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E2/anticurr100_pr_comparison.png}
+\caption{Precision and recall comparisons.} \label{fig:E2_curr_mass_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{E2 - Performance of curriculum learning and anti-curriculum learning for Massachusetts Roads Dataset} \label{fig:E2_curriculum_mass}
+\end{figure}

@@ -3,6 +3,7 @@
 This section will present the convolutional neural network in detail. \todo[inline]{Better and a slightly longer introduction to section}
 
 \subsection{Patch-based architecture}
+\todo[inline]{Explain what this actually does!}
 \todo[inline]{Outline what this thing actually predict. Patch based approach}
 \todo[inline]{Input bigger than output. Context, etc}
 \todo[inline]{Explain layering etc. show image}
@@ -72,24 +73,29 @@ All the above mentioned optimization approaches have an important hyperparameter
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 
 \subsection{Regularization}
-\todo[inline]{Samll introduction}
+\todo[inline]{small introduction to what regularization can do}
 \todo[inline]{Dropout}
+\todo[inline]{What it is. Why it is useful. Paper. Why dropout in convolutional layers.}
+\todo[inline]{Must be scaled at test time. No dropping then}
+
 \todo[inline]{L2 regularization}
+\todo[inline]{What is L2 good for?}
+
 \todo[inline]{Early stopping}
 \todo[inline]{Leaky ReLu}
+\todo[inline]{Can this be placed here?}
+
 To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The first applies a weight penalty to prevent weights from growing large. The second stops the optimization process when performance on the validation set starts to consistently decrease. This is an indication of the model starting to overfit the training set. Dropout forces the units to rely less on each other, by randomly disabling half of the units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units.\\
 
 
 \subsection{Data preprocessing}
 \todo[inline]{Beta 0.0.0.01 Rubbish}
-Several preprocessing steps are applied to the data before training. These steps and the reasoning behind them are presented here. \\
-
 The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to training with. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
 
-However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias exhibited by the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by random angles before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation.\\
+However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias in the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by random angles before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation.\\
 
 Another data augmentation method utilized when constructing the patch training set is flipping. This is a common method for artificially increase the size of the dataset \citep{Krizhevsky_imagenet}. Since the dataset contains aerial imagery that depict landscape from a top-down perspective, the patches can both be flipped vertically and horizontally \todo{Something missing here}.\\
 
 Contrast normalization is also applied to every patch. each patch is normalized by subtracting the mean pixel value from the pixels of a patch, and then dividing the result by the standard deviation found for all pixels in the dataset.\\
 
-Additionally, the datasets used exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. The proportion of patches containing road according to the labelling, range between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by simply artificially increasing the proportion of road examples, when sampling the patch dataset. This method is not applied to the test and validation patch set, and will therefore retain their natural class distribution\todo{Improve language}.\\
+Additionally, the datasets used exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might decide to prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. The proportion of patches containing road according to the labelling, range between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by simply artificially increasing the proportion of road examples, when sampling the patch dataset. This method is not applied to the test and validation patch set, and will therefore retain their natural class distribution\todo{Improve language}.\\
