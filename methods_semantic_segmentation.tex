@@ -71,22 +71,27 @@ Furthermore, the system also support RMSProp which keeps a running average of th
 All the above mentioned optimization approaches have an important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in regular intervals of epochs by some factor $a_{decrease}$ during optimization. \\
 
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
-
+%http://neuralnetworksanddeeplearning.com/chap3.html crossentropy!!
 \subsection{Regularization}
-\todo[inline]{small introduction to what regularization can do}
+To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The model's task is to learn the regularities found in the mapping between the data and labels in the training set. However, the training set also contain sampling errors and accidental patterns not relevant to the task at hand. Without regularization, a model will learns the useful, but also the erroneous regularities a bit to well, and can therefore start to overfit the data. \\
+
+L2 weight decay applies a weight penalty to prevent weights from growing large. \\
+
+
+Early stopping stops the optimization process when performance on the validation set starts to consistently decrease. When the validation loss stops or starts to increase in value, the method waits for a certain number of iterations before stops the training. There are three parameters that controls the early stopping behaviour, \textit{initial patience}, \textit{improvement threshold} and \textit{patience increase}. The first parameter controls how many iterations the training should run for regardless of validation loss improvements. The second parameter dictates the required amount of improvement of the current validation loss compared to the best previously seen validation loss, before incrementing the patience. The latter parameter decide the increment factor of the patience. The patience, or how many additional iterations early stopping will wait for an validation loss improvement is defined as $\textit{patience} = max(\textit{patience}, \textit{iteration} \times \textit{patience increase} )$ \todo{Paper, and is formula really necessary???}\\
+%http://link.springer.com/chapter/10.1007/3-540-49430-8_3
+
+The dropout method forces the units to rely less on each other, by randomly disabling half of the units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units \citep{Srivastava_dropout}. \\
+
 \todo[inline]{Dropout}
-\todo[inline]{What it is. Why it is useful. Paper. Why dropout in convolutional layers.}
+\todo[inline]{What it is. Why it is useful. Why dropout in convolutional layers.}
 \todo[inline]{Must be scaled at test time. No dropping then}
 
 \todo[inline]{L2 regularization}
 \todo[inline]{What is L2 good for?}
 
-\todo[inline]{Early stopping}
 \todo[inline]{Leaky ReLu}
 \todo[inline]{Can this be placed here?}
-
-To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The first applies a weight penalty to prevent weights from growing large. The second stops the optimization process when performance on the validation set starts to consistently decrease. This is an indication of the model starting to overfit the training set. Dropout forces the units to rely less on each other, by randomly disabling half of the units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units.\\
-
 
 \subsection{Data preprocessing}
 \todo[inline]{Draft rewrite}
