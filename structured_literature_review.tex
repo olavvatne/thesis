@@ -26,13 +26,13 @@ Table \ref{tab:search_terms} describes the different word groups employed by the
 \caption{The terms and groups}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{|+c|^c|^c|^c|^c|^c|^c|}\hline
+\begin{tabular}{+c | ^p{0.2\textwidth} ^p{0.2\textwidth} ^p{0.2\textwidth} ^p{0.2\textwidth} ^p{0.2\textwidth} ^l }\hline
 \rowstyle{\bfseries}
  		& Group 1 & Group 2 & Group 3 & Group 4 & Group 5 & Group 6\\\hline
-Term 1 	& \pbox{20cm}{Aerial \\ images} & \pbox{2cm}{Curriculum learning} & \pbox{2cm}{Noisy \\ labels} & \pbox{2cm}{Neural \\ network} & Segmentation & Roads\\\hline
-Term 2 	& \pbox{20cm}{Satellite \\ images} & \pbox{2cm}{Guided learning} & \pbox{2cm}{Missing labels} & \pbox{3cm}{Convolutional \\ neural network} & Classification & \\\hline
-Term 3 	& \pbox{20cm}{Remote \\ sensing} & \pbox{2cm}{Example ordering} & \pbox{2cm}{Semi-supervised} & \pbox{3cm}{Machine learning} & & \\\hline
-Term 4 	& \pbox{20cm}{Images} & & \pbox{2cm}{Noisy data \\ (appended)} & \pbox{3cm}{Deep neural \\ networks \\ (appended)} & & \\\hline
+\textbf{Term 1} 	& Aerial images & Curriculum learning & Noisy labels & Neural network & Segmentation & Roads\\
+\textbf{Term 2}	& Satellite images & Guided learning & Missing labels & Convolutional neural network & Classification & \\
+\textbf{Term 3} 	& Remote sensing & Example ordering & Semi-supervised & Machine learning & & \\
+\textbf{Term 4} 	& Images & & Noisy data (appended) & Deep neural networks (appended) & & \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
@@ -60,11 +60,11 @@ the study was removed. Then the title and the abstract were evaluated using the 
 \caption{Inclusion and quality criteria for the selection process}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+l ^l ^l}\hline
+\begin{tabular}{+l ^p{8cm} ^r}\hline
 \rowstyle{\bfseries}
 Id & Criteria & Screening step\\\hline
 
-IC 1 & \pbox{10cm}{The study's main concern is curriculum learning, dealing with noisy labels or road extraction systems}  & 1\\
+IC 1 & The study's main concern is curriculum learning, dealing with noisy labels or road extraction systems  & 1\\
 IC 2 & The study is presenting empirical results & 1\\
 IC 3 & The study preferably involve machine learning & 1\\
 QC 1 & The research has a clear aim & 2\\

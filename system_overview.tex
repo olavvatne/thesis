@@ -11,7 +11,7 @@
 
 The objective of the system is to detect roads found in aerial color images by supervised learning. To do so, the \ac{CNN} approach has been chosen for this learning task. \ac{CNN}s have been applied to many computer vision tasks recently, and given great results, outperforming other approaches \citep{Krizhevsky_imagenet} \todo{Really bad sentence}. As discussed in Section \ref{sec:background_theory}, these networks reduce need for feature engineering by letting the network learning to extract suitable features from raw pixel values, and are therefore a good choice for tasks involving images. Additionally, an important part of making a supervised learning algorithm competent, is by having a large dataset containing aerial images and label images showing exactly which pixels represent roads.\\
 
-\todo[inline]{Rewrite}
+\todo[inline]{enhance!}
 This system shares many similarities to the patch-based approached presented by \cite{Mnih_aerial_images_noisy}. The system produces a patch of predictions given a patch of pixel values, where each value indicate the probability of the input pixel depicting a road. Given a $64 \times 64$ aerial image patch the system produce a $16 \times 16$ patch of predictions.\\
 
 
