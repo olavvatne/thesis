@@ -2,8 +2,6 @@
 \documentclass[a4paper]{book}
 \usepackage{listings}
 \usepackage{amsmath} %Math over several liens
-\usepackage{todonotes}
-\presetkeys{todonotes}{color=blue!20, bordercolor=white}{}
 \usepackage[printonlyused]{acronym}
 \usepackage[english]{babel}	
 					% Correct English hyphenation
@@ -61,6 +59,9 @@
 \newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
 #1\ignorespaces
 }
+
+\usepackage{todonotes}
+\presetkeys{todonotes}{color=blue!20, bordercolor=white}{}
 \begin{document}
 
 %Title page (This is generate automatically from the commands above)

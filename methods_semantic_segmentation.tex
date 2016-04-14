@@ -1,5 +1,6 @@
 \section{Semantic Segmentation with Convolutional Neural Network}
 \label{sec:network}
+\todo[inline]{Draft edition. Create revision of section}
 This section will present the convolutional neural network in detail. \todo[inline]{Better and a slightly longer introduction to section}
 
 \subsection{Patch-based architecture}
@@ -8,6 +9,8 @@ This section will present the convolutional neural network in detail. \todo[inli
 \todo[inline]{Input bigger than output. Context, etc}
 \todo[inline]{Explain layering etc. show image}
 \todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
+\todo[inline]{Leaky ReLu}
+\todo[inline]{Can this be placed here?}
 
 The system is based on the deep neural network outlined by \cite{Mnih_aerial_images_noisy}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. After the network is trained, it can predict whether or not roads are present in a $16 \times 16$ pixel area contained in the center of a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
 
@@ -39,7 +42,7 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
   $p_i$ & Dropout rate for a layer $i$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
   $a$ & Learning rate & 0.0014 \\
   $a_{decrease}$ & learning rate decrease factor & 0.95 \\
-  $L_2$ & Weight decay & 0.0001 \\
+  $\lambda$ & L2 Weight decay strength & 0.0001 \\
   $m$ & Momentum & 0.9 \\
   $b$ & Batch size & 64 \\\hline
 \end{tabular}
@@ -49,7 +52,6 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 \end{table}
 
 \subsection{Optimization}
-\todo[inline]{Draft. Rewrite better.}
 %\url{http://cs231n.github.io/neural-networks-3/}
 %http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}
 %http://arxiv.org/pdf/1212.0901v2.pdf
@@ -73,28 +75,23 @@ All the above mentioned optimization approaches have an important hyperparameter
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 %http://neuralnetworksanddeeplearning.com/chap3.html crossentropy!!
 \subsection{Regularization}
-To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The model's task is to learn the regularities found in the mapping between the data and labels in the training set. However, the training set also contain sampling errors and accidental patterns not relevant to the task at hand. Without regularization, a model will learns the useful, but also the erroneous regularities a bit to well, and can therefore start to overfit the data. \\
+To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The model's task is to learn the regularities found in the mappings between the data and labels in the training set. However, the training set also contain sampling errors and accidental patterns not relevant to the task at hand. Without regularization, a model will learns the useful, but also the erroneous regularities a bit to well, and can therefore start to overfit the data. \\
 
-L2 weight decay applies a weight penalty to prevent weights from growing large. \\
-
+L2 regularization is a weight decay method which applies a loss function penalty to prevent weights in the network from growing large. This is achieved by adding an extra term, $\lambda\sum_{i=0}^{|w|} w_i^2$ to the loss function, which penalize large valued weights, and encourages a smoother parameter configuration \citep{Hinton_regularization}. The strength of the weight decay is controlled by the $\lambda$ hyperparameter, which is typically is set to a low value \todo{Ok to cite lecture note???}.\\
 
 Early stopping stops the optimization process when performance on the validation set starts to consistently decrease. When the validation loss stops or starts to increase in value, the method waits for a certain number of iterations before stops the training. There are three parameters that controls the early stopping behaviour, \textit{initial patience}, \textit{improvement threshold} and \textit{patience increase}. The first parameter controls how many iterations the training should run for regardless of validation loss improvements. The second parameter dictates the required amount of improvement of the current validation loss compared to the best previously seen validation loss, before incrementing the patience. The latter parameter decide the increment factor of the patience. The patience, or how many additional iterations early stopping will wait for an validation loss improvement is defined as $\textit{patience} = max(\textit{patience}, \textit{iteration} \times \textit{patience increase} )$ \todo{Paper, and is formula really necessary???}\\
 %http://link.springer.com/chapter/10.1007/3-540-49430-8_3
 
-The dropout method forces the units to rely less on each other, by randomly disabling half of the units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units \citep{Srivastava_dropout}. \\
+The dropout method forces the units to rely less on each other, by randomly disabling units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units \citep{Srivastava_dropout}. Dropout can also be viewed as an ensemble method approximation. By randomly removing subsets of units from the network, an exponential number of parameter sharing subnetworks are trained simultaneously. This is less computationally expensive than training an ensemble of many individual neural networks. At test time, the predictions of these subnetworks are combined by an approximate averaging method \todo{Bad way to say this}. This is done by having the neural network creat predictions without dropping any units. Because all units are used, the weights of network have to be scaled down. If a unit is retained with a probability of $p$ during training, the outgoing weights of that unit should be multiplied by $p$ at test time. Each layer $i$ has an unique dropout rate parameter, $p_i$, which controls the probability of dropping an unit at that layer.  In the \ac{CNN} implementation, dropout has been implemented with some minor tweaks: \\
 
-\todo[inline]{Dropout}
-\todo[inline]{What it is. Why it is useful. Why dropout in convolutional layers.}
-\todo[inline]{Must be scaled at test time. No dropping then}
+\todo{VERY BAD}
+\begin{flalign*}
+     &Y = \frac{1}{p^{(l)}} R \sigma(W^{(l)}X + B^{(l)}),
+\end{flalign*}
 
-\todo[inline]{L2 regularization}
-\todo[inline]{What is L2 good for?}
-
-\todo[inline]{Leaky ReLu}
-\todo[inline]{Can this be placed here?}
+\noindent where $W$ and $B$ are the weights and biases in layer $l$, $X$ denote the input potentials and f(z) is the transfer function. $R$ is a vector of independent Bernoulli random variables each having a probability of $p^{l}$ being 1. Instead of multiplying the outcoming weights at test time, the output potentials during training are divided by $p^{(l)}$, which should give essentially the same scaling effect.\\
 
 \subsection{Data preprocessing}
-\todo[inline]{Draft rewrite}
 The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to training with. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
 
 However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias in the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by random angles before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation.\\
