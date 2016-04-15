@@ -38,8 +38,12 @@ Ensemble methods have also been applied to tasks involving aerial imagery. In \c
 
 \cite{Mnih_roads_high_res_aerial_images} proposed an automatic road extraction approach for large real-world datasets. The system consists of a neural network with millions of weights that is trained on a large dataset of aerial images. A \ac{GPU} was utilized to train the network.  \\
 
-They formulated extraction of road pixels from aerial images as a patch-based semantic segmentation problem. 
-The goal of the model is to predict whether or not pixels belong to a road class, given an image patch. This is achieved by having the neural network learn $p(N(M(i,j), w_m) \mid N(S(i,j), w_s)$, where $S$ is an aerial image and $M$ is a corresponding road label image. $M(i,j) = 1$ if $S(i,j)$ is a road pixel and 0 otherwise.  $N(I(i,j), w)$  denotes a $w \times w$ large patch of pixels centered at location (i,j). \\
+They formulated detection of road pixels from aerial images as a patch-based semantic segmentation problem. 
+The goal of the model is to predict whether or not pixels belong to a road class, given an image patch. This is achieved by having the neural network model the distribution:
+
+ $$p(N(M(i,j), w_m) \mid N(S(i,j), w_s),$$ 
+ 
+\noindent where $S$ is an aerial image and $M$ is a corresponding road label image. $M(i,j) = 1$ if $S(i,j)$ is a road pixel and 0 otherwise.  $N(I(i,j), w)$  denotes a $w \times w$ large patch of pixels centered at location (i,j) of a large image $I$. Using smaller image patches instead of entire images for modelling the distribution, limits the image context which the model use to make predictions. However, this approach is less computational expensive, and by retaining a relatively large $w_s \times w_s$ can still provide enough image context to create a competent road detector. \\
 
 The network consists of a single hidden layer with 12288 units, an input layer of 4096 units, and 256 output units. This enables the network to predict 16 x 16 road prediction patches given 64 x 64 aerial image patches. The network is trained by \ac{SGD} to minimize cross-entropy between training labels and the predicted map patches. Furthermore, unsupervised pre-training is used to initialize the parameters of the network.\\
 

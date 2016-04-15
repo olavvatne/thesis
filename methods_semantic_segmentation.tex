@@ -3,18 +3,19 @@
 \todo[inline]{Draft edition. Create revision of section}
 This section will present the convolutional neural network in detail. \todo[inline]{Better and a slightly longer introduction to section}
 
-\subsection{Patch-based architecture}
-\todo[inline]{Explain what this actually does!}
-\todo[inline]{Outline what this thing actually predict. Patch based approach}
-\todo[inline]{Input bigger than output. Context, etc}
-\todo[inline]{Explain layering etc. show image}
-\todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
-\todo[inline]{Leaky ReLu}
-\todo[inline]{Can this be placed here?}
+\subsection{Patch-based approach}
+\todo[inline]{Double explaining? Also discussed in related works}
+\todo[inline]{Bad introduction, and need better expaining}
+This thesis formulate the problem of road segmentation in aerial images in the same manner  \cite{Mnih_roads_high_res_aerial_images} do. This patch-based approach is presented in detail in Section \ref{sec:related_works}. In short, the convolutional neural network should learn the distribution:
 
-The system is based on the deep neural network outlined by \cite{Mnih_aerial_images_noisy}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. After the network is trained, it can predict whether or not roads are present in a $16 \times 16$ pixel area contained in the center of a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
+$$ p(m|s) = \prod_{i=0}^{w_m^2}p(m_i | s),  $$
 
-The first layer perform convolution using $13 \times 13$ kernels, and outputs in total 64 feature maps. Only the first layer utilize max pooling, which reduces the number of inputs to the next layer as well as introducing some translational invariance to the model. The kernel size in the second and third layer are currently $4 \times 4$ and $3 \times 3$, respectably. The output of the third convolutional layer is used as input to a fully connected neural network with a single hidden layer and an output layer. The latter contains 256 units where each output is the probability of a pixel representing a road.\\
+where $p(m|s)$ denote a conditional probability of a label map patch given an aerial image patch. The patches $m$ and $p$ have been extracted from label image $M$ and aerial image $S$. Alternatively, the the label and image patch can be defined as $m =N(M_{i,j}, w_m)$ and $ s = N(S_{i,j}, w_s)$, where an area of $w_m \times w_m$ and $w_s \times w_s$ centered at location $(i, j)$ have been extracted from $M$ and $S$. By having a label patch $m$, the model can simultaneously make several predictions from the same context $s$, which is more effective than making a separate predictions per aerial image patch \todo{More effective to limit size of patches. Context is good but not too much. Assume conditional independence}. \\ 
+
+
+The system is based on the deep neural network outlined by \cite{Mnih_aerial_images_noisy}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. After the network is trained, it will predict whether or not roads are present in a $16 \times 16$ pixel area from the center of  a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
+
+The first layer perform convolution using $13 \times 13$ kernels, and outputs in total 64 feature maps. Only the first layer utilize max pooling, which reduces the number of inputs to the next layer as well as introducing some translational invariance to the model. The kernel size in the second and third layer are currently $4 \times 4$ and $3 \times 3$, respectably. The output of the third convolutional layer is used as input to a fully connected neural network with a single hidden layer with 4096 units and an output layer. The latter contains 256 units where each output is the probability of a pixel representing a road.\\
 
 \begin{figure}
 \begin{center}
@@ -50,6 +51,13 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 \end{center}
 \label{tab:curriculum_parameters}
 \end{table}
+
+\todo[inline]{Outline what this thing actually predict. Patch based approach}
+\todo[inline]{Input bigger than output. Context, etc}
+\todo[inline]{Explain layering etc. show image}
+\todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
+\todo[inline]{Leaky ReLu}
+\todo[inline]{Can this be placed here?}
 
 \subsection{Optimization}
 %\url{http://cs231n.github.io/neural-networks-3/}
