@@ -16,11 +16,19 @@ The first layer performs convolution using $13 \times 13$ kernels. Only the firs
 
 \todo[inline]{stride}
 
-The convolutional layers each have 64, 112 and 80 different feature maps, respectably. When training, these feature maps or kernels typically learn to respond to common local patterns in the input. The kernels in the first convolutional layer, for example, will learn to detect low level features in the aerial image, such as edges, color and textures. This happens because the \ac{CNN} employ parameter sharing by convolving the same kernel across the input data, forcing the model to find local image features. The 64 feature maps from the first layer of a trained model, can be viewed in Figure \ref{fig:convoluional_first_layer_visualization}. Many of the kernels,  seem to have developed into something similar to Gabor filters. These filters are effective at detecting edges at certain orientations. Coincidentally, oriented two-dimensional Gabor functions are widely used to model the response from simple-cell receptive fields in the primary visual cortex. \\
+The convolutional layers each have 64, 112 and 80 different feature maps, respectably. During training, these feature maps or kernels typically learn to respond to common local patterns in the input. The kernels in the first convolutional layer, for example, will learn to detect low level features in the aerial image, such as edges, colors and textures. This happens because the \ac{CNN} employ parameter sharing by convolving the same kernel across the input data, forcing the model to find local image features. The 64 feature maps from the first layer of a trained model, can be viewed in Figure \ref{fig:convoluional_first_layer_visualization}. Many of the kernels seem to have developed into something similar to Gabor filters, which are effective at detecting edges at certain orientations. Coincidentally, oriented two-dimensional Gabor functions are widely used to model the response from simple-cell receptive fields in the primary visual cortex. \\
 
 %Read this before citing
 %\citep{Ringach_gabor_spatial}
 %http://jn.physiology.org/content/jn/88/1/455.full.pdf
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\columnwidth]{figs/network/Filter_unblurred.png}
+\caption[Visualization of filter map]{Visualization of filter maps from the first convolutional layer of a trained network.}
+\label{fig:convoluional_first_layer_visualization}
+\end{center}
+\end{figure}
 
 Common for both convolutional layers and fully connected layers, are the use of a non-linear activation function, which allow the network to learn non-linear decision boundaries \todo{Fact check}. To compute the outgoing activation of any unit in the network, the incoming weights are first summed with the activations coming from either the input or the previous layer. Then, a bias is added, before feeding the result through the activation function. This is typically denoted \todo{Totally bad word}:
 
@@ -28,7 +36,7 @@ $$ y = \sigma(aw + b),$$
 
 \noindent where $a$ and  $w$ is the unit's incoming activations and weights, $b$ is the bias and $\sigma$ is the non-linear activation function.\\
 
-In the default hyperparameter configuration of this system, the output layer apply the logistic activation function, while the \ac{ReLU} activation function is used by the input and hidden layers. The logistic activation function is appropriate for the output layer, because it squashes any input to be between the value of 0 and 1. This is useful for the road detection system, where the activation of each output unit should predict a probability of whether the corresponding aerial image patch pixel belong to the road class or not. The \ac{ReLU}, however, has been used all other layers, and has been shown to be effective for deep neural networks \todo{Bad sentence and paper}.  The activation functions are displayed in Figure \ref{fig:activation_functions}\\
+In the default hyperparameter configuration of this system, the output layer apply the logistic activation function, while the \ac{ReLU} activation function is used by the input and hidden layers. The logistic activation function is appropriate for the output layer, because it squashes any input to be between the value of 0 and 1. This is useful for the road detection system, where the activation of each output unit should predict a probability of whether the corresponding aerial image patch pixel belong to the road class or not. The \ac{ReLU}, however, has been used for all other layers. This activation function has been shown to be especially effective for deep neural networks \todo{Bad sentence and paper}.  The activation functions are displayed in Figure \ref{fig:activation_functions}.\\
 
 \begin{figure}[h]
 \begin{subfigure}{0.45\textwidth}
@@ -47,15 +55,7 @@ $$ y = \text{max}(0, x) \frac{}{}$$
 \end{figure}
 
 
-The specific network configuration described above, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters and default values are listed in Table \ref{tab:network_parameters}.\\
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=1\columnwidth]{figs/network/Filter_unblurred.png}
-\caption[Visualization of filter map]{Visualization of filter maps from the first convolutional layer of a trained network.}
-\label{fig:convoluional_first_layer_visualization}
-\end{center}
-\end{figure}
+The specific network configuration described in this section, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters and default values are listed in Table \ref{tab:network_parameters}.\\
 
 \begin{table}[htp]
 \caption{Hyperparameters for \ac{CNN}}
@@ -64,15 +64,15 @@ The specific network configuration described above, is the default configuration
 \begin{tabular}{+l ^l ^l}\hline
 \rowstyle{\bfseries}
   Parameter & Description & Value\\\hline
-  $K_i$ & Number of kernels for convolutional layer i & 64, 112, 80 \\
-  $CLF_i$ & Filter size of convolutional layer $i$ & (13,13),(4,4),(3,3) \\
-  $CLS_i$ & Stride amount of convolutional layer $i$ & (4,4),(1,1),(1,1) \\
-  $CLP_i$ & Pool size of convolutional layer $i$ & (2,2),(1,1),(1,1) \\
+  $K^{(l)}$ & Number of kernels for convolutional layer $l$ & 64, 112, 80 \\
+  $CLF^{(l)}$ & Filter size of convolutional layer $l$ & (13,13),(4,4),(3,3) \\
+  $CLS^{(l)}$ & Stride amount of convolutional layer $l$ & (4,4),(1,1),(1,1) \\
+  $CLP^{(l)}$ & Pool size of convolutional layer $l$ & (2,2),(1,1),(1,1) \\
   Cost function & Function that is minimzed each iteration & Cross entropy \\
   Epochs & How many epochs \ac{CNN} will train for. & 100 \\
-  $\theta_i$ & Transfer function for each value & Leaky ReLU x4, sigmoid x1 \\
+  $\sigma^{(l)}$ & Transfer function for each layer $l$ & Leaky ReLU x4, sigmoid x1 \\
   $h$ & Number of neurons in hidden layer. & 4096 \\
-  $p_i$ & Dropout rate for a layer $i$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
+  $p^{(l)}$ & Dropout rate for a layer $l$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
   $a$ & Learning rate & 0.0014 \\
   $a_{decrease}$ & learning rate decrease factor & 0.95 \\
   $\lambda$ & L2 Weight decay strength & 0.0001 \\
@@ -90,7 +90,7 @@ The specific network configuration described above, is the default configuration
 %http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}
 %http://arxiv.org/pdf/1212.0901v2.pdf
 %http://stats.stackexchange.com/questions/179915/whats-the-difference-between-momentum-based-gradient-descent-and-nesterovs-ac
-The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and have an improved stability and faster convergence compared to standard \ac{SGD} \citep{Bengio_advances_optimizing}. The standard momentum approach extend the gradient update step, by introducing velocity. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the loss optimization is gaining velocity, it will stop doing steepest decent, and results in a smoother decent with less oscillations. Basically, instead of directly using the gradient to move in the landscape, the gradient will influence the velocity. The only hyperparameter associated with momentum is $m$, which damps the velocity, and can be interpreted as friction inflicted on the particle \todo{INflicted on the particle?}. \\
+The model parameters are optimized with a special form of \ac{SGD}, called Nesterov momentum stochastic gradient decent, and has an improved stability and faster convergence compared to standard \ac{SGD} \citep{Bengio_advances_optimizing}. The standard momentum approach extend the gradient update step, by introducing velocity. The loss can be interpreted as a hilly error surface where loss optimization can be viewed as a particle gaining and losing velocity while interacting with the landscape. When the loss optimization has gained velocity, it will stop doing purely steepest decent, and results in a smoother decent with less oscillations. Basically, instead of directly using the gradient to move in the landscape, the gradient will influence the velocity. The only hyperparameter associated with momentum is $m$, which damps the velocity, and can be interpreted as friction inflicted on the particle \todo{INflicted on the particle?}. \\
 
 
 Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nesterov method first makes a step in the direction of the accumulated velocity, and then makes a correction of the velocity based on the new location. In standard momentum a correction to the velocity is made before taking a step. The Nesterov gradient is defined by the following update rule:
@@ -108,30 +108,32 @@ All the above mentioned optimization approaches have an important hyperparameter
 
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 %http://neuralnetworksanddeeplearning.com/chap3.html crossentropy!!
+
 \subsection{Regularization}
 To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The model's task is to learn the regularities found in the mappings between the data and labels in the training set. However, the training set also contain sampling errors and accidental patterns not relevant to the task at hand. Without regularization, a model will learns the useful, but also the erroneous regularities a bit too well, and can therefore start to overfit the data. \\
 
 L2 regularization is a weight decay method which applies a loss function penalty to prevent weights in the network from growing large. This is achieved by adding an extra term, $\lambda\sum_{i=0}^{|w|} w_i^2$ to the loss function, which penalize large valued weights, and encourages a smoother parameter configuration \citep{Hinton_regularization}. The strength of the weight decay is controlled by the $\lambda$ hyperparameter, which is typically is set to a low value \todo{Ok to cite lecture note???}.\\
 
-Early stopping stops the optimization process when performance on the validation set starts to consistently decrease. When the validation loss stagnates or starts to increase in value, the method waits for a certain number of iterations before stopping the training process. There are three parameters that controls the early stopping behaviour, \textit{initial patience}, \textit{improvement threshold} and \textit{patience increase}. The first parameter controls how many iterations the training should run for, regardless of validation loss improvements. The second parameter dictates the required amount of improvement of the current validation loss compared to the best previously seen validation loss, before incrementing the patience variable. The latter parameter decide the increment factor of the patience. The patience, or how many additional iterations early stopping will wait for a validation loss improvement is defined as $\textit{patience} = max(\textit{patience}, \textit{iteration} \times \textit{patience increase} )$ \todo{Paper, and is formula really necessary???}\\
+Early stopping stops the optimization process when performance on the validation set starts to consistently decrease. When the validation loss stagnates or starts to increase in value, the method waits for a certain number of iterations before stopping the training process. There are three parameters that controls the early stopping behaviour, \textit{initial patience}, \textit{improvement threshold} and \textit{patience increase}. The first parameter controls how many iterations the training should run for, regardless of validation loss improvements. The second parameter dictates the required amount of improvement of the current validation loss compared to the best previously seen validation loss, before incrementing the patience variable. The latter parameter decide the increment factor of the patience. The patience, or how many additional iterations early stopping will wait for a validation loss improvement, is defined as $\textit{patience} = max(\textit{patience}, \textit{iteration} \times \textit{patience increase} )$ \todo{Paper, and is formula really necessary???}\\
 %http://link.springer.com/chapter/10.1007/3-540-49430-8_3
 
-The dropout method forces the units to rely less on each other, by randomly disabling units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units \citep{Srivastava_dropout}. Dropout can also be viewed as an ensemble method approximation. By randomly removing subsets of units from the network, an exponential number of parameter sharing subnetworks are trained simultaneously. This is less computationally expensive than training an ensemble of many individual neural networks. At test time, the predictions of these subnetworks are combined by an approximate averaging method \todo{Bad way to say this}. This is done by having the neural network creat predictions without dropping any units. Because all units are used, the weights of network have to be scaled down. If a unit is retained with a probability of $p$ during training, the outgoing weights of that unit should be multiplied by $p$ at test time. Each layer $i$ has an unique dropout rate parameter, $p_i$, which controls the probability of dropping an unit at that layer.  In the \ac{CNN} implementation, dropout has been implemented with some minor tweaks: \\
+The dropout method forces the units to rely less on each other, by randomly disabling units in the network during training. This encourage units to encode independently useful information, since dropout penalize co-adaptation between units \citep{Srivastava_dropout}. Dropout can also be viewed as an ensemble method approximation. By randomly removing subsets of units from the network, an exponential number of parameter sharing subnetworks are trained simultaneously. This is less computationally expensive than training an ensemble of many individual neural networks. At test time, the predictions of these subnetworks are combined by an approximate averaging method \todo{Bad way to say this}. This is done by having the neural network produce predictions without dropping any units. Because all units make contributions, the weights of the network have to be scaled down. If a unit is retained with a probability of $p$ during training, the outgoing weights of that unit should be multiplied by $p$ at test time. Each layer $l$ has an unique dropout rate parameter, $p^{(l)}$, which controls the probability of dropping an unit at that layer.  In the \ac{CNN} implementation, dropout has been implemented with some minor tweaks: \\
 
 \todo{VERY BAD}
 \begin{flalign*}
      &Y = \frac{1}{p^{(l)}} R \sigma(W^{(l)}X + B^{(l)}),
 \end{flalign*}
 
-\noindent where $W$ and $B$ are the weights and biases in layer $l$, $X$ denote the input potentials and f(z) is the transfer function. $R$ is a vector of independent Bernoulli random variables each having a probability of $p^{l}$ being 1. Instead of multiplying the outgoing weights at test time, the output potentials during training are divided by $p^{(l)}$, which should essentially give the same scaling effect.\\
+\noindent where $W$ and $B$ are the weights and biases in layer $l$, $X$ denote the input potentials and f(z) is the activation function. $R$ is a vector of independent Bernoulli random variables each having a probability of $p^{(l)}$ being 1. Instead of multiplying the outgoing weights at test time, the output potentials during training are divided by $p^{(l)}$, which should essentially give the same scaling effect.\\
+
 
 \subsection{Data preprocessing}
-The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to training with. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
+The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to use directly as input. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
 
-However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias in the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by random angles before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation.\\
+However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias in the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by a random angle before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation \todo{A bit icky. Invariance to orientation shoulds wrong.}.\\
 
 Another data augmentation method utilized when constructing the patch training set is flipping. This is a common method for artificially increase the size of the dataset \citep{Krizhevsky_imagenet}. Since the dataset contains aerial imagery that depict landscape from a top-down perspective, the patches can both be flipped vertically and horizontally \todo{Something missing here}.\\
 
-Contrast normalization is also applied to every patch. each patch is normalized by subtracting the mean pixel value from the pixels of a patch, and then dividing the result by the standard deviation found for all pixels in the dataset.\\
+Contrast normalization is also applied to every patch. Each patch is normalized by subtracting the mean pixel value from the pixels of a patch, and then dividing the result by the standard deviation found for all pixels in the dataset.\\
 
-Additionally, the datasets used exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might decide to prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. The proportion of patches containing road according to the labelling, range between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by simply artificially increasing the proportion of road examples, when sampling the patch dataset. This method is not applied to the test and validation patch set, and will therefore retain their natural class distribution\todo{Improve language}.\\
+Additionally, the datasets exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might decide to prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. The proportion of patches containing road according to the labelling, range between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by artificially increasing the proportion of road examples, when sampling the patch dataset. This method is not applied to the test and validation patch set, and will therefore retain their natural class distribution\todo{Improve language}.\\
