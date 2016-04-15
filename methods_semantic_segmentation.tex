@@ -1,21 +1,53 @@
 \section{Semantic Segmentation with Convolutional Neural Network}
 \label{sec:network}
-\todo[inline]{Draft edition. Create revision of section}
 This section will present the convolutional neural network in detail. \todo[inline]{Better and a slightly longer introduction to section}
 
 \subsection{Patch-based approach}
-\todo[inline]{Double explaining? Also discussed in related works}
-\todo[inline]{Bad introduction, and need better expaining}
-This thesis formulate the problem of road segmentation in aerial images in the same manner  \cite{Mnih_roads_high_res_aerial_images} do. This patch-based approach is presented in detail in Section \ref{sec:related_works}. In short, the convolutional neural network should learn the distribution:
+This thesis formulates the problem of road segmentation in aerial images in the same manner  \cite{Mnih_roads_high_res_aerial_images} do \todo{Bad first paragraph. Wierd introduction}. This patch-based approach is presented in detail in Section \ref{sec:related_works}. In short, the convolutional neural network should learn the distribution \todo{Explained in related works. Tedious to repeat???}:
 
 $$ p(m|s) = \prod_{i=0}^{w_m^2}p(m_i | s),  $$
 
-where $p(m|s)$ denote a conditional probability of a label map patch given an aerial image patch. The patches $m$ and $p$ have been extracted from label image $M$ and aerial image $S$. Alternatively, the the label and image patch can be defined as $m =N(M_{i,j}, w_m)$ and $ s = N(S_{i,j}, w_s)$, where an area of $w_m \times w_m$ and $w_s \times w_s$ centered at location $(i, j)$ have been extracted from $M$ and $S$. By having a label patch $m$, the model can simultaneously make several predictions from the same context $s$, which is more effective than making a separate predictions per aerial image patch \todo{More effective to limit size of patches. Context is good but not too much. Assume conditional independence}. \\ 
+where $p(m|s)$ denote a conditional probability of a label map patch given an aerial image patch. The patches $m$ and $p$ have been extracted from label image $M$ and aerial image $S$. Alternatively, the the label and image patch can be defined as $m =N(M_{i,j}, w_m)$ and $ s = N(S_{i,j}, w_s)$, where an area of $w_m \times w_m$ and $w_s \times w_s$ centered at location $(i, j)$ have been extracted from $M$ and $S$. By having a label patch $m$, the model can simultaneously make several predictions from the same context $s$, which is more effective than making a separate prediction per aerial image patch \todo{More effective to limit size of patches. Context is good but not too much. Assume conditional independence}. \\ 
 
 
-The system is based on the deep neural network outlined by \cite{Mnih_aerial_images_noisy}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. After the network is trained, it will predict whether or not roads are present in a $16 \times 16$ pixel area from the center of  a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
+The system is based on the deep neural network outlined by \cite{MnihThesis}. See Section \ref{sec:convolutional_networks_background} for background theory about \ac{CNN}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. The network predicts whether or not roads are present in a $16 \times 16$ pixel area in the center of  a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
 
-The first layer perform convolution using $13 \times 13$ kernels, and outputs in total 64 feature maps. Only the first layer utilize max pooling, which reduces the number of inputs to the next layer as well as introducing some translational invariance to the model. The kernel size in the second and third layer are currently $4 \times 4$ and $3 \times 3$, respectably. The output of the third convolutional layer is used as input to a fully connected neural network with a single hidden layer with 4096 units and an output layer. The latter contains 256 units where each output is the probability of a pixel representing a road.\\
+The first layer performs convolution using $13 \times 13$ kernels. Only the first layer utilize max pooling, which reduces the number of inputs to the next layer as well as introducing some translational invariance in the model. The default kernel size in the second and third layer are $4 \times 4$ and $3 \times 3$, respectably. The output of the third convolutional layer is used as input to a fully connected neural network with a single hidden layer with 4096 units and an output layer. The latter contains 256 units where each output is the probability of a pixel representing a road.\\
+
+\todo[inline]{stride}
+
+The convolutional layers each have 64, 112 and 80 different feature maps, respectably. When training, these feature maps or kernels typically learn to respond to common local patterns in the input. The kernels in the first convolutional layer, for example, will learn to detect low level features in the aerial image, such as edges, color and textures. This happens because the \ac{CNN} employ parameter sharing by convolving the same kernel across the input data, forcing the model to find local image features. The 64 feature maps from the first layer of a trained model, can be viewed in Figure \ref{fig:convoluional_first_layer_visualization}. Many of the kernels,  seem to have developed into something similar to Gabor filters. These filters are effective at detecting edges at certain orientations. Coincidentally, oriented two-dimensional Gabor functions are widely used to model the response from simple-cell receptive fields in the primary visual cortex. \\
+
+%Read this before citing
+%\citep{Ringach_gabor_spatial}
+%http://jn.physiology.org/content/jn/88/1/455.full.pdf
+
+Common for both convolutional layers and fully connected layers, are the use of a non-linear activation function, which allow the network to learn non-linear decision boundaries \todo{Fact check}. To compute the outgoing activation of any unit in the network, the incoming weights are first summed with the activations coming from either the input or the previous layer. Then, a bias is added, before feeding the result through the activation function. This is typically denoted \todo{Totally bad word}:
+
+$$ y = \sigma(aw + b),$$
+
+\noindent where $a$ and  $w$ is the unit's incoming activations and weights, $b$ is the bias and $\sigma$ is the non-linear activation function.\\
+
+In the default hyperparameter configuration of this system, the output layer apply the logistic activation function, while the \ac{ReLU} activation function is used by the input and hidden layers. The logistic activation function is appropriate for the output layer, because it squashes any input to be between the value of 0 and 1. This is useful for the road detection system, where the activation of each output unit should predict a probability of whether the corresponding aerial image patch pixel belong to the road class or not. The \ac{ReLU}, however, has been used all other layers, and has been shown to be effective for deep neural networks \todo{Bad sentence and paper}.  The activation functions are displayed in Figure \ref{fig:activation_functions}\\
+
+\begin{figure}[h]
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{figs/sigmoid2.png}
+$$ y = \frac{1}{1+ e^{-x}}$$
+\caption{Logistic} \label{fig:activation_sigmoid}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.45\textwidth}
+\includegraphics[width=\linewidth]{figs/relu2.png}
+$$ y = \text{max}(0, x) \frac{}{}$$
+\caption{Rectified linear unit} \label{fig:activation_relu}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{Activation functions} \label{fig:activation_functions}
+\end{figure}
+
+
+The specific network configuration described above, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters and default values are listed in Table \ref{tab:network_parameters}.\\
 
 \begin{figure}
 \begin{center}
@@ -49,15 +81,9 @@ The first layer perform convolution using $13 \times 13$ kernels, and outputs in
 \end{tabular}
 \end{adjustbox}
 \end{center}
-\label{tab:curriculum_parameters}
+\label{tab:network_parameters}
 \end{table}
 
-\todo[inline]{Outline what this thing actually predict. Patch based approach}
-\todo[inline]{Input bigger than output. Context, etc}
-\todo[inline]{Explain layering etc. show image}
-\todo[inline]{Have to justify model layering. 256 output? why 64x64 input images why? Context. }
-\todo[inline]{Leaky ReLu}
-\todo[inline]{Can this be placed here?}
 
 \subsection{Optimization}
 %\url{http://cs231n.github.io/neural-networks-3/}

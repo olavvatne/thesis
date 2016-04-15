@@ -1,6 +1,5 @@
 \section{Datasets}
 \label{sec:datasets}
-\todo[inline]{Draft}
 For testing the bootstrapping technique and curriculum learning as well as measuring the performance of the semantic segmentation system, two datasets have been used. Both datasets involve the task of learning structured output predictions\todo{Or semantic segmentation} from images, specifically the task of extracting roads from aerial images. The first dataset, Massachusetts Roads Dataset, is provided by \cite{MnihThesis} and have been used in other works. The second dataset, Norwegian Roads Dataset, have been created from publicly available source specifically for this thesis. Differences, similarities and challenges of employing these datasets will be further discussed below.\\
 
 \subsection{Massachusetts Roads Dataset}
@@ -23,8 +22,7 @@ Each aerial image have an accompanying identically sized binary label image whic
 \end{figure}
 
 
-\todo[inline]{DRAFT REWRITE. - In regards to, what!}
-There are many reasons for using this dataset for conducting experiments related to the research questions.  The task involve semantic segmentation of roads based exclusively on aerial color images which is arguable a hard task, and might justify the use of a large model for training, such as a \ac{CNN}. Additionally, the labels have been generated from existing map data, and therefore contains many instances of naturally occurring inconsistent labelling. This is compelling in regards to the research questions of this thesis. The dataset has also been used in other works, which enables comparisons between the results obtained in this thesis and results obtained in other works. \\
+There are many reasons for using this dataset for conducting experiments related to the research questions.  The task involve semantic segmentation of roads based exclusively on aerial color images which is arguable a hard task, and might justify the use of a large model for training, such as a \ac{CNN}. Additionally, the labels have been generated from existing map data, and therefore contains many instances of naturally occurring inconsistent labelling. This is compelling in regards to \todo{Is this allowed to say?} the research questions of this thesis. The dataset has also been used in other works, which enables comparisons between the results obtained in this thesis and results obtained in other works. \\
 
 Aerial image dataset typically suffer from two distinct types of label noise, which \cite{Mnih_aerial_images_noisy} have labelled omission and registration noise. The dataset is generated from existing map data, and have some deficiencies when coupled with supervised learning. There are many instances of omission noise in this dataset, where smaller roads and parking areas have not been marked as roads in the label images. These omissions are most likely perfectly acceptable for map purposes, but might negatively impact the performance of a classifier.  Because unlabelled paved areas share a high spectral similarity to roads, this type of inconsistent labelling might compel the model to minimize the loss by learning complicated distinctions between surfaces that are essentially the same thing \todo{Show examples}.\\
 
