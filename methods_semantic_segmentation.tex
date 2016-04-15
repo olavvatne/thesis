@@ -16,7 +16,7 @@ The first layer performs convolution using $13 \times 13$ kernels. Only the firs
 
 \todo[inline]{stride}
 
-The convolutional layers each have 64, 112 and 80 different feature maps, respectably. During training, these feature maps or kernels typically learn to respond to common local patterns in the input. The kernels in the first convolutional layer, for example, will learn to detect low level features in the aerial image, such as edges, colors and textures. This happens because the \ac{CNN} employ parameter sharing by convolving the same kernel across the input data, forcing the model to find local image features. The 64 feature maps from the first layer of a trained model, can be viewed in Figure \ref{fig:convoluional_first_layer_visualization}. Many of the kernels seem to have developed into something similar to Gabor filters, which are effective at detecting edges at certain orientations. Coincidentally, oriented two-dimensional Gabor functions are widely used to model the response from simple-cell receptive fields in the primary visual cortex. \\
+The convolutional layers each have 64, 112 and 80 different feature maps, respectably. During training, these feature maps or kernels typically learn to respond to common local patterns in the input. The kernels in the first convolutional layer, for example, will learn to detect low level features in the aerial image, such as edges, colors and textures. This happens because the \ac{CNN} employ parameter sharing by convolving the same kernel across the input data, forcing the model to find local image features. The 64 feature maps from the first layer of a trained model, can be viewed in Figure \ref{fig:convoluional_first_layer_visualization}. Many of the kernels seem to have developed into something similar to Gabor filters, which are effective at detecting edges at certain orientations. Coincidentally, oriented two-dimensional Gabor functions are often used to model the response from simple-cell receptive fields in the primary visual cortex \citep{Ringach_gabor_spatial}. \\
 
 %Read this before citing
 %\citep{Ringach_gabor_spatial}
@@ -25,7 +25,7 @@ The convolutional layers each have 64, 112 and 80 different feature maps, respec
 \begin{figure}
 \begin{center}
 \includegraphics[width=1\columnwidth]{figs/network/Filter_unblurred.png}
-\caption[Visualization of filter map]{Visualization of filter maps from the first convolutional layer of a trained network.}
+\caption[Visualization of filter map]{Visualization of feature maps from the first convolutional layer of a trained network.}
 \label{fig:convoluional_first_layer_visualization}
 \end{center}
 \end{figure}
@@ -36,7 +36,7 @@ $$ y = \sigma(aw + b),$$
 
 \noindent where $a$ and  $w$ is the unit's incoming activations and weights, $b$ is the bias and $\sigma$ is the non-linear activation function.\\
 
-In the default hyperparameter configuration of this system, the output layer apply the logistic activation function, while the \ac{ReLU} activation function is used by the input and hidden layers. The logistic activation function is appropriate for the output layer, because it squashes any input to be between the value of 0 and 1. This is useful for the road detection system, where the activation of each output unit should predict a probability of whether the corresponding aerial image patch pixel belong to the road class or not. The \ac{ReLU}, however, has been used for all other layers. This activation function has been shown to be especially effective for deep neural networks \todo{Bad sentence and paper}.  The activation functions are displayed in Figure \ref{fig:activation_functions}.\\
+In the default hyperparameter configuration of this system, the output layer apply the logistic activation function, while the \ac{ReLU} activation function is used by the input and hidden layers. The logistic activation function is appropriate for the output layer, because it squashes any input to be between the value of 0 and 1. This is useful for the road detection system, where the activation of each output unit should predict a probability of whether the corresponding aerial image patch pixel belong to the road class or not. The \ac{ReLU}, however, has been used for all other layers. This activation function has been shown to be train deep neural networks faster, because it does not suffer from the gradient vanishing problem by being a non-linear but non-saturating activation function \citep{Krizhevsky_imagenet}.  The activation functions are displayed in Figure \ref{fig:activation_functions}.\\
 
 \begin{figure}[h]
 \begin{subfigure}{0.45\textwidth}
