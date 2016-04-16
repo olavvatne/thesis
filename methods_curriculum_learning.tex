@@ -1,7 +1,22 @@
 \section{Curriculum learning}
 \label{sec:curriculum_learning}
-\todo[inline]{Curriculum stage loading and swapping.}
-\todo[inline]{Curriculum teacher and dataset example evaluator.}
+The curriculum learning method presented by \cite{Bengio_curriculumlearning}, showed that presenting the dataset in a certain order yielded better generalization as well as faster convergence. Similar to a school curriculum, easier concepts are presented before harder concepts, which translate to having the learning algorithm do optimization on a dataset consisting of "easier" examples, before introducing "harder" examples into the mix. Continuing this analogy, there is a teacher who decides the curriculum by judging how easy concepts is to grasp. For some datasets, such as language modelling datasets, the role of the teacher can easily be performed by a human. In language modelling tasks, a viable curriculum strategy is to start training using a simple dataset containing examples with only a limited vocabulary, and then gradually grow the allowed vocabulary. However, similar curriculum strategies are harder to identify for datasets involving images. The solution is therefore to outsource the job of curriculum teacher, to a supervised learning algorithm.  \\
+
+In this thesis, aerial image datasets are used. Based purely on color image patches, a supervised learning algorithm should be able to detect roads found in these patches. A curriculum strategy for this task is hard to identify. Is curved roads segment harder to learn for a machine learning algorithm than a straight road segment? It is hard for a human to identify features in images which a machine learning algorithm would consider easier to learn. \\
+
+
+Hence, a supervised learning algorithm is trained on the available examples and given the role of the teacher. The model, regardless of competence, will generate predictions which is used in a difficulty estimation of each example. The difficulty estimation is simply based on the amount of disagreement between the teacher's prediction and the label of the example. The difficulty estimator is defined below:  \\
+
+ \begin{flalign*}
+  &  d(y, q) = \frac{1}{w_m^2}\sum_{i=0}^{w_m^2} |y_i - \mathbb{1}_{q_i > s} |,  \\
+ \end{flalign*}
+ 
+ 
+\noindent where $q$ is the curriculum teacher's prediction, $y$ is the label, and $s$ is the probability threshold which gives the best precision and recall breakeven for the curriculum teacher classifier. The estimator compute the average value from the $w_m^2 \times w_m^2$ patch of label pixels and prediction probabilities. Even though the estimator has been customized to the patch-based approach of aerial road detection, the method can easily be adopted to other types of datasets. Which makes this a generally applicable curriculum strategy.\todo{Bad sentence}\\
+
+An interesting thing to note, is that with a very competent teacher classifier, the disagreement estimation will be able to detect examples with inconsistent labelling.
+
+
 
 \begin{table}[htp]
 \caption{Hyperparameters for curriculum learning}
