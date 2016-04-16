@@ -2,7 +2,7 @@
 \label{sec:network}
 This section will present the convolutional neural network in detail. \todo[inline]{Better and a slightly longer introduction to section}
 
-\subsection{Patch-based approach}
+\subsection{Patch-based Approach}
 This thesis formulates the problem of road segmentation in aerial images in the same manner  \cite{Mnih_roads_high_res_aerial_images} do \todo{Bad first paragraph. Wierd introduction}. This patch-based approach is presented in detail in Section \ref{sec:related_works}. In short, the convolutional neural network should learn the distribution \todo{Explained in related works. Tedious to repeat???}:
 
 $$ p(m|s) = \prod_{i=0}^{w_m^2}p(m_i | s),  $$
@@ -10,7 +10,8 @@ $$ p(m|s) = \prod_{i=0}^{w_m^2}p(m_i | s),  $$
 where $p(m|s)$ denote a conditional probability of a label map patch given an aerial image patch. The patches $m$ and $p$ have been extracted from label image $M$ and aerial image $S$. Alternatively, the the label and image patch can be defined as $m =N(M_{i,j}, w_m)$ and $ s = N(S_{i,j}, w_s)$, where an area of $w_m \times w_m$ and $w_s \times w_s$ centered at location $(i, j)$ have been extracted from $M$ and $S$. By having a label patch $m$, the model can simultaneously make several predictions from the same context $s$, which is more effective than making a separate prediction per aerial image patch \todo{More effective to limit size of patches. Context is good but not too much. Assume conditional independence}. \\ 
 
 
-The system is based on the deep neural network outlined by \cite{MnihThesis}. See Section \ref{sec:convolutional_networks_background} for background theory about \ac{CNN}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. The network predicts whether or not roads are present in a $16 \times 16$ pixel area in the center of  a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
+\subsection{Network Architecture}
+The network is based on the deep neural network outlined by \cite{MnihThesis}. See Section \ref{sec:convolutional_networks_background} for background theory about \ac{CNN}. The network have three convolutional layers and two fully connected layers. This network architecture is depicted in Figure \ref{fig:conv}. The network predicts whether or not roads are present in a $16 \times 16$ pixel area in the center of  a $64 \times 64$ aerial image patch. The input patch is considerably larger than the output patch, so that the network can better utilize the context in the image. \\
 
 The first layer performs convolution using $13 \times 13$ kernels. Only the first layer utilize max pooling, which reduces the number of inputs to the next layer as well as introducing some translational invariance in the model. The default kernel size in the second and third layer are $4 \times 4$ and $3 \times 3$, respectably. The output of the third convolutional layer is used as input to a fully connected neural network with a single hidden layer with 4096 units and an output layer. The latter contains 256 units where each output is the probability of a pixel representing a road.\\
 
@@ -127,7 +128,7 @@ The dropout method forces the units to rely less on each other, by randomly disa
 \noindent where $W$ and $B$ are the weights and biases in layer $l$, $X$ denote the input potentials and f(z) is the activation function. $R$ is a vector of independent Bernoulli random variables each having a probability of $p^{(l)}$ being 1. Instead of multiplying the outgoing weights at test time, the output potentials during training are divided by $p^{(l)}$, which should essentially give the same scaling effect.\\
 
 
-\subsection{Data preprocessing}
+\subsection{Data Preprocessing}
 The datasets used in this thesis contains aerial images and road label maps that are very large. Each image is typically around $1500 \times 1500$ pixels in size, which is arguably to large for the model to use directly as input. Smaller patches of examples are therefore extracted from these larger images. From each image a certain number of data patches and label patches of $64 \times 64$ and $16 \times 16$ are extracted randomly and added to a patch dataset.\\
 
 However, before extracting patches, each aerial image and road label map is rotated by a random number of degrees between 0 and 360 degrees. This is necessary because of orientation bias in the datasets \todo{DO they?}. In many cities the road network is often constructed in a grid pattern, which leads to roads having certain orientations. Without random rotations of the training data, the model might become better at detecting roads only at certain orientations \citep{Mnih_roads_high_res_aerial_images}. Each image is therefore rotated by a random angle before extracting patches, which results in a patch training set that encourages the model to learn invariance to orientation \todo{A bit icky. Invariance to orientation shoulds wrong.}.\\

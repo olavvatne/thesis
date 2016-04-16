@@ -203,7 +203,7 @@ They present two ways of incorporating perceptual consistency in a network. The 
 
 The bootstrapping approach tweaks the loss function to be a convex combination of the model prediction $q$ and the label $y$. The $\beta$ parameter is set to a fixed value.
 
-$$L(q,y) = - \sum\limits_{k=1}^L [\beta y_k + (1-\beta)z_k]log(q_k),$$
+$$\mathcal{L}(q,y) = - \sum\limits_{k=1}^L [\beta y_k + (1-\beta)z_k]log(q_k),$$
 
 where $z_k$ is assigned a value of 1 for the most confidently predicted class $q_i$, given the data. \\
 

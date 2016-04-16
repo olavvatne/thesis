@@ -2,6 +2,17 @@
 \label{sec:bootstrapping_loss}
 \todo[inline]{Bootstrapping loss}
 \todo{Mix factor. Check paper for correct}
+ 
+ \begin{flalign*}
+  \mathcal{L}_{hard}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.5}]log(q_i)  \\
+                    & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(1-\mathbb{1}_{q_i > 0.5})]log(1 - q_i) 
+ \end{flalign*}
+ 
+ 
+  \begin{flalign*}
+  \mathcal{L}_{confident}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.8}]log(q_i)  \\
+                    & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(\mathbb{1}_{q_i < 0.2})]log(1 - q_i) 
+ \end{flalign*}
 \begin{table}[htp]
 \caption{Hyperparameters for bootstrapping loss}
 \begin{center}
