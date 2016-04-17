@@ -8,15 +8,17 @@ In this thesis, aerial image datasets are used. Based purely on color image patc
 Hence, a supervised learning algorithm is trained on the available examples and given the role of the teacher. The model, regardless of competence, will generate predictions which is used in a difficulty estimation of each example. The difficulty estimation is simply based on the amount of disagreement between the teacher's prediction and the label of the example. The difficulty estimator is defined below:  \\
 
  \begin{flalign*}
-  &  d(y, q) = \frac{1}{w_m^2}\sum_{i=0}^{w_m^2} |y_i - \mathbb{1}_{q_i > s} |,  \\
+  &  d(y, q) = \frac{1}{w_m^2}\sum_{i=0}^{w_m^2} |y_i - \mathbb{1}_{q_i > r} |,  \\
  \end{flalign*}
  
  
-\noindent where $q$ is the curriculum teacher's prediction, $y$ is the label, and $s$ is the probability threshold which gives the best precision and recall breakeven for the curriculum teacher classifier. The estimator compute the average value from the $w_m^2 \times w_m^2$ patch of label pixels and prediction probabilities. Even though the estimator has been customized to the patch-based approach of aerial road detection, the method can easily be adopted to other types of datasets. Which makes this a generally applicable curriculum strategy.\todo{Bad sentence}\\
+\noindent where $q$ is the curriculum teacher's prediction, $y$ is the label. The $\mathbb{1}_{q_i > s}$ is a threshold operator, where $r$ is the threshold value which gives the best precision and recall breakeven for the curriculum teacher classifier. The operator essentially, creates a binary image patch from the prediction probabilities. The estimator compute the average value from the $w_m^2 \times w_m^2$ patch of label pixels and prediction probabilities. Even though the estimator has been customized to the patch-based approach of aerial road detection, the method can easily be adopted to other types of datasets. This curriculum strategy can therefore be considered generally applicable.\todo{Can it, though?}\\
 
-An interesting thing to note, is that with a very competent teacher classifier, the disagreement estimation will be able to detect examples with inconsistent labelling.
+An interesting thing to note, is with a very competent teacher classifier, computing a high difficulty score for an example, might indicate that the example's label is inconsistent.   \\
 
+The implementation of curriculum learning, involve $S$ training set stages. Each stage $\theta$ only contains examples where $d(y, q) < D_{\theta}$, in which the difficulty threshold $ D_{\theta} > D_{\theta -1}$ for all stages $ \theta > \theta -1$. Each subsequent stage, therefore contain examples with a broader range of difficulties \todo{Weird}. In the final stage $S$, the threshold $D_{S}$ is typically set to 1, which result in every example being added to the patch dataset. This stage has an training distribution equal to what a patch dataset from random sampling would have.  \todo{Bad to the bone}\\
 
+The supervised learning algorithm, is gradually introduced to 
 
 \begin{table}[htp]
 \caption{Hyperparameters for curriculum learning}
@@ -26,9 +28,9 @@ An interesting thing to note, is that with a very competent teacher classifier, 
 \rowstyle{\bfseries}
  		 Parameter & Description & Value\\\hline
  		 $S$ & Number of stages & 2 \\
- 		 $D_\theta$ & Threshold value for difficulty estimate for stage $\theta$ & 0.25 \\
+ 		 $D_\theta$ & Threshold value for difficulty estimate for stage $\theta$ & 0.25, 1.0 \\
  		 $t_{start}$ & What epoch to load stage 1 & 50 \\
- 		 $t_{stage}$ & Load subsequent stage after every $t_{stage}$ epoch & 10 \\\hline
+ 		 $t_{stage}$ & Load subsequent stage after every $t_{stage}$ epoch & 50 \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
