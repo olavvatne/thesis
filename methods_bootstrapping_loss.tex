@@ -1,14 +1,18 @@
 \section{Bootstrapping loss}
 \label{sec:bootstrapping_loss}
-\todo[inline]{Bootstrapping loss}
-\todo{Mix factor. Check paper for correct}
+Normally, the \ac{CNN} is optimized with a cross entropy loss function\todo{Weird way to start, and cross entropy normally???}, which assume the labels are correct \todo{Bad apple}. According, to \cite{Reed_noisy_labels_bootstrapping} tweaking the loss function by incorporating the network's own predictions can yield improved robustness to inconsistent labelling. Whereas other approaches \citep{Mnih_aerial_images_noisy}\citep{Sukhbaatar_noisy_network_learning} explicitly model the noise distribution, the proposed loss function utilize the implicit knowledge acquired by the network during optimization. The bootstrapping method, compute the loss by a convex combination of the model prediction q and the label y. Additionally, the thesis propose a variation of bootstrapping loss function, which only incorporate confident predictions. \\
+
  
+\todo[inline]{Specficially what bootstrapping is}
  \begin{flalign*}
   \mathcal{L}_{hard}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.5}]log(q_i)  \\
                     & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(1-\mathbb{1}_{q_i > 0.5})]log(1 - q_i) 
  \end{flalign*}
  
+ \todo[inline]{Explain all variables}
  
+ 
+ \todo[inline]{Introduce custom confident bootstrapping. Only predictions which model is very certain about is added to combined conjective etc.}
   \begin{flalign*}
   \mathcal{L}_{confident}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.8}]log(q_i)  \\
                     & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(\mathbb{1}_{q_i < 0.2})]log(1 - q_i) 
@@ -17,10 +21,11 @@
 \caption{Hyperparameters for bootstrapping loss}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+l ^l ^l}\hline
+\begin{tabular}{+l ^l ^p{3.5cm}}\hline
 \rowstyle{\bfseries}
  		 Parameter & Description & Value\\\hline
- 		 $\beta$ & Mix factor  & 0.95 \\
+ 		 Cost function & Modified cost function  & bootstrapping or confident boostrapping \\
+ 		 $\beta$ & Mix factor  & 1.0 \\
  		 $\beta_{min}$ & Minimum mix factor & 0.90 \\
  		 $\beta_{start}$ & When to start mixing & 60 \\\hline
 \end{tabular}
@@ -28,3 +33,6 @@
 \end{center}
 \label{tab:curriculum_parameters}
 \end{table}
+
+\todo[inline]{Mix factor. Correct term, check the paper}
+\todo[inline]{Mix factor. Correct term, check the paper}

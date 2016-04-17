@@ -56,7 +56,7 @@ $$ y = \text{max}(0, x) \frac{}{}$$
 \end{figure}
 
 
-The specific network configuration described in this section, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters and default values are listed in Table \ref{tab:network_parameters}.\\
+The specific network configuration described in this section, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters related to the \ac{CNN} and default values are listed in Table \ref{tab:network_parameters}.\\
 
 \begin{table}[htp]
 \caption{Hyperparameters for the \ac{CNN}}
@@ -70,7 +70,7 @@ The specific network configuration described in this section, is the default con
   $CLS^{(l)}$ & Stride amount of convolutional layer $l$ & (4,4),(1,1),(1,1) \\
   $CLP^{(l)}$ & Pool size of convolutional layer $l$ & (2,2),(1,1),(1,1) \\
   Cost function & Function that is minimzed each iteration & Cross entropy \\
-  Epochs & How many epochs \ac{CNN} will train for. & 100 \\
+  Epochs & How many epochs of training & 100 \\
   $\sigma^{(l)}$ & Transfer function for each layer $l$ & Leaky ReLU x4, sigmoid x1 \\
   $h$ & Number of neurons in hidden layer. & 4096 \\
   $p^{(l)}$ & Dropout rate for a layer $l$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
