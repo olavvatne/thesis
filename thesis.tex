@@ -200,9 +200,11 @@ This chapter will describe the architecture, and the methods needed in order to 
 \input{methods_implementation_details}
 
 
-\chapter{Experiments and Results}
+\chapter{Experiments and Discussion}
+\todo[inline]{Draft edition 0.1}
+\todo[inline]{The intro not so bland in comparisons}
+In the following sections, all experiments regarding the research questions will be presented, and the results will be presented and analysed. Section \ref{sec:experimentalPlan} outlines the experiment plan, and Section \ref{sec:experimentalSetup} presents the hyperparameter configuration for each experiment. In Section \ref{sec:experimentalResults} the results are presented, and are then discussed in Section \ref{sec:Discussion}.
 \label{cha:ResearchAndResults}
-\todo[inline]{Introduction to experiments and results}
 
 \input{experimental_plan}
 
@@ -210,8 +212,12 @@ This chapter will describe the architecture, and the methods needed in order to 
 
 \input{experimental_results}
 
-\section{Analysis}
+\section{Discussion}
+\label{sec:Discussion}
 The \ac{CNN} and these methods can each be seen as one of the approaches dealing with label noise as described in \ref{sec:background_label_noise}. Curriculum learning in some ways be be characterized as a data cleansing method, while bootstrapping loss is a noise-tolerant algorithm. Because of regularizers the \ac{CNN} can be seen as a noise-robust model. \todo{Really better suited in the discussion. Move there}
+\todo[inline]{Mention limited amount of data. Curriculum learning advantageous for even bigger patch datasets?}
+\todo[inline]{The experiments remove roads - does not introduce registration noise. 50/50 class balance, as standard setup. So the 50 road examples are correct -but maybe more overlapping road examples less variance. Still a slight improvement of precision and recall. }
+\todo[inline]{The curriculum teacher trained with -- examples - while .train with teacher that has not seen more examples than experiments.}
 
 \chapter{Conclusion}
 \label{cha:evaluationAndConclusion}
