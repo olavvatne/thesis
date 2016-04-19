@@ -109,10 +109,14 @@ Furthermore, the system also support RMSProp which keeps a running average of th
 
 All the above mentioned optimization approaches have an important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in regular intervals of epochs by some factor $a_{decrease}$ during optimization. \\
 
+The default loss function for the system, is cross-entropy loss, which in the context of the patch-based approach is denoted \todo{This paragraph is bad}:\\
 
+\begin{flalign*}
+  \mathcal{L}_{\text{cross-entropy}}(q,y) =&  - \frac{1}{w_m^2} \sum\limits_{i=1}^{w_m^2} [y_i \log(q_i) + (1 -y_i)\log(1-q_i)],  \\ 
+ \end{flalign*}
 
-\todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
-%http://neuralnetworksanddeeplearning.com/chap3.html crossentropy!!
+\noindent where $q$ and $y$ is the prediction and label patch. Each of the patches have $w_m^2$ probabilities and label values, which are used for computing the element-wise cross-entropy. Cross-entropy loss is non-negative and moves towards 0 as the network improves at the task. The backpropagation computes gradients derived from the loss function. \todo{No cohesion}  \\
+
 
 \subsection{Regularization}
 To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The model's task is to learn the regularities found in the mappings between the data and labels in the training set. However, the training set also contains sampling errors and accidental patterns not relevant to the task at hand. Without regularization, a model will learns the useful, but also the erroneous regularities a bit too well, and can therefore start to overfit the data. \\

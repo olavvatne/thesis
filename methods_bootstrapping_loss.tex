@@ -5,8 +5,8 @@ Normally, the loss function calculates the loss assuming the labels are correct.
 The bootstrapping loss function, use the current model prediction $q$ and the noisy training label $y$ in a convex combination, which result in a modified target. Except for this, the loss function is similar to cross entropy\todo{Is it though?}. The model prediction's contribution to the convex combination is decided by the $\beta$ parameter. The bootstrapping loss for the aerial road detection system is defined below:
 
  \begin{flalign*}
-  \mathcal{L}_{hard}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.5}]log(q_i)  \\
-                    & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(1-\mathbb{1}_{q_i > 0.5})]log(1 - q_i) 
+  \mathcal{L}_{\text{hard}}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.5}]\log(q_i)  \\
+                    & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(1-\mathbb{1}_{q_i > 0.5})]\log(1 - q_i) 
  \end{flalign*}
 
 \noindent where $\mathbb{1}_{q_i > 0.5}$ is the MAP estimate of the model prediction $q$ \todo{Why is this important?}. For the task of road detection it is simply a threshold operation. All probabilities above 0.5 are set to 1, otherwise 0. This is the reason why this loss function is denoted hard. A soft version of bootstrapping where the predictions $q_i$ are used directly, has also tested by \cite{Reed_noisy_labels_bootstrapping} , but generally performed worse than the bootstrapping hard variant.\\
@@ -16,8 +16,8 @@ Bootstrapping loss combined with gradient descent, results in an EM-like algorit
 Since, the task involves the binary task of discriminating road pixels from non-road pixels, a slightly modified version of bootstrapping is also tested in the thesis. This approach is named confident bootstrapping, since all model predictions between 0.2 and 0.8 are ignored. Only predictions that the learner have a high confidence in, are allowed to contribute in the convex combination. An added benefit of this loss function, is the possibility of increasing the factor $\beta$. The confident bootstrapping loss function is denoted:
 
   \begin{flalign*}
-  \mathcal{L}_{confident}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.8}]log(q_i)  \\
-                    & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(\mathbb{1}_{q_i < 0.2})]log(1 - q_i) 
+  \mathcal{L}_{\text{confident}}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.8}]\log(q_i)  \\
+                    & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(\mathbb{1}_{q_i < 0.2})]\log(1 - q_i) 
  \end{flalign*}
  
 \noindent where $\mathbb{1}_{q_i > 0.8}$ and $\mathbb{1}_{q_i < 0.2}$ are threshold operations which only keep fairly confident predictions. For the task of road detection, this translates to saying pixel predictions above 0.8 are most likely road pixels, and predictions below 0.2 are likely to be non-road pixels.\\
