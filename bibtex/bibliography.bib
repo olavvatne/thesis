@@ -63,8 +63,8 @@ url = {http://papers.nips.cc/paper/5568-self-paced-learning-with-diversity.pdf}
                Dumitru Erhan and
                Andrew Rabinovich},
   title     = {Training Deep Neural Networks on Noisy Labels with Bootstrapping},
-  journal   = {CoRR},
-  volume    = {abs/1412.6596},
+journal={arXiv preprint arXiv:1412.6596},
+  note		= {Accepted as a workshop contribution at ICLR 2015},
   year      = {2014},
   url       = {http://arxiv.org/abs/1412.6596},
   timestamp = {Thu, 01 Jan 2015 19:51:08 +0100},
@@ -255,9 +255,10 @@ language={English}
 }
 
 @article{Sukhbaatar_noisy_network_learning,
-  title={Learning from noisy labels with deep neural networks},
+  title={Training Convolutional Networks with Noisy Labels},
   author={Sukhbaatar, Sainbayar and Fergus, Rob},
   journal={arXiv preprint arXiv:1406.2080},
+  note	= {Accepted as a workshop contribution at ICLR 2015},
   year={2014}
 }
 
@@ -407,4 +408,18 @@ pubstate = {June 01, 2014},
   pages={455--463},
   year={2002},
   publisher={Am Physiological Soc}
+}
+
+@INPROCEEDINGS{bergstra_theano,
+     author = {Bergstra, James and Breuleux, Olivier and Bastien, Fr{\'{e}}d{\'{e}}ric and Lamblin, Pascal and Pascanu, Razvan and Desjardins, Guillaume and Turian, Joseph and Warde-Farley, David and Bengio, Yoshua},
+      month = jun,
+      title = {Theano: a {CPU} and {GPU} Math Expression Compiler},
+  booktitle = {Proceedings of the Python for Scientific Computing Conference ({SciPy})},
+       year = {2010},
+   location = {Austin, TX},
+       note = {Oral Presentation},
+   abstract = {Theano is a compiler for mathematical expressions in Python that combines the convenience of NumPy’s syntax with the speed of optimized native machine language. The user composes mathematical expressions in a high-level description that mimics NumPy’s syntax and semantics, while being statically typed and
+functional (as opposed to imperative). These expressions allow Theano to provide symbolic differentiation. Before performing computation, Theano optimizes the choice of expressions, translates
+them into C++ (or CUDA for GPU), compiles them into dynamically loaded Python modules, all automatically. Common machine learning algorithms implemented with Theano are from 1.6× to 7.5× faster than competitive alternatives (including those implemented with C/C++, NumPy/SciPy and MATLAB) when compiled for the
+CPU and between 6.5× and 44× faster when compiled for the GPU. This paper illustrates how to use Theano, outlines the scope of the compiler, provides benchmarks on both CPU and GPU processors, and explains its overall design.}
 }

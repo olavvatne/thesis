@@ -51,14 +51,14 @@ $$ y = \text{max}(0, x) \frac{}{}$$
 \caption{Rectified linear unit} \label{fig:activation_relu}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Activation functions} \label{fig:activation_functions}
+\caption{Activation functions.} \label{fig:activation_functions}
 \end{figure}
 
 
 The specific network configuration values described in this section, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters related to the \ac{CNN} and their default values are listed in Table \ref{tab:network_parameters}.\\
 
 \begin{table}[htp]
-\caption{Hyperparameters for the \ac{CNN}}
+\caption{Hyperparameters for the \ac{CNN}.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^p{7.5cm} ^l}\hline
@@ -100,7 +100,7 @@ Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nest
 
 \begin{flalign*}
      &v_{t} = mv_{t-1} - a \nabla f(\theta_{t-1} + m v_{t-1}) \\
-     &\theta_t = \theta_{t-1} + v_t,
+     &\theta_{t} = \theta_{t-1} + v_t,
 \end{flalign*}
 
 \noindent where $\theta_t$ is the model parameters, $v_t$ the velocity, $m$ the momentum decay, $a$ the current learning rate and $\nabla f(\theta)$ is the gradient.\\
@@ -108,6 +108,8 @@ Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nest
 Furthermore, the system also support RMSProp which keeps a running average of the gradient magnitude for every weight. This is used to adaptively adjust the learning rate of each weight. Compared to regular \ac{SGD}, this will result in a faster convergence. \todo{Keep or remove. If keep , paper or lecture notes}\\ 
 
 All the above mentioned optimization approaches have an important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in regular intervals of epochs by some factor $a_{decrease}$ during optimization. \\
+
+
 
 \todo[inline]{Learning and negative log likelihood?. Optimization of the loss. So the loss is negative log likelihood}
 %http://neuralnetworksanddeeplearning.com/chap3.html crossentropy!!
