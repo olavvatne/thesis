@@ -202,8 +202,8 @@ This chapter will describe the architecture, and the methods needed in order to 
 
 \chapter{Experiments and Discussion}
 \todo[inline]{Draft edition 0.1}
-\todo[inline]{The intro not so bland in comparisons}
-In the following sections, all experiments regarding the research questions will be presented, and the results will be presented and analysed. Section \ref{sec:experimentalPlan} outlines the experiment plan, and Section \ref{sec:experimentalSetup} presents the hyperparameter configuration for each experiment. In Section \ref{sec:experimentalResults} the results are presented, and are then discussed in Section \ref{sec:Discussion}.
+
+In the following sections, all experiments regarding the research questions will be presented, and the results will be presented and analysed. Section \ref{sec:experimentalPlan} outlines the experiment plan, and Section \ref{sec:experimentalSetup} presents the hyperparameter configuration for each experiment. In Section \ref{sec:experimentalResults} the results are presented, and are then discussed in Section \ref{sec:Discussion}.\todo{The intro not so bland in comparisons}
 \label{cha:ResearchAndResults}
 
 \input{experimental_plan}
@@ -218,6 +218,7 @@ The \ac{CNN} and these methods can each be seen as one of the approaches dealing
 \todo[inline]{Mention limited amount of data. Curriculum learning advantageous for even bigger patch datasets?}
 \todo[inline]{The experiments remove roads - does not introduce registration noise. 50/50 class balance, as standard setup. So the 50 road examples are correct -but maybe more overlapping road examples less variance. Still a slight improvement of precision and recall. }
 \todo[inline]{The curriculum teacher trained with -- examples - while .train with teacher that has not seen more examples than experiments.}
+\todo[inline]{Curriculum learning - similar to boosting. Only from the baseline training distribution and then harder, but from easier first and then to harder distributions. Active learning, disagreement?}
 
 \chapter{Conclusion}
 \label{cha:evaluationAndConclusion}

@@ -1,17 +1,22 @@
-\section{Experimental Plan}
+\section{Experimental Design}
 \label{sec:experimentalPlan}
-\todo[inline]{Plan for experimental research. Include experiments and series of experiments planned.}
-\todo[inline]{Planned experiments and what questions the experiements aim to answer. Connected to research questions}
-\begin{itemize}
-\item Comparison baseline model and curriculum model
-\item Comparison crossentropy and bootstrapping for several
-levels of label degradation. 
-\item Test curriculum for different dataset sizes. Will advantage of curriculum disappear for larger datasets?
-\item Larger dataset for bootstrapping?
-\item Can curriculum learning combined with bootstrapping loss function further improve results for label noise?
-\item How much does the competence of the curriculum teacher affect the results of curriculum learning?
-\end{itemize}
+To resolve the research questions and test the performance of the road detection system a number of experiments have been planned. Experiments related to the first research question involve testing the robustness of the bootstrapping loss function compared to a baseline loss function. For the other research question regarding the performance of curriculum learning, the performance of a network trained according to a curriculum strategy will be compared with a network trained by a random sampled patch dataset. In addition, tests measuring the performance of the road detection system will be conducted, and the results compared to other works.\\
 
+ Throughout the rest of this chapter the experiments will be referred to by their assigned id. An overview of all experiments and their assigned id, can be found in in Table \ref{tab:planned_experiments}.\\
+
+Each experiment found in Table \ref{tab:planned_experiments} have been replicated and measured 10 times. The experiments have many sources of variability, and averaging the measurements improves the reliability of the result. The network, for instance, is initialized with random weights, and the patch dataset is constructed from random sampling. These factors influence the optimization process, and might create anomalous measurements.\todo{Need to check terminology}\\
+
+The methods have also been tested on two different datasets. Despite the datasets involving the same task of road segmentation, they do differ in many ways. The datasets depict separate aerial regions, have different \ac{GSD}, contain different topography and differs in label quality. Conducting experiments on both datasets, might verify whether the methods can be generally applicable or not.\todo{A bit strong i guess}\\
+
+For all experiments, the hyperparameters are kept constant, while only the parameters related to the research questions are varied. These hyperparameters are presented in Section \ref{sec:experimentalSetup}. Furthermore, all regularization methods were enabled during testing. The proposed methods should provide some additional benefit, when used in combination with regularizes. Considering, that a network using regularizes already yields some robustness to label noise, n method which claims to provide robustness towards label noise should improve performance even further \todo{Do they. Cite}.  \\
+
+To show that the bootstrapping loss function is effective at handling inconsistent labelling, it will be compared with the cross-entropy loss function at different levels of noise. Inconsistent labels in the form of omission noise, are artificially introduced to the label images. Networks trained with both bootstrapping loss and cross-entropy loss will be compared, after being trained on patch datasets with different levels of label degradation. The degradation involves removing between 0\% and 40\% of the road class pixels from the label images. The experiment will show how well the different loss functions cope with omission error, and whether bootstrapping loss function is more robust than the cross-entropy loss function. The bootstrapping loss function is further tested in Experiment E4, where the training set consists of the label set N50, while the more accurate label set Vbase is used for the validation and test set. The N50 label set contains a lot of naturally occurring registration error, which means the robustness of the different loss functions, can be tested by comparing the test loss.\\
+
+-Validation and test set. More images im
+-Bootstrapping loss function experiments - more detail
+-Curriculum learning loss function experiments -more detail
+-Precision recall curves- what is this again. Refer to background. Most only have precision slack. Gives more conservative results.
+-Baseline and test network, both use regularization. Which provide some robustness towards label noise. No use in turning them off, because we want to measure whether there are any additional benefits from using a modified loss function.
 
 \begin{table}[htp]
 \caption{Experiment overview}
@@ -26,9 +31,26 @@ levels of label degradation.
   E4 & RQ1 & Norwegian Roads Dataset N50/Vbase & Performance of bootstrapping with a label set containing a lot of label noise \\
   E5 & RQ1 & Norwegian Roads Dataset Vbase & Bootstrapping loss performance at different levels of label noise\\
   E6 & - & Massachusetts Roads Dataset & Best performing road detection network \\
-  E7 & RQ2 & Massachusetts Roads Dataset & Curriculum learning. Stage switching by random sampling with replacement. \\\hline
+  E7 & RQ2 & Massachusetts Roads Dataset & Curriculum learning. Stage switching by random sampling with replacement.\\
+  E8 & - & Norwegian Roads Dataset N50/Vbase & Combining curriculum learning and bootstrapping. \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
 \label{tab:planned_experiments}
 \end{table}
+
+\todo[inline]{Plan for experimental research. Include experiments and series of experiments planned.}
+\todo[inline]{Planned experiments and what questions the experiements aim to answer. Connected to research questions}
+
+\begin{itemize}
+\item Comparison baseline model and curriculum model
+\item Comparison crossentropy and bootstrapping for several
+levels of label degradation. 
+\item Test curriculum for different dataset sizes. Will advantage of curriculum disappear for larger datasets?
+\item Larger dataset for bootstrapping?
+\item Can curriculum learning combined with bootstrapping loss function further improve results for label noise?
+\item How much does the competence of the curriculum teacher affect the results of curriculum learning?
+\end{itemize}
+
+
+
