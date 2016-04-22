@@ -4,22 +4,6 @@ To resolve the research questions and test the performance of the road detection
 
  Throughout the rest of this chapter the experiments will be referred to by their assigned id. An overview of all experiments and their assigned id, can be found in in Table \ref{tab:planned_experiments}.\\
 
-Each experiment found in Table \ref{tab:planned_experiments} have been replicated and measured 10 times. The experiments have many sources of variability, and averaging the measurements improves the reliability of the result. The network, for instance, is initialized with random weights, and the patch dataset is constructed from random sampling. These factors influence the optimization process, and might create anomalous measurements.\todo{Need to check terminology}\\
-
-The methods have also been tested on two different datasets. Despite the datasets involving the same task of road segmentation, they do differ in many ways. The datasets depict separate aerial regions, have different \ac{GSD}, contain different topography and differs in label quality. Conducting experiments on both datasets, might verify whether the methods can be generally applicable or not.\todo{A bit strong i guess}\\
-
-For all experiments, the hyperparameters are kept constant, while only the parameters related to the research questions are varied. These hyperparameters are presented in Section \ref{sec:experimentalSetup}. Furthermore, all regularization methods were enabled during testing. The proposed methods should provide some additional benefit, when used in combination with regularizes. Considering, that a network using regularizes already yields some robustness to label noise, n method which claims to provide robustness towards label noise should improve performance even further \todo{Do they. Cite}.  \\
-
-To show that the bootstrapping loss function is effective at handling inconsistent labelling, it will be compared with the cross-entropy loss function at different levels of noise. Inconsistent labels in the form of omission noise, are artificially introduced to the label images. Networks trained with both bootstrapping loss and cross-entropy loss will be compared, after being trained on patch datasets with different levels of label degradation. The degradation involves removing between 0\% and 40\% of the road class pixels from the label images. The experiment will show how well the different loss functions cope with omission error, and whether bootstrapping loss function is more robust than the cross-entropy loss function. The bootstrapping loss function is further tested in Experiment E4, where the training set consists of the label set N50, while the more accurate label set Vbase is used for the validation and test set. The N50 label set contains a lot of naturally occurring registration error, which means the robustness of the different loss functions, can be tested by comparing the test loss. Artificially introducing omission noise is tested for both datasets in Experiment E3 and E4, and Experiment E5 compare several loss functions for the N50/Vbase combo dataset. \\
-
-The effectiveness of curriculum learning will be tested by training the network on two different patch dataset. The first is created according to a curriculum strategy, where each stage $\theta$ only contain examples with a difficulty estimate below $D_\theta$. The training distribution of each stage will increase in difficulty, which results in the network being gradually introduced to harder examples. The second patch dataset is created with no regard to the difficulty, by random sampling. Specifically, it is created with the difficulty threshold $D_\theta =1.0$ for all stages $\theta$. The performance from training the network on this dataset, forms the baseline which is compared to the performance of a network trained on the curriculum dataset. Both datasets contain the same number of stages, and therefore the same number of examples. The network configuration is also identical. Essentially, the only difference is the ordering of the examples in the patch datasets. Curriculum learning is tested for both aerial image datasets in Experiment E1 and E2\\
-
-The approach of curriculum learning also raises some other interesting questions. How well does a network perform if presented with the "harder" examples first? In Experiment E2  anti-curriculum learning is therefore tested. \todo{More motivation for doing this}. Furthermore, Experiment E1 explores what happens when setting the difficulty threshold $D_\theta$ at different values.  \\
-
--Validation and test set. More images im
--Precision recall curves- what is this again. Refer to background. Most only have precision slack. Gives more conservative results.
--Baseline and test network, both use regularization. Which provide some robustness towards label noise. No use in turning them off, because we want to measure whether there are any additional benefits from using a modified loss function.
-
 \begin{table}[htp]
 \caption{Experiment overview}
 \begin{center}
@@ -41,18 +25,24 @@ The approach of curriculum learning also raises some other interesting questions
 \label{tab:planned_experiments}
 \end{table}
 
-\todo[inline]{Plan for experimental research. Include experiments and series of experiments planned.}
-\todo[inline]{Planned experiments and what questions the experiements aim to answer. Connected to research questions}
+Each experiment found in Table \ref{tab:planned_experiments} have been replicated and measured 10 times. The experiments have many sources of variability, and averaging the measurements improves the reliability of the result. The network, for instance, is initialized with random weights, and the patch dataset is constructed from random sampling. These factors influence the optimization process, and might create anomalous measurements.\todo{Need to check terminology}\\
 
-\begin{itemize}
-\item Comparison baseline model and curriculum model
-\item Comparison crossentropy and bootstrapping for several
-levels of label degradation. 
-\item Test curriculum for different dataset sizes. Will advantage of curriculum disappear for larger datasets?
-\item Larger dataset for bootstrapping?
-\item Can curriculum learning combined with bootstrapping loss function further improve results for label noise?
-\item How much does the competence of the curriculum teacher affect the results of curriculum learning?
-\end{itemize}
+The methods have also been tested on two different datasets. Despite the datasets involving the same task of road segmentation, they do differ in many ways. The datasets depict separate aerial regions, have different \ac{GSD}, contain different topography and differs in label quality. Conducting experiments on both datasets, might verify whether the methods can be generally applicable or not.\todo{A bit strong i guess}\\
+
+For all experiments, the hyperparameters are kept constant, while only the parameters related to the research questions are varied. These hyperparameters are presented in Section \ref{sec:experimentalSetup}. Furthermore, all regularization methods were enabled during testing. The proposed methods should provide some additional benefit, when used in combination with regularizes. Considering, that a network using regularizes already yields some robustness to label noise, n method which claims to provide robustness towards label noise should improve performance even further \todo{Do they. Cite}.  \\
+
+To show that the bootstrapping loss function is effective at handling inconsistent labelling, it will be compared with the cross-entropy loss function at different levels of noise. Inconsistent labels in the form of omission noise, are artificially introduced to the label images. Networks trained with both bootstrapping loss and cross-entropy loss will be compared, after being trained on patch datasets with different levels of label degradation. The degradation involves removing between 0\% and 40\% of the road class pixels from the label images. The experiment will show how well the different loss functions cope with omission error, and whether bootstrapping loss function is more robust than the cross-entropy loss function. The bootstrapping loss function is further tested in Experiment E4, where the training set consists of the label set N50, while the more accurate label set Vbase is used for the validation and test set. The N50 label set contains a lot of naturally occurring registration error, which means the robustness of the different loss functions, can be tested by comparing the test loss. Artificially introducing omission noise is tested with both datasets in Experiment E3 and E4, and Experiment E5 compare several loss functions for the N50/Vbase combo dataset \todo{Badly written}. \\
+
+The effectiveness of curriculum learning will be tested by training the network on two different patch dataset. The first is created according to a curriculum strategy, where each stage $\theta$ only contain examples with a difficulty estimate below $D_\theta$. The training distribution of each stage will increase in difficulty, which results in the network being gradually introduced to harder examples. The second patch dataset is created with no regard to the difficulty, by random sampling. Specifically, it is created with the difficulty threshold $D_\theta =1.0$ for all stages $\theta$. The performance from training the network on this dataset, forms the baseline which is compared to the performance of a network trained on the curriculum dataset. Both datasets contain the same number of stages, and therefore the same number of examples. The network configuration is also identical. Essentially, the only difference is the ordering of the examples in the patch datasets. Curriculum learning is tested with both aerial image datasets in Experiment E1 and E2.\\
+
+The approach of curriculum learning also raises some other interesting questions. How well does a network perform if presented with the "harder" examples first? In Experiment E2, anti-curriculum learning is therefore tested. \todo{More motivation for doing this}. Furthermore, Experiment E1 explores what happens when setting the difficulty threshold $D_\theta$ at different values.  \\
+
+In addition to presenting the experimental results as MSE loss per epoch plots, the network performance is also presented as precision and recall curves. These curves are created by thresholding the network's prediction probabilities by values between 0 and 1, and then computing the precision and recall using the predictions and labels. The result is a curve that shows the trade-off between precision and recall. As the recall increases, the precision usually decreases. Similar to \citep{Mnih_aerial_images_noisy}, this thesis utilize a relaxed measure of precision and recall. The relaxed precision is the fraction of predicted road class that are within $p$ pixels from the a true label road class. Whereas, the relaxed recall is the fraction of 
+
+\todo[inline]{Testing only easier examples. Is that better. Filtering technique}
+\todo[inline]{Semi-competent teacher testing.}
+\todo[inline]{Can curriculum learning combined with bootstrapping loss function further improve results for label noise?}
+\todo[inline]{How much does the competence of the curriculum teacher affect the results of curriculum learning?}
 
 
 
