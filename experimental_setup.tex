@@ -1,12 +1,105 @@
 \section{Experimental Setup}
 \label{sec:experimentalSetup}
-\todo[inline]{The experimental setup should include all data - parameters etc, that would allow a person to repeat your experiments.}
-\todo[inline]{Default parameters found in methods used, if not specified}
-\todo[inline]{}
-\begin{itemize}
-\item ml-monitor. Json file for every experiment.
-\item For curriculum learning trained for similar number of epochs, with same amount of training data.
-\end{itemize}
+The network configuration for most experiments are listed in Table \ref{tab:network_parameters}. Any deviations from this configuration will be detailed in this section. In addition, the specific hyperparameters used for each experiment can be found at \url{http://interface.ml/experiments}. The relevant parameters for each experiment are detailed below.\\ 
 
-For comparsion experiments. No recall slack.
-To propertly compare with - use slack for recall as well. Mistake when calc the stuff.
+
+
+\subsubsection{E1 - Curriculum learning with Norwegian Roads Dataset}
+This experiment involves comparing two patch datasets generated from the Norwegian Roads Dataset. Both datasets have $S=2$ stages, where each stage include 110 000 training examples. The first patch dataset is created according to a curriculum strategy, where the difficulty estimate $d(y, q)$ is less than a threshold $D_\theta$. The first stage consists of only examples with a difficulty estimate below 0.25,  while the second stage have a threshold of 1.0, which is equivalent to random sampling of patches. The second patch dataset have a threshold $D_\theta$ of 1.0 for both stages, and constitute the baseline. Switching between the first and second stage, happens by entirely replacing the training set by sampling without replacement \todo{Need to know if sampling without replacement is correct term}.\\
+
+The curriculum teacher, which create predictions for the difficulty estimation of examples, are a previous model. The teacher classifier was trained with a dataset consisting of 440000 examples for 175 epochs. Otherwise, the network parameters closely resembles the default parameters listed in Table \ref{tab:network_parameters} \todo{True?}. The classifier's final \ac{MSE} test loss is 0.0222, and the precision and recall breakeven is around 0.66. \\
+
+The default network configuration is used for models trained on both the curriculum dataset and the baseline dataset. Essentially, the only real difference between the two, is the first stage of the datasets. The models are trained for 120 epochs, with the stage switch after 50 epochs. Important parameters for this experiment are listed in Table \ref{tab:key_parameter_E1}.\\
+
+An additional patch dataset has also been included, which tests the performance of anti-curriculum learning. For this dataset, the first stage only include road patches with a difficulty estimate $d(y, q)$ above 0.25.
+
+\begin{table}[h]
+\caption{Key parameters for E1}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^p{11cm}}\hline
+\rowstyle{\bfseries}
+  - & parameters \\\hline
+  Baseline & 120 epochs, s=110000, $d(y, q) < D_{\theta}$, $D_{0} = 1.00$, $D_{1} = 1.0$, $t_{start} = 50$  \\
+  Curriculum & 120 epochs, s=110000, $d(y, q) < D_{\theta}$, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 50$ \\
+  Anti-curriculum & 120 epochs, s=110000, $d(y, q) > D_{\theta}$, $D_{0} = 0.25$, $D_{1} = 0.0$, $t_{start} = 50$ \\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:key_parameter_E1}
+\end{table}
+
+\subsubsection{E2 - Curriculum learning with Massachusetts Roads Dataset}
+Experiment E2 have a similar setup to Experiment E1. patch datasets with two stages, where the first patch dataset has been created by a curriculum strategy and the other by random sampling. In addition to comparing a baseline setup to a curriculum setup, different $D_{0}$ values for stage $0$ have been tested. This will show how setting the threshold for the first stage will affect the performance of curriculum learning.\\
+
+\begin{table}[h]
+\caption{Key parameters for E2}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^p{11cm}}\hline
+\rowstyle{\bfseries}
+  - & parameters \\\hline
+  Baseline & 100 epochs, s=110800, $D_{0} = 1.0$,  $D_{1} = 1.0$, $t_{start} = 50$  \\
+  Curriculum 0.15 & 100 epochs, s=110800, $D_{0} = 0.15$, $D_{1} = 1.0$, $t_{start} = 50$ \\
+  Curriculum 0.25 & 100 epochs, s=110800, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 50$ \\
+  Curriculum 0.35 & 100 epochs, s=110800, $D_{0} = 0.35$, $D_{1} = 1.0$, $t_{start} = 50$ \\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:key_parameter_E2}
+\end{table}
+
+\subsubsection{E3 - Bootstrapping with Massachusetts Roads Dataset}
+\begin{table}[h]
+\caption{Key parameters for E3}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^p{11cm}}\hline
+\rowstyle{\bfseries}
+  - & parameters \\\hline
+  Baseline & 100 epochs, s=110800, $a=0.0011$, $\mathcal{L}$ = cross-entropy, emission noise levels=0\%, 10\%, 20\%, 30\%, 40\%  \\
+  Bootstrapping& 100 epochs, s=110800, $a=0.0011$, $\mathcal{L}$ = bootstrapping, $\beta_{max}$=1.0, $\beta_{min}$=0.9, $M$=60, emission noise levels=0\%, 10\%, 20\%, 30\%, 40\% \\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:key_parameter_E3}
+\end{table}
+
+\subsubsection{E4 - Bootstrapping with Norwegian Roads Dataset N50/VBase}
+
+\begin{table}[h]
+\caption{Key parameters for E4}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^p{11cm}}\hline
+\rowstyle{\bfseries}
+  - & parameters \\\hline
+  Baseline & 140 epochs, s=165000, $a=0.0011$, $\mathcal{L}$ = cross-entropy \\
+  Bootstrapping&  140 epochs, s=165000, $a=0.0011$, $\mathcal{L}$ = bootstrapping, $\beta_{max}$=1.0, $\beta_{min}$=0.8, $M$=90\\
+    Confident bootstrapping & 140 epochs, $a=0.0011$, s=165000, $\mathcal{L}$ = confident-bootstrapping, $\beta_{max}$=1.0, $\beta_{min}$=0.8, $M$=90\\
+  \hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:key_parameter_E4}
+\end{table}
+
+\subsubsection{E5 - Bootstrapping with Norwegian Roads Dataset VBase}
+\begin{table}[h]
+\caption{Key parameters for E5}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^p{11cm}}\hline
+\rowstyle{\bfseries}
+  - & parameters \\\hline
+  Baseline & 100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = cross-entropy \\
+  Bootstrapping&  100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = bootstrapping, $\beta_{max}$=1.0, $\beta_{min}$=0.8, $M$=60\\
+    Confident bootstrapping & 100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = confident-bootstrapping, $\beta_{max}$=1.0, $\beta_{min}$=0.8, $M$=60\\
+  \hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:key_parameter_E5}
+\end{table}
+
+\subsubsection{E6 - Performance of road detection system}

@@ -22,7 +22,7 @@ Since, the task involves the binary task of discriminating road pixels from non-
  
 \noindent where $\mathbb{1}_{q_i > 0.8}$ and $\mathbb{1}_{q_i < 0.2}$ are threshold operations which only keep fairly confident predictions. For the task of road detection, this translates to saying pixel predictions above 0.8 are most likely road pixels, and predictions below 0.2 are likely to be non-road pixels.\\
 
-In the actual implementation, the $\beta$ parameter is annealed often from 1.0, down to the minimum value of $\beta_{min}$, starting from $\beta_{start}$ epochs. This is because the learner should have some implicit knowledge before using it's predictions to modify the target. This is similar to the approach \todo{Just a bit of the approach. The method entirely different} by \cite{Sukhbaatar_noisy_network_learning}. The configurable parameters for bootstrapping can be found in Table \ref{tab:bootstrapping_parameters}
+In the actual implementation, the $\beta$ parameter is annealed from the max value $\beta_{max}$, down to the minimum value of $\beta_{min}$, starting from $M$ epochs. This is because the learner should have some implicit knowledge before using it's predictions to modify the target. This is similar to the approach \todo{Just a bit of the approach. The method entirely different} by \cite{Sukhbaatar_noisy_network_learning}. The configurable parameters for bootstrapping can be found in Table \ref{tab:bootstrapping_parameters}
 
 \begin{table}[htp]
 \caption{Hyperparameters for bootstrapping loss.}
@@ -32,9 +32,9 @@ In the actual implementation, the $\beta$ parameter is annealed often from 1.0, 
 \rowstyle{\bfseries}
  		 Parameter & Description & Value\\\hline
  		 Cost function & Modified cost function  & bootstrapping or confident boostrapping \\
- 		 $\beta$ & Mix factor  & 1.0 \\
+ 		 $\beta_{max}$ & Mix factor  & 1.0 \\
  		 $\beta_{min}$ & Minimum mix factor & 0.90 \\
- 		 $\beta_{start}$ & When to start mixing & 60 \\\hline
+ 		 $M$ & When to start mixing & 60 \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
