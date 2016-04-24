@@ -59,7 +59,7 @@ The quality of the the generated label maps might also present a challenge to a 
 \caption{Private road} \label{fig:norwegian_roads_missing_n50}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Examples of label inconsistent labelling found in the Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_examples_n50}
+\caption{Examples of inconsistent labelling found in the Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_examples_n50}
 \end{figure}
 
 In addition to the set of label images generated from N50, the dataset also include an alternate set of label images generated from the road centerline vector database, Vbase \citep{Kartverket_vbase}, which have more accurate road centerline vectors. There are still omission and registration errors present in this label image set, but to a less extent. Surfaces that share spectral similarities to asphalt, such as private roads and parking areas have not been marked, similar to the Massachusetts Roads Dataset. The difference in accuracy between N50 and Vbase, can be seen by comparing Figure \ref{fig:norwegian_roads_examples_n50} and Figure \ref{fig:norwegian_roads_examples_vbase}. A minor downside of using this alternate vector database is that Vbase provide fewer road segment properties, which have resulted in smaller of set of line thicknesses applied to the label images.\\
