@@ -1,6 +1,6 @@
 \section{Experimental Setup}
 \label{sec:experimentalSetup}
-The network configuration for most experiments are listed in Table \ref{tab:network_parameters}. Any deviations from this configuration will be detailed in this section. In addition, the specific hyperparameters used for each experiment can be found at \url{http://interface.ml/experiments}. The relevant parameters for each experiment are detailed below.\\ 
+The network configuration for most experiments are listed in Table \ref{tab:network_parameters}. Any deviations from this configuration will be detailed in this section. In addition, the specific hyperparameters used for each experiment can be found at \url{http://interface.ml/experiments}. Descriptions about tools used for conducting the experiments can be found in Appendix \ref{app:tools}, and the relevant parameters for each experiment are detailed below.\\ 
 
 \subsubsection{E1 - Curriculum learning with Norwegian Roads Dataset}
 This experiment involves comparing two patch datasets generated from the Norwegian Roads Dataset. Both datasets have $S=2$ stages, where each stage include 110 000 training examples. The first patch dataset is created according to a curriculum strategy, where the difficulty estimate $d(y, q)$ is less than a threshold $D_\theta$. The first stage consists of only examples with a difficulty estimate below 0.25,  while the second stage have a threshold of 1.0, which is equivalent to random sampling of patches. The second patch dataset have a threshold $D_\theta$ of 1.0 for both stages, and constitute the baseline. Switching between the first and second stage, happens by entirely replacing the training set by sampling without replacement \todo{Need to know if sampling without replacement is correct term}.\\
@@ -110,6 +110,7 @@ Experiment E5 tests the robustness towards label noise for the Norwegian Roads D
 \end{table}
 
 \subsubsection{E6 - Performance of road detection system}
+The performance of the road detection system is tested in this experiment. The patch dataset counts 3985200 examples, randomly sampled from the Massachusetts Roads Dataset, and is trained for 300 epochs, unless early stopping terminates the optimization before this. In order to train with such a big dataset, the model trains with only a subset of the examples at any given time. The training data is switched with another subset every 30th epoch starting from epoch 50 \todo{rewrite}. At any given epoch, the model is optimized by a total of 442800 examples. This is probably not as effective as using the entire dataset throughout training \todo{Check if this is correct}. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E6}.
 \begin{table}[h]
 \caption{Key parameters for E6.}
 \begin{center}
@@ -117,7 +118,7 @@ Experiment E5 tests the robustness towards label noise for the Norwegian Roads D
 \begin{tabular}{+l ^p{11cm}}\hline
 \rowstyle{\bfseries}
   - & parameters \\\hline
-  Baseline & 300 epochs, $s=3 985 200$, $a=0.0015$, $b=128$, $\mathcal{L}$ = cross-entropy  \\
+  Baseline & 300 epochs, $s=3 985 200$, $a=0.0015$, $b=128$, $\mathcal{L}$ = cross-entropy, initial\_patience = 400000  \\
   \hline
 \end{tabular}
 \end{adjustbox}

@@ -43,10 +43,5 @@ A precision and recall curve is created by thresholding the network's prediction
 
 The reason for using the relaxed version of precision and recall is that the majority of the label maps exhibit a small amount of registration noise. It is therefore unreasonable to count predictions which are slightly off target as errors. Consequently, misalignments of 3 pixels or less between the prediction and and label will not affect the values of the relaxed precision and recall curve.\\
 
-\todo[inline]{Testing only easier examples. Is that better. Filtering technique}
-\todo[inline]{Semi-competent teacher testing.}
-\todo[inline]{Can curriculum learning combined with bootstrapping loss function further improve results for label noise?}
-\todo[inline]{How much does the competence of the curriculum teacher affect the results of curriculum learning?}
-
 
 
