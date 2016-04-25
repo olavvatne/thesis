@@ -3,7 +3,7 @@
 To resolve the research questions and test the performance of the road detection system a number of experiments have been planned. Experiments related to the first research question involve testing the robustness of the bootstrapping loss function compared to a baseline loss function. For the other research question regarding the performance of curriculum learning, the performance of a network trained according to a curriculum strategy will be compared with a network trained by a random sampled patch dataset. In addition, tests measuring the performance of the road detection system will be conducted, and the results compared to other works.\\
 
  Throughout the rest of this chapter the experiments will be referred to by their assigned id. An overview of all experiments and their assigned id, can be found in in Table \ref{tab:planned_experiments}.\\
-
+\todo{Have a curriculum experiment without replacement. Include or not.}
 \begin{table}[htp]
 \caption{Experiment overview}
 \begin{center}
@@ -17,7 +17,7 @@ To resolve the research questions and test the performance of the road detection
   E4 & RQ1 & Norwegian Roads Dataset N50/Vbase & Performance of bootstrapping with a label set with large amounts of label noise \\
   E5 & RQ1 & Norwegian Roads Dataset Vbase & Bootstrapping loss performance at different levels of label noise\\
   E6 & - & Massachusetts Roads Dataset & Best performing road detection network \\
-  E7 & RQ2 & Massachusetts Roads Dataset & Curriculum learning. Stage switching by random sampling with replacement.\\
+  E7 & RQ2 & Massachusetts Roads Dataset & Curriculum learning with a inexperienced teacher.\\
   E8 & - & Norwegian Roads Dataset N50/Vbase & Combining curriculum learning and bootstrapping. \\\hline
 \end{tabular}
 \end{adjustbox}
