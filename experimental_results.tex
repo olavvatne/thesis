@@ -131,10 +131,15 @@ A slightly different approach has been taken for Experiment E4. The road detecti
 
 \subsection{Road detection system}
 \label{sec:results_road_detection_system}
-Furthermore, the images in Figure \ref{fig:E6_performance} illustrate qualitatively the performance of the system. For this particular test image, the model is able to identify the majority of the roads present, except for an almost imperceptible dirt road on the right side of the image. There are also some prediction errors, such as roads being disconnected, and prediction artefacts in the forest areas. However, the majority of the forest artefacts have low prediction probabilities, and are removed when applying a threshold operation on the probabilities. The threshold value which result in the best precision and recall trade off, is used in this threshold operation.\\
+In this section, the road detection system were trained using a much larger patch dataset than in the previous sections. In order for the patch dataset to fit in memory, the examples were split into 9 separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E6_performance_mass_lc}, where the loss jumps slightly after a training set switch. The training converge to a \ac{MSE} test loss of 0.0232. \\
+
+In Figure \ref{fig:E6_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}.\\
+
+Furthermore, the images in Figure \ref{fig:E6_performance} illustrate qualitatively the performance of the system. For this particular test image, the model was able to identify the majority of the roads present, except for an almost imperceptible dirt road on the right side of the image. There are also some prediction errors, such as roads being disconnected, and prediction artefacts in the forest areas. However, the majority of the forest artefacts have low prediction probabilities, and were removed when a threshold operation were applied on the probabilities. The threshold value which result in the best precision and recall trade off, was used in this threshold operation.\\
 
 An interesting observation is that the model also correctly predicts small private roads leading up to houses present in the image. Furthermore, the model detects construction roads in the upper left corner. Since these roads are not present in the label image, the model is penalized for making these predictions by the cross-entropy loss function.\\
 
+The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road label and road prediction pixels are superimposed on the aerial image. The road pixels that are coloured green, have been correctly predicted. In contrast, the red and blue coloured pixels show the prediction errors. The red pixels indicate areas in which the system failed to predict road, and the blue pixels show areas where the system incorrectly predicted road. Yet, the majority of the prediction errors are understandable, and arguably not actually errors at all. Most of the blue areas, covers pixels which depict asphalt surfaces, and some of red areas have trees covering the road. However, an undeniable challenge is the amount of disconnected roads, which especially occurs at road junctions and highway ramps. Possible reasons for this type of prediction errors can be the low frequency of junctions and ramps in the dataset or that the model capacity is inadequate. \\
 \begin{figure}[!ht]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_loss.png}
@@ -186,7 +191,7 @@ An interesting observation is that the model also correctly predicts small priva
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\textwidth]{figs/E6/E6-hit.jpg}
-\caption{Prediction hit and miss image.} \label{fig:E6_hit_iamge}
+\caption{Prediction hit and miss image.} \label{fig:E6_hit_image}
 \end{subfigure}
 \caption{E6 - Example of model's road detection performance. The aerial image is part of the test set in Massachusetts Roads Dataset} \label{fig:E6_performance}
 \end{figure}

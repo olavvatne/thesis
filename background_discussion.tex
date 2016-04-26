@@ -1,17 +1,16 @@
 \section{Background discussion}
 \label{sec:backgroundDiscussion}
-\todo[inline]{Is this part necessary?}
-In this section a brief discussion of what elements in this chapter have influenced the thesis project.
+\todo{Breif discussion of what elements influenced thesis project. Modify the text, which were put in future work in preliminary work} The first research question involves reducing the effect of inconsistent labels when training a classifier. The bootstrapping approach presented by \cite{Reed_noisy_labels_bootstrapping} will be evaluated for road detection. Whereas the loss functions presented by \citep{Mnih_aerial_images_noisy} require a noise distribution model,  bootstrapping utilize a   convex combination between the classifier's prediction and the label. This approach seems to be more generally applicable, and has been tested for different tasks.\\
 
-\begin{itemize}
-\item Training with datasets with unreliable supervision signal
-\item Using a curriculum to improve performance of models. Estimating reliability of 
-examples in dataset to create a transition from easy to hard samples. Based on 
-evidence that samples earlier in training have bigger influence than examples seen later in training process. As well as inconsistent labels having an adverse effect on 
-training.
-\item Curriculum teacher (Alternatives for this)
-\item Aerial dataset contain noise. Hinton showed methods can improve performance. Test alternative methods that are generally applicable. \todo{Need better word for expressing this} for dataset.
-Experiment with other more general techniques to achieve robustness.
-\item find roads in images require structured output. CNN 
-\item Good dataset to test whether curriculum learning and measures to limit inconsistent labelling work. Dataset with real world applications, complex.
-\end{itemize}
+ An interesting improvement to this approach is to set a time-dependent parameter for how much the classifier's own prediction should be trusted. The parameter should, at the start of training, weight the convex combination more in favor of the label. While in later stages of training, the parameter can favor the classifier's predictions more, because they have become more accurate.\\
+
+It is important to demonstrate that the approach offers robustness to different amounts of label noise. This can be done by artificially introducing label noise in samples of road detection datasets. Omission noise can be simulated by removing a fraction of the ground truth in the label images, while registration noise can be introduced by shifting subsets of label images by a certain amount of pixels. Classifiers with the bootstrapping extension can be trained on these modified datasets, and compared to the performance achieved from baseline classifiers. The performances can then be compared at different noise levels, and reveal whether or not the technique offers any robustness towards noisy labels. Similar experiments have been conducted by \citep{Sukhbaatar_noisy_network_learning} and \citep{Reed_noisy_labels_bootstrapping} for a variety of datasets. \\
+
+The second research question will investigate what effect a curriculum strategy can have on the road detection system's precision and recall. An interesting curriculum strategy, mentioned by \cite{Bengio_curriculumlearning}, is creating an easy-to-hard ordering of samples according to how noisy the examples are. This particular curriculum strategy might assist the bootstrapping technique, as well as being applicable for datasets containing images. A classifier is trained to a decent level for road detection, and in turn, is used to create a simple and complex dataset. Samples that are confidently and correctly predicted are considered easy and put in the simple dataset. The samples that are confidently predicted, but wrong, are assumed to be inconsistent, and therefore put in the complex dataset. The inconsistent examples will then have a higher probability of being presented later in the training procedure, when the model predictions have become more trustworthy. The convex combination of the bootstrapping approach can then be tuned more in favor of the predictions, which might avoid the negative consequences of inconsistent labelling.  It could be interesting to determine whether this curriculum strategy is beneficial for the bootstrapping technique in any way. \todo{Mention that the teacher is sole based on a machine learning algorithms perception of harder examples}\\
+
+To evaluate curriculum learning, the road detection system could be trained, using both an unaltered training scheme and with a curriculum strategy. The results can then be compared, in order to determine whether curriculum learning can achieve better generalization for road detection.\\
+
+\todo{CRF methods improves results quite a lot , but not a focus of this thesis. Fyll ut}
+\todo{Aerial dataset, good dataset to test bootstrapping. Omission and registration errors, since dataset has not been hand-labelled for machine learning purposes. A real dataset, with an application area. }
+
+In summary, the loss function of the road detection system will be modified, and an alternative training regime will be used for training. To measure the effect of these modifications, the system will be compared to a baseline system, and previous results achieved by similar systems.
