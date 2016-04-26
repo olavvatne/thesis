@@ -200,6 +200,22 @@ This guide outlines the steps required for setting up the monitoring interface. 
 \section{Experiment tool overview}
 \label{app:tools}
 \todo[inline]{Explain every tool, and to what experiment they relate.}
+\begin{itemize}
+\item measurement.precisionrecall.py\\
+The tool create the precision and recall curve. Command line options can be supplied.
+\item layer.visualize.py\\
+Opens a params.pkl file, containing the weight and hyperparameter configuration of a trained network, and created a visualization of the kernels from the network's input layer.
+\item distribution.curriculum\_diff.py\\
+Samples patches and create a histogram showing a patch dataset difficulty estimate distribution. Useful for setting threshold $D_\theta$. Also useful for verifying a curriculum patch dataset stage.
+\item distribution.dataset\_std.py\\
+Tool for finding an estimate of dataset's standard deviation. Used by contrast normalization in the pre-processing step.
+\item distribution.label\_dist\\
+Counts the percentage of road label pixels in a dataset.
+\item curriculum.dataset\_create.py\\
+Tool for pre-generating curriculum patch datasets. Command line options can be passed, to select a teacher, the thresholds $D_\theta$, the teachers optimal thresholding value, and dataset. The tool also comes with a baseline option which generate a staged patch dataset without curating the content of each stage.
+\item convert.alpha.py\\
+Converts a RGB dataset to RGBA. Python module PIL quirk, which makes RGBA better when rotating the aerial images. Areas not covered by pixels after a rotation, set to transparent with RGBA. With RGB, these pixels are set to black, which results in a lot of patch examples with no content.
+\end{itemize}
 \section{TODOs which apply to entire thesis}
 \todo[inline]{Remove this part!}
 \begin{itemize}
@@ -219,7 +235,8 @@ This guide outlines the steps required for setting up the monitoring interface. 
 \end{itemize}
 
 For chapter 4.
-\todo[inline]{Remove E7?}
+\todo[inline]{Mnih and Saito - average of 10 or 1?}
+\todo[inline]{Include E7 without replacement?}
 \todo[inline]{Testing only easier examples. Is that better. Filtering technique}
 \todo[inline]{Semi-competent teacher testing.}
 \todo[inline]{Can curriculum learning combined with bootstrapping loss function further improve results for label noise?}

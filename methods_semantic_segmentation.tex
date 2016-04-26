@@ -145,4 +145,20 @@ Another data augmentation method utilized when constructing the patch training s
 
 Contrast normalization is also applied to every patch. Each patch is normalized by subtracting the mean pixel value from the pixels of the patch, and then dividing the result by the standard deviation found for all pixels in the dataset.\\
 
-Additionally, the datasets exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might decide to prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. According to the label maps, the proportion of patches containing road, ranges between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by artificially increasing the proportion of road examples, when sampling the patch dataset. Normally a distribution of around 50\% road patches and 50\% non-road patches is used. However, this method is not applied to the test and validation patch set, which means that these sets will retain their natural class distribution.\\
+Additionally, the datasets exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the model might decide to prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. According to the label maps, the proportion of patches containing any road pixels, ranges between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by artificially increasing the proportion of road examples, when sampling the patch dataset. Normally a distribution of around 50\% road patches and 50\% non-road patches is used. However, this method is not applied to the test and validation patch set, which means that these sets will retain their natural class distribution. In table \ref{tab:label_percentage} the percentage of road pixel for each dataset is listed. \\
+
+\begin{table}[htp]
+\caption{Percentage of road pixels in the dataset}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^r ^r ^r}\hline
+\rowstyle{\bfseries}
+ 		 Set & Massachusetts & Norwegian Vbase & Norwegian N50\\\hline
+ 		 Test & 4.70 & 4.60 & 2.76 \\
+ 		 Validation & 6.90  & 4.06 & 2.45 \\
+ 		 Training & 4.77 & 4.60 &  2.78\\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:label_percentage}
+\end{table}
