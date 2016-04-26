@@ -18,11 +18,9 @@
 \caption{E1 - Performance of curriculum learning at different thresholds, $D_{0}$ for Norwegian Roads Dataset Vbase} \label{fig:E1_curriculum_norway}
 \end{figure}
 
-In Experiment E1, the road detection system have been trained on four different patch datasets. The system's performance for each of these datasets are displayed in Figure \ref{fig:E1_curriculum_norway}. A comparison of the test loss per epoch is displayed in Figure \ref{fig:E1_curr_norway_loss}, whereas the final performance of each network is shown by a precision and recall curve in Figure \ref{fig:E1_curr_norway_pr}. The network configuration used for the tests was identical, as well as the number of training examples seen while training. The performance gap between the results, comes from the first stage of the patch datasets, where different difficulty threshold $D_0$ have been used.\\
+In Experiment E1, the road detection system have been trained on four different patch datasets. The system's performance for each of these datasets are displayed in Figure \ref{fig:E1_curriculum_norway}. A comparison of the test loss per epoch is displayed in Figure \ref{fig:E1_curr_norway_loss}, whereas the final performance of each network is shown by a precision and recall curve in Figure \ref{fig:E1_curr_norway_pr}. The network configuration used for the tests was identical, as well as the number of training examples seen during training. Essentially, the performance gap between the baseline and curriculum plots, comes from the first stage of the patch datasets, where different difficulty threshold $D_0$ have been used.\\
 
-
-
-Observing the plots in Figure \ref{fig:E1_curr_norway_loss}, the switch between stage 0 and stage 1, is clearly visible at epoch 50. The increase in test loss is most severe in the datasets formed by a curriculum strategy. Leading up epoch 50, the curriculum plots show an increasing gap in test performance against the baseline plot. After the switch the curriculum datasets still outperform the baseline dataset, even though the training set distribution of stage 1 are the same for all patch datasets.\\
+Observing the plots in Figure \ref{fig:E1_curr_norway_loss}, the switch between stage 0 and stage 1, is clearly visible at epoch 50. The increase in test loss is most severe in the datasets formed by a curriculum strategy. Leading up to epoch 50, the curriculum plots show an increasing gap in test performance, if compared to the baseline plot. After the switch the curriculum datasets still outperform the baseline dataset, even though the training set distribution of stage 1 are the same for all patch datasets.\\
 
 Furthermore, the networks trained with a curriculum strategy shows an improved precision for all levels of recall compared to the baseline. \todo{Not so different here}\\
 
@@ -31,12 +29,12 @@ An interesting trend between the thresholds $D_0$ and the loss, is that decreasi
 \todo[inline]{Need to place distribution charts somewhere}
 
 
-A similar experiment was also performed on the Massachusetts Roads Dataset. In Experiment E2, networks are trained with three different patch datasets. The first stage of the baseline dataset have a first stage constructed by random sampling, which means that no examples were filtered out because of estimated difficulty. The curriculum dataset has a difficulty threshold $D_0$ of 0.25, which exclude every example with a estimated difficulty above 0.25 from the first stage. In contrast, the anti-curriculum patch dataset only have examples with a difficulty above 0.25 \todo{Mention, the non-road patches, and why non-road examples have been included}.\\
+A similar experiment was also performed on the Massachusetts Roads Dataset. In Experiment E2, networks are trained with three different patch datasets. The baseline dataset's first stage has a distribution similar to the aerial image dataset's training set. The curriculum dataset has a difficulty threshold $D_0$ of 0.25, which exclude every example with a estimated difficulty above 0.25 from the first stage. In contrast, the anti-curriculum patch dataset only include examples with a difficulty above 0.25 \todo{Mention, the non-road patches, and why non-road examples have been included}.\\
 
 
-The results from this experiment can be seen in Figure \ref{fig:E2_curriculum_mass}. The switch from stage 0 and stage 1 is visible for the \textit{Baseline} and \textit{Anti-curriculum} loss plots at epoch 50. The network trained with the dataset constructed with a curriculum strategy, performs better than the baseline as seen in Figure \ref{fig:E2_curr_mass_loss} and Figure \ref{fig:E2_curr_mass_pr}. Training with an anti-curriculum strategy, where the first stage consists of harder examples, does not provide the same loss, or breakeven. This is especially evident in the plot of test loss, where the network converge around epoch 25, and start to overfit slightly towards epoch 50. From epoch 50 when stage 1 examples entered the training set, there is a dramatic decrease in test loss. The final performance of anti-curriculum learning is substantially lower than both baseline and curriculum learning, as illustrated by the breakeven points in Figure \ref{fig:E2_curr_mass_pr}.\\
+The results from this experiment can be seen in Figure \ref{fig:E2_curriculum_mass}. The switch from stage 0 and stage 1 is visible for the \textit{Baseline} and \textit{Anti-curriculum} loss plots at epoch 50. The network trained with the curriculum patch dataset, performs better than the baseline as seen in Figure \ref{fig:E2_curr_mass_loss} and Figure \ref{fig:E2_curr_mass_pr}. Training with an anti-curriculum strategy, where the first stage consists of harder examples, does not provide the same loss, or breakeven performance. This is especially evident in the test loss plot, where the network converge at around epoch 25, and start to overfit towards epoch 50. From epoch 50 when stage 1 examples entered the training set, there is a dramatic decrease in test loss. The test loss decrease continues at a steady pace until epoch 85. Yet, the final performance of anti-curriculum learning is substantially lower than both the baseline and curriculum learning, as illustrated by the breakeven points in Figure \ref{fig:E2_curr_mass_pr}.\\
 
-The precision and recall breakeven values from Experiment E1 and Experiment E2, are listed in Table \ref{tab:results_curriculum_learning_breakeven}, and shows that training with a curriculum dataset is beneficial for both datasets.\\
+The precision and recall breakeven values from Experiment E1 and Experiment E2, are listed in Table \ref{tab:results_curriculum_learning_breakeven}, and shows that training with a curriculum strategy was beneficial for both datasets.\\
 \begin{figure}[!ht]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E2/E2-lc.png}
@@ -74,7 +72,7 @@ The precision and recall breakeven values from Experiment E1 and Experiment E2, 
 \subsection{Bootstrapping for imagery with noisy labels}
 \label{sec:results_bootstrapping}
 
-The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E3_boot_mass} and Figure \ref{fig:E5_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. The label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulate omission errors, in which roads have not been marked in the label maps. Experiment E3 and E5, utilized patch datasets where 0, 10, 20 ,30 and 40 percent were removed from the labels.\\
+The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E3_boot_mass} and Figure \ref{fig:E5_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E3 and E5, utilized patch datasets where 0, 10, 20 ,30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
 
 \begin{figure}[p]
 \begin{subfigure}{0.48\textwidth}
@@ -104,15 +102,15 @@ The results from comparing the bootstrapping methods and the baseline method at 
 \caption{E3 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E5_boot_norway}
 \end{figure}
 
-In Experiment E3, conducted on the Massachusetts Roads Dataset, Figure \ref{fig:E3_boot_mass_loss} displays the averaged test loss at different levels of label noise. Generally, the baseline, which utilize the cross-entropy, seems to increase in test loss, as the noise level is increased. The bootstrapping loss function has a lower test loss for noise levels above 10 percent.\\
+Figure \ref{fig:E3_boot_mass_loss} displays the averaged test loss at different levels of label noise, for Experiment E3 \todo{Bad}. The baseline, which utilizes the cross-entropy loss function, seems to generally increase in test loss as the noise level is increased. The bootstrapping loss function has a lower test loss for noise levels above 10 percent.\\
 
-Figure \ref{fig:E3_boot_mass_pr}, which displays the precision and recall breakeven values at increasing levels of label noise, shows a trend of decreasing values. For label noise levels above 20 percent, bootstrapping surpass the baseline. Though, the difference in performance is limited.\\
+Figure \ref{fig:E3_boot_mass_pr}, which displays the precision and recall breakeven values at increasing levels of label noise, shows a trend of decreasing values.  For label noise levels above 20 percent, bootstrapping surpasses the baseline. Though, the difference in performance is small.\\
 
-The same type label noise experiment has been conducted for the Norwegian Roads Dataset as well, and include a plot of the confident bootstrapping performance. In Figure \ref{fig:E5_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. As expected, the precision and recall breakeven points for the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E4_boot_norway_vbase_pr}. Although the bootstrapping methods behave a bit more erratic, they generally tend to decrease at a slower rate \todo{A bit hard to see, doncha think!}.\\
+The same kind of label noise experiment was also conducted for the Norwegian Roads Dataset, and include an additional plot of the confident bootstrapping performance. In Figure \ref{fig:E5_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. As expected, the precision and recall breakeven points for the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E4_boot_norway_vbase_pr}. Although the bootstrapping methods behave a bit more erratic, they generally tend to decrease at a slower rate \todo{A bit hard to see, doncha think!}.\\
 
-A slightly different approach has been taken for Experiment E4. The road detection system has in this experiment been trained with a labels from the label set N50. This label set have a higher rate of omission and registration noise, than the labels in Massachusetts Roads Dataset for instance. The test set however, consists of labels originating from the Vbase label set, which is more accurate. The result from this experiment is displayed in \ref{fig:E4_boot_norway_vbase}\\
+A slightly different approach has been taken for Experiment E4. The road detection system has in this experiment been trained with a labels from the label set N50. This label set have a higher rate of omission and registration noise than the labels in Massachusetts Roads Dataset for instance. The test set however, consists of labels originating from the Vbase label set, which is more accurate. The result from this experiment is displayed in \ref{fig:E4_boot_norway_vbase}\\
 
-\todo[inline]{Explain what the figure shows.}
+The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E4_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E4_boot_norway_vbase_pr}. In fact, the precision and recall breakeven values slightly favours the bootstrapping methods. This contradictory results between the MSE loss and the breakeven point, might be the result of the relaxed measure of precision, which ignores small misalignments between the prediction and label pixels.
 
   
 \begin{figure}[!ht]
@@ -131,15 +129,10 @@ A slightly different approach has been taken for Experiment E4. The road detecti
 
 \subsection{Road detection system}
 \label{sec:results_road_detection_system}
-In this section, the road detection system were trained using a much larger patch dataset than in the previous sections. In order for the patch dataset to fit in memory, the examples were split into 9 separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E6_performance_mass_lc}, where the loss jumps slightly after a training set switch. The training converge to a \ac{MSE} test loss of 0.0232. \\
+In this section, the road detection system was trained on a much larger patch dataset than in previous sections. In order for the patch dataset to fit in main memory, the examples were split into 9 separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E6_performance_mass_lc}, where the loss increases slightly after a training set switch. The network converged to a \ac{MSE} test loss of 0.0232. \\
 
 In Figure \ref{fig:E6_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}.\\
 
-Furthermore, the images in Figure \ref{fig:E6_performance} illustrate qualitatively the performance of the system. For this particular test image, the model was able to identify the majority of the roads present, except for an almost imperceptible dirt road on the right side of the image. There are also some prediction errors, such as roads being disconnected, and prediction artefacts in the forest areas. However, the majority of the forest artefacts have low prediction probabilities, and were removed when a threshold operation were applied on the probabilities. The threshold value which result in the best precision and recall trade off, was used in this threshold operation.\\
-
-An interesting observation is that the model also correctly predicts small private roads leading up to houses present in the image. Furthermore, the model detects construction roads in the upper left corner. Since these roads are not present in the label image, the model is penalized for making these predictions by the cross-entropy loss function.\\
-
-The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road label and road prediction pixels are superimposed on the aerial image. The road pixels that are coloured green, have been correctly predicted. In contrast, the red and blue coloured pixels show the prediction errors. The red pixels indicate areas in which the system failed to predict road, and the blue pixels show areas where the system incorrectly predicted road. Yet, the majority of the prediction errors are understandable, and arguably not actually errors at all. Most of the blue areas, covers pixels which depict asphalt surfaces, and some of red areas have trees covering the road. However, an undeniable challenge is the amount of disconnected roads, which especially occurs at road junctions and highway ramps. Possible reasons for this type of prediction errors can be the low frequency of junctions and ramps in the dataset or that the model capacity is inadequate. \\
 \begin{figure}[!ht]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_loss.png}
@@ -151,7 +144,7 @@ The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road 
 \caption{Precision and recall.} \label{fig:E6_performance_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{E6 - Performance of road detection system trained with Massachusetts Roads Dataset} \label{fig:E6_performance_mass}
+\caption{E6 - Performance of road detection system trained with Massachusetts Roads Dataset.} \label{fig:E6_performance_mass}
 \end{figure}
 
 \begin{table}[!ht]
@@ -170,6 +163,13 @@ The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road 
 \end{center}
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
+
+The images in Figure \ref{fig:E6_performance} illustrate qualitatively the performance of the system. For this particular test image, the model was able to identify the majority of the roads present, except for an almost imperceptible dirt road on the right side of the image. There are also some prediction errors, such as roads being disconnected, and prediction artefacts in the forest areas. However, the majority of the forest artefacts have low prediction probabilities, and were removed when a threshold operation were applied on the probabilities. The threshold value which result in the best precision and recall trade off, was used in this threshold operation.\\
+
+An interesting observation is that the model also correctly predicts small private roads leading up to houses present in the image. Furthermore, the model detects construction roads in the upper left corner. Since these roads are not present in the label image, the model is penalized for making these predictions by the cross-entropy loss function.\\
+
+The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road label and road prediction pixels are superimposed on the aerial image. The road pixels that are coloured green, have been correctly predicted. In contrast, the red and blue coloured pixels show the prediction errors. The red pixels indicate areas in which the system failed to predict road, and the blue pixels show areas where the system incorrectly predicted road. Yet, the majority of the prediction errors are understandable, and arguably not actually errors at all. Most of the blue areas, covers pixels which depict asphalt surfaces, and some of red areas have trees covering the road. However, an undeniable challenge is the amount of disconnected roads, which especially occurs at road junctions and highway ramps. Possible reasons for this type of prediction errors can be the low frequency of junctions and ramps in the dataset or that the model capacity is inadequate. \\
+
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
@@ -199,8 +199,5 @@ The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road 
 
 
 
-\todo[inline]{Choose what to present}
-\todo[inline]{Present results for each experiment}
-\todo[inline]{Avoid drawing grand conclusions. Only what your data can support}
-\todo[inline]{Study tables graphs for unusual things that might raise questions with the reader}
-\todo[inline]{Reason for this is the use of 50/50 split. Even though 40 percent is removed the sampling still pick out samples so that 50 percent of patches contain road class pixels. In discussion?}
+\todo{Avoid drawing grand conclusions. Only what your data can support}
+\todo{Study tables graphs for unusual things that might raise questions with the reader}

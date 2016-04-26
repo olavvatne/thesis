@@ -203,7 +203,7 @@ This chapter will describe the architecture, and the methods needed in order to 
 \chapter{Experiments and Discussion}
 \todo[inline]{Draft edition 0.1}
 
-In the following sections, all experiments regarding the research questions will be presented, and the results will be presented and analysed. Section \ref{sec:experimentalPlan} outlines the experiment plan, and Section \ref{sec:experimentalSetup} presents the hyperparameter configuration for each experiment. In Section \ref{sec:experimentalResults} the results are presented, and are then discussed in Section \ref{sec:Discussion}.\todo{The intro not so bland in comparisons}
+In the following sections, all experiments conducted to resolve the research questions will be presented, and the results will be analysed. Section \ref{sec:experimentalPlan} outlines the experimental design, and Section \ref{sec:experimentalSetup} presents the parameter configuration for each experiment. In Section \ref{sec:experimentalResults} the results are presented, and followed by a discussion in Section \ref{sec:Discussion}.
 \label{cha:ResearchAndResults}
 
 \input{experimental_plan}
@@ -225,6 +225,8 @@ Even though the bootstrapping in Figure \ref{fig:E4_boot_norway_vbase} show an i
 Unfortunately, the effect of using the bootstrapping loss function is quite small. Although, the network's regularizers and data preprocessing contribute to robustness of towards noise labels. Especially the class balancer. Should probably simulate registration noise. The network have 50\% examples which contain roads. At least for these datasets and this network configuration, bootstrapping not work.
 
 Runtime concerns! 
+
+\todo[inline]{Reason for this is the use of 50/50 split. Even though 40 percent is removed the sampling still pick out samples so that 50 percent of patches contain road class pixels. In discussion?}
 
 \chapter{Conclusion}
 \label{cha:evaluationAndConclusion}
