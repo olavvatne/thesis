@@ -2,10 +2,10 @@
 \label{sec:experimentalSetup}
 The network configuration for most experiments are listed in Table \ref{tab:network_parameters}. Any deviations from this configuration will be detailed in this section. In addition, the specific hyperparameters used for each experiment can be found at \url{http://interface.ml/experiments}. Descriptions about tools used for conducting the experiments can be found in Appendix \ref{app:tools}. The relevant parameters for each experiment are detailed below.\\ 
 
-\subsubsection{E1 - Curriculum learning with Norwegian Roads Dataset}
-This experiment involves comparing two patch datasets generated from the Norwegian Roads Dataset. Both datasets have $S=2$ stages, where each stage include 110 000 training examples. The first patch dataset is created according to a curriculum strategy, where the difficulty estimate $d(y, q)$ is less than a threshold $D_\theta$. The first stage consists of only examples with a difficulty estimate below 0.25,  while the second stage have a threshold of 1.0, which is equivalent to random sampling of patches. The second patch dataset have a threshold $D_\theta$ of 1.0 for both stages, and constitute the baseline. Switching between the first and second stage, happens by entirely replacing the training set with examples from the second stage.\\
+\subsubsection{E1 - Curriculum Learning with Norwegian Roads Dataset}
+This experiment involves comparing two patch datasets generated from the Norwegian Roads Dataset. Both datasets have $N=2$ stages, where each stage include 110 000 training examples. The first patch dataset is created according to a curriculum strategy, where the difficulty estimate $d(y, q)$ is less than a threshold $D_\theta$. The first stage consists of only examples with a difficulty estimate below 0.25,  while the second stage have a threshold of 1.0, which is equivalent to random sampling of patches. The second patch dataset have a threshold $D_\theta$ of 1.0 for both stages, and constitute the baseline. Switching between the first and second stage, happens by entirely replacing the training set with examples from the second stage.\\
 
-The curriculum teacher, which generate predictions for the difficulty estimation are a previous trained model. The teacher classifier was trained with a dataset consisting of 440000 examples for 175 epochs. Otherwise, the network parameters closely resembles the default parameters listed in Table \ref{tab:network_parameters} \todo{True?}. The classifier's final \ac{MSE} test loss is 0.0222, and the precision and recall breakeven is around 0.66. \\
+The curriculum teacher, which generate predictions for the difficulty estimation are a previous trained model. The teacher classifier was trained with a dataset consisting of 440000 examples for 175 epochs. Otherwise, the network parameters closely resembles the default parameters listed in Table \ref{tab:network_parameters} \todo{True?}. The classifier's final \ac{MSE} test loss is 0.0222, and the relaxed precision and recall breakeven is around 0.71. \\
 
 The default network configuration is used for models trained on both the curriculum dataset and the baseline dataset. Essentially, the only real difference between the two, is the first stage of the datasets. The models are trained for 120 epochs, with a stage switch after 50 epochs. Important parameters for this experiment are listed in Table \ref{tab:key_parameter_E1}.\\
 
@@ -18,16 +18,16 @@ An additional patch dataset has also been included, which tests the performance 
 \begin{tabular}{+l ^p{11cm}}\hline
 \rowstyle{\bfseries}
   - & parameters \\\hline
-  Baseline & 120 epochs, s=110000, $d(y, q) < D_{\theta}$, $D_{0} = 1.00$, $D_{1} = 1.0$, $t_{start} = 50$  \\
-  Curriculum & 120 epochs, s=110000, $d(y, q) < D_{\theta}$, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 50$ \\
-  Anti-curriculum & 120 epochs, s=110000, $d(y, q) > D_{\theta}$, $D_{0} = 0.25$, $D_{1} = 0.0$, $t_{start} = 50$ \\\hline
+  Baseline & 120 epochs, s=220000, $d(y, q) < D_{\theta}$, $D_{0} = 1.00$, $D_{1} = 1.0$, $t_{start} = 50$  \\
+  Curriculum & 120 epochs, s=220000, $d(y, q) < D_{\theta}$, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 50$ \\
+  Anti-curriculum & 120 epochs, s=220000, $d(y, q) > D_{\theta}$, $D_{0} = 0.25$, $D_{1} = 0.0$, $t_{start} = 50$ \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
 \label{tab:key_parameter_E1}
 \end{table}
 
-\subsubsection{E2 - Curriculum learning with Massachusetts Roads Dataset}
+\subsubsection{E2 - Curriculum Learning with Massachusetts Roads Dataset}
 Experiment E2 have a similar setup to Experiment E1. There are two patch datasets, each with two stages, where the first patch dataset has been created by a curriculum strategy and the other by random sampling. In addition to comparing a baseline setup to a curriculum setup, various $D_{0}$ values for stage $0$ have been tested. This will show how setting the threshold for the first stage will affect the performance of curriculum learning. Special parameters for this experiment can be found in Table \ref{tab:key_parameter_E2}.\\
 
 \begin{table}[!h]
@@ -37,17 +37,17 @@ Experiment E2 have a similar setup to Experiment E1. There are two patch dataset
 \begin{tabular}{+l ^p{11cm}}\hline
 \rowstyle{\bfseries}
   - & parameters \\\hline
-  Baseline & 100 epochs, s=110800, $D_{0} = 1.0$,  $D_{1} = 1.0$, $t_{start} = 50$  \\
-  Curriculum 0.15 & 100 epochs, s=110800, $D_{0} = 0.15$, $D_{1} = 1.0$, $t_{start} = 50$ \\
-  Curriculum 0.25 & 100 epochs, s=110800, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 50$ \\
-  Curriculum 0.35 & 100 epochs, s=110800, $D_{0} = 0.35$, $D_{1} = 1.0$, $t_{start} = 50$ \\\hline
+  Baseline & 100 epochs, s=221600, $D_{0} = 1.0$,  $D_{1} = 1.0$, $t_{start} = 50$  \\
+  Curriculum 0.15 & 100 epochs, s=221600, $D_{0} = 0.15$, $D_{1} = 1.0$, $t_{start} = 50$ \\
+  Curriculum 0.25 & 100 epochs, s=221600, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 50$ \\
+  Curriculum 0.35 & 100 epochs, s=221600, $D_{0} = 0.35$, $D_{1} = 1.0$, $t_{start} = 50$ \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
 \label{tab:key_parameter_E2}
 \end{table}
 
-The curriculum teacher for this experiment was trained with a patch dataset of 442800 examples, sampled from Massachusetts Roads Dataset. The teacher model was trained for 272 epoch. The model achieved a \ac{MSE} loss of 0.0225, and a precision and recall breakeven of 0.76 \todo{Relaxed precision only}.\\
+The curriculum teacher for this experiment was trained with a patch dataset of 442800 examples, sampled from Massachusetts Roads Dataset. The teacher model was trained for 272 epoch. The model achieved a \ac{MSE} loss of 0.0225, and a relaxed precision and recall breakeven of 0.80 \todo{Relaxed precision only}.\\
 
 
 
@@ -109,7 +109,7 @@ Experiment E5 tests the robustness towards label noise for the Norwegian Roads D
 \label{tab:key_parameter_E5}
 \end{table}
 
-\subsubsection{E6 - Performance of road detection system}
+\subsubsection{E6 - Performance of the Road Detection System}
 The performance of the road detection system is tested in Experiment E6. The patch dataset counts 3985200 examples, which have been randomly sampled from the Massachusetts Roads Dataset. The network is trained for 300 epochs, unless early stopping terminates the optimization. In order to train with such a large dataset, the model trains with only a subset of the examples at any given epoch. The training data is switched with another subset every 30th epoch starting from epoch 50 \todo{rewrite}. At any given epoch, the model is optimized by a total of 442800 examples. This is probably not as effective as using the entire dataset throughout training \todo{Check if this is correct}. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E6}.
 \begin{table}[h]
 \caption{Key parameters for E6.}
@@ -124,4 +124,29 @@ The performance of the road detection system is tested in Experiment E6. The pat
 \end{adjustbox}
 \end{center}
 \label{tab:key_parameter_E6}
+\end{table}
+
+\subsubsection{E7 - Curriculum Learning with an Inexperienced Teacher}
+While experiment E1 and E2 have teacher's that were trained with over 400000 examples, this  
+experiment assume that there are a limited amount of patches available. The teacher for this experiment was therefore only trained with 221600 examples, which is the same number of examples in all the patch dataset experiments. The model was trained for 156 epochs, and achieved a test \ac{MSE} of 0.0253 and a relaxed precision and recall of 0.79.\\
+
+For the experiment involving gradually increasing the difficulty of the training set, there are 326800 examples in total. There are $N=5$ stages. The first stage have 110800 examples, whereas the remaining stages have 54000 examples each. For the baseline, the difficulty theshold $D_\theta$ is set to 1 for every stage. The first stage of the curriculum patch dataset, only allow examples with a difficulty below 0.25. The key parameters for Experiment E7, are displayed in \ref{tab:key_parameter_E7}\\
+
+\begin{table}[!h]
+\caption{Key parameters for E7.}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^p{10cm}}\hline
+\rowstyle{\bfseries}
+  - & parameters \\\hline
+  Baseline & 120 epochs, s=221600, $D_{0} = 1.0$,  $D_{1} = 1.0$, $t_{start} = 60$\\
+  Curriculum & 120 epochs, s=221600, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 60$ \\
+  Baseline - First stage only & 120 epochs, s=221600, $D_{0} = 1.0$\\
+  Curriculum - First stage only & 120 epochs, s=221600, $D_{0} = 0.25$ \\
+  Baseline - Gradual & 120 epochs, s=326800, $D_{\theta} = 1.0, \theta \in \{0, 1, 2, 3, 4\}$, $t_{start} = 60$,  $t_{stage} = 15$\\
+  Curriculum - Gradual & 120 epochs, s=326800, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4\}$ , $t_{start} = 60$,  $t_{stage} = 15$ \\\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:key_parameter_E7}
 \end{table}
