@@ -27,7 +27,19 @@ Furthermore, the networks trained with a curriculum strategy shows an improved p
 An interesting trend between the thresholds $D_0$ and the loss, is that decreasing the difficulty threshold, does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performed worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35} \todo{Generalize, easier examples reduce variability of training set, generalize worse. Discussion?}. \\
 
 \todo[inline]{Need to place distribution charts somewhere}
-
+\begin{figure}[!ht]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E2/E2-road-dist.png}
+\caption{Distribution for road patches.} \label{fig:E2_difficulty_distribution_road}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E2/E2-non_road-dist.png}
+\caption{Distribution for non-road patches.} \label{fig:E2_difficulty_distribution_non-road}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{E2 - Example difficulty distribution according to estimator $d(y,q)$ } \label{fig:E2_difficulty_distribution}
+\end{figure}
 
 A similar experiment was also performed on the Massachusetts Roads Dataset. In Experiment E2, networks are trained with three different patch datasets. The baseline dataset's first stage has a distribution similar to the aerial image dataset's training set. The curriculum dataset has a difficulty threshold $D_0$ of 0.25, which exclude every example with a estimated difficulty above 0.25 from the first stage. In contrast, the anti-curriculum patch dataset only include examples with a difficulty above 0.25 \todo{Mention, the non-road patches, and why non-road examples have been included}.\\
 
@@ -68,6 +80,32 @@ The precision and recall breakeven values from Experiment E1 and Experiment E2, 
 \end{center}
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
+
+Experiment E7, use a teacher that has been trained on fewer examples. Figure 
+
+\begin{figure}[p]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E7/E7_lc_two_stage.png}
+\caption{Test loss for two stage dataset} \label{fig:fig:E7_curriculum_inexperienced_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E7/E7_pr_two_stage.png}
+\caption{Precision and recall comparisons for two stage dataset.} \label{fig:fig:E7_curriculum_inexperienced_pr}
+\end{subfigure}
+
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E7/E7_lc_gradual.png}
+\caption{Test loss for dataset with gradual stage switching} \label{fig:fig:E7_gradual_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E7/E7_pr_gradual.png}
+\caption{Precision and recall for dataset with gradual stage switching.} \label{fig:fig:E7_gradual_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{E7 - Results from Experiment E7.} \label{fig:E7_curriculum_inexperienced}
+\end{figure}
 
 \subsection{Bootstrapping for Imagery with Noisy Labels}
 \label{sec:results_bootstrapping}
@@ -110,9 +148,8 @@ The same kind of label noise experiment was also conducted for the Norwegian Roa
 
 A slightly different approach has been taken for Experiment E4. The road detection system has in this experiment been trained with a labels from the label set N50. This label set have a higher rate of omission and registration noise than the labels in Massachusetts Roads Dataset for instance. The test set however, consists of labels originating from the Vbase label set, which is more accurate. The result from this experiment is displayed in \ref{fig:E4_boot_norway_vbase}\\
 
-The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E4_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E4_boot_norway_vbase_pr}. In fact, the precision and recall breakeven values slightly favours the bootstrapping methods. This contradictory results between the MSE loss and the breakeven point, might be the result of the relaxed measure of precision, which ignores small misalignments between the prediction and label pixels.
+The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E4_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E4_boot_norway_vbase_pr}. In fact, the precision and recall breakeven values slightly favours the bootstrapping methods. This contradictory results between the MSE loss and the breakeven point, might be the result of the relaxed measure of precision, which ignores small misalignments between the prediction and label pixels.\\
 
-  
 \begin{figure}[!ht]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E4/E4_lc.png}
@@ -126,6 +163,7 @@ The difference between bootstrapping and confident bootstrapping is evident in F
 \hspace*{\fill} % separation between the subfigures
 \caption{E4 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E4_boot_norway_vbase}
 \end{figure}
+
 
 \subsection{Road Detection System}
 \label{sec:results_road_detection_system}
