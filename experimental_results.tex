@@ -1,7 +1,7 @@
 \section{Experimental Results}
 \label{sec:experimentalResults}
 
-\subsection{Curriculum learning with aerial imagery}
+\subsection{Curriculum Learning with Aerial Imagery}
 \label{sec:results_curriculum_learning_aerial_imagery}
 
 \begin{figure}[!ht]
@@ -24,7 +24,7 @@ Observing the plots in Figure \ref{fig:E1_curr_norway_loss}, the switch between 
 
 Furthermore, the networks trained with a curriculum strategy shows an improved precision for all levels of recall compared to the baseline. \todo{Not so different here}\\
 
-An interesting trend between the thresholds $D_0$ and the loss, is that decreasing the difficulty threshold, does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performs worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35} \todo{Generalize, easier examples reduce variability of training set, generalize worse. Discussion?}. \\
+An interesting trend between the thresholds $D_0$ and the loss, is that decreasing the difficulty threshold, does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performed worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35} \todo{Generalize, easier examples reduce variability of training set, generalize worse. Discussion?}. \\
 
 \todo[inline]{Need to place distribution charts somewhere}
 
@@ -69,7 +69,7 @@ The precision and recall breakeven values from Experiment E1 and Experiment E2, 
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
 
-\subsection{Bootstrapping for imagery with noisy labels}
+\subsection{Bootstrapping for Imagery with Noisy Labels}
 \label{sec:results_bootstrapping}
 
 The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E3_boot_mass} and Figure \ref{fig:E5_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E3 and E5, utilized patch datasets where 0, 10, 20 ,30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
@@ -127,7 +127,7 @@ The difference between bootstrapping and confident bootstrapping is evident in F
 \caption{E4 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E4_boot_norway_vbase}
 \end{figure}
 
-\subsection{Road detection system}
+\subsection{Road Detection System}
 \label{sec:results_road_detection_system}
 In this section, the road detection system was trained on a much larger patch dataset than in previous sections. In order for the patch dataset to fit in main memory, the examples were split into 9 separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E6_performance_mass_lc}, where the loss increases slightly after a training set switch. The network converged to a \ac{MSE} test loss of 0.0232. \\
 
@@ -164,37 +164,7 @@ In Figure \ref{fig:E6_performance_mass_pr}, the averaged precision and recall cu
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
 
-The images in Figure \ref{fig:E6_performance} illustrate qualitatively the performance of the system. For this particular test image, the model was able to identify the majority of the roads present, except for an almost imperceptible dirt road on the right side of the image. There are also some prediction errors, such as roads being disconnected, and prediction artefacts in the forest areas. However, the majority of the forest artefacts have low prediction probabilities, and were removed when a threshold operation were applied on the probabilities. The threshold value which result in the best precision and recall trade off, was used in this threshold operation.\\
 
-An interesting observation is that the model also correctly predicts small private roads leading up to houses present in the image. Furthermore, the model detects construction roads in the upper left corner. Since these roads are not present in the label image, the model is penalized for making these predictions by the cross-entropy loss function.\\
-
-The predictions errors are displayed in Figure \ref{fig:E6_hit_image}. The road label and road prediction pixels are superimposed on the aerial image. The road pixels that are coloured green, have been correctly predicted. In contrast, the red and blue coloured pixels show the prediction errors. The red pixels indicate areas in which the system failed to predict road, and the blue pixels show areas where the system incorrectly predicted road. Yet, the majority of the prediction errors are understandable, and arguably not actually errors at all. Most of the blue areas, covers pixels which depict asphalt surfaces, and some of red areas have trees covering the road. However, an undeniable challenge is the amount of disconnected roads, which especially occurs at road junctions and highway ramps. Possible reasons for this type of prediction errors can be the low frequency of junctions and ramps in the dataset or that the model capacity is inadequate. \\
-
-
-\begin{figure}
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\textwidth]{figs/E6/E6-label.jpg}
-\caption{Label image.} \label{fig:E6_label_iamge}
-\vspace{0.5cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\textwidth]{figs/E6/E6-image.jpg}
-\caption{Aerial image.} \label{fig:E6_aerial_image}
-\vspace{0.5cm} % separation vertically between the subfigures
-\end{subfigure}
-
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\textwidth]{figs/E6/E6-pred.jpg}
-\caption{Model predictions.} \label{fig:E6_model_predictions}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\textwidth]{figs/E6/E6-hit.jpg}
-\caption{Prediction hit and miss image.} \label{fig:E6_hit_image}
-\end{subfigure}
-\caption{E6 - Example of model's road detection performance. The aerial image is part of the test set in Massachusetts Roads Dataset} \label{fig:E6_performance}
-\end{figure}
 
 
 

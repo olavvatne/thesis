@@ -1,12 +1,12 @@
 \section{Related work}
 \label{sec:related_works}
-\subsection{Road extraction systems}
+\subsection{Road Extraction Systems}
 Road extraction is a part of the field of Photogrammetry. The field involves technology for map production and measurements of objects in images. As digital acquisition systems for capturing aerial images have become commonplace, the availability of high resolution aerial images have increased. Coupled with the increasing need for detailed spatial information in \ac{GIS} databases and production of digital maps, a lot of approaches for automatic object extraction from aerial imagery has been suggested. A reliable and accurate detection system could be beneficial in terms of increased levels of details, while reducing the cost associated with map production.\\
 
 There is a large amount of literature regarding proposed methods for automatic road extraction systems. This includes segmentation, edge detection, knowledge based methods, fuzzy classification methods, and region growing methods. For a thorough review of different road extraction systems, see \citep{Trinder_towards_automation}
 \citep{Mena_GIS_state_of_the_art}. The main aim of this section is to present approaches based on machine learning.
 
-\subsubsection{Types of aerial imagery}
+\subsubsection{Types of Aerial Imagery}
 Aerial and satellite imagery are captured using a whole range of sensors. A lot of approaches found in remote sensing are developed for certain types of sensor data. Below is a list of different types of aerial imagery:
 \begin{itemize}
  \item Monochromatic (single channel or greyscale) images 
@@ -19,7 +19,7 @@ Aerial and satellite imagery are captured using a whole range of sensors. A lot 
 
 The focus of this review is approaches for color images, which is the most common type of aerial imagery.
 
-\subsubsection{Machine learning}
+\subsubsection{Machine Learning}
 In the previous two decades, the availability of high resolution images covering large areas have increased. These images can have a resolution of around 1 square meter per pixel or higher. At this resolution, finer details such as cars, buildings and trees can be distinguished. Having a higher resolution for images also result in much more variability in terms of shape, texture and illumination. Machine learning algorithms that can learn highly non-linear decision boundaries have therefore become more common for aerial imagery applications. To successfully discriminate between object classes, more spatial context have been used to create a richer feature representation, as well as more data being used for training. Additionally, structured prediction methods such as \ac{CRF}, have become popular for smoothing in semantic segmentation applications.
 
 
@@ -53,7 +53,7 @@ The problem with inconsistent labels in the context of aerial images was investi
 
 The proposed deep neural network performed significantly better in terms of precision and recall, compared to the shallow neural network in \citep{Mnih_roads_high_res_aerial_images}. By utilizing the robust loss functions, performance was further improved.\\
 
-\subsubsection{Larger datasets}
+\subsubsection{Larger Datasets}
 Learning complex decision boundaries and the variations present in the high-resolution aerial imagery requires a lot of training data. In previous studies, much smaller datasets have been used \citep{Mokhtarzade_road_ann} \citep{Song_road_extraction_svm}. Only eight test images ranging from 1600 to 4000 pixels in width and height were utilized to evaluate automatic road extraction approaches in \citep{Mayer_road_test}. The trend in road extraction and land cover classification literature is to use increasingly larger datasets.\\
 
 A high-resolution aerial dataset used to optimize the randomized forest algorithm in \citep{Kluckner_semantic_height}, contains  155 images and covers an area of about 85 square kilometers. Each of these images are 11500 x 7500 pixels in size and have a \ac{GSD} of 8 centimeter.\\
@@ -63,7 +63,7 @@ In both \citep{Mnih_roads_high_res_aerial_images} and \citep{Mnih_aerial_images_
 The Massachusetts Roads Dataset introduced by \cite{MnihThesis}, consist of 1171 aerial images, each with a height and width of 1500 pixels. The dataset covers an area of over 2600 square kilometers, and contains a variety of regions, such as urban, suburban and rural areas. The \ac{GSD} is 1 meter per pixel.\\
 
 
-\subsubsection{Feature representation}
+\subsubsection{Feature Representation}
 Another trend in road detection is to extract features from larger contexts or pixel neighbourhoods. In addition to increasing the classifiers ability to discriminate between objects sharing similar texture and shape, using larger contexts are necessary for images with a low ground sampling distance.\\
 
 \cite{Mokhtarzade_road_ann} proposed using a shallow neural network for road detection. For this approach, a normalized $3 \times 3$ neighbourhood of pixel values was used as input features to a neural network. \\
@@ -75,7 +75,7 @@ A much larger neighbourhood of pixels were utilized as features in \citep{Mnih_a
   Combining images with height or elevation information can also increase classifier accuracy. This was demonstrated by \cite{Kluckner_semantic_height} where both color and height cues were integrated as features. The height information significantly improved the performance of the classifier.
   
 
-\subsubsection{Conditional random fields}
+\subsubsection{Conditional Random Fields}
 The smoothness assumption is a strong piece of prior knowledge we have about images. Neighbouring pixels tend to influence each other, and are more likely to belong to the same object or class. \ac{CRF} is a way to explicitly model dependencies between neighbouring pixels, and is often utilized in semantic segmentation tasks to obtain a smoother segmentation result. The goal of semantic segmentation is to split an image into disjoint regions, where each region is associated with a certain class label.\\
 
 In the study by \cite{Kluckner_semantic_height}, an approach for land cover classification given high resolution aerial images was presented. Aerial images are segmented according to five classes: Building, tree, waterbody, green area, and streetlayer. Attributes such as color and edge response is extracted from aerial images, and combined with height information to create an efficient feature representation based on covariance matrices. The randomized forest classifier is trained to learn a conditional probability distribution over the possible class labels given the feature representation.\\
@@ -100,7 +100,7 @@ An approach similar to \ac{CRF} is proposed by \cite{Mnih_roads_high_res_aerial_
 
 
  
-\subsection{Learning by a curriculum}
+\subsection{Learning by a Curriculum}
 Inspired by how humans learn in an organized fashion, \cite{Bengio_curriculumlearning} presented curriculum learning and investigated how machine learning can benefit from modifying the training regime. In curriculum learning, a learner is gradually presented with harder training samples. In order to do this, an ordering criteria that can identify easy samples must be devised. Experiments showed that a simple multi-stage curriculum reduced convergence time and increased accuracy. \\
 
 A study conducted by \cite{Erhan-unsupervised-pre-training} investigated why supervised learning tasks benefit from unsupervised pre-training. It showed that examples presented early on in training have a disproportionate influence on the outcome of the training procedure. Earlier training can trap the \ac{SGD} in a basin of attraction, which can be hard to escape from.  By using a curriculum strategy the learner can potentially be guided to better areas in parameter space and lead to a better local minima. \\
@@ -153,7 +153,7 @@ Based on the ordering each participant chose, three major human teaching strateg
 The experiment showed that there is evidence of curriculum learning being employed by humans in a teacher role. This might indicate that this is an intuitive and efficient way to learn, and might be beneficial for machine learning methods as well. \\
 
 
-\subsection{Dealing with noisy labels}
+\subsection{Dealing with Noisy Labels}
 Supervised learning works well for applications where there are a lot of labelled data available. For object recognition, the large-scale image database ImageNet have often been utilized. This database provide millions of manually annotated and quality controlled images, organized in a semantic hierarchy \citep{Deng_imagenet}. However, for some tasks, such as semantic segmentation and object detection, manually labelled data are expensive and time consuming to create, and high quality datasets can be hard to obtain. Automatically creating large dataset from internet resources, such as image search engines, \ac{GIS} databases, and user annotated images can be very practical in terms of reducing the costs of creating very large datasets. \\
 
 Unfortunately, such datasets will often contain noisy or weak labels. User annotation for images are usually incomplete, image search engines often return images unrelated to the search term, and \ac{GIS} databases might be outdated and missing important object information. This can have negative consequences for a supervised algorithm, which in most cases assume that the labels are correct. These consequences are more evident in datasets containing substantial amount of inconsistent labels.\\
@@ -163,7 +163,7 @@ There are three main approaches to dealing with noisy label, as outlined in Sect
 %\subsubsection{Modelling the noise distribution}
 %Compare the different approaches for modelling the noise.
 
-\subsubsection{Learning to label aerial images from noisy data}
+\subsubsection{Learning to Label Aerial Images from Noisy Data}
 The problem with inconsistent labels in aerial images was investigated in \citep{Mnih_aerial_images_noisy}. In this work, two types of label noise were identified,  which datasets constructed from maps are especially susceptible of. Omission noise is defined as objects that appear in the aerial image, but not in the map. Registration noise occurs when the location of the object in the map is inaccurate. Considering that the presence of label noise might negatively impact the classifier accuracy, \cite{Mnih_aerial_images_noisy} proposed two robust loss functions that can be incorporated in a deep learning framework. \\
 
 The first loss function proposed explicitly models asymmetric noise, and is designed to deal with omission noise. It treats label $\tilde{y}$ as a noisy observation generated from true label $y$, according to a noise distribution $p(\tilde{y} \mid y)$. This distribution is determined by two parameters, set before training. The noise model modifies the derivatives produced by the loss function, which results in the neural network being penalized less for making confident, but incorrect predictions. \\
@@ -174,7 +174,7 @@ The second loss function is an extension of the first, and considers both omissi
 The loss functions were evaluated on two large aerial road detection datasets. There was a significant improvement in precision and recall for both loss functions, compared to the baseline deep neural network and the network in \citep{Mnih_roads_high_res_aerial_images}. The second loss function performed slightly better than the first for one of the datasets. This dataset had substantial amounts of registration errors.\\
 
 
-\subsubsection{Training convolutional networks with noisy labels}
+\subsubsection{Training Convolutional Networks with Noisy Labels}
 \cite{Sukhbaatar_noisy_network_learning} demonstrated robustness towards label noise in a modified \ac{CNN}. This is done by modelling the noise through an additional noise layer which is estimated alongside the network parameters during \ac{SGD} training. The combined model is optimized to predict the noisy labels. The goal of the noise layer is to approximate the noise distribution of the data and thereby forcing the base model to predict the true labels. Experiments were conducted for several datasets, and showed that the approach do well for higher levels of label noise. \\
 
 Like other noise-tolerant methods, the algorithm involves learning a noise distribution, where the examples observed by the algorithm have been altered by a noisy distribution. The noise distribution is parameterized by a matrix Q, where each value specify the probability of observing noisy label $\tilde{y}$ given the true label $y$: $q_{ji} := p(\tilde{y} = j \mid y = i)$. \\
@@ -196,7 +196,7 @@ The noise layer extension consistently achieved better accuracy compared to the 
 For the ImageNet dataset, the labels were switched on half of the examples in the dataset. The approach did better than the baseline model. Additionally, the approach also outperformed the baseline model trained on the clean unaltered subset of the dataset, showing that the noisy examples carry useful information.
 
 
-\subsubsection{Training deep neural networks on noisy labels with bootstrapping}
+\subsubsection{Training Deep Neural networks on Noisy Labels with Bootstrapping}
 In \cite{Reed_noisy_labels_bootstrapping}, a generic approach to handling noisy and incomplete labels in supervised deep learning was presented. The approach incorporate a notion of perceptual consistency in the loss function. A prediction is consistent if the same prediction is made given similar percepts. The learner is allowed to disagree with inconsistent labels by using its own implicit knowledge stored in the network parameters.\\ 
 
 They present two ways of incorporating perceptual consistency in a network. The first involves a reconstruction loss and a noise distribution model. The other method is introduced as bootstrapping, and avoids directly modelling the noise distribution, by using a combination of training labels and the current model's prediction to generate targets.\\
@@ -236,7 +236,7 @@ Overall, bootstrapping improves the robustness of a model and is fairly simple t
 
 
 
-\subsubsection{Semi-supervised learning}
+\subsubsection{Semi-supervised Learning}
 Literature for semi-supervised learning has also covered noisy labels. In semi-supervised learning, a fraction of the dataset is assumed to be correctly labelled or clean, while the remaining data either have no label or is weakly labelled. For tasks where labels are expensive to produce, semi-supervised learning can be advantageous. Furthermore, label noise can have a big impact on semi-supervised learning, since only a small subset of the dataset is labelled. The approaches described below takes an active role in the learning process by iteratively improving the quality of the dataset, which is similar to the bootstrapping technique.\\
 
 Self-training has been suggested as an approach to training a classifier when there is a considerable amount of missing or weak labels present in the dataset \citep{Rosenberg_self-training}. A classifier is trained using an initial set of fully labelled examples, which is then used to predict weakly labelled examples. The set of fully labelled examples is expanded by adding a selection of the predicted examples. The selection can be based on the prediction confidence of the model. The process is repeated, which will incrementally increase the number of fully labelled examples until the entire dataset has been assigned a label. \\

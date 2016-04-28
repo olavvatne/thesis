@@ -99,7 +99,7 @@ Experiment E5 tests the robustness towards label noise for the Norwegian Roads D
 \begin{tabular}{+l ^p{11cm}}\hline
 \rowstyle{\bfseries}
   - & parameters \\\hline
-  Baseline & 100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = cross-entropy, o%mission noise levels=0\%, 10\%, 20\%, 30\%, 40\%  \\
+  Baseline & 100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = cross-entropy, omission noise levels=0\%, 10\%, 20\%, 30\%, 40\%  \\
   Bootstrapping&  100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = bootstrapping, $\beta_{max}=1.0$, $\beta_{min}=0.8$, $M=60$, emission noise levels=0\%, 10\%, 20\%, 30\%, 40\% \\
     Confident bootstrapping & 100 epochs, s=110000, $a=0.0011$, $\mathcal{L}$ = confident-bootstrapping, $\beta_{max}=1.0$, $\beta_{min}=0.8$, $M=60$, omission noise levels=0\%, 10\%, 20\%, 30\%, 40\% \\
   \hline
@@ -110,7 +110,7 @@ Experiment E5 tests the robustness towards label noise for the Norwegian Roads D
 \end{table}
 
 \subsubsection{E6 - Performance of road detection system}
-The performance of the road detection system is tested in Experiment E6. The patch dataset counts 3985200 examples, which have been randomly sampled from the Massachusetts Roads Dataset. The network is trained for 300 epochs, unless early stopping terminates the optimization before this. In order to train with such a big dataset, the model trains with only a subset of the examples at any given epoch. The training data is switched with another subset every 30th epoch starting from epoch 50 \todo{rewrite}. At any given epoch, the model is optimized by a total of 442800 examples. This is probably not as effective as using the entire dataset throughout training \todo{Check if this is correct}. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E6}.
+The performance of the road detection system is tested in Experiment E6. The patch dataset counts 3985200 examples, which have been randomly sampled from the Massachusetts Roads Dataset. The network is trained for 300 epochs, unless early stopping terminates the optimization. In order to train with such a large dataset, the model trains with only a subset of the examples at any given epoch. The training data is switched with another subset every 30th epoch starting from epoch 50 \todo{rewrite}. At any given epoch, the model is optimized by a total of 442800 examples. This is probably not as effective as using the entire dataset throughout training \todo{Check if this is correct}. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E6}.
 \begin{table}[h]
 \caption{Key parameters for E6.}
 \begin{center}

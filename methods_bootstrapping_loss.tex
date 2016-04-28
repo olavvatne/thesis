@@ -1,4 +1,4 @@
-\section{Bootstrapping loss}
+\section{Bootstrapping Loss}
 \label{sec:bootstrapping_loss}
 Normally, the loss function calculates the loss assuming the labels are correct. But many datasets contain label noise, which will result in the learner being penalized for making a correct prediction if the label happens to be inconsistent. According to \cite{Reed_noisy_labels_bootstrapping}, tweaking the loss function by incorporating the network's own predictions can yield improved robustness to inconsistent labelling. Whereas other approaches \citep{Mnih_aerial_images_noisy}\citep{Sukhbaatar_noisy_network_learning} explicitly model the noise distribution, the proposed loss function utilizes the implicit knowledge acquired by the network during optimization. The bootstrapping method, computes the loss by a convex combination of the model prediction q and the label y. Additionally, this thesis propose a variation of the bootstrapping loss function, which only incorporate confident predictions. \\
 

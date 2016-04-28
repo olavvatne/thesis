@@ -20,14 +20,14 @@ This operation is  visualized in figure \ref{fig:convolution} where a $2 \times 
 \end{figure}
 
 
-\subsubsection{Local connectivity}
+\subsubsection{Local Connectivity}
 In a traditional neural network each layer is typically fully connected. Each unit has connections to every unit in the previous layer. In a \ac{CNN}, however, a unit  interacts only with a small region of units in the previous layer. This region is often referred to as the unit's local receptive field. This kind of local connectivity can be very practical for high-dimensional data, such as images where meaningful features can be extracted using only a small area of the total image. \\
 
 Local connectivity can be achieved by using a small kernel as seen in Figure \ref{fig:convolution}. Instead of each output unit being connected to all inputs, the output only depends on a $2 \times 2$ region for summation. \\
 
 If there are $m$ inputs and $n$ output units, a matrix multiplication for a fully-connected network would require $m\times n$ parameters, as well as having a runtime of $O(m\times n)$. By using a kernel we limit the number of connections each output may have to k. This requires only $k\times n$ parameters and a runtime of $O(k\times n)$. For image applications the kernel size can be relatively small and still achieve good results, which can give big improvements in efficiency.
 
-\subsubsection{Parameter sharing}
+\subsubsection{Parameter Sharing}
 The number of model parameters are further reduced by using parameter sharing. Each weight in the kernel is applied to every position of the input. In contrast, a neural network which is fully connected will have a separate weight for every connection. This can be redundant for high-dimensional data, where most of the features are localized. In images, for example, an important feature to extract are edges. A kernel with weights that are good at detecting edges at one location, will be equally good at detecting them in other locations. \\
 
 The use of parameter sharing further reduces the storage requirement to $k$ parameters. Usually one kernel per layer is not enough, so several kernels with tied weights convolve the input. The layer will then produce output activations for different features. The output of several kernels are often referred to as feature maps.
@@ -35,7 +35,7 @@ The use of parameter sharing further reduces the storage requirement to $k$ para
 \subsubsection{Pooling}
 The pooling function is another operation typically associated with \ac{CNN}. A pooling function modifies the output of a layer in some way. It replaces a rectangular region of the output by a single value that has been determined by a summary operation. A common pooling function is the max pooling operation, which outputs the maximum within a rectangular neighbourhood. The reason for utilizing pooling is that it helps the representation become invariant to small translation in the input. For example a network created to classify whether an image depicts a cat or not will benefit from pooling, since the location of the cat in the picture is irrelevant. For tasks where the location of a feature is important, such as semantic segmentation, applying pooling should be done with restraint. Additionally, pooling reduce the number of input parameters for the next layer.
 
-\subsubsection{Layer structure}
+\subsubsection{Layer Structure}
 A typical convolutional layer in a network consists of three stages. First, convolution creates all pre-synaptic activations. Second, an activation function is applied to the pre-synaptic activation for all units in the layer. The rectified linear unit is a popular choice, and outputs either 0 or the pre-synaptic activation, depending on which is biggest. $f(x) = max(0, a)$. Finally the pooling function modifies the output of the layer. 
 
 \subsubsection{Network architecture}
