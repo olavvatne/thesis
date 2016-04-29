@@ -22,26 +22,11 @@ In Experiment E1, the road detection system have been trained on four different 
 
 Observing the plots in Figure \ref{fig:E1_curr_norway_loss}, the switch between stage 0 and stage 1, is clearly visible at epoch 50. The increase in test loss is most severe in the datasets formed by a curriculum strategy. Leading up to epoch 50, the curriculum plots show an increasing gap in test performance, if compared to the baseline plot. After the switch the curriculum datasets still outperform the baseline dataset, even though the training set distribution of stage 1 are the same for all patch datasets.\\
 
-Furthermore, the networks trained with a curriculum strategy shows an improved precision for all levels of recall compared to the baseline. \todo{Not so different here}\\
+Furthermore, the networks trained with a curriculum strategy shows an improved precision for all levels of recall compared to the baseline.\\
 
-An interesting trend between the thresholds $D_0$ and the loss, is that decreasing the difficulty threshold, does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performed worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35} \todo{Generalize, easier examples reduce variability of training set, generalize worse. Discussion?}. \\
+An interesting trend between the thresholds $D_0$ and the loss, is that decreasing the difficulty threshold, does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performed worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35}. \\
 
-\todo[inline]{Need to place distribution charts somewhere}
-\begin{figure}[!ht]
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E2/E2-road-dist.png}
-\caption{Distribution for road patches.} \label{fig:E2_difficulty_distribution_road}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E2/E2-non_road-dist.png}
-\caption{Distribution for non-road patches.} \label{fig:E2_difficulty_distribution_non-road}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\caption{E2 - Example difficulty distribution according to estimator $d(y,q)$ } \label{fig:E2_difficulty_distribution}
-\end{figure}
-
-A similar experiment was also performed on the Massachusetts Roads Dataset. In Experiment E2, networks are trained with three different patch datasets. The baseline dataset's first stage has a distribution similar to the aerial image dataset's training set. The curriculum dataset has a difficulty threshold $D_0$ of 0.25, which exclude every example with a estimated difficulty above 0.25 from the first stage. In contrast, the anti-curriculum patch dataset only include examples with a difficulty above 0.25 \todo{Mention, the non-road patches, and why non-road examples have been included}.\\
+A similar experiment was also performed on the Massachusetts Roads Dataset. In Experiment E2, networks are trained with three different patch datasets. The baseline dataset's first stage has a distribution similar to the aerial image dataset's training set. The curriculum dataset has a difficulty threshold $D_0$ of 0.25, which exclude every example with a estimated difficulty above 0.25 from the first stage. In contrast, the anti-curriculum patch dataset only include road patch examples with a difficulty above 0.25. The curriculum teacher model is really good at predicting patches that contain no road label pixels, there are very few non-road patches with a difficulty rating above 0.25. This is why the anti-curriculum's first stage does not exclude any non-road patches \todo{A bit weirdy spoken}. 
 
 
 The results from this experiment can be seen in Figure \ref{fig:E2_curriculum_mass}. The switch from stage 0 and stage 1 is visible for the \textit{Baseline} and \textit{Anti-curriculum} loss plots at epoch 50. The network trained with the curriculum patch dataset, performs better than the baseline as seen in Figure \ref{fig:E2_curr_mass_loss} and Figure \ref{fig:E2_curr_mass_pr}. Training with an anti-curriculum strategy, where the first stage consists of harder examples, does not provide the same loss, or breakeven performance. This is especially evident in the test loss plot, where the network converge at around epoch 25, and start to overfit towards epoch 50. From epoch 50 when stage 1 examples entered the training set, there is a dramatic decrease in test loss. The test loss decrease continues at a steady pace until epoch 85. Yet, the final performance of anti-curriculum learning is substantially lower than both the baseline and curriculum learning, as illustrated by the breakeven points in Figure \ref{fig:E2_curr_mass_pr}.\\
@@ -81,31 +66,52 @@ The precision and recall breakeven values from Experiment E1 and Experiment E2, 
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
 
-Experiment E7, use a teacher that has been trained on fewer examples. Figure 
+The training set difficulty distribution, according to the difficulty estimator $d(y,q)$ and the curriculum teacher model used in Experiment E2, is depicted in a histogram in Figure \ref{fig:E2_difficulty_distribution}. The training set of  Massachusetts Roads Dataset was sampled, and the difficulty estimate for each patch was computed for every patch. The patches which contain no road label pixels, were counted separately from patches containing road label pixels. The resulting histogram for non-road patches in Figure \ref{fig:E2_difficulty_distribution_nonroad}, shows that the trained curriculum model is excellent at predicting non-road patches, because the predictions and labels match very well resulting in a very low difficulty estimate. This is not the case for road patches, illustrated by Figure  \ref{fig:E2_difficulty_distribution_road}, where the distribution is clearly skewed right and have a greater variance. \\
+
+\begin{figure}[!ht]
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E2/E2-road-dist.png}
+\caption{Distribution for road patches.} \label{fig:E2_difficulty_distribution_road}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E2/E2-non_road-dist.png}
+\caption{Distribution for non-road patches.} \label{fig:E2_difficulty_distribution_nonroad}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{E2 - Example difficulty distribution according to estimator $d(y,q)$ } \label{fig:E2_difficulty_distribution}
+\end{figure}
+
+Figure \ref{fig:E7_curriculum_inexperienced} shows the results from Experiment E7. The patch datasets in this experiment were created from a teacher that was trained with the same number of training examples. Curriculum learning still achieves a higher test loss and a gives better precision for all levels of recall. In addition to comparing the baseline and curriculum learning with two stages, Figure \ref{fig:E7_curriculum_inexperienced_loss} and \ref{fig:E7_curriculum_inexperienced_pr} illustrate the performance of training with the first stage of the patch datasets only. As expected, the first stage baseline have a lower breakeven than the two stage baseline. More surprisingly, the first stage curriculum outperform both the baseline and the curriculum, both in terms of breakeven and test loss. Unfortunately, at recall levels than 0.4, the precision of the first stage curriculum decreases rapidly. This shows that the curriculum strategy is effective at filtering out inconsistent labels, and with a suitable difficulty threshold $D_0$ can provides enough example variability in the first stage training set. Another possible reason for this result, is the sudden training set switch at epoch 60, which dramatically increase the test loss. \\
 
 \begin{figure}[p]
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_lc_two_stage.png}
-\caption{Test loss for two stage dataset} \label{fig:fig:E7_curriculum_inexperienced_loss}
+\caption{Test loss for two stage dataset} \label{fig:E7_curriculum_inexperienced_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_pr_two_stage.png}
-\caption{Precision and recall comparisons for two stage dataset.} \label{fig:fig:E7_curriculum_inexperienced_pr}
+\caption{Precision and recall comparisons for two stage dataset.} \label{fig:E7_curriculum_inexperienced_pr}
 \end{subfigure}
 
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_lc_gradual.png}
-\caption{Test loss for dataset with gradual stage switching} \label{fig:fig:E7_gradual_loss}
+\caption{Test loss for dataset with gradual stage switching} \label{fig:E7_gradual_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_pr_gradual.png}
-\caption{Precision and recall for dataset with gradual stage switching.} \label{fig:fig:E7_gradual_pr}
+\caption{Precision and recall for dataset with gradual stage switching.} \label{fig:E7_gradual_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \caption{E7 - Results from Experiment E7.} \label{fig:E7_curriculum_inexperienced}
 \end{figure}
+
+This was further explored by creating two additional patch datasets, with 5 stages each. The first stage have 108000 examples, while the other 4 stages contain 54000 examples each. Subsequent stages replaces the training set, by assigning each example to a random position in the training set. Because the positions are picked by random sampling with replacement, only around 40\% of the existing examples in the training set are replaced. This results in a more gradual transition of the difficulty distribution. In Figure \ref{fig:E7_gradual_loss}, the stage switching with these patch datasets, results in the test loss being more stable.
+The baseline plot even decreases substantially after epoch 60. This is an improvement from the spiking behaviour from the two stage baseline. The gradual approach also shows promise in Figure \ref{fig:E7_curriculum_inexperienced}, where curriculum achieves a breakeven of 0.809, compared to the breakeven of 0.802 for the first stage curriculum. The gradual baseline approach only achieved a breakeven of 0.795.\\
+
+In summary, the composition of the first stage has a big effect on the training outcome. The results shows that the proposed curriculum strategy, which is based on estimating inconsistencies between labels and predictions, works well in practice.
 
 \subsection{Bootstrapping for Imagery with Noisy Labels}
 \label{sec:results_bootstrapping}
