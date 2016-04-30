@@ -2,8 +2,7 @@
 \label{sec:futureWork}
 \todo[inline]{How to extend yout eotk. Directions that became obvious during work}
 \todo[inline]{Possible solutions for limitations in the work conducted}
-incorporate conditional random fields. Will yield further improvements.\\
-One of the most compelling ways of improving performance for road detection, is utilizing structured output prediction methods. Several studies \citep{Kluckner_semantic_height} \citep{LeCun_semantic} \citep{Mnih_roads_high_res_aerial_images} have shown that employing a smoothness prior, by taking neighbouring predictions into account, can significantly improve generalization in semantic segmentation tasks. Implementing either \ac{CRF} or the post-processing neural network in the road detection system should be considered for this system as well.\\
+incorporate conditional random fields, or post processing neural network. Will yield further improvements.\\
 
 Is it worth including every example at later stages of learning. What works better between filtering and curriculum learning. Exclude some examples?\\
 
@@ -17,9 +16,4 @@ Estimate variability of examples, diverse set of examples in the simple dataset.
 
 \todo[inline]{Some larger tests but runtime too large for extensive testing with these quantities}
 
-The road detection system consists of a \ac{CNN}. This was shown, by \cite{MnihThesis}, to give better performance than locally connected neural networks with untied weights. However, there are still parts of the network architecture worth exploring further. For instance, can increasing the number of convolutional layers improve the network's ability to extract features? Tweaking the kernel sizes of the different layers could also be beneficial, and if an input layer connected to a neighbourhood larger than a $64 \times 64$ pixels can better resolve ambiguous in the data. \cite{MnihThesis} also suggested adapting the loss function to maximize the area under the precision-recall curve. Furthermore, different optimization techniques, such as Nesterov momentum and RMSProp, could be compared.\\
-
-
-
-In terms of evaluating the system, precision-recall curves will enable comparison to other systems. The system will also be trained using the Massachusetts Roads Dataset, which other road detection systems have utilized for training \citep{MnihThesis}\citep{saito_building_and_roads}. By training on the same dataset, the ability of the classifiers can more easily be compared. Furthermore, the system will also be evaluated on the Norwegian Roads Dataset. An interesting experiment would be to train the system using one of the datasets, and see what performance is achieved by the other dataset. The datasets contain two very separate areas, but also depict roads with relatively similar appearance. This might indicate how well the system captures the variability in aerial images. \\
 

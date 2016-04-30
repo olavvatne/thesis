@@ -223,6 +223,9 @@ Averages the test, validation and training loss from experiment replicates, and 
 Average the final MSE loss for each replicate experiment, and precision and recall breakeven. 
 The figures created by this tools, show the MSE loss and breakeven, over increasing levels of label noise.
 \end{itemize}
+
+
+
 \section{TODOs which apply to entire thesis}
 \todo[inline]{Remove this part!}
 \begin{itemize}
@@ -249,3 +252,72 @@ For chapter 4.
 \todo[inline]{Semi-competent teacher testing.}
 \todo[inline]{Can curriculum learning combined with bootstrapping loss function further improve results for label noise?}
 \todo[inline]{How much does the competence of the curriculum teacher affect the results of curriculum learning?}
+
+\todo{Avoid drawing grand conclusions. Only what your data can support}
+\todo{Study tables graphs for unusual things that might raise questions with the reader}
+
+\section{Experiment E3 Results}
+\label{app:fullE3results}
+\begin{figure}[!ht]
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_0.png}
+\caption{ 0\% } \label{fig:app_E5_0_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_1.png}
+\caption{10\% } \label{fig:app_E5_1_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_2.png}
+\caption{20\% } \label{fig:app_E5_2_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_3.png}
+\caption{ 30\%} \label{fig:app_E5_3_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_4.png}
+\caption{40\%} \label{fig:app_E5_4_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\caption{E5 - Precision and recall breakeven comparisons for several levels of omission noise.} \label{fig:E5_all_pr}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_0.png}
+\caption{ 0\% } \label{fig:app_E5_0_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_1.png}
+\caption{10\% } \label{fig:app_E5_1_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_2.png}
+\caption{20\% } \label{fig:app_E5_2_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_3.png}
+\caption{ 30\%} \label{fig:app_E5_3_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.32\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_4.png}
+\caption{40\%} \label{fig:app_E5_4_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\caption{E5 - Test loss comparisons for several levels of omission noise.} \label{fig:E5_all_pr}
+\end{figure}
