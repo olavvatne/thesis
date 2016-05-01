@@ -1,18 +1,20 @@
-\section{Results}
+\section{Evaluation}
 \label{sec:SummaryDiscussion}
+The goal of this thesis was to segment road pixels from aerial imagery, using a convolutional neural network. This network shares many similarities to the networks used by \cite{Mnih_aerial_images_noisy} and \citep{MnihThesis}. Experiments demonstrated that this architecture trained on the Massachusetts Roads Dataset achieved an averaged breakeven point of 0.83. This is a bit below comparable results from other works. The most likely explanation is that the default network architecture constrained the capacity of the model. From the qualitative analysis, the classifier seemed to have generalized well to the task of road segmentation.\\
 
--Present the goal. And that performance in terms of breakeven point lower than other works.
-Still usable. Refer to qualitative stuff.
-Focus of research question related to label noise in aerila image datasets. 
- 
- This section will attempt to resolve the research questions defined in Section \ref{sec:Goals and Research Questions} by a brief discussion based on the results from Chapter \ref{cha:ResearchAndResults}.
+ The research questions of this thesis are related to this goal. Automatically generated aerial imagery datasets often suffer from label noise, and the research questions involve methods which can possibly alleviate the negative effects of inconsistent labelling. This section will attempt to resolve the research questions defined in Section \ref{sec:Goals and Research Questions} by a brief discussion based on the results from Chapter \ref{cha:ResearchAndResults}.\\
 \begin{description}
 \item[Research question 1] Does the bootstrapping loss function give a significant improvement of precision and recall for datasets with noisy labels?
 \end{description}
 
--Reference to other works, and good results from these.\\
--Answer\\
-\todo[inline]{Merits and limitations}
+\cite{Mnih_aerial_images_noisy} showed that performance could be improved for aerial imagery, by having the loss function modelling the noise distribution. They also foudn two particular breeds of label noise in aerial imagery datasets, which they called omission and registration noise. The bootstrapping loss function proposed by \cite{Reed_noisy_labels_bootstrapping}, has also showed promising results for several noisy datasets. In this thesis, this particular loss function was therefore tested on aerial imagery, to see if it provided robustness towards omission and registration noise. Furthermore, a proposed variation of bootstrapping was also tested.\\
+
+The experiments demonstrated that the bootstrapping method did provide some robustness towards omission noise. For increasing levels of omission noise the gap in performance was increasing, indicating robustness. However, the results were not significant \todo{Is it?}.\\
+
+Unfortunately, the loss function was not tested on artificially increasing levels of registration noise, which would make the results more definite. This would require some sort of image morphing, and locally skew the roads present in the imagery. \\
+
+Tests performed on the Norwegian Roads Dataset N50 showed that confident bootstrapping performed slightly better than bootstrapping, and that both bootstrapping methods did significantly better than the baseline \todo{Did they?}. In summary, the bootstrapping loss function do have an positive effect on noisy labels, but it is not significant \todo{Is it?}. 
+\todo{Merits and limitations}
 
 
 \begin{description}
