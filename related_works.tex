@@ -43,9 +43,9 @@ The goal of the model is to predict whether or not pixels belong to a road class
 
  $$p(N(M(i,j), w_m) \mid N(S(i,j), w_s),$$ 
  
-\noindent where $S$ is an aerial image and $M$ is a corresponding road label image. $M(i,j) = 1$ if $S(i,j)$ is a road pixel and 0 otherwise.  $N(I(i,j), w)$  denotes a $w \times w$ large patch of pixels centered at location (i,j) of a large image $I$. Using smaller image patches instead of entire images for modelling the distribution, limits the image context which the model use to make predictions. However, this approach is less computational expensive, and by retaining a relatively large $w_s \times w_s$ can still provide enough image context to create a competent road detector. \\
+\noindent where $S$ is an aerial image and $M$ is a corresponding road label image. $M(i,j) = 1$ if $S(i,j)$ is a road pixel and 0 otherwise.  $N(I(i,j), w)$  denotes a $w \times w$ large patch of pixels centered at location (i,j) of a large image $I$. Using smaller image patches instead of entire images for modelling the distribution, limits the image context which the model use to make predictions. This approach is less computational expensive, and by retaining a relatively large $w_s \times w_s$ can still provide enough image context to create a competent road detector. \\
 
-The network consists of a single hidden layer with 12288 units, an input layer of 4096 units, and 256 output units. This enables the network to predict 16 x 16 road prediction patches given 64 x 64 aerial image patches. The network is trained by \ac{SGD} to minimize cross-entropy between training labels and the predicted map patches. Furthermore, unsupervised pre-training is used to initialize the parameters of the network.\\
+The network consisted of a single hidden layer with 12288 units, an input layer of 4096 units, and 256 output units. This enables the network to predict 16 x 16 road prediction patches given 64 x 64 aerial image patches. The network was trained by \ac{SGD} to minimize cross-entropy between training labels and the predicted map patches. Furthermore, unsupervised pre-training was used to initialize the parameters of the network.\\
 
 Experiments have been conducted on two large aerial image datasets, and the network achieved good performance both in terms of precision and recall. A problem identified by \cite{Mnih_roads_high_res_aerial_images}, is that the model is penalized for correct predictions because of noisy labels. Smaller roads or paved areas have often not been marked in the dataset. Additionally, the road labels in the dataset have been generated from road center-line vectors with a fixed width, which results in some roads not being covered by the ground truth. This may lead to a decrease in model performance, since the model is penalized for correctly labelling the roads when minimizing the cross-entropy between predictions and inconsistent labels.\\
 
@@ -66,13 +66,21 @@ The Massachusetts Roads Dataset introduced by \cite{MnihThesis}, consist of 1171
 \subsubsection{Feature Representation}
 Another trend in road detection is to extract features from larger contexts or pixel neighbourhoods. In addition to increasing the classifiers ability to discriminate between objects sharing similar texture and shape, using larger contexts are necessary for images with a low ground sampling distance.\\
 
-\cite{Mokhtarzade_road_ann} proposed using a shallow neural network for road detection. For this approach, a normalized $3 \times 3$ neighbourhood of pixel values was used as input features to a neural network. \\
+\cite{Mokhtarzade_road_ann} proposed using a shallow neural network for road detection. For this approach, a normalized $3 \times 3$ neighbourhood of pixel values was used as input features to a neural network. The neural network is illustrated in Figure \ref{fig:zoej_neural_network}. \\
 
-In \cite{Song_road_extraction_svm}, shape description is generated from segmented images, and certain properties descriptive of roads are used to remove objects that share spectral similarities with roads.\\
+\begin{figure}
+\begin{center}
+\includegraphics[width=.6\columnwidth]{figs/zoej.png}
+\caption[shallow neural network]{Pixel neighbourhood and shallow neural network used for road detection by \cite{Mokhtarzade_road_ann} }
+\label{fig:zoej_neural_network}
+\end{center}
+\end{figure}
+
+In \cite{Song_road_extraction_svm}, shape description is generated from segmented images, and certain characteristics descriptive of roads, such as being lengthy and narrow, are used to remove objects that share spectral similarities with roads. Each shape's border length, area, pixel count and approximate radius are used for measuring the shape index and density. Road shapes should have a large shape index value and a small density. \todo{Small language improvement. Roads extracted based on threshold that.}\\
 
 A much larger neighbourhood of pixels were utilized as features in \citep{Mnih_aerial_images_noisy} and \citep{Mnih_roads_high_res_aerial_images}. In this case, $64 \times 64$ pixels with minimal pre-processing formed the input to both  networks. Furthermore, the neural network learns suitable features which enables it to distinguish road pixels from non-road pixels. The large neighbourhood is helpful when resolving ambiguities often found in suburban environments, such as flat grey roof-top and roads. \\
 
-  Combining images with height or elevation information can also increase classifier accuracy. This was demonstrated by \cite{Kluckner_semantic_height} where both color and height cues were integrated as features. The height information significantly improved the performance of the classifier.
+  Combining images with height or elevation information can also increase classifier accuracy. For instance, height information makes grey rooftops easier to distinguish from street areas for a classifier\todo{Improve language}. The effectiveness of combining images and height maps was demonstrated by \cite{Kluckner_semantic_height} where both color and height cues were integrated as features. The height information significantly improved the performance of the classifier.
   
 
 \subsubsection{Conditional Random Fields}
@@ -80,13 +88,13 @@ The smoothness assumption is a strong piece of prior knowledge we have about ima
 
 In the study by \cite{Kluckner_semantic_height}, an approach for land cover classification given high resolution aerial images was presented. Aerial images are segmented according to five classes: Building, tree, waterbody, green area, and streetlayer. Attributes such as color and edge response is extracted from aerial images, and combined with height information to create an efficient feature representation based on covariance matrices. The randomized forest classifier is trained to learn a conditional probability distribution over the possible class labels given the feature representation.\\
 
-In order to achieve smoother labelling,  a \ac{CRF} stage that incorporate neighbouring predictions can be applied. An energy function which takes the class label and the spatial interactions between labels is minimized. The classifier's predictions estimate every pixel's probability of belonging to each of the possible classes, and can be used as unary potentials. The pairwise class potentials between neighbouring pixels are also estimated for the \ac{CRF} procedure. This is a first-order random field, since only immediate neighbouring pixels are used as class potentials. \\
+In order to achieve smoother labelling,  a \ac{CRF} stage that incorporates neighbouring predictions can be applied. An energy function which takes the class label and the spatial interactions between labels is minimized. The classifier's predictions estimate every pixel's probability of belonging to each of the possible classes, and can be used as unary potentials. The pairwise class potentials between neighbouring pixels are also estimated for the \ac{CRF} procedure. This is a first-order random field, since only immediate neighbouring pixels are used as class potentials\todo{This is aa little confusing. Improve description}. \\
 
 \ac{CRF} is often formulated as a graph with $V$ nodes, where each node represents a pixel, and can be assigned a label from a discrete set of classes, such as grass, tree, roads. The edges are represented by the set $E$, and models the relationship between neighbouring pixels or nodes. The energy is modelled:
 
 $$E(y) = \sum\limits_{i\in V} \Psi_i(y_i, x_i) + \sum\limits_{i,j\in E}\Psi_ij(y_i, y_j),$$
 
-where $\Psi_i(l_i, x_i)$ is the unary potential modelling the likelihood of pixel x having label y. This is obtained from the classifier.  $\Psi_ij(y_i, y_j)$ is the pairwise potential modelling the coherence of neighbouring pixels. The final label assignment $\hat{y}$, which takes the pixel neighbourhood into account, is obtained by minimizing the energy on the graph structure:  $\hat{y} =argmin_y E(y)$.\\
+where $\Psi_i(y_i, x_i)$ is the unary potential modelling the likelihood of pixel x having label y. This is obtained from the classifier.  $\Psi_ij(y_i, y_j)$ is the pairwise potential modelling the coherence of neighbouring pixels. The final label assignment $\hat{y}$, which takes the pixel neighbourhood into account, is obtained by minimizing the energy on the graph structure:  $\hat{y} =argmin_y E(y)$ \todo{Give me an intuitive explaination for what it means to have high and low energy}.\\
 
 This approach was tested in \citep{Kluckner_semantic_height} for aerial datasets, covering urban and suburban areas. Integrating height information gave an average accuracy rate of between 88\% to 92\%, depending on the dataset. \ac{CRF} was shown to significantly improve accuracy for semantic segmentation tasks. \\ 
 
@@ -109,7 +117,7 @@ Curriculum learning shares similarities with boosting algorithms such as AdaBoos
 
 Active learning \citep{Cohn_active_learning} is also considered related to curriculum learning. In active learning, the learner participates in selecting samples for training. Contrary to a curriculum strategy, an active learner prefers a strategy of picking examples close to the decision boundary, in order to reduce the number of examples necessary for learning a target concept.\\
 
-Training by a curriculum can be seen as gradually increasing the influence of difficult examples. Let $P(z)$ be the target training distribution, and $W_{t}(z)$ be a weight applied to example $z$ at step $0\leq t\leq 1$. The training distribution at step $t$ is:
+Training by a curriculum can be seen as gradually increasing the influence of difficult examples. Let $P(z)$ be the target training distribution, and $W_{t}(z)$ be a weight applied to example $z$ at step $0\leq t\leq 1$. The training distribution at step $t$ is \todo{Confusing. Steps usually integers. Define Qt(z)}:
 
 $$Q_{t}(z)\propto W_{t}(z)P(z)\forall z$$
 
@@ -119,7 +127,7 @@ At $t=1$ all weights $W_{1}(z)$ are set to one, and the target training distribu
 
 An experiment was conducted on the task of shape recognition, where images of geometrical shapes were classified. Two artificially generated datasets consisting of 32x32 grey scale images were constructed. The simpler dataset contained only squares, circles, and equilateral triangles, while the complex dataset was composed of all types of rectangles, circles and triangles. Two neural networks were trained for 256 epochs by \ac{SGD} to classify these shapes. The network trained using a curriculum strategy would start by training only on easier examples found in the simple dataset, and switch to the complex after a certain number of epochs. The baseline network would only train using the complex dataset. The best generalization was obtained by the network using a curriculum, where half of the total epochs was spent on easier examples. \\
 
-Another experiment was conducted on a language modelling task, where a learner predicts the best word that can follow a given sentence. The curriculum strategy in this case was to iteratively grow the allowed vocabulary. Only sentences in the dataset where all words were present in the vocabulary would be included in the training set. The network that utilized curriculum learning performed better than the baseline for this task as well.\\
+Another experiment was conducted on a language modelling task, where a learner predicts the best\todo{Maybe a more fitting word.} word that can follow a given sentence. The curriculum strategy in this case was to iteratively grow the allowed vocabulary. Only sentences in the dataset where all words were present in the vocabulary would be included in the training set. The network that utilized curriculum learning performed better than the baseline for this task as well.\\
 
 A considerable challenge with curriculum learning is to define an appropriate curriculum strategy that can work well for a task. In this study the sorting strategies were task specific, and not generally applicable. Furthermore, the tasks presented were fairly simple, and sorting strategies were easy to identify. This may not be the case for datasets containing images where a measure of easiness can be harder to define.\\
 
@@ -164,30 +172,37 @@ There are three main approaches to dealing with noisy label, as outlined in Sect
 %Compare the different approaches for modelling the noise.
 
 \subsubsection{Learning to Label Aerial Images from Noisy Data}
-The problem with inconsistent labels in aerial images was investigated in \citep{Mnih_aerial_images_noisy}. In this work, two types of label noise were identified,  which datasets constructed from maps are especially susceptible of. Omission noise is defined as objects that appear in the aerial image, but not in the map. Registration noise occurs when the location of the object in the map is inaccurate. Considering that the presence of label noise might negatively impact the classifier accuracy, \cite{Mnih_aerial_images_noisy} proposed two robust loss functions that can be incorporated in a deep learning framework. \\
+The problem with inconsistent labels in aerial images was investigated in \citep{Mnih_aerial_images_noisy}. In this work, two types of label noise were identified,  which datasets constructed from maps are especially susceptible to. Omission noise is defined as objects that appear in the aerial image, but not in the map. Registration noise occurs when the location of the object in the map is inaccurate. Considering that the presence of label noise might negatively impact the classifier accuracy, \cite{Mnih_aerial_images_noisy} proposed two robust loss functions that can be incorporated in a deep learning framework. \\
 
 The first loss function proposed explicitly models asymmetric noise, and is designed to deal with omission noise. It treats label $\tilde{y}$ as a noisy observation generated from true label $y$, according to a noise distribution $p(\tilde{y} \mid y)$. This distribution is determined by two parameters, set before training. The noise model modifies the derivatives produced by the loss function, which results in the neural network being penalized less for making confident, but incorrect predictions. \\
 
-The second loss function is an extension of the first, and considers both omission and registration error. The noise distribution model is combines with a generative model, where different crops of an unobserved, perfectly registered map are generated. These crops are used by an expectation–maximization like algorithm to estimate the true label, which can reduce the effect of local registration errors.\\
+The second loss function is an extension of the first, and considers both omission and registration error. The noise distribution model combines with a generative model, where different crops of an unobserved, perfectly registered map are generated. These crops are used by an expectation–maximization like algorithm to estimate the true label, which can reduce the effect of local registration errors.\\
 
 
 The loss functions were evaluated on two large aerial road detection datasets. There was a significant improvement in precision and recall for both loss functions, compared to the baseline deep neural network and the network in \citep{Mnih_roads_high_res_aerial_images}. The second loss function performed slightly better than the first for one of the datasets. This dataset had substantial amounts of registration errors.\\
 
 
 \subsubsection{Training Convolutional Networks with Noisy Labels}
-\cite{Sukhbaatar_noisy_network_learning} demonstrated robustness towards label noise in a modified \ac{CNN}. This is done by modelling the noise through an additional noise layer which is estimated alongside the network parameters during \ac{SGD} training. The combined model is optimized to predict the noisy labels. The goal of the noise layer is to approximate the noise distribution of the data and thereby forcing the base model to predict the true labels. Experiments were conducted for several datasets, and showed that the approach do well for higher levels of label noise. \\
+\cite{Sukhbaatar_noisy_network_learning} demonstrate robustness towards label noise in a modified \ac{CNN}. The method models the noise through an additional noise layer which is estimated alongside the network parameters during \ac{SGD} training. The combined model is optimized to predict the noisy labels. The goal of the noise layer is to approximate the noise distribution of the data and thereby forcing the base model to predict the true labels. Experiments were conducted for several datasets, and showed that the approach does well for higher levels of label noise. \\
 
-Like other noise-tolerant methods, the algorithm involves learning a noise distribution, where the examples observed by the algorithm have been altered by a noisy distribution. The noise distribution is parameterized by a matrix Q, where each value specify the probability of observing noisy label $\tilde{y}$ given the true label $y$: $q_{ji} := p(\tilde{y} = j \mid y = i)$. \\
+Like other noise-tolerant methods, the algorithm involves learning a noise distribution, where the examples observed by the algorithm have been altered by a noisy distribution. The noise distribution is parameterized by a matrix Q, where each value specifies the probability of observing noisy label $\tilde{y}$ given the true label $y$: $q_{ji} := p(\tilde{y} = j \mid y = i)$. \\
 
-The matrix Q is implemented by a constrained linear noise layer, which is added to the base model. The weights between the output layer of the base model and the noise layer corresponds to probabilities found in Q. These conditional probabilities $q_{ji}$ are usually unknown, but an approximate noise distribution can be estimated by conventional back-propagation. \\
-%Setting the weights of this layer to the identity, $q_{ji} = 1$, where j = i, is equivalent to not having a noise layer. \\
+The matrix Q is implemented by a constrained linear noise layer, which is added to the base model. Figure \ref{fig:fergus_method} illustrate this. The weights between the output layer of the base model and the noise layer corresponds to probabilities found in Q. These conditional probabilities $q_{ji}$ are usually unknown, but an approximate noise distribution can be estimated by conventional back-propagation\todo{Better integration of figure}. \\
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.6\columnwidth]{figs/Fergusmethod.png}
+\caption[Noise matrix Q]{Noise matrix Q is inserted between loss function and output layer of the model. }
+\label{fig:fergus_method}
+\end{center}
+\end{figure}
 
 The training procedure starts with Q fixed to the identify matrix, while the base model is trained. After a number of epochs, the weights in the linear noise layer will also be adapted by back-propagation. To ensure that Q captures the noise properties of the data, a regularization term is used to make it converge to the true noise distribution. Effectively, the prediction of the combined model will be given by
 
 %Is a regularization term used, or regularizer?
 $$p(\tilde{y} = j \mid x) = \sum_{i} q_{ji}p(y = i \mid x),$$ 
 
-where the noisy predictions are made by the conditional probabilities encoded in q and the prediction of the base model. Hopefully, the base model will learn to predict the true labels instead of the noisy labels.  \\
+where the noisy predictions are made by the conditional probabilities encoded in q and the prediction of the base model. Hopefully, the base model will learn to predict the true labels $y$ instead of the noisy labels $\tilde{y}$.  \\
 
 The approach was tested using the Google street-view house number, CIFAR10 and ImageNet dataset. Noisy labels were synthesized by switching labels of examples with a fixed probability defined by a probability matrix. \\
 
@@ -201,7 +216,7 @@ In \cite{Reed_noisy_labels_bootstrapping}, a generic approach to handling noisy 
 
 They present two ways of incorporating perceptual consistency in a network. The first involves a reconstruction loss and a noise distribution model. The other method is introduced as bootstrapping, and avoids directly modelling the noise distribution, by using a combination of training labels and the current model's prediction to generate targets.\\
 
-The bootstrapping approach tweaks the loss function to be a convex combination of the model prediction $q$ and the label $y$. The $\beta$ parameter is set to a fixed value.
+The bootstrapping approach tweaks the loss function to be a convex combination of the model prediction $q$ and the label $y$. The $\beta$ parameter is set to a fixed value \todo{Maybe explain more parameters?}.
 
 $$\mathcal{L}(q,y) = - \sum\limits_{k=1}^L [\beta y_k + (1-\beta)z_k]log(q_k),$$
 
