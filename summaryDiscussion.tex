@@ -7,13 +7,11 @@ The goal of this thesis was to segment road pixels from aerial imagery, using a 
 \item[Research question 1] Does the bootstrapping loss function give a significant improvement of precision and recall for datasets with noisy labels?
 \end{description}
 
-\cite{Mnih_aerial_images_noisy} showed that performance could be improved for aerial imagery, by having the loss function modelling the noise distribution. They also foudn two particular breeds of label noise in aerial imagery datasets, which they called omission and registration noise. The bootstrapping loss function proposed by \cite{Reed_noisy_labels_bootstrapping}, has also showed promising results for several noisy datasets. In this thesis, this particular loss function was therefore tested on aerial imagery, to see if it provided robustness towards omission and registration noise. Furthermore, a proposed variation of bootstrapping was also tested.\\
+\cite{Mnih_aerial_images_noisy} showed that performance could be improved for aerial imagery, by having the loss function model the noise distribution. They also found two particular breeds of label noise in aerial imagery datasets, which they called omission and registration noise. The bootstrapping loss function proposed by \cite{Reed_noisy_labels_bootstrapping}, has also showed promising results for several noisy datasets. In this thesis, this particular loss function was therefore tested on aerial imagery, to see if it provided robustness towards omission and registration noise. Furthermore, a proposed variation of bootstrapping was also tested.\\
 
-The experiments demonstrated that the bootstrapping method did provide some robustness towards omission noise. For increasing levels of omission noise the gap in performance was increasing, indicating robustness. However, the results were not significant \todo{Is it?}.\\
+The experiments demonstrated that the bootstrapping method did provide some robustness towards label noise. For increasing levels of omission noise the gap in performance between the cross-entropy and the bootstrapping loss function was increasing, indicating robustness. However, the results were not significant \todo{Is it?}. The loss function was not tested on artificially increasing levels of registration noise, which would make the results more definite. This would require some sort of image morphing, and locally skew the roads present in the imagery. \\
 
-Unfortunately, the loss function was not tested on artificially increasing levels of registration noise, which would make the results more definite. This would require some sort of image morphing, and locally skew the roads present in the imagery. \\
-
-Tests performed on the Norwegian Roads Dataset N50 showed that confident bootstrapping performed slightly better than bootstrapping, and that both bootstrapping methods did significantly better than the baseline \todo{Did they?}. In summary, the bootstrapping loss function do have an positive effect on noisy labels, but it is not significant \todo{Is it?}. 
+Tests performed on the Norwegian Roads Dataset N50 showed that confident bootstrapping performed slightly better than bootstrapping, and that both bootstrapping methods did significantly better than the baseline \todo{Did they?}. In summary, the bootstrapping loss function did have a positive effect on noisy labels, but it was not significant \todo{Is it?}. 
 \todo{Merits and limitations}
 
 
@@ -21,9 +19,17 @@ Tests performed on the Norwegian Roads Dataset N50 showed that confident bootstr
 \item[Research question 2]  How can curriculum learning improve results in deep learning, and does this improve precision and recall for aerial images?
 \end{description}
 
--Reference to studies from related works. Experiment using images, only a toy example. Separating shapes bases on geometrical attributes. Not that simple with aerial images. Spd, modify the model. Possible to create a curriculum dataset trained with a ordinary deep neural network.\\
--Explain curriculum strategy\\
--Experiments supporting improvement, every result showed improved precision and recall\\
--
-\todo[inline]{Merits and limitations}
+Curriculum learning proposed by \cite{Bengio_curriculumlearning}, demonstrated compelling results for several tasks. The method increased generalization accuracy and reduced convergence, by organizing each dataset according to the the examples difficulty. The classifier is trained by gradually introducing harder examples to the training set. However, the curriculum strategies used for sorting the dataset were specific for each task, and was not particularly adaptable to road detection. This challenge was addressed by \ac{SPL} \citep{Kumar_self_paced_learning}, where the curriculum strategy is internalized in the classifier. The classifier simultaneously calculate loss and and adjust the contribution of each example based on it's easiness  \todo{Wrong, based on what criteria}.\\
+
+The proposed curriculum strategy in this thesis, requires no modification to the classifier. Instead, the difficulty of examples are estimated based on inconsistencies between labels and predictions, and a curriculum dataset build based on these estimates. A limitation of this method is that it's effectiveness is based on the predictions generated from a curriculum teacher model, which has to be trained beforehand. The method will however, be applicable to all domains of supervised learning, and  is not task specific. This curriculum strategy can also be applied with any supervised algorithm, without modification of the loss function. \\
+
+The experiments demonstrated consistently better generalization accuracy using curriculum learning. The resulting precision and recall curves from experiments conducted with both the Norwegian Roads Dataset and Massachusetts Roads Dataset, showed that the network trained on the curriculum datasets performed better than the baseline datasets.\\
+
+The experiments - same network configuration, and same number of examples. Two stage , switching. The outcome of training procedure, based on the first stage. Only first stage different. Training set entirely switch. Advantage does not diminish. Training examples presented early big influence. Also evident in test with anti-curriculum learning which converged above the baseline.
+
+Gradually increasing concentration of harder examples also did better.
+
+From experiments unclear whether the advantage of curriculum learning is present for large scale datasets. The dataset size limited, because of runtime constraints. For teacher models trained with a limited dataset still give advantage. Possible advantageous to use this for dataset where labelled data is limited and expensive to produce.
+
+
 
