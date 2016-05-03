@@ -6,6 +6,7 @@
 \usepackage[printonlyused]{acronym}
 \usepackage[english]{babel}	
 					% Correct English hyphenation
+\usepackage{float} %For H, place figure at precise location in code
 \usepackage{subcaption}
 \usepackage[utf8]{inputenc}						% Allow for non-English letters
 \usepackage{graphicx}							% To include graphics
@@ -222,9 +223,9 @@ The goal of this thesis was to create a road detection system able to detect roa
 
 \section{Overview}
 \label{sec:summaryOverview}
-In Chapter \ref{cha:TheoryAndBackground}, the thesis presented background theory, and related works. the components of a \ac{CNN}s was briefly explained, as well as curriculum learning and approaches for dealing with nosy labels. The related works, presented studies involving road detection systems, semantic segmentation, approaches for dealing with noisy labels, and curriculum learning. The issue of label noise in aerial imagery, have been influential in the choice of a curriculum strategy, and the studies have inspired the testing methodology used in Chapter \ref{cha:ResearchAndResults}.\\
+In Chapter \ref{cha:TheoryAndBackground}, the thesis presented background theory, and related works. the components of a \ac{CNN}s was briefly explained, as well as curriculum learning and approaches for dealing with nosy labels. The related works, presented studies involving road detection systems, semantic segmentation, approaches for dealing with noisy labels, and curriculum learning. The issue of label noise in aerial imagery, has been influential in the choice of a curriculum strategy, and the studies have inspired the testing methodology used in Chapter \ref{cha:ResearchAndResults}.\\
 
-Chapter \ref{cha:architectureAndModel}, presented a detailed description about the selected methods and the aerial image dataset. This included, a presentation of the default hyperparameters, the architecture, the optimization and regularization methods used by the \ac{CNN}. The chapter also described how the Norwegian Roads Dataset was constructed from aerial imagery and existing map data, and why this type of dataset is compelling to test the proposed methods on.\\
+Chapter \ref{cha:architectureAndModel}, presented a detailed description about the selected methods and the aerial image datasets. This included, a presentation of the default hyperparameters, the architecture, the optimization and regularization methods used by the \ac{CNN}. The chapter also described how the Norwegian Roads Dataset was constructed from aerial imagery and existing map data, and why it is compelling to test the proposed methods with this type of dataset.\\
 
 Experimental results from the proposed methods and the road detection system was presented in Chapter \ref{cha:ResearchAndResults}. First, the design of the experiments were described, and the basis for conducting them. Then, the specific details and parameters for each experiment were listed. Finally, the results were presented, and then discussed. The results showed that examples presented early in optimization, influence the final outcome of training, and that curriculum learning consistently performed better than the baseline. Furthermore, the chosen curriculum strategy worked well in practice. The bootstrapping experiments revealed that they do provide some robustness against omission and registration errors, but that the performance gain was minor. The qualitative analysis of the best performing road detection system, showed that a lot of the supposedly incorrect predictions, is actually a result of incorrect label maps.\\
 

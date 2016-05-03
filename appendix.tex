@@ -199,14 +199,14 @@ This guide outlines the steps required for setting up the monitoring interface. 
 
 \section{Experiment tools overview}
 \label{app:tools}
-All tools which have been used for this thesis are listed below. The source code can be found inside the tools module of the road detection system's repository.
+All tools which have been created for this thesis are listed below. The source code can be found inside the tools module of the road detection system's repository.
 \begin{itemize}
 \item measurement.precisionrecall.py\\
 The tool creates the precision and recall curve. Command line options can be supplied.
 \item layer.visualize.py\\
 Opens a params.pkl file, containing the weight and hyperparameter configuration of a trained network, and created a visualization of the kernels from the network's input layer.
 \item distribution.curriculum\_diff.py\\
-Samples patches and create a histogram showing a patch dataset difficulty estimate distribution. Useful for setting threshold $D_\theta$. Also useful for verifying a curriculum patch dataset stage.
+Samples patches and create a histogram showing a patch dataset difficulty estimate distribution. Useful for setting threshold $D_\theta$. Also useful for verifying the content in a curriculum patch dataset stage.
 \item distribution.dataset\_std.py\\
 Tool for finding an estimate of dataset's standard deviation. Used by contrast normalization in the pre-processing step.
 \item distribution.label\_dist\\
@@ -224,6 +224,75 @@ Average the final MSE loss for each replicate experiment, and precision and reca
 The figures created by this tools, show the MSE loss and breakeven, over increasing levels of label noise.
 \end{itemize}
 
+\section{Road Detection Systems Results}
+In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is --\todo{Breakeven values}. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is --.  
+
+\section{Experiment E5 Results}
+The results from Experiment E5, were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E5_all_lc}, while the precision and recall curves are depicted in Figure \ref{fig:E5_all_pr}. Each plot is the average from 10 separate runs.\\
+\label{app:fullE3results}
+\begin{figure}[H]
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_0.png}
+\caption{ 0\% } \label{fig:app_E5_0_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_1.png}
+\caption{10\% } \label{fig:app_E5_1_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_2.png}
+\caption{20\% } \label{fig:app_E5_2_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_3.png}
+\caption{ 30\%} \label{fig:app_E5_3_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/pr_4.png}
+\caption{40\%} \label{fig:app_E5_4_pr}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\caption{E5 - Precision and recall breakeven comparisons for several levels of omission noise.} \label{fig:E5_all_pr}
+\end{figure}
+
+\begin{figure}[H]
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_0.png}
+\caption{ 0\% } \label{fig:app_E5_0_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_1.png}
+\caption{10\% } \label{fig:app_E5_1_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_2.png}
+\caption{20\% } \label{fig:app_E5_2_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_3.png}
+\caption{ 30\%} \label{fig:app_E5_3_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E5/lc_4.png}
+\caption{40\%} \label{fig:app_E5_4_lc}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\caption{E5 - Test loss comparisons for several levels of omission noise.} \label{fig:E5_all_lc}
+\end{figure}
 
 
 \section{TODOs which apply to entire thesis}
@@ -238,86 +307,19 @@ The figures created by this tools, show the MSE loss and breakeven, over increas
 \item Acronym CNN, is ok. But only defined once? Or once per chapter.
 \item Check that installation guides and dependencies are correct - Appendix A, B, C
 \item Fortid eller nåtid - proofread
-\item 3.6 Mention Theano licensing (Done in B). And MIT licence. What does that entail?
+\item 3.6 Mention Theano licensing (Done in B)
 \item Keep contributions. Show Keith. Contributions to multiple fields.
 \item Background discussion - some kind of summary. May be a good idea for related works.
-\item Mention CRF and post processing neural networks in future work or somewhere. Should aknowledge that this is not used for this thesis
 \item Road extraction, road detection, semantic segmentation, patch-based. Need clarity, and really good understanding of these terms. Check for misuse of these terms!
+
 \end{itemize}
 
 For chapter 4.
 \todo[inline]{Mnih and Saito - average of 10 or 1?}
-\todo[inline]{Include E7 without replacement?}
-\todo[inline]{Testing only easier examples. Is that better. Filtering technique}
-\todo[inline]{Semi-competent teacher testing.}
-\todo[inline]{Can curriculum learning combined with bootstrapping loss function further improve results for label noise?}
-\todo[inline]{How much does the competence of the curriculum teacher affect the results of curriculum learning?}
 
 \todo{Avoid drawing grand conclusions. Only what your data can support}
 \todo{Study tables graphs for unusual things that might raise questions with the reader}
 \todo{Limits and merits. Propertly in discussion summary of results?}
-\section{Experiment E3 Results}
-\label{app:fullE3results}
-\begin{figure}[!ht]
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/pr_0.png}
-\caption{ 0\% } \label{fig:app_E5_0_pr}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/pr_1.png}
-\caption{10\% } \label{fig:app_E5_1_pr}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/pr_2.png}
-\caption{20\% } \label{fig:app_E5_2_pr}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/pr_3.png}
-\caption{ 30\%} \label{fig:app_E5_3_pr}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/pr_4.png}
-\caption{40\%} \label{fig:app_E5_4_pr}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\caption{E5 - Precision and recall breakeven comparisons for several levels of omission noise.} \label{fig:E5_all_pr}
-\end{figure}
 
-\begin{figure}[!ht]
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/lc_0.png}
-\caption{ 0\% } \label{fig:app_E5_0_lc}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/lc_1.png}
-\caption{10\% } \label{fig:app_E5_1_lc}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/lc_2.png}
-\caption{20\% } \label{fig:app_E5_2_lc}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/lc_3.png}
-\caption{ 30\%} \label{fig:app_E5_3_lc}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.32\textwidth}
-\includegraphics[width=\textwidth]{figs/E5/lc_4.png}
-\caption{40\%} \label{fig:app_E5_4_lc}
-\vspace{0.2cm} % separation vertically between the subfigures
-\end{subfigure}
-\caption{E5 - Test loss comparisons for several levels of omission noise.} \label{fig:E5_all_pr}
-\end{figure}
+Chapter 5.
+\todo[inline]{Main contributions to the field and how significant}.\\
