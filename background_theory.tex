@@ -44,8 +44,30 @@ In noise-tolerant approaches, existing algorithms are modified to be more robust
 
 Techniques that incorporate label noise tolerance, such as particle competition, noise model estimation, bootstrapping, and co-training, will be further discussed in Section \ref{sec:related_works}.
 
+\subsection{Road Extraction by Machine Learning}
+Road extraction is a part of the field of Photogrammetry. The field involves technology for map production and measurements of objects in images. As digital acquisition systems for capturing aerial images have become commonplace, the availability of high resolution aerial images have increased. Coupled with the increasing need for detailed spatial information in \ac{GIS} databases and production of digital maps, a lot of approaches for automatic object extraction from aerial imagery has been suggested. A reliable and accurate detection system could be beneficial in terms of increased levels of details, while reducing the cost associated with map production.\\
+
+There are three distinctive approaches for extracting objects from aerial imagery. Manual, semi-automatic and automatic methods. The semi-automatic approach integrates computer vision techniques and machine learning into the workflow of skilled human labellers. For instance, Google's Ground Truth project employs skilled operators which utilize advanced software tools to improve the accuracy of Google's map products \citep{Ground_truth}.\\
+
+To do automatic road extraction, supervised learning is often employed. This requires a training dataset of aerial image examples and labels. The labels for road extraction are usually binary images that shows the ground truth of roads. Creating the label images by manually labelling aerial imagery would be prohibitively expensive, which is why ground truth labels are often generated from existing map data. Figure \ref{fig:background_dataset_example} shows an example of aerial image and label typically found in a road extraction dataset.\\
+
+\begin{figure}
+\begin{subfigure}{0.40\textwidth}
+\includegraphics[width=\linewidth]{figs/background_theory_example_data.png}
+\caption{Aerial image} \label{fig:background_dataset_example_data}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.40\textwidth}
+\includegraphics[width=\linewidth]{figs/background_theory_example_label.png}
+\caption{Label image} \label{fig:background_dataset_example_label}
+\end{subfigure}
+\caption{Image and label example from the training set of the Norwegian Roads Dataset.} \label{fig:background_dataset_example}
+\end{figure}
+
+From these large training set images, smaller training set patches are extracted. The supervised learning algorithm is given a patch dataset $d$ containing $N$ training examples in the form $d=\{(s_1, m_1),...,(s_N, m_N)\}$, where $s_i$ is an aerial image patch and $m_i$ is the corresponding ground truth label. Examples of aerial image patches and labels can be found in \todo{Add images}. The learning algorithm's task is to learn a suitable mapping from the input space of aerial imagery to the output space of road ground truth. For neural networks, this mapping is typically learned by minimizing the cross-entropy loss by gradient descent optimization.\\
+
+ The resulting classifier has hopefully extracted some useful patterns from the training data, which enables it to generalize to the task of road extraction. This is verified by computing the \ac{MSE} on a test set, containing examples not seen during training. The machine learning approach for road extraction, should therefore be able to train algorithms from data, which can predict the ground truth reasonable well for new unseen aerial image patches. \\
 
 \subsection{Evaluation Metrics}
 A common way to evaluate road extraction systems is by the quality measures,  correctness and completeness \citep{Wiedemann_road_evaluation}. These are closely related to precision and recall. Precision measures the fraction of true roads that are correctly detected, while recall is the fraction of predicted roads that are true roads. Because the label maps are not perfectly aligned with the images, it is also common to use a relaxed measure of precision and recall. This is accomplished by treating predicted road pixels within $p$ pixels of the the true road pixel as being correctly detected, and true roads within $p$ of a predicted road pixel as properly recalled. The slack parameter $p$ is often set to 3 pixels \citep{Mnih_roads_high_res_aerial_images}.
 
-\todo[inline]{A bit more detail on the actual extraction probelm would be useful here, with an example}
