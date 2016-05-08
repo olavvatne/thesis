@@ -1,6 +1,15 @@
 \section{Background discussion}
 \label{sec:backgroundDiscussion}
-\todo{Breif discussion of what elements influenced thesis project. Modify the text, which were put in future work in preliminary work} The first research question involves reducing the effect of inconsistent labels when training a classifier. The bootstrapping approach presented by \cite{Reed_noisy_labels_bootstrapping} will be evaluated for road detection. Whereas the loss functions presented by \citep{Mnih_aerial_images_noisy} require a noise distribution model,  bootstrapping utilize a  convex combination between the classifier's prediction and the label. Furthermore, the method was tested for several datasets.\\
+This chapter has given a brief introduction to several topics. This include road extraction systems based on machine learning, convolutional neural networks, curriculum learning and label noise. In this section these topics will be summarised. \\
+
+Manual labelling of aerial imagery for map purposes is a laborious task, and the surface landscape is always changing. These changes should preferable be reflected in the map data in a timely manner. Automatic object extraction has therefore become an compelling area of research.\\
+
+Much more details. More features distinuishable from aerial imagery. Trend of powerful classifiers. Larger datasets. Increasing window size. CRF for smoother segmentation. Latest iteration deep neural networks for road extraction.
+
+The large datasets -> automatically generated from existing map data. --> Result in datasets with certain types of label noise. Which can impact supervised learning. Registration and omission noise. Noise modelling, bootstrapping.
+
+Curriculum learning. Compelling in the context of label noise. Inconsistent labelling is harder for a classifier to learn, considered hard. 
+ The first research question involves reducing the effect of inconsistent labels when training a classifier. The bootstrapping approach presented by \cite{Reed_noisy_labels_bootstrapping} will be evaluated for road detection. Whereas the loss functions presented by \citep{Mnih_aerial_images_noisy} require a noise distribution model,  bootstrapping utilize a  convex combination between the classifier's prediction and the label. Furthermore, the method was tested for several datasets.\\
 
  An interesting improvement to this approach is to set a time-dependent parameter for how much the classifier's own prediction should be trusted. The parameter should, at the start of training, weight the convex combination more in favor of the label. While in later stages of training, the parameter can favor the classifier's predictions more, because they have become more accurate.\todo{Check if this was done already}\\
 
