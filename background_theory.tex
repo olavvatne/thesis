@@ -64,7 +64,15 @@ To do automatic road extraction, supervised learning is often employed. This req
 \caption{Image and label example from the training set of the Norwegian Roads Dataset.} \label{fig:background_dataset_example}
 \end{figure}
 
-From these large training set images, smaller training set patches are extracted. The supervised learning algorithm is given a patch dataset $d$ containing $N$ training examples in the form $d=\{(s_1, m_1),...,(s_N, m_N)\}$, where $s_i$ is an aerial image patch and $m_i$ is the corresponding ground truth label. Examples of aerial image patches and labels can be found in \todo{Add images}. The learning algorithm's task is to learn a suitable mapping from the input space of aerial imagery to the output space of road ground truth. For neural networks, this mapping is typically learned by minimizing the cross-entropy loss by gradient descent optimization.\\
+From these large training set images, smaller training set patches are extracted. The supervised learning algorithm is given a patch dataset $d$ containing $N$ training examples in the form $d=\{(s_1, m_1),...,(s_N, m_N)\}$, where $s_i$ is an aerial image patch and $m_i$ is the corresponding ground truth label. Examples of aerial image patches and labels can be found in Figure \ref{fig:examples_background}. The learning algorithm's task is to learn a suitable mapping from the input space of aerial imagery to the output space of road ground truth. For neural networks, this mapping is typically learned by minimizing the cross-entropy loss by gradient descent optimization.\\
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\columnwidth]{figs/examples.png}
+\caption[Patch examples]{Aerial image and label examples from a patch dataset. The patches originate from the Norwegian Roads Dataset. Each label indicates the road ground truth from the center location of the aerial patch.  }
+\label{fig:examples_background}
+\end{center}
+\end{figure}
 
  The resulting classifier has hopefully extracted some useful patterns from the training data, which enables it to generalize to the task of road extraction. This is verified by computing the \ac{MSE} on a test set, containing examples not seen during training. The machine learning approach for road extraction, should therefore be able to train algorithms from data, which can predict the ground truth reasonable well for new unseen aerial image patches. \\
 

@@ -94,13 +94,13 @@
 \clearpage
 
 \section*{Abstract}
-This thesis presents a brief introduction to aerial road detection, and semantic segmentation of images. Aerial imagery are often automatically generated from existing map data, which causes the dataset to be afflicted by label noise. Supervised training with datasets having inconsistent labelling will penalize the classifier for making correct predictions, and can impact the resulting performance of the classifier. The thesis investigate different approaches to decrease the impact of noisy labels in deep neural networks. This includes modifying the loss function by the bootstrapping method, and adjusting the training regime through the use of curriculum learning.\\
+This thesis presents a brief introduction to aerial road detection, and semantic segmentation of images. Aerial imagery are often automatically generated from existing map data, which causes the dataset to be afflicted by label noise. Supervised training with datasets having inconsistent labelling will penalize the classifier for making correct predictions, and can impact the resulting performance of the classifier. The thesis investigates different approaches to decrease the impact of noisy labels in deep neural networks. This includes modifying the loss function by the bootstrapping method, and adjusting the training regime through the use of curriculum learning.\\
 
-The bootstrapping method, incorporate the model's  own predictions in the cross-entropy loss function, which modifies the target through a convex combination between the prediction and the label.\\
+The bootstrapping method incorporates the model's  own predictions in the cross-entropy loss function, which modifies the label targets through a convex combination between the prediction and the label.\\
 
-In addition, the thesis investigate curriculum learning and it's impact on classifier accuracy. A curriculum strategy is defined, which estimates example difficulty. The classifier is trained by presenting "easier" examples at the beginning, and then gradually introduce "harder" examples to the training set. This thesis propose a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
+In addition, the thesis investigates curriculum learning and it's impact on classifier accuracy. A curriculum strategy is defined, which estimates example difficulty. The classifier is trained by presenting "easier" examples at the beginning, and then gradually introduce "harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
 
-The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task, and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss functions showed some robustness to the label noise present in aerial imagery. However this result was not significant.
+The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task, and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However this result was not significant.
 
 \clearpage
 
