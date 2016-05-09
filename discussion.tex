@@ -4,7 +4,6 @@ In the following discussion, the results presented in the previous section will 
 
 The \ac{CNN} and the proposed methods are in some sense comparable to the three groups of approaches for dealing with label noise, described in \ref{sec:background_label_noise}. The bootstrapping loss function is clearly a noise-tolerant approach, where the loss function is modified in an attempt to make the network more robust towards label noise. The \ac{CNN} and the regularization methods used, can be categorized as a noise-robust model. Whereas, curriculum learning in some sense can be described as a data cleansing method. The training set does not exclude any examples from all stages, or relabel examples. But, the "simple" stages are created based on filtering techniques, where inconsistency between label and prediction determine whether an example is excluded from a training set stage.  \\
 
-
 \subsection{The Effect of Bootstrapping}
 Unfortunately, the effect of employing the bootstrapping loss function is quite small. However, the bootstrapping methods did perform nearly equal or slightly better when looking at the breakeven values in Experiment E3, E4 and E5. And for increasing levels of omission noise,  as seen in Figure \ref{fig:E3_boot_mass}, and Figure \ref{fig:E5_boot_norway}, it seems that bootstrapping do exhibit some robustness towards label noise. Compared to the performance of the baseline, the difference in both test loss and breakeven seems to be increasing.  \\
 
@@ -74,7 +73,7 @@ One of the most compelling ways of reducing the disconnected roads errors, is ut
 \includegraphics[width=\textwidth]{figs/E6/E6-hit.jpg}
 \caption{Prediction hit and miss image.} \label{fig:E6_hit_image}
 \end{subfigure}
-\caption{E6 - Example of model's road detection performance. The aerial image is part of the test set in Massachusetts Roads Dataset} \label{fig:E6_performance}
+\caption[E6 - Qualitiative results of the road extraction system ]{E6 - Example of model's road detection performance. The aerial image is part of the test set in Massachusetts Roads Dataset} \label{fig:E6_performance}
 \end{figure}
 
 \todo[inline]{Mention limited amount of data. Curriculum learning advantageous for even bigger patch datasets?}

@@ -6,12 +6,6 @@ In this section, theory about different topics related to the thesis is presente
 \input{convolutional_networks}
 \label{sec:convolutional_networks_background}
 
-\subsection{Curriculum Learning}
-Curriculum learning is inspired by how humans learn, and that learning typically is highly organized. For instance, by the use of a curriculum in educational institutions. Easier concepts tend to be introduced first. In terms of machine learning, this means presenting the classifier with easier samples first while training. To do so, a curriculum strategy has to be defined, which sorts the training set from easy to hard. Samples that are not near the decision boundary could be considered easy, for instance. Utilizing curriculum learning might lead to a faster convergence time, and the algorithm reaching a better local minima. Different works show that curriculum learning can achieve better generalization for many tasks \citep{Bengio_curriculumlearning} \citep{Kumar_self_paced_learning} \citep{Lu_self-paced_learning_diversity}.\\
-
-A challenge for curriculum learning is defining a sorting measure that enables a curriculum strategy of gradually introducing harder training samples to the learner. This issue, and works related to curriculum learning, is further explored in Section \ref{sec:related_works}.\\
-
-
 \subsection{Label Noise}
 \label{sec:background_label_noise}
 There are several reasons for the presence of inconsistent labels in real-world datasets. For instance, the labeller was presented with insufficient information, or the dataset was automatically generated from a source with poor quality labels. Additionally, the samples could be ambiguous and therefore hard to label correctly by a human expert. Label noise, can in many cases, lead to negative consequences for a classifier. This can include reduced accuracy, increased model complexity, and more samples required for learning a target concept. Approaches for dealing with noisy labels can generally be divided into three groups: Noise-robust models, data cleansing methods and noise-tolerant algorithms \citep{Frenay_label_noise_survey}. These three groups are presented below.  \\
@@ -44,6 +38,11 @@ In noise-tolerant approaches, existing algorithms are modified to be more robust
 
 Techniques that incorporate label noise tolerance, such as particle competition, noise model estimation, bootstrapping, and co-training, will be further discussed in Section \ref{sec:related_works}.
 
+\subsection{Curriculum Learning}
+Curriculum learning is inspired by how humans learn, and that learning typically is highly organized. For instance, by the use of a curriculum in educational institutions. Easier concepts tend to be introduced first. In terms of machine learning, this means presenting the classifier with easier samples first while training. To do so, a curriculum strategy has to be defined, which sorts the training set from easy to hard. Samples that are not near the decision boundary could be considered easy, for instance. Utilizing curriculum learning might lead to a faster convergence time, and the algorithm reaching a better local minima. Different works show that curriculum learning can achieve better generalization for many tasks \citep{Bengio_curriculumlearning} \citep{Kumar_self_paced_learning} \citep{Lu_self-paced_learning_diversity}.\\
+
+A challenge for curriculum learning is defining a sorting measure that enables a curriculum strategy of gradually introducing harder training samples to the learner. This issue, and works related to curriculum learning, is further explored in Section \ref{sec:related_works}.\\
+
 \subsection{Road Extraction by Machine Learning}
 Road extraction is a part of the field of Photogrammetry. The field involves technology for map production and measurements of objects in images. As digital acquisition systems for capturing aerial images have become commonplace, the availability of high resolution aerial images have increased. Coupled with the increasing need for detailed spatial information in \ac{GIS} databases and production of digital maps, a lot of approaches for automatic object extraction from aerial imagery has been suggested. A reliable and accurate detection system could be beneficial in terms of increased levels of details, while reducing the cost associated with map production.\\
 
@@ -61,7 +60,7 @@ To do automatic road extraction, supervised learning is often employed. This req
 \includegraphics[width=\linewidth]{figs/background_theory_example_label.png}
 \caption{Label image} \label{fig:background_dataset_example_label}
 \end{subfigure}
-\caption{Image and label example from the training set of the Norwegian Roads Dataset.} \label{fig:background_dataset_example}
+\caption[Example from the Norwegian Roads Dataset]{Image and label example from the training set of the Norwegian Roads Dataset.} \label{fig:background_dataset_example}
 \end{figure}
 
 From these large training set images, smaller training set patches are extracted. The supervised learning algorithm is given a patch dataset $d$ containing $N$ training examples in the form $d=\{(s_1, m_1),...,(s_N, m_N)\}$, where $s_i$ is an aerial image patch and $m_i$ is the corresponding ground truth label. Examples of aerial image patches and labels can be found in Figure \ref{fig:examples_background}. The learning algorithm's task is to learn a suitable mapping from the input space of aerial imagery to the output space of road ground truth. For neural networks, this mapping is typically learned by minimizing the cross-entropy loss by gradient descent optimization.\\
@@ -69,7 +68,7 @@ From these large training set images, smaller training set patches are extracted
 \begin{figure}
 \begin{center}
 \includegraphics[width=1\columnwidth]{figs/examples.png}
-\caption[Patch examples]{Aerial image and label examples from a patch dataset. The patches originate from the Norwegian Roads Dataset. Each label indicates the road ground truth from the center location of the aerial patch.  }
+\caption[Patch dataset examples]{Aerial image and label examples from a patch dataset. The patches originate from the Norwegian Roads Dataset. Each label indicates the road ground truth from the center location of the aerial patch.}
 \label{fig:examples_background}
 \end{center}
 \end{figure}

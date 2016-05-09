@@ -18,7 +18,7 @@ Each aerial image has an accompanying identically sized binary label image which
 \caption{Label image} \label{fig:mass_roads_example_label}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Image and label example taken from test set in Massachusetts Roads Dataset.} \label{fig:mass_roads_example}
+\caption[Massachusetts Roads Dataset]{Image and label example taken from test set in Massachusetts Roads Dataset.} \label{fig:mass_roads_example}
 \end{figure}
 
 
@@ -59,7 +59,7 @@ The quality of the the generated label maps might also present a challenge to a 
 \caption{Private road} \label{fig:norwegian_roads_missing_n50}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Examples of inconsistent labelling found in the Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_examples_n50}
+\caption[Inconsistent labelling in Norwegian Roads Dataset N50]{Examples of inconsistent labelling found in the Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_examples_n50}
 \end{figure}
 
 In addition to the set of label images generated from N50, the dataset also include an alternate set of label images generated from the road centerline vector database, Vbase \citep{Kartverket_vbase}. This database has more accurate road centerline vectors. There are still omission and registration errors present in this label image set, but to a less extent. Surfaces that share spectral similarities to asphalt, such as private roads and parking areas have not been marked, similar to the Massachusetts Roads Dataset. The difference in accuracy between N50 and Vbase, can be seen by comparing Figure \ref{fig:norwegian_roads_examples_n50} and Figure \ref{fig:norwegian_roads_examples_vbase}. A minor downside of using this alternate vector database is that Vbase provide fewer road segment properties, which have resulted in a smaller of set of line thicknesses applied to the label images.\\
@@ -80,11 +80,11 @@ In addition to the set of label images generated from N50, the dataset also incl
 \caption{Private road} \label{fig:norwegian_roads_missing_vbase}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Examples of road centerline vector quality in Vbase.} \label{fig:norwegian_roads_examples_vbase}
+\caption[Road centerline vector quality of Vbase]{Examples of road centerline vector quality in Vbase.} \label{fig:norwegian_roads_examples_vbase}
 \end{figure}
 
 \begin{table}[htp]
-\caption{Raster line thickness and road segment filtering rule for each type of road. A margin of 10\% is removed from the line thicknesses, which are based on numbers found in the road specification manual.}
+\caption[Raster line thicknesses for the Norwegian Roads Dataset]{Raster line thickness and road segment filtering rule for each type of road. A margin of 10\% is removed from the line thicknesses, which are based on numbers found in the road specification manual.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^l ^r}\hline
@@ -122,7 +122,7 @@ The dataset were constructed by using QGIS, an open source geographic informatio
 \caption{Overlay image} \label{fig:norwegian_roads_example_overlay}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Example taken from test set in Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_example}
+\caption[Example from Norwegian Roads Dataset N50]{Example taken from test set in Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_example}
 \end{figure}
 
 An aerial image and it's corresponding label image from the Norwegian Roads Dataset N50 can be seen in Figure \ref{fig:norwegian_roads_example}, and Figure \ref{fig:norwegian_roads_example_overlay} shows the same label image superimposed on the aerial image. Observe that some roads are missing from the label image, as well as the ground truth not covering the roads properly. \\

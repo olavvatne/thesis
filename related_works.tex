@@ -102,61 +102,6 @@ Improvements in classification accuracy is further shown empirically by \cite{Sc
 
 An approach similar to \ac{CRF} is proposed by \cite{Mnih_roads_high_res_aerial_images}, where a post-processing step is introduced to improve the predictions produced by the neural network by incorporating knowledge about nearby predictions. This is achieved by training another neural network that predicts 16 by 16 map patches using 64 by 64 patches of predictions. The approach was applied to reduce the amount of gaps and disconnected road present in the baseline predictions. 
 
-
- 
-\subsection{Learning by a Curriculum}
-Inspired by how humans learn in an organized fashion, \cite{Bengio_curriculumlearning} presented curriculum learning and investigated how machine learning can benefit from modifying the training regime. In curriculum learning, a learner is gradually presented with harder training samples. In order to do this, an ordering criteria that can identify easy samples must be devised. Experiments showed that a simple multi-stage curriculum reduced convergence time and increased accuracy. \\
-
-A study conducted by \cite{Erhan-unsupervised-pre-training} investigated why supervised learning tasks benefit from unsupervised pre-training. It showed that examples presented early on in training have a disproportionate influence on the outcome of the training procedure. Earlier training can trap the \ac{SGD} in a basin of attraction, which can be hard to escape from.  By using a curriculum strategy the learner can potentially be guided to better areas in parameter space and lead to a better local minima. \\
-
-Curriculum learning shares similarities with boosting algorithms such as AdaBoost. This algorithm trains several weak classifiers by iteratively re-weighting the training set, which gradually puts more emphasis on difficult samples. Unlike boosting, curriculum learning starts off training by considering the easiest examples found in the dataset.\\
-
-Active learning \citep{Cohn_active_learning} is also considered related to curriculum learning. In active learning, the learner participates in selecting samples for training. Contrary to a curriculum strategy, an active learner prefers a strategy of picking examples close to the decision boundary, in order to reduce the number of examples necessary for learning a target concept.\\
-
-Formally, training by a curriculum can be seen as gradually increasing the influence of difficult examples. Let $P(z)$ be the target training distribution, and $W_{i}(z)$ be a weight applied to example $z$ at step $1\leq i\leq N$. The weight $W_{i}(z)$ is reweighted at each step, until $W_{N}(z) = 1$ for all examples.  The training distribution  $Q_{i}(z)$ at step $i$:
-
-$$Q_{i}(z)\propto W_{i}(z)P(z)\forall z$$
-
-At each step, examples are reweighed, which changes the training distribution $Q_{i}(z)$. The weights are first increased on examples considered easy.  
-At $i=N$ all weights $W_{1}(z)$ are set to one, and the target training distribution $P(z)$ is recovered. This process should iteratively increase the entropy of the distributions $Q_{t}(z)$. For instance, curriculum learning could be achieved by two steps $N=2$. At step $1$ the influence from harder examples are entirely removed by setting $W_{1}(z) = 0$. Whereas, in step $2$ the target training distribution $P(z)$ is recovered by setting all weights $W_{2}(z) = 1$.\\
-
-
-An experiment was conducted on the task of shape recognition, where images of geometrical shapes were classified. Two artificially generated datasets consisting of 32x32 grey scale images were constructed. The simpler dataset contained only squares, circles, and equilateral triangles, while the complex dataset was composed of all types of rectangles, circles and triangles. Two neural networks were trained for 256 epochs by \ac{SGD} to classify these shapes. The network trained using a curriculum strategy would start by training only on easier examples found in the simple dataset, and switch to the complex after a certain number of epochs. The baseline network would only train using the complex dataset. The best generalization was obtained by the network using a curriculum, where half of the total epochs was spent on easier examples. \\
-
-Another experiment was conducted on a language modelling task, where a learner predicts the most fitting word that can follow a given sentence. The curriculum strategy in this case was to iteratively grow the allowed vocabulary. Only sentences in the dataset where all words were present in the vocabulary would be included in the training set. The network that utilized curriculum learning performed better than the baseline for this task as well.\\
-
-A considerable challenge with curriculum learning is to define an appropriate curriculum strategy that can work well for a task. In this study the sorting strategies were task specific, and not generally applicable. Furthermore, the tasks presented were fairly simple, and sorting strategies were easy to identify. This may not be the case for datasets containing images where a measure of easiness can be harder to define.\\
-
-
-Curriculum learning's main challenge is to find a sequence for samples that are meaningful, and can facilitate learning. This requires an ordering criteria that sorts samples based on some measure of "easiness". The criterias presented by \cite{Bengio_curriculumlearning} were problem-specific. To address this issue, \cite{Kumar_self_paced_learning} proposed \ac{SPL}. Instead of a teacher providing the algorithm with a fixed curriculum, the algorithm iteratively selects samples based on its own abilities. \\
-
-\ac{SPL} is an iterative approach, where the learner both selects easy samples and update its parameters at each iteration. The number of samples is determined by a weight that is gradually annealed. At the start of training, only easy samples are considered. In self-paced learning, easy samples are defined as samples that have labels that are easy to predict.
-The algorithm finishes when all samples have been considered by the learner, or at convergence.\\
-
-Specifically, \ac{SPL} integrates curriculum learning by modifying the loss function of the model. The model parameters $w$ and binary variables $v_{i}$ are simultaneously estimated by minimizing the modified loss function. The binary variables $v_{i}$, indicate whether the model considers sample $i$ easy or not.  A parameter $K$ is gradually annealed to modify the learning pace by increasing the effect of a regularization term. As $K$ is cooled, harder samples are included in order to minimize the loss. \\
-
-The \ac{SPL} approach was tested on several tasks, including hand-written recognition and object detection. The self-paced learning approach was implemented for a latent structural support vector machine. To predict digits found in the MNIST dataset, self-paced learning performed significantly better on most runs. In the task of object detection, self-paced learning also produced better results.  \\
-
-According to \cite{Lu_self-paced_learning_diversity}, the self-paced learning approach is limited because it does not consider diversity in sample selection. They therefore, proposed an extension to \ac{SPL} called \ac{SPLD}. In this approach, a new regularization term is introduced which encourages selecting diverse samples. \ac{SPLD} was evaluated on different tasks, such as multimedia event detection and video action recognition, and compared against \ac{SPL} and three other baseline methods. In the task of event detection, the \ac{SPLD} method outperformed both \ac{SPL}, RandomForest, and AdaBoost. This was also the case for action recognition.\\
-
-%An unsupervised clustering method is first applied to the samples and the training set. The goal is to identify group of dissimilar samples, and 
-%TODO: alternative convex search - fix w fix v.
-%\todo{K-means or groups. 
-
-
-%\todo[inline]{Interesting apporach is to consider noise as a sorting measure for curriculum learning.}
-
-A human behavioral study was conducted by \citep{Khan_human_teach}, in which participants were tasked with teaching a robot a target concept. The goal of the study was to explore what teaching strategies humans employ. Empirical results suggest that human teachers follow the principles of curriculum learning. \\
-
-There are two prominent teaching models in computational teaching. The teaching dimension and the curriculum  learning principle. The former is based on showing samples closest to the decision boundary, in order to minimize the number of samples needed to reveal a target concept. The latter suggests an easy-to-hard teaching strategy. \\
-
-The experiment involved 31 participants, each tasked with teaching a robot the concept of graspability. The robot would not learn anything but followed motions with its gaze. This provided a consistent environment for the trials. Participants were first asked to sort images of common objects based on how easy they are to hold with one hand. The images were placed along a ruler.  The participants then assigned a binary value indicating whether an object is graspable or not to each object. Finally, the participants would act as teachers by showing the robot images and giving a description about the depicted object's graspability. The participants could chose any order, and use as few images that they felt were needed to teach the robot the target concept. The task represents a simple one dimensional machine learning problem of binary classification, where participants assigned x and y value to each sample. \\
-
-Based on the ordering each participant chose, three major human teaching strategies were observed. A large percentage of the participants employed the curriculum learning approach, by gradually presenting samples closer to the decision boundary. 20 of the participants started by showing the most graspable object, and 6 started with the least graspable.  None of the subjects started by showing samples close to the decision boundary, which the teaching dimension model suggests.\\
-
-The experiment showed that there is evidence of curriculum learning being employed by humans in a teacher role. This might indicate that this is an intuitive and efficient way to learn, and might be beneficial for machine learning methods as well. \\
-
-
 \subsection{Dealing with Noisy Labels}
 Supervised learning works well for applications where there are a lot of labelled data available. For object recognition, the large-scale image database ImageNet have often been utilized. This database provide millions of manually annotated and quality controlled images, organized in a semantic hierarchy \citep{Deng_imagenet}. However, for some tasks, such as semantic segmentation and object detection, manually labelled data are expensive and time consuming to create, and high quality datasets can be hard to obtain. Automatically creating large dataset from internet resources, such as image search engines, \ac{GIS} databases, and user annotated images can be very practical in terms of reducing the costs of creating very large datasets. \\
 
@@ -188,7 +133,7 @@ The matrix Q is implemented by a constrained linear noise layer, which is added 
 \begin{figure}
 \begin{center}
 \includegraphics[width=.6\columnwidth]{figs/Fergusmethod.png}
-\caption[Noise matrix Q]{Noise matrix Q is inserted between loss function and output layer of the model. }
+\caption[Noise matrix Q]{Noise matrix Q is inserted between loss function and output layer of the model.}
 \label{fig:fergus_method}
 \end{center}
 \end{figure}
@@ -260,3 +205,55 @@ In \citep{Breve_particle}, particle competition and cooperation is used to addre
 Most of these approaches require an initial dataset that contains clean labels, which, in many cases, require precise manual labelling. For road extraction, a fully labelled, but noisy dataset, can be generated from existing map data. The problem is that we cannot assume that a subset of this dataset contains clean labels, without a thorough inspection. Therefore, techniques that treat the entire dataset as noisy are better suited for this task. 
 
 %The bootstrapping technique share similarities with semi-supervised training. The both rely on their own predictions.
+
+\subsection{Learning by a Curriculum}
+Inspired by how humans learn in an organized fashion, \cite{Bengio_curriculumlearning} presented curriculum learning and investigated how machine learning can benefit from modifying the training regime. In curriculum learning, a learner is gradually presented with harder training samples. In order to do this, an ordering criteria that can identify easy samples must be devised. Experiments showed that a simple multi-stage curriculum reduced convergence time and increased accuracy. \\
+
+A study conducted by \cite{Erhan-unsupervised-pre-training} investigated why supervised learning tasks benefit from unsupervised pre-training. It showed that examples presented early on in training have a disproportionate influence on the outcome of the training procedure. Earlier training can trap the \ac{SGD} in a basin of attraction, which can be hard to escape from.  By using a curriculum strategy the learner can potentially be guided to better areas in parameter space and lead to a better local minima. \\
+
+Curriculum learning shares similarities with boosting algorithms such as AdaBoost. This algorithm trains several weak classifiers by iteratively re-weighting the training set, which gradually puts more emphasis on difficult samples. Unlike boosting, curriculum learning starts off training by considering the easiest examples found in the dataset.\\
+
+Active learning \citep{Cohn_active_learning} is also considered related to curriculum learning. In active learning, the learner participates in selecting samples for training. Contrary to a curriculum strategy, an active learner prefers a strategy of picking examples close to the decision boundary, in order to reduce the number of examples necessary for learning a target concept.\\
+
+Formally, training by a curriculum can be seen as gradually increasing the influence of difficult examples. Let $P(z)$ be the target training distribution, and $W_{i}(z)$ be a weight applied to example $z$ at step $1\leq i\leq N$. The weight $W_{i}(z)$ is reweighted at each step, until $W_{N}(z) = 1$ for all examples.  The training distribution  $Q_{i}(z)$ at step $i$:
+
+$$Q_{i}(z)\propto W_{i}(z)P(z)\forall z$$
+
+At each step, examples are reweighed, which changes the training distribution $Q_{i}(z)$. The weights are first increased on examples considered easy.  
+At $i=N$ all weights $W_{1}(z)$ are set to one, and the target training distribution $P(z)$ is recovered. This process should iteratively increase the entropy of the distributions $Q_{t}(z)$. For instance, curriculum learning could be achieved by two steps $N=2$. At step $1$ the influence from harder examples are entirely removed by setting $W_{1}(z) = 0$. Whereas, in step $2$ the target training distribution $P(z)$ is recovered by setting all weights $W_{2}(z) = 1$.\\
+
+
+An experiment was conducted on the task of shape recognition, where images of geometrical shapes were classified. Two artificially generated datasets consisting of 32x32 grey scale images were constructed. The simpler dataset contained only squares, circles, and equilateral triangles, while the complex dataset was composed of all types of rectangles, circles and triangles. Two neural networks were trained for 256 epochs by \ac{SGD} to classify these shapes. The network trained using a curriculum strategy would start by training only on easier examples found in the simple dataset, and switch to the complex after a certain number of epochs. The baseline network would only train using the complex dataset. The best generalization was obtained by the network using a curriculum, where half of the total epochs was spent on easier examples. \\
+
+Another experiment was conducted on a language modelling task, where a learner predicts the most fitting word that can follow a given sentence. The curriculum strategy in this case was to iteratively grow the allowed vocabulary. Only sentences in the dataset where all words were present in the vocabulary would be included in the training set. The network that utilized curriculum learning performed better than the baseline for this task as well.\\
+
+A considerable challenge with curriculum learning is to define an appropriate curriculum strategy that can work well for a task. In this study the sorting strategies were task specific, and not generally applicable. Furthermore, the tasks presented were fairly simple, and sorting strategies were easy to identify. This may not be the case for datasets containing images where a measure of easiness can be harder to define.\\
+
+
+Curriculum learning's main challenge is to find a sequence for samples that are meaningful, and can facilitate learning. This requires an ordering criteria that sorts samples based on some measure of "easiness". The criterias presented by \cite{Bengio_curriculumlearning} were problem-specific. To address this issue, \cite{Kumar_self_paced_learning} proposed \ac{SPL}. Instead of a teacher providing the algorithm with a fixed curriculum, the algorithm iteratively selects samples based on its own abilities. \\
+
+\ac{SPL} is an iterative approach, where the learner both selects easy samples and update its parameters at each iteration. The number of samples is determined by a weight that is gradually annealed. At the start of training, only easy samples are considered. In self-paced learning, easy samples are defined as samples that have labels that are easy to predict.
+The algorithm finishes when all samples have been considered by the learner, or at convergence.\\
+
+Specifically, \ac{SPL} integrates curriculum learning by modifying the loss function of the model. The model parameters $w$ and binary variables $v_{i}$ are simultaneously estimated by minimizing the modified loss function. The binary variables $v_{i}$, indicate whether the model considers sample $i$ easy or not.  A parameter $K$ is gradually annealed to modify the learning pace by increasing the effect of a regularization term. As $K$ is cooled, harder samples are included in order to minimize the loss. \\
+
+The \ac{SPL} approach was tested on several tasks, including hand-written recognition and object detection. The self-paced learning approach was implemented for a latent structural support vector machine. To predict digits found in the MNIST dataset, self-paced learning performed significantly better on most runs. In the task of object detection, self-paced learning also produced better results.  \\
+
+According to \cite{Lu_self-paced_learning_diversity}, the self-paced learning approach is limited because it does not consider diversity in sample selection. They therefore, proposed an extension to \ac{SPL} called \ac{SPLD}. In this approach, a new regularization term is introduced which encourages selecting diverse samples. \ac{SPLD} was evaluated on different tasks, such as multimedia event detection and video action recognition, and compared against \ac{SPL} and three other baseline methods. In the task of event detection, the \ac{SPLD} method outperformed both \ac{SPL}, RandomForest, and AdaBoost. This was also the case for action recognition.\\
+
+%An unsupervised clustering method is first applied to the samples and the training set. The goal is to identify group of dissimilar samples, and 
+%TODO: alternative convex search - fix w fix v.
+%\todo{K-means or groups. 
+
+
+%\todo[inline]{Interesting apporach is to consider noise as a sorting measure for curriculum learning.}
+
+A human behavioral study was conducted by \citep{Khan_human_teach}, in which participants were tasked with teaching a robot a target concept. The goal of the study was to explore what teaching strategies humans employ. Empirical results suggest that human teachers follow the principles of curriculum learning. \\
+
+There are two prominent teaching models in computational teaching. The teaching dimension and the curriculum  learning principle. The former is based on showing samples closest to the decision boundary, in order to minimize the number of samples needed to reveal a target concept. The latter suggests an easy-to-hard teaching strategy. \\
+
+The experiment involved 31 participants, each tasked with teaching a robot the concept of graspability. The robot would not learn anything but followed motions with its gaze. This provided a consistent environment for the trials. Participants were first asked to sort images of common objects based on how easy they are to hold with one hand. The images were placed along a ruler.  The participants then assigned a binary value indicating whether an object is graspable or not to each object. Finally, the participants would act as teachers by showing the robot images and giving a description about the depicted object's graspability. The participants could chose any order, and use as few images that they felt were needed to teach the robot the target concept. The task represents a simple one dimensional machine learning problem of binary classification, where participants assigned x and y value to each sample. \\
+
+Based on the ordering each participant chose, three major human teaching strategies were observed. A large percentage of the participants employed the curriculum learning approach, by gradually presenting samples closer to the decision boundary. 20 of the participants started by showing the most graspable object, and 6 started with the least graspable.  None of the subjects started by showing samples close to the decision boundary, which the teaching dimension model suggests.\\
+
+The experiment showed that there is evidence of curriculum learning being employed by humans in a teacher role. This might indicate that this is an intuitive and efficient way to learn, and might be beneficial for machine learning methods as well. \\

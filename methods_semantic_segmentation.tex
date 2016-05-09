@@ -1,4 +1,4 @@
-\section{Semantic Segmentation with \ac{CNN}}
+\section{Semantic Segmentation with CNN}
 \label{sec:network}
 This section presents the structure of the convolutional neural network, as well as the details surrounding the optimization and regularization of the network. 
 
@@ -51,14 +51,14 @@ $$ y = \text{max}(0, x) \frac{}{}$$
 \caption{Rectified linear unit} \label{fig:activation_relu}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{Activation functions.} \label{fig:activation_functions}
+\caption[Activation functions]{Activation functions.} \label{fig:activation_functions}
 \end{figure}
 
 
 The specific network configuration values described in this section, is the default configuration used in experiments found in Chapter \ref{cha:ResearchAndResults}. However, the network architecture can easily be changed through a configuration file. All configurable parameters related to the \ac{CNN} and their default values are listed in Table \ref{tab:network_parameters}.\\
 
 \begin{table}[htp]
-\caption{Hyperparameters for the \ac{CNN}.}
+\caption[Hyperparameters for the CNN]{Hyperparameters for the \ac{CNN}.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^p{6.5cm} ^l}\hline
@@ -148,7 +148,7 @@ Contrast normalization is also applied to every patch. Each patch is normalized 
 Additionally, the datasets exhibit some class imbalance \citep{Japkowicz_class_imbalance}, which can be problematic since the optimization might prioritize loss minimization of the high-occurence classes and ignore low-occurring classes. Random sampling of the datasets, lead to a large imbalance between road examples and non-road examples. According to the label maps, the proportion of patches containing any road pixels, ranges between 8\% and 25\%\todo{Check numbers}, depending on the dataset. This is solved by artificially increasing the proportion of road examples, when sampling the patch dataset. Normally a distribution of around 50\% road patches and 50\% non-road patches are used. However, this method is not applied to the test and validation patch set, which means that these sets will retain their natural class distribution. In table \ref{tab:label_percentage} the percentage of road pixels for each dataset is listed. \\
 
 \begin{table}[htp]
-\caption{Percentage of road pixels in the dataset}
+\caption[Percentage of road pixels in the dataset]{Percentage of road pixels in the dataset.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^r ^r ^r}\hline

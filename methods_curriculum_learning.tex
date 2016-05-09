@@ -21,7 +21,7 @@ The implementation of curriculum learning, involves $N$ training set stages. Eac
 The supervised learning algorithm, is gradually exposed to harder examples by stage switching. The classifer is first optimized with the examples in the first stage, which has the lowest difficulty threshold. At epoch $t_{start}$, the next stage replaces the existing training set by assigning each new example to a random index in the training set. The indices are sampled without replacement. Following stages are mixed into the training set every $t_{stage}$ epoch, until the model has trained with examples from all stages. The hyperparameters and default values for curriculum learning are listed in  Table \ref{tab:curriculum_parameters}. \\
 
 \begin{table}[htp]
-\caption{Hyperparameters for curriculum learning.}
+\caption[Hyperparameters for curriculum learning]{Hyperparameters for curriculum learning.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^l ^l}\hline

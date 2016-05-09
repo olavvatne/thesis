@@ -25,7 +25,7 @@ Since, the task involves the binary task of discriminating road pixels from non-
 In the actual implementation, the $\beta$ parameter is annealed from the max value $\beta_{max}$, down to the minimum value of $\beta_{min}$, starting from epoch $M$. This is because the learner should have some implicit knowledge before using it's predictions to modify the target. This is similar to the approach \todo{Just a bit of the approach. The method entirely different} by \cite{Sukhbaatar_noisy_network_learning}. The configurable parameters for bootstrapping can be found in Table \ref{tab:bootstrapping_parameters}.\\
 
 \begin{table}[htp]
-\caption{Hyperparameters for bootstrapping loss.}
+\caption[Hyperparameters for bootstrapping loss]{Hyperparameters for bootstrapping loss.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^l ^p{3.5cm}}\hline

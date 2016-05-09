@@ -1,5 +1,61 @@
 \section{Experimental Results}
 \label{sec:experimentalResults}
+\subsection{Bootstrapping for Imagery with Noisy Labels}
+\label{sec:results_bootstrapping}
+
+The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E3_boot_mass} and Figure \ref{fig:E5_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E3 and E5, utilized patch datasets where 0, 10, 20 ,30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E3/E3_lc_noise.png}
+\caption{MSE test loss} \label{fig:E3_boot_mass_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E3/E3_pr_noise.png}
+\caption{Precision and recall breakeven} \label{fig:E3_boot_mass_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption{E4 - Robustness of bootstrapping for increasing amount of label noise. Massachusetts Roads Dataset} \label{fig:E3_boot_mass}
+\end{figure}
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E5/E5_lc_noise.png}
+\caption{MSE test loss} \label{fig:E5_boot_norway_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E5/E5_pr_noise.png}
+\caption{Precision and recall breakeven} \label{fig:E5_boot_norway_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption[E3 - Robustness of bootstrapping for increasing amount of label noise]{E3 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E5_boot_norway}
+\end{figure}
+
+Figure \ref{fig:E3_boot_mass_loss} displays the averaged test loss at different levels of label noise, for Experiment E3. The baseline, which utilizes the cross-entropy loss function, seems to generally increase in test loss as the noise level is increased. The bootstrapping loss function has a lower test loss for noise levels above 10 percent.\\
+
+Figure \ref{fig:E3_boot_mass_pr}, which displays the precision and recall breakeven values at increasing levels of label noise, shows a trend of decreasing values.  For label noise levels above 20 percent, bootstrapping surpasses the baseline. Though, the difference in performance is small.\\
+
+The same kind of label noise experiment was also conducted for the Norwegian Roads Dataset, and include an additional plot of the confident bootstrapping performance. In Figure \ref{fig:E5_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. As expected, the precision and recall breakeven points for the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E4_boot_norway_vbase_pr}. Although the bootstrapping methods behave a bit more erratic, they generally tend to decrease at a slower rate \todo{A bit hard to see, maybe}.\\
+
+A slightly different approach has been taken for Experiment E4. The road detection system has in this experiment been trained with labels from the label set N50. This label set has a higher rate of omission and registration noise than the labels in Massachusetts Roads Dataset, for instance. The test set however, consists of labels originating from the Vbase label set, which is more accurate. The result from this experiment is displayed in Figure \ref{fig:E4_boot_norway_vbase}\\
+
+The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E4_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E4_boot_norway_vbase_pr}. In fact, the precision and recall breakeven values slightly favours the bootstrapping methods. This contradictory results between the MSE loss and the breakeven point, might be the result of the relaxed measure of precision, which ignores small misalignments between the prediction and label pixels.\\
+
+\begin{figure}
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E4/E4_lc.png}
+\caption{MSE test loss} \label{fig:E4_boot_norway_vbase_loss}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.48\textwidth}
+\includegraphics[width=\linewidth]{figs/E4/E4_pr.png}
+\caption{Precision and recall comparison.} \label{fig:E4_boot_norway_vbase_pr}
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\caption[E4 - Comparison of loss functions for Norwegian Roads Dataset Vbase]{E4 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E4_boot_norway_vbase}
+\end{figure}
 
 \subsection{Curriculum Learning with Aerial Imagery}
 \label{sec:results_curriculum_learning_aerial_imagery}
@@ -15,7 +71,7 @@
 \caption{Precision and recall comparisons.} \label{fig:E1_curr_norway_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{E1 - Performance of curriculum learning at different thresholds, $D_{0}$ for Norwegian Roads Dataset Vbase} \label{fig:E1_curriculum_norway}
+\caption[E1 - Performance of curriculum learning for Norwegian Roads Dataset Vbase]{E1 - Performance of curriculum learning at different thresholds, $D_{0}$ for Norwegian Roads Dataset Vbase} \label{fig:E1_curriculum_norway}
 \end{figure}
 
 In Experiment E1, the road detection system was trained on four different patch datasets. The system's performance for each of these datasets are displayed in Figure \ref{fig:E1_curriculum_norway}. A comparison of the test loss per epoch is displayed in Figure \ref{fig:E1_curr_norway_loss}, whereas the final performance of each patch dataset is shown by a precision and recall curve in Figure \ref{fig:E1_curr_norway_pr}. The network configuration used for the tests was identical, as well as the number of training examples seen during training. Essentially, the performance gap between the baseline and curriculum plots, comes from the first stage of the patch datasets, where different difficulty threshold $D_0$ have been used.\\
@@ -43,11 +99,11 @@ The precision and recall breakeven values from Experiment E1 and Experiment E2, 
 \caption{Precision and recall comparisons.} \label{fig:E2_curr_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{E2 - Performance of curriculum learning and anti-curriculum learning for Massachusetts Roads Dataset} \label{fig:E2_curriculum_mass}
+\caption[E2 - Performance of curriculum learning for Massachusetts Roads Dataset]{E2 - Performance of curriculum learning and anti-curriculum learning for Massachusetts Roads Dataset} \label{fig:E2_curriculum_mass}
 \end{figure}
 
 \begin{table}
-\caption{Curriculum learning results.}
+\caption[Curriculum learning results]{Curriculum learning results.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^l ^l ^r}\hline
@@ -105,69 +161,11 @@ Figure \ref{fig:E7_curriculum_inexperienced} shows the results from Experiment E
 \caption{Precision and recall for dataset with gradual stage switching.} \label{fig:E7_gradual_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{E7 - Results from Experiment E7.} \label{fig:E7_curriculum_inexperienced}
+\caption[E7 - Results from experiments with an less experienced teacher ]{E7 - Results from experiments with an less experienced teacher model.} \label{fig:E7_curriculum_inexperienced}
 \end{figure}
 
 This was further explored by creating two additional patch datasets, with 5 stages each. The first stage has 108000 examples, while the other 4 stages contain 54000 examples each. Subsequent stages replaces the training set, by assigning each example to a random position in the training set. Because the positions are picked by random sampling with replacement, only around 40\% of the existing examples in the training set are replaced at each switch. This results in a more gradual transition of the difficulty distribution. In Figure \ref{fig:E7_gradual_loss}, the stage switching with these patch datasets, results in the test loss being more stable.
 The baseline plot even decreases substantially after epoch 60. This is an improvement from the spiking behaviour from the two stage baseline. The gradual approach also shows promise in Figure \ref{fig:E7_curriculum_inexperienced}, where the curriculum plot achieves a breakeven point of 0.809, compared to the breakeven of 0.802 for the first stage curriculum. The gradual baseline approach only achieved a breakeven of 0.795.\\
-
-\subsection{Bootstrapping for Imagery with Noisy Labels}
-\label{sec:results_bootstrapping}
-
-The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E3_boot_mass} and Figure \ref{fig:E5_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E3 and E5, utilized patch datasets where 0, 10, 20 ,30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
-
-\begin{figure}
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E3/E3_lc_noise.png}
-\caption{MSE test loss} \label{fig:E3_boot_mass_loss}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E3/E3_pr_noise.png}
-\caption{Precision and recall breakeven} \label{fig:E3_boot_mass_pr}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\caption{E4 - Robustness of bootstrapping for increasing amount of label noise. Massachusetts Roads Dataset} \label{fig:E3_boot_mass}
-\end{figure}
-
-\begin{figure}
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E5/E5_lc_noise.png}
-\caption{MSE test loss} \label{fig:E5_boot_norway_loss}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E5/E5_pr_noise.png}
-\caption{Precision and recall breakeven} \label{fig:E5_boot_norway_pr}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\caption{E3 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E5_boot_norway}
-\end{figure}
-
-Figure \ref{fig:E3_boot_mass_loss} displays the averaged test loss at different levels of label noise, for Experiment E3. The baseline, which utilizes the cross-entropy loss function, seems to generally increase in test loss as the noise level is increased. The bootstrapping loss function has a lower test loss for noise levels above 10 percent.\\
-
-Figure \ref{fig:E3_boot_mass_pr}, which displays the precision and recall breakeven values at increasing levels of label noise, shows a trend of decreasing values.  For label noise levels above 20 percent, bootstrapping surpasses the baseline. Though, the difference in performance is small.\\
-
-The same kind of label noise experiment was also conducted for the Norwegian Roads Dataset, and include an additional plot of the confident bootstrapping performance. In Figure \ref{fig:E5_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. As expected, the precision and recall breakeven points for the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E4_boot_norway_vbase_pr}. Although the bootstrapping methods behave a bit more erratic, they generally tend to decrease at a slower rate \todo{A bit hard to see, maybe}.\\
-
-A slightly different approach has been taken for Experiment E4. The road detection system has in this experiment been trained with labels from the label set N50. This label set has a higher rate of omission and registration noise than the labels in Massachusetts Roads Dataset, for instance. The test set however, consists of labels originating from the Vbase label set, which is more accurate. The result from this experiment is displayed in Figure \ref{fig:E4_boot_norway_vbase}\\
-
-The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E4_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E4_boot_norway_vbase_pr}. In fact, the precision and recall breakeven values slightly favours the bootstrapping methods. This contradictory results between the MSE loss and the breakeven point, might be the result of the relaxed measure of precision, which ignores small misalignments between the prediction and label pixels.\\
-
-\begin{figure}
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E4/E4_lc.png}
-\caption{MSE test loss} \label{fig:E4_boot_norway_vbase_loss}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E4/E4_pr.png}
-\caption{Precision and recall comparison.} \label{fig:E4_boot_norway_vbase_pr}
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\caption{E4 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E4_boot_norway_vbase}
-\end{figure}
-
 
 \subsection{Road Detection System}
 \label{sec:results_road_detection_system}
@@ -186,11 +184,11 @@ In Figure \ref{fig:E6_performance_mass_pr}, the averaged precision and recall cu
 \caption{Precision and recall.} \label{fig:E6_performance_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption{E6 - Performance of road detection system trained with Massachusetts Roads Dataset.} \label{fig:E6_performance_mass}
+\caption[E6 - Performance of road detection system trained with Massachusetts Roads Dataset]{E6 - Performance of road detection system trained with Massachusetts Roads Dataset.} \label{fig:E6_performance_mass}
 \end{figure}
 
 \begin{table}
-\caption{Road detection system results.}
+\caption[Road detection system results]{Road detection system results.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^r ^r}\hline
