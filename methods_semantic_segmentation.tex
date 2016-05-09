@@ -109,7 +109,7 @@ Furthermore, the system also support RMSProp which keeps a running average of th
 
 All the above mentioned optimization approaches have an important hyperparameter in common, and that is the learning rate $a$. In this implementation the learning rate is annealed over time, by step decay. The learning rate is decreased in a regular interval of epochs by some factor $a_{decrease}$ during optimization. \\
 
-The default loss function for the system is cross-entropy loss, which in the context of the patch-based approach is denoted \todo{This paragraph is bad}:\\
+The default loss function for the system is cross-entropy loss, which in the context of the patch-based approach is denoted:\\
 
 \begin{flalign*}
   \mathcal{L}_{\text{cross-entropy}}(q,y) =&  - \frac{1}{w_m^2} \sum\limits_{i=1}^{w_m^2} [y_i \log(q_i) + (1 -y_i)\log(1-q_i)],  \\ 
