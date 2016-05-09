@@ -225,7 +225,106 @@ The figures created by this tools, show the MSE loss and breakeven, over increas
 \end{itemize}
 
 \section{Road Detection Systems Results}
-In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is 0.863. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is 0.765.  
+In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is 0.863. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is 0.765.  \\
+
+\begin{figure}[H]
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/img1151.jpg}
+\caption{ Image. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/label1151.jpg}
+\caption{ Label. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/pred1151.jpg}
+\caption{ Prediction. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/hit1151.jpg}
+\caption{ Hits. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/img1160.jpg}
+\caption{ Image.}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/label1160.jpg}
+\caption{Label}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/pred1160.jpg}
+\caption{Prediction.}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/hit1160.jpg}
+\caption{Hits.}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\caption{Road extraction results 1 from the Norwegian Roads Dataset} \label{fig:Norway_app_results}
+\end{figure}
+
+\begin{figure}[H]
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/img1205.jpg}
+\caption{ Image. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/label1205.jpg}
+\caption{ Label. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/pred1205.jpg}
+\caption{ Prediction. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/hit1205.jpg}
+\caption{ Hits. }
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/img1217.jpg}
+\caption{ Image.}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/label1217.jpg}
+\caption{Label}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/pred1217.jpg}
+\caption{Prediction.}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.23\textwidth}
+\includegraphics[width=\textwidth]{figs/appendix/hit1217.jpg}
+\caption{Hits.}
+\vspace{0.2cm} % separation vertically between the subfigures
+\end{subfigure}
+\caption{Road extraction results 2 from the Norwegian Roads Dataset} \label{fig:Norway_app_results}
+\end{figure}
+
 
 \section{Experiment E5 Results}
 The results from Experiment E5, were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E5_all_lc}, while the precision and recall curves are depicted in Figure \ref{fig:E5_all_pr}. Each plot is the average from 10 separate runs.\\
@@ -306,7 +405,6 @@ The results from Experiment E5, were summarised by plotting the final test loss 
 \item Acronym CNN, is ok. But only defined once? Or once per chapter.
 \item Check that installation guides and dependencies are correct - Appendix A, B, C
 \item Proof read for incorrect future tense
-\item Background discussion - Write a summary of related works, and short emphasis on elements important for the rest of the thesis. Extraction systems, label noise, curriculum learning.
 \item Rest of results.
 \item Student t test for results. To see if results are significant, or convincing is the better word.uncertainty for every pair.
 \item Footnote for mnih and saito - average of 10 or 1?

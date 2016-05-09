@@ -3,20 +3,20 @@
 In this section, the goal and research questions of this thesis are presented. 
 
 \begin{description}
-\item[Goal] Create a convolutional neural network that can extract roads from aerial images.
+\item[Goal:] Create a convolutional neural network that can extract roads from aerial images.
 \end{description}
 
 The thesis will investigate how to further improve road extraction by considering the two research question defined below. A system consisting of a convolutional neural network will be created, and experiments will reveal how well the system performs.
 
 \begin{description}
-\item[Research question 1] Does the bootstrapping loss function give a significant improvement of precision and recall for datasets with noisy labels?
+\item[Research question 1:] Does the bootstrapping loss function give a significant improvement of precision and recall for datasets with noisy labels?
 \end{description}
 
 Because of the costs involved in creating accurate datasets, the thesis will look at techniques to reduce the effect of inconsistent labelling. For datasets related to aerial images, it is common to find omission and registration error. Small and private roads are often unmarked on maps, and roads might be incorrectly placed on them.
 
 
 \begin{description}
-\item[Research question 2]  How can curriculum learning improve results in deep learning, and does this improve precision and recall for aerial images?
+\item[Research question 2:]  How can curriculum learning improve results in deep learning, and does this improve precision and recall for aerial images?
 \end{description}
 
 The thesis will also investigate the benefits of curriculum learning for a machine learning algorithm. By sorting examples from easy to hard, the learner can potentially be guided to a more advantageous area of parameter space and result in the learner finding a better local minima, as well as reducing the time of convergence. This can be beneficial for deep learning, which often involves optimization of a lot of parameters. The challenge is to find an ordering criteria that is applicable for aerial images. 

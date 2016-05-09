@@ -1,4 +1,4 @@
-\section{Semantic Segmentation with Convolutional Neural Network}
+\section{Semantic Segmentation with \ac{CNN}}
 \label{sec:network}
 This section presents the structure of the convolutional neural network, as well as the details surrounding the optimization and regularization of the network. 
 
@@ -61,7 +61,7 @@ The specific network configuration values described in this section, is the defa
 \caption{Hyperparameters for the \ac{CNN}.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+l ^p{7.5cm} ^l}\hline
+\begin{tabular}{+l ^p{6.5cm} ^l}\hline
 \rowstyle{\bfseries}
   Parameter & Description & Value\\\hline
   $K^{(l)}$ & Number of kernels for convolutional layer $l$ & 64, 112, 80 \\
@@ -71,7 +71,7 @@ The specific network configuration values described in this section, is the defa
   $\mathcal{L}$ & Loss function  & Cross-entropy \\
   Epochs & How many epochs of training & 100 \\
   $\sigma^{(l)}$ & Transfer function for each layer $l$ & Leaky ReLU x4, sigmoid x1 \\
-  $h$ & Number of neurons in hidden layer. & 4096 \\
+  $h$ & Number of neurons in hidden layer & 4096 \\
   $p^{(l)}$ & Dropout rate for a layer $l$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
   Initial patience  & Initial patience in iterations & 100 000 \\
   Patience increase  & Increase factor for patience & 2 \\

@@ -130,7 +130,7 @@ The performance of the road detection system was tested in Experiment E6. The pa
 While experiment E1 and E2 had teachers that were trained with over 400000 examples, this  
 experiment assumed that there are a limited amount of patches available. The teacher for this experiment was therefore only trained with 221600 examples, which is the same number of examples in each patch dataset. The model was trained for 156 epochs, and achieved a test \ac{MSE} of 0.0253 and a relaxed precision and recall of 0.79.\\
 
-For the experiment involving gradually increasing the difficulty of the training set, there were 326800 examples in total, split between $N=5$ stages. The first stage had 110800 examples, whereas the remaining stages had 54000 examples each. For the baseline, the difficulty theshold $D_\theta$ was set to 1 for every stage. The first stage of the curriculum patch dataset, only allowed examples with a difficulty below 0.25. The key parameters for Experiment E7, are displayed in \ref{tab:key_parameter_E7}\\
+For the experiment involving gradually increasing the difficulty of the training set, there were 326800 examples in total, split between $N=5$ stages. The first stage had 110800 examples, whereas the remaining stages had 54000 examples each. For the baseline, the difficulty theshold $D_\theta$ was set to 1 for every stage. The first stage of the curriculum patch dataset, only allowed examples with a difficulty below 0.25. The key parameters for Experiment E7, are displayed in Table \ref{tab:key_parameter_E7}\\
 
 \begin{table}[!h]
 \caption{Key parameters for E7.}
