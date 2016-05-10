@@ -225,6 +225,7 @@ The figures created by this tools, show the MSE loss and breakeven, over increas
 \end{itemize}
 
 \section{Road Detection Systems Results}
+\label{app:roaddetectionresults}
 In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is 0.863. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is 0.765.  \\
 
 \begin{figure}[H]
@@ -427,98 +428,89 @@ In this appendix results from the best performing convolutional neural networks 
 \caption[Massachusetts Road extraction results 1]{Road extraction results 2 from the Massachusetts Roads Dataset.} \label{fiMass_app_results2}
 \end{figure}
 
-\section{Experiment E5 Results}
+\section{Experiment E2 Results}
 \label{app:fullE5results}
 
-The results from Experiment E5, were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E5_all_lc}, while the precision and recall curves are depicted in Figure \ref{fig:E5_all_pr}. Each plot is the average from 10 separate runs.\\
+The results from Experiment E2, were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E2_all_lc}, while the precision and recall curves are depicted in Figure \ref{fig:E2_all_pr}. Each plot is the average from 10 separate runs.\\
 
 \begin{figure}[H]
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/pr_0.png}
-\caption{ 0\% } \label{fig:app_E5_0_pr}
+\caption{ 0\% } \label{fig:app_E2_0_pr}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/pr_1.png}
-\caption{10\% } \label{fig:app_E5_1_pr}
+\caption{10\% } \label{fig:app_E2_1_pr}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/pr_2.png}
-\caption{20\% } \label{fig:app_E5_2_pr}
+\caption{20\% } \label{fig:app_E2_2_pr}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/pr_3.png}
-\caption{ 30\%} \label{fig:app_E5_3_pr}
+\caption{ 30\%} \label{fig:app_E2_3_pr}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/pr_4.png}
-\caption{40\%} \label{fig:app_E5_4_pr}
+\caption{40\%} \label{fig:app_E2_4_pr}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
-\caption{E5 - Precision and recall breakeven comparisons for several levels of omission noise.} \label{fig:E5_all_pr}
+\caption{E5 - Precision and recall breakeven comparisons for several levels of omission noise.} \label{fig:E2_all_pr}
 \end{figure}
 
 \begin{figure}[H]
 \begin{subfigure}{0.3\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/lc_0.png}
-\caption{ 0\% } \label{fig:app_E5_0_lc}
+\caption{ 0\% } \label{fig:app_E2_0_lc}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/lc_1.png}
-\caption{10\% } \label{fig:app_E5_1_lc}
+\caption{10\% } \label{fig:app_E2_1_lc}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/lc_2.png}
-\caption{20\% } \label{fig:app_E5_2_lc}
+\caption{20\% } \label{fig:app_E2_2_lc}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/lc_3.png}
-\caption{ 30\%} \label{fig:app_E5_3_lc}
+\caption{ 30\%} \label{fig:app_E2_3_lc}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\textwidth]{figs/E5/lc_4.png}
-\caption{40\%} \label{fig:app_E5_4_lc}
+\caption{40\%} \label{fig:app_E2_4_lc}
 \vspace{0.1cm} % separation vertically between the subfigures
 \end{subfigure}
-\caption{E5 - Test loss comparisons for several levels of omission noise.} \label{fig:E5_all_lc}
+\caption{E2 - Test loss comparisons for several levels of omission noise.} \label{fig:E2_all_lc}
 \end{figure}
 
 
 \section{TODOs which apply to entire thesis}
 \todo[inline]{Remove this part!}
 \begin{itemize}
+\item Rest of results.
+\item Student t test for results. To see if results are significant, or convincing is the better word.uncertainty for every pair.
 \item Update experiment IDs
-\item curriculum learning and bootstrapping - capitalize?
+\item Update figures
 \item proof read
 \item Road extraction, road detection, semantic segmentation, patch-based. Need clarity, and really good understanding of these terms. Check for misuse of these terms!
 \item Read sukhbaatar updated paper
-\item Additional thanks in preface?
 \item Acronym CNN, is ok. But only defined once? Or once per chapter.
 \item Check that installation guides and dependencies are correct - Appendix A, B, C
 \item Proof read for incorrect future tense
-\item Rest of results.
-\item Student t test for results. To see if results are significant, or convincing is the better word.uncertainty for every pair.
-\item Footnote for mnih and saito - average of 10 or 1?
+\item Where by is more appropriate than for
+\item Check if repetitions of mnih and saito is unclear
 \end{itemize}
- 
-\todo[inline]{field of research, brief motivation for the work, what the research topic is, the research approach(es) applied. contributions}
-\todo[inline]{Avoid drawing grand conclusions. Only what your data can support}
-\todo[inline]{Study tables graphs for unusual things that might raise questions with the reader}
-
-
-Chapter 5.
-\todo[inline]{Limits and merits. Propertly in discussion summary of results?}
-\todo[inline]{Main contributions to the field and how significant}.\\
