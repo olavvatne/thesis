@@ -2,9 +2,10 @@
 \label{sec:SummaryDiscussion}
 The goal of this thesis was to segment road pixels from aerial imagery, using a convolutional neural network. This network shares many similarities to the networks used by \cite{Mnih_aerial_images_noisy} and \citep{MnihThesis}. Experiments demonstrated that this architecture trained on the Massachusetts Roads Dataset achieved an averaged breakeven point of 0.83. This is a bit below comparable results from other works. The most likely explanation is that the default network architecture constrained the capacity of the model. From the qualitative analysis, the classifier seemed to have generalized fairly well to the task of road segmentation.\\
 
- The research questions of this thesis are related to this goal. Automatically generated aerial imagery datasets often suffer from label noise, and the research questions involve methods which can possibly alleviate the negative effects of inconsistent labelling. This section will attempt to resolve the research questions defined in Section \ref{sec:Goals and Research Questions} by a brief discussion based on the results from Chapter \ref{cha:ResearchAndResults}.\\
-\begin{description}
-\item[Research question 1] Does the bootstrapping loss function give a significant improvement of precision and recall for datasets with noisy labels?
+ The research questions of this thesis are related to this goal. Automatically generated aerial imagery datasets often suffer from label noise, and the research questions involve methods which can possibly alleviate the negative effects of inconsistent labelling. This section will attempt to resolve the research questions defined in Section \ref{sec:Goals and Research Questions} by a brief discussion based on the results from Chapter \ref{cha:ResearchAndResults}.
+ 
+\begin{description}[ style=nextline, leftmargin=1.5em, rightmargin=1.5em]
+\item[Research question 1:]{\it Does the bootstrapping loss function give a significant improvement of precision and recall for datasets with noisy labels?}
 \end{description}
 
 \cite{Mnih_aerial_images_noisy} showed that performance could be improved for aerial imagery, by having the loss function model the noise distribution. They also found two particular breeds of label noise in aerial imagery datasets, which they called omission and registration noise. The bootstrapping loss function proposed by \cite{Reed_noisy_labels_bootstrapping}, has also showed promising results for several noisy datasets. In this thesis, this particular loss function was therefore tested on aerial imagery, to see if it provided robustness towards omission and registration noise. Furthermore, a proposed variation of bootstrapping was also tested.\\
@@ -13,8 +14,8 @@ The experiments demonstrated that the bootstrapping method did provide some robu
 
 Tests performed on the Norwegian Roads Dataset N50 showed that confident bootstrapping performed slightly better than bootstrapping, and that both bootstrapping methods did significantly better than the baseline \todo{Did they?}. In summary, the bootstrapping loss function did have a positive effect on noisy labels, but it was not significant \todo{Is it?}. 
 
-\begin{description}
-\item[Research question 2]  How can curriculum learning improve results in deep learning, and does this improve precision and recall for aerial images?
+\begin{description}[ style=nextline, leftmargin=1.5em, rightmargin=1.5em]
+\item[Research question 2:]{\it How can curriculum learning improve results in deep learning, and does this improve precision and recall for aerial images?}
 \end{description}
 
 Curriculum learning proposed by \cite{Bengio_curriculumlearning}, demonstrated compelling results for several tasks. The method increased generalization accuracy and reduced convergence, by organizing each dataset according to the the examples difficulty. The classifier is trained by gradually introducing harder examples to the training set. However, the curriculum strategies used for sorting the dataset were specific for each task, and was not particularly adaptable to road detection. This challenge was addressed by \ac{SPL} \citep{Kumar_self_paced_learning}, where the curriculum strategy is internalized in the classifier. The classifier simultaneously calculate loss and and adjust the contribution of each example based on it's easiness  \todo{Wrong, based on what criteria}.\\
