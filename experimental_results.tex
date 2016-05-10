@@ -30,14 +30,14 @@ The results from comparing the bootstrapping methods and the baseline method at 
 \caption{Precision and recall breakeven} \label{fig:E5_boot_norway_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E3 - Robustness of bootstrapping for increasing amount of label noise]{E3 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E5_boot_norway}
+\caption[E5 - Robustness of bootstrapping for increasing amount of label noise]{E5 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E5_boot_norway}
 \end{figure}
 
 Figure \ref{fig:E3_boot_mass_loss} displays the averaged test loss at different levels of label noise, for Experiment E3. The baseline, which utilizes the cross-entropy loss function, seems to generally increase in test loss as the noise level is increased. The bootstrapping loss function has a lower test loss for noise levels above 10 percent.\\
 
 Figure \ref{fig:E3_boot_mass_pr}, which displays the precision and recall breakeven values at increasing levels of label noise, shows a trend of decreasing values.  For label noise levels above 20 percent, bootstrapping surpasses the baseline. Though, the difference in performance is small.\\
 
-The same kind of label noise experiment was also conducted for the Norwegian Roads Dataset, and include an additional plot of the confident bootstrapping performance. In Figure \ref{fig:E5_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. As expected, the precision and recall breakeven points for the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E4_boot_norway_vbase_pr}. Although the bootstrapping methods behave a bit more erratic, they generally tend to decrease at a slower rate \todo{A bit hard to see, maybe}.\\
+The same kind of label noise experiment was also conducted for the Norwegian Roads Dataset, and include an additional plot of the confident bootstrapping performance. In Figure \ref{fig:E5_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. As expected, the precision and recall breakeven points for the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E4_boot_norway_vbase_pr}. Although the bootstrapping methods behave a bit more erratic, they generally tend to decrease at a slower rate. The precision and recall curves and \ac{MSE} test loss plots of Experiment E5 can be found in Appendix \ref{app:fullE5results}.\\
 
 A slightly different approach has been taken for Experiment E4. The road detection system has in this experiment been trained with labels from the label set N50. This label set has a higher rate of omission and registration noise than the labels in Massachusetts Roads Dataset, for instance. The test set however, consists of labels originating from the Vbase label set, which is more accurate. The result from this experiment is displayed in Figure \ref{fig:E4_boot_norway_vbase}\\
 
