@@ -19,7 +19,7 @@
 \usepackage[linktocpage,colorlinks]{hyperref}			% PDF hyperlink
 \usepackage{geometry} 							% Better geometry
 %\usepackage[center]					% For cropping documents
-
+\usepackage{enumitem}
 % B5 (uncomment to convert to B5 format)
  \geometry{b5paper}
 
@@ -157,10 +157,7 @@ helpful advice and guidance throughout this project. \\
 
 \chapter{Introduction}
 \label{cha:Introduction}
-In this thesis, the state of the art for road extraction is explored. This particular area is a part of the field of Photogrammetry. Additionally, research into topics such as curriculum learning, and how to handle label noise have been conducted.\\
-% This research will be useful in the development of a road detection system.
-
-This chapter aims at giving an introduction to the thesis. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Research methods are described in Section \ref{sec:researchMethod}, Section \ref{sec:IntroContributions} outlines the contributions of this thesis and Section \ref{sec:thesisStructure} presents an overview of the thesis structure.
+This chapter aims at giving an introduction to the thesis. This includes a brief presentation of the field of Photogrammetry, road extraction from aerial imagery and an introduction to the thesis' research questions. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Next, the research methods are described in Section \ref{sec:researchMethod}. The contributions of this thesis are outlined in Section \ref{sec:IntroContributions}, and Section \ref{sec:thesisStructure} presents an overview of the thesis structure.
 
 \input{motivation}
 
@@ -176,7 +173,7 @@ This chapter aims at giving an introduction to the thesis. Section \ref{sec:Back
 
 \chapter{Background Theory and Motivation}\label{T-B}
 \label{cha:TheoryAndBackground}
-
+This chapter presents background theory and related works related to the research goal and questions.In section \ref{sec:BackgroundAndMotivation} topics such as \ac{CNN}, label noise and road extraction system are briefly introduced. The structured literature review is outlined in Section \ref{sec:literature_resources}. The relevant research found by the structured literature review are then presented in Section \ref{sec:related_works}. Finally, Section \ref{sec:backgroundDiscussion} concludes the chapter by a background discussion \todo{Valid use of finally?}.
 \input{background_theory}
 
 \input{structured_literature_review}
