@@ -20,12 +20,12 @@ The results from comparing the bootstrapping methods and the baseline method at 
 \end{figure}
 
 \begin{figure}
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E5/E5_lc_noise.png}
 \caption{MSE test loss} \label{fig:E5_boot_norway_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E5/E5_pr_noise.png}
 \caption{Precision and recall breakeven} \label{fig:E5_boot_norway_pr}
 \end{subfigure}
@@ -61,12 +61,12 @@ The difference between bootstrapping and confident bootstrapping is evident in F
 \label{sec:results_curriculum_learning_aerial_imagery}
 
 \begin{figure}[!h]
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E1/E1-lc.png}
 \caption{Comparison of test loss} \label{fig:E1_curr_norway_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E1/E1-pr.png}
 \caption{Precision and recall comparisons.} \label{fig:E1_curr_norway_pr}
 \end{subfigure}
@@ -125,12 +125,12 @@ The precision and recall breakeven values from Experiment E1 and Experiment E2, 
 The training set difficulty distribution, according to the difficulty estimator $d(y,q)$ from Experiment E2, is depicted in a histogram in Figure \ref{fig:E2_difficulty_distribution}. The training set of  Massachusetts Roads Dataset was sampled, and the difficulty estimate for each patch was computed for every patch. The patches which contain no road label pixels, were counted separately from patches containing road label pixels. The resulting histogram for non-road patches in Figure \ref{fig:E2_difficulty_distribution_nonroad}, shows that the trained curriculum model is excellent at predicting non-road patches, because the predictions and labels match very well resulting in very low difficulty estimates. This is not the case for road patches, illustrated by Figure  \ref{fig:E2_difficulty_distribution_road}, where the distribution is clearly skewed right and have a greater variance. \\
 
 \begin{figure}
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E2/E2-road-dist.png}
 \caption{Distribution for road patches.} \label{fig:E2_difficulty_distribution_road}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E2/E2-non_road-dist.png}
 \caption{Distribution for non-road patches.} \label{fig:E2_difficulty_distribution_nonroad}
 \end{subfigure}
@@ -141,22 +141,22 @@ The training set difficulty distribution, according to the difficulty estimator 
 Figure \ref{fig:E7_curriculum_inexperienced} shows the results from Experiment E7. The patch datasets in this experiment were created from a teacher that was trained with the same number of training examples as the patch datasets \todo{Double patch datasets in sentence}. Curriculum learning still achieved a higher test loss and gave better precision for all levels of recall. In addition, comparing the baseline and curriculum learning which have two stages, Figure \ref{fig:E7_curriculum_inexperienced_loss} and \ref{fig:E7_curriculum_inexperienced_pr} illustrate the performance of training with only the first stage of the patch datasets. As expected, the first stage baseline has a lower breakeven point than the two stage baseline. More surprisingly, the first stage curriculum outperformed both the baseline and the curriculum, both in terms of breakeven and test loss. However, at recall levels less than 0.4, the precision of the first stage curriculum decreases rapidly. This shows that the curriculum strategy is effective at filtering out inconsistent labels, and with a suitable difficulty threshold $D_0$ can provides enough example variability in the first stage training set. Another possible reason for this result, is the sudden training set switch at epoch 60, which dramatically increases the test loss. \\
 
 \begin{figure}
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_lc_two_stage.png}
 \caption{Test loss for two stage dataset} \label{fig:E7_curriculum_inexperienced_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_pr_two_stage.png}
 \caption{Precision and recall comparisons for two stage dataset.} \label{fig:E7_curriculum_inexperienced_pr}
 \end{subfigure}
 
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_lc_gradual.png}
 \caption{Test loss for dataset with gradual stage switching} \label{fig:E7_gradual_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_pr_gradual.png}
 \caption{Precision and recall for dataset with gradual stage switching.} \label{fig:E7_gradual_pr}
 \end{subfigure}
@@ -174,12 +174,12 @@ In this section, the road detection system was trained on a much larger patch da
 In Figure \ref{fig:E6_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}.\todo{Footnote for other works. Unclear if average}\\
 
 \begin{figure}
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_loss.png}
 \caption{MSE loss} \label{fig:E6_performance_mass_lc}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_pr.png}
 \caption{Precision and recall.} \label{fig:E6_performance_mass_pr}
 \end{subfigure}
