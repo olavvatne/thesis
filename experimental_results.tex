@@ -3,7 +3,7 @@
 \subsection{Bootstrapping for Imagery with Noisy Labels}
 \label{sec:results_bootstrapping}
 
-The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E1_boot_mass} and Figure \ref{fig:E2_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E1 and E2, utilized patch datasets where 0, 10, 20 ,30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
+The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E1_boot_mass} and Figure \ref{fig:E2_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E1 and E2, utilized patch datasets where 0, 10, 20, 30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
@@ -193,10 +193,11 @@ In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall cu
 \begin{tabular}{+l ^r ^r}\hline
 \rowstyle{\bfseries}
   System & breakeven & best network\\\hline
-  Road detection system & 0.8341 & 0.8413\\
-  Curriculum	 trained system &  & 0.863--\\
+  M1 - Road detection system & 0.8341 & 0.8413\\
+  M2 - Road detection system &  & 0.863--\\
   \cite{MnihThesis}\tablefootnote{Number of repetitions unclear} & 0.8873 & \\
   \cite{saito_building_and_roads}\tablefootnote{Number of repetitions unclear} & 0.8866& \\\hline
+  N1 - Road detection system &  & 0.863--\\\hline
 \end{tabular}
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
