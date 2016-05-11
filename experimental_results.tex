@@ -7,12 +7,12 @@ The results from comparing the bootstrapping methods and the baseline method at 
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E1/E1_lc_noise.png}
+\includegraphics[width=\linewidth]{figs/E1/E1-lc-noise.png}
 \caption{MSE test loss} \label{fig:E1_boot_mass_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E1/E1_pr_noise.png}
+\includegraphics[width=\linewidth]{figs/E1/E1-pr-noise.png}
 \caption{Precision and recall breakeven} \label{fig:E1_boot_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
@@ -21,12 +21,12 @@ The results from comparing the bootstrapping methods and the baseline method at 
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\linewidth]{figs/E2/E2_lc_noise.png}
+\includegraphics[width=\linewidth]{figs/E2/E2-lc-noise.png}
 \caption{MSE test loss} \label{fig:E2_boot_norway_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\linewidth]{figs/E2/E2_pr_noise.png}
+\includegraphics[width=\linewidth]{figs/E2/E2-pr-noise.png}
 \caption{Precision and recall breakeven} \label{fig:E2_boot_norway_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
@@ -44,13 +44,13 @@ A slightly different approach has been taken for Experiment E3. The road detecti
 The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E3_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E3_boot_norway_vbase_pr}. In fact, the precision and recall breakeven values slightly favours the bootstrapping methods. This contradictory results between the MSE loss and the breakeven point, might be the result of the relaxed measure of precision, which ignores small misalignments between the prediction and label pixels.\\
 
 \begin{figure}
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E3/E3_lc.png}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\linewidth]{figs/E3/E3-lc.png}
 \caption{MSE test loss} \label{fig:E3_boot_norway_vbase_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.48\textwidth}
-\includegraphics[width=\linewidth]{figs/E3/E3_pr.png}
+\begin{subfigure}{0.5\textwidth}
+\includegraphics[width=\linewidth]{figs/E3/E3-pr.png}
 \caption{Precision and recall comparison.} \label{fig:E3_boot_norway_vbase_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
@@ -138,12 +138,15 @@ The training set difficulty distribution, according to the difficulty estimator 
 \caption[E4 - Difficulty distribution]{E4 - Example difficulty distribution according to estimator $d(y,q)$. } \label{fig:E4_difficulty_distribution}
 \end{figure}
 
-Figure \ref{fig:E6_curriculum_inexperienced} shows the results from Experiment E6. The patch datasets in this experiment were created from a teacher that was trained with the same number of training examples as the patch datasets \todo{Double patch datasets in sentence}. Curriculum learning still achieved a higher test loss and gave better precision for all levels of recall. In addition, comparing the baseline and curriculum learning which have two stages, Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_inexperienced_pr} illustrate the performance of training with only the first stage of the patch datasets. As expected, the first stage baseline has a lower breakeven point than the two stage baseline. More surprisingly, the first stage curriculum outperformed both the baseline and the curriculum, both in terms of breakeven and test loss. However, at recall levels less than 0.4, the precision of the first stage curriculum decreases rapidly. This shows that the curriculum strategy is effective at filtering out inconsistent labels, and with a suitable difficulty threshold $D_0$ can provides enough example variability in the first stage training set. Another possible reason for this result, is the sudden training set switch at epoch 60, which dramatically increases the test loss. \\
+Figure \ref{fig:E6_curriculum_inexperienced} shows the results from Experiment E6. The patch datasets in this experiment were created from a teacher that was trained with the same number of training examples as the patch datasets. Curriculum learning still achieved a higher test loss and gave better precision for all levels of recall. In addition, comparing the baseline and curriculum learning which have two stages, Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_inexperienced_pr} illustrate the performance of training with only the first stage of the patch datasets. As expected, the first stage baseline has a lower breakeven point than the two stage baseline. More surprisingly, the first stage curriculum outperformed both the baseline and the curriculum, both in terms of breakeven and test loss. However, at recall levels less than 0.4, the precision of the first stage curriculum decreases rapidly. This shows that the curriculum strategy is effective at filtering out inconsistent labels, and with a suitable difficulty threshold $D_0$ can provides enough example variability in the first stage training set. Another possible reason for this result, is the sudden training set switch at epoch 60, which dramatically increases the test loss. \\
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_two_stage.png}
-\caption{Test loss for two stage dataset} \label{fig:E6_curriculum_inexperienced_loss}
+
+\caption{Test loss for two stage dataset}
+\vspace{0.4cm} 
+\label{fig:E6_curriculum_inexperienced_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
@@ -171,7 +174,7 @@ The baseline plot even decreases substantially after epoch 60. This is an improv
 \label{sec:results_road_detection_system}
 In Experiment E7, the road detection system was trained on a much larger patch dataset than in previous sections. In order for the patch dataset to fit in main memory, the examples were split into nine separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E7_performance_mass_lc}, where the loss increases slightly after a training set switch. The network converged to a \ac{MSE} test loss of 0.0232. \\
 
-In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}.\\
+In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}\todo{Explain what the comparable work actually is?}.\\
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
@@ -184,20 +187,20 @@ In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall cu
 \caption{Precision and recall.} \label{fig:E7_performance_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E7 - Performance of road detection system trained with Massachusetts Roads Dataset]{E7 - Performance of road detection system trained with Massachusetts Roads Dataset.} \label{fig:E7_performance_mass}
+\caption[E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset]{E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset.} \label{fig:E7_performance_mass}
 \end{figure}
 
 \begin{table}
-\caption[Road detection system results]{Road detection system results.}
+\caption[Road detection system results]{Road detection system results. The values in this table represent the precision and recall breakeven points achieved by the systems.}
 \centering
 \begin{tabular}{+l ^r ^r}\hline
 \rowstyle{\bfseries}
   System & breakeven & best network\\\hline
-  M1 - Road detection system & 0.8341 & 0.8413\\
-  M2 - Road detection system &  & 0.863--\\
+  M1 - Network & 0.8341 & 0.8413\\
+  M2 - Network & 0.8494 & 0.8627\\
   \cite{MnihThesis}\tablefootnote{Number of repetitions unclear} & 0.8873 & \\
   \cite{saito_building_and_roads}\tablefootnote{Number of repetitions unclear} & 0.8866& \\\hline
-  N1 - Road detection system &  & 0.863--\\\hline
+  N1 - Network & 0.7508 & 0.7620 \\\hline
 \end{tabular}
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}

@@ -131,18 +131,20 @@ For the experiment involving gradually increasing the difficulty of the training
 \end{table}
 
 \subsubsection{E7 - Performance of the Road Detection System}
-The performance of the road detection system was tested in Experiment E7. The patch dataset counts 3985200 examples, which have been randomly sampled from the Massachusetts Roads Dataset. The network was trained for 300 epochs, unless early stopping terminated the optimization. In order to train with such a large dataset, the model trained with only a subset of the examples at any given epoch. The training data was switched with another subset at every $epoch\mod30=0$ , starting from epoch 50. At any given epoch, the model was optimized by a total of 442800 examples. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E7}.
+The performance of the road detection system was tested in Experiment E7. The M1 network utilized a patch dataset with 3985200 examples, which have been randomly sampled from the Massachusetts Roads Dataset. The network was trained for 300 epochs, unless early stopping terminated the optimization. In order to train with such a large dataset, the model trained with only a subset of the examples at any given epoch. The training data was switched with another subset at every $epoch\mod30=0$ , starting from epoch 50. At any given epoch, the model was optimized by a total of 442800 examples. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E7}.\\
+
+In addition to the M1 network, the road detection performance on both datasets were tested by Network M2 and N1. The default network architecture was altered in both networks, as seen in \ref{tab:key_parameter_E7}. This resulted in a significant increase in adjustable parameters, compared to M1. Both networks utilized the {\it confident bootstrapping} loss function, and were trained by curriculum patch datasets. The curriculum teachers of Experiment E4 and E5 were used to create the patch datasets.\\
 
 \begin{table}[p]
 \caption[Parameters for Experiment E7]{Key parameters for Experiment E7.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+p{2.4cm} ^p{10cm}}\hline
+\begin{tabular}{+p{2.4cm} ^p{9.8cm}}\hline
 \rowstyle{\bfseries}
   Method & Parameters \\\hline
-  Massachusetts, cross-entropy, no-curriculum & 300 epochs, $s=3985200$, $a=0.0015$, $b=128$, $\mathcal{L}$ = cross-entropy, $ES_{initial}$ = 400000  \\
-  Massachusetts, bootstrapping, curriculum & 85 epochs, $s=1772800$, $a=0.0025$,$a_{decrease}=0.9$ $b=128$, $m=0.93$, $\mathcal{L}$ = confident bootstrapping, $ES_{initial}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
-    Norway, bootstrapping, curriculum & 85 epochs, $s=1772800$, $a=0.0025$, $a_{decrease}=0.9$, $b=128$, $m=0.93$ $\mathcal{L}$ = confident bootstrapping, $ES_{initial}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
+  M1-Massachusetts, cross-entropy, no-curriculum & 300 epochs, $s=3985200$, $a=0.0015$, $b=128$, $\mathcal{L}$ = cross-entropy, $ES_{initial}$ = 400000  \\
+  M2-Massachusetts, bootstrapping, curriculum & 85 epochs, $s=1772800$, $a=0.0025$,$a_{decrease}=0.9$ $b=128$, $m=0.93$, $\mathcal{L}$ = confident bootstrapping, $ES_{initial}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
+    N3 - Norway, bootstrapping, curriculum & 85 epochs, $s=1760000$, $a=0.0025$, $a_{decrease}=0.9$, $b=128$, $m=0.93$ $\mathcal{L}$ = confident bootstrapping, $ES_{initial}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
   \hline
 \end{tabular}
 \end{adjustbox}
