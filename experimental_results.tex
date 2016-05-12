@@ -58,7 +58,7 @@ The difference between bootstrapping and confident bootstrapping is evident in F
 \end{figure}
 
 \begin{table}
-\caption[Bootstrapping results]{Bootstrapping results. P-values are computed for the test loss. The Welch's t test compare the bootstrapping and baseline distribution. If a p-value is below 0.1, it is plausible that the samples originate from different distributions. The second column shows the percentage of artificial omission noise.}
+\caption[Bootstrapping results]{Bootstrapping results. P-values are computed for the test loss. If a p-value is below 0.1, it is plausible that the samples originate from different distributions. The second column shows the percentage of artificial omission noise.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^l ^l ^r ^r ^r}\hline
@@ -88,7 +88,10 @@ The difference between bootstrapping and confident bootstrapping is evident in F
   E2 - Confident 		&10 & Norwegian & 0.5913 & 0.0257 & 0.43790 \\
   E2 - Confident 		&20 & Norwegian & 0.5961 & 0.0252 & 0.36447 \\
   E2 - Confident 		&30 & Norwegian & 0.5876 & 0.0251 & 0.09397 \\
-  E2 - Confident 		&40 & Norwegian & 0.5869 & 0.0256 & 0.17952 \\
+  E2 - Confident 		&40 & Norwegian & 0.5869 & 0.0256 & 0.17952 \\\hline
+  E3 - Baseline 			&0 & Norwegian &  &  &  \\
+  E3 - Bootstrapping 	&0 & Norwegian &  & & \\
+  E3 - Confident 		&0 & Norwegian &  & &  \\
   \hline
 \end{tabular}
 \end{adjustbox}
