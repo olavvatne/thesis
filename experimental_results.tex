@@ -3,7 +3,7 @@
 \subsection{Bootstrapping for Imagery with Noisy Labels}
 \label{sec:results_bootstrapping}
 
-The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E1_boot_mass} and Figure \ref{fig:E2_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E1 and E2, utilized patch datasets where 0, 10, 20, 30 and 40 percent of roads were removed from the labels \todo{Example of road removal}.\\
+The results from comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E1_boot_mass} and Figure \ref{fig:E2_boot_norway}. The plots in the first figure are based on models trained on the Massachusetts Roads Dataset, whereas the second figure show results from training on the Norwegian Roads Dataset. Label noise have been artificially added to the label images before training. Specifically, areas of road pixels have been removed incrementally, by setting the label pixel values to zero. This process is continued until a certain percentage of road class pixels have been removed. In terms of aerial imagery, the artificially added label noise simulates omission errors, in which roads have not been marked in the label maps. Experiment E1 and E2, utilized patch datasets where 0, 10, 20, 30 and 40 percent of roads were removed from each label image\todo{Example of road removal?}.\\
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
@@ -57,6 +57,45 @@ The difference between bootstrapping and confident bootstrapping is evident in F
 \caption[E3 - Comparison of loss functions for Norwegian Roads Dataset Vbase]{E3 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E3_boot_norway_vbase}
 \end{figure}
 
+\begin{table}
+\caption[Bootstrapping results]{Bootstrapping results. P-values are computed for the test loss. The Welch's t test compare the bootstrapping and baseline distribution. If a p-value is below 0.1, it is plausible that the samples originate from different distributions. The second column shows the percentage of artificial omission noise.}
+\begin{center}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{+l ^l ^l ^r ^r ^r}\hline
+\rowstyle{\bfseries}
+  Experiment & \% & Dataset & Breakeven & Test loss & P-value\\\hline
+  E1 - Baseline 			&0	& Massachusetts & 0.6949 & 0.0299 & - \\
+  E1 - Baseline 			&10 & Massachusetts & 0.6910 & 0.0294 & -  \\
+  E1 - Baseline 			&20 & Massachusetts & 0.6795 & 0.0299 & - \\
+  E1 - Baseline 			&30 & Massachusetts & 0.6825 & 0.0297 & - \\
+  E1 - Baseline 			&40 & Massachusetts & 0.6663 & 0.0308 & - \\
+  E1 - Bootstrapping 	&0	& Massachusetts & 0.6930 & 0.0290 &  \\
+  E1 - Bootstrapping 	&10 & Massachusetts & 0.6879 & 0.0297 &   \\
+  E1 - Bootstrapping 	&20 & Massachusetts & 0.6810 & 0.0292 & \\
+  E1 - Bootstrapping 	&30 & Massachusetts & 0.6855 & 0.0289 &  \\
+  E1 - Bootstrapping 	&40 & Massachusetts & 0.6757 & 0.0299&  \\\hline
+  E2 - Baseline 			&0	& Norwegian & 0.6001 & 0.0265 & - \\
+  E2 - Baseline 			&10 	& Norwegian & 0.5930 & 0.0261 & -  \\
+  E2 - Baseline 			&20 	& Norwegian & & & - \\
+  E2 - Baseline 			&30 	& Norwegian & & & - \\
+  E2 - Baseline 			&40 	& Norwegian & & & - \\
+  E2 - Bootstrapping 	&0	& Norwegian & 0.6069 & 0.0251 & \\
+  E2 - Bootstrapping 	&10 & Norwegian & 0.6014 & 0.0254 &  \\
+  E2 - Bootstrapping 	&20 & Norwegian & & & \\
+  E2 - Bootstrapping 	&30 & Norwegian & & &  \\
+  E2 - Bootstrapping 	&40 & Norwegian & & &  \\
+  E2 - Confident 		&0	& Norwegian & 0.6032 & 0.0253 &  \\
+  E2 - Confident 		&10 & Norwegian & 0.5913 & 0.0257 &   \\
+  E2 - Confident 		&20 & Norwegian & & &  \\
+  E2 - Confident 		&30 & Norwegian & & &  \\
+  E2 - Confident 		&40 & Norwegian & & &  \\
+  \hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+\label{tab:results_curriculum_learning_breakeven}
+\end{table}
+
 \subsection{Curriculum Learning with Aerial Imagery}
 \label{sec:results_curriculum_learning_aerial_imagery}
 
@@ -103,23 +142,23 @@ The precision and recall breakeven values from Experiment E5 and Experiment E4, 
 \end{figure}
 
 \begin{table}
-\caption[Curriculum learning results]{Curriculum learning results. test loss p-values computed by the Welch's t test between samples from two distributions. If the value is below 0.1, it is plausible that the samples originate from different distributions.}
+\caption[Curriculum learning results]{Curriculum learning results. P-values are computed for the test loss. The Welch's t test compare the experiment and baseline distribution. If a p-value is below 0.1, it is plausible that the samples originate from different distributions.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+l ^l ^l ^r ^r ^r}\hline
+\begin{tabular}{+p{3.3cm} ^l ^l ^r ^r ^r}\hline
 \rowstyle{\bfseries}
   Experiment & $\mathbf{D_0}$ & Dataset & Breakeven & Test loss & P-value\\\hline
-  E4 - Baseline &1.0& Massachusetts & 0.7211 & - \\
-  E4 - Curriculum &0.25& Massachusetts & 0.\textbf{7353} & 0.01023 \\
-  E4 - Anti-curriculum &0.25 & Massachusetts & 0.6904 & 0.00057 \\\hline
-  E5 - Baseline & 1.00 & Norwegian & 0.6105 & -  \\
-  E5 - Curriculum &0.15 & Norwegian & 0.6264 & 0.18160 \\
-  E5 - Curriculum &0.25 & Norwegian & \textbf{0.6292} & 0.00817 \\
-  E5 - Curriculum &0.35 & Norwegian & 0.6269 & 0.00017 \\\hline
-  E6 - Baseline & 1.00 & Massachusetts & 0.7836 & - \\
-  E6 - Curriculum &0.25 & Massachusetts & 0.7880 & 0.01519 \\
-  E6 - Baseline, gradual &1.00 & Massachusetts & 0.7952 & - \\
-  E6 - Curriculum, gradual &0.25 & Massachusetts & \textbf{0.8088} & 0.00007 \\
+  E4 - Baseline 		&1.0& Massachusetts & 0.7211 & 0.0279 & - \\
+  E4 - Curriculum 	&0.25& Massachusetts & \textbf{0.7353} & 0.0267 & 0.01023 \\
+  E4 - Anti-curriculum &0.25 & Massachusetts & 0.6904 & 0.0296 & 0.00057 \\\hline
+  E5 - Baseline 		& 1.00 & Norwegian & 0.6105 & 0.0262 & -  \\
+  E5 - Curriculum 	&0.15 & Norwegian & 0.6264 & 0.0255 & 0.18160 \\
+  E5 - Curriculum 	&0.25 & Norwegian & \textbf{0.6292} & 0.0240 & 0.00817 \\
+  E5 - Curriculum 	&0.35 & Norwegian & 0.6269 & 0.0237 & 0.00017 \\\hline
+  E6 - Baseline 		&1.00 & Massachusetts & 0.7836 & 0.0258 & - \\
+  E6 - Curriculum 	&0.25 & Massachusetts & 0.7880 & 0.0245 & 0.01519 \\
+  E6 - Baseline, gradual 	&1.00 & Massachusetts & 0.7952 			&0.0267 & - \\
+  E6 - Curriculum, gradual 	&0.25 & Massachusetts & \textbf{0.8088} 	&0.0250 & 0.00007 \\
   \hline
 \end{tabular}
 \end{adjustbox}
@@ -179,7 +218,7 @@ The baseline plot even decreases substantially after epoch 60. This is an improv
 \label{sec:results_road_detection_system}
 In Experiment E7, the road detection system was trained on a much larger patch dataset than in previous sections. In order for the patch dataset to fit in main memory, the examples were split into nine separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E7_performance_mass_lc}, where the loss increases slightly after a training set switch. The network converged to a \ac{MSE} test loss of 0.0232. \\
 
-In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}\todo{Explain what the comparable work actually is?}.\\
+In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}. Descriptions of these systems can be found in Section \ref{sec:related_works}.\todo{Describe these in related works}  \\
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
@@ -195,7 +234,7 @@ In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall cu
 \caption[E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset]{E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset.} \label{fig:E7_performance_mass}
 \end{figure}
 
-\begin{table}
+\begin{table}[H]
 \caption[Road detection system results]{Road detection system results. The values in this table represent the precision and recall breakeven points achieved by the systems.}
 \centering
 \begin{tabular}{+l ^r ^r}\hline

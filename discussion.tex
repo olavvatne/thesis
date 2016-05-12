@@ -15,7 +15,7 @@ There is also the issue of seemingly contradictory results in Experiment E3. Eve
 
 The alternative bootstrapping loss function  behaves slightly different compared to bootstrapping, as demonstrated by the test loss figures, \ref{fig:E2_boot_norway_loss} and \ref{fig:E3_boot_norway_vbase_loss}. In these figures, the confident bootstrapping seems to follow the general outline of the baseline more closely than bootstrapping. The only difference between the two, is that the confident bootstrapping loss function modifies targets using only confident pixel predictions. In addition, for the N50 label set, this loss function actually performed slightly better than bootstrapping and the baseline \todo{Oh my glob}.\\ 
 
-In summary, the experiments show that the bootstrapping can successfully utilize the implicit knowledge stored in the network. But, the possible performance gain might not justify it's use. \\
+In summary, the experiments show that the bootstrapping can successfully utilize the implicit knowledge stored in the network. But, the possible performance gain might not justify it's use.\todo{Not so sucessfully!} \\
 
 %An additional challenge was the constraint on runtime. To run 10 replicate experiments, the patch dataset size had to be limited. This might impact the performance of the bootstrapping methods, since they rely on models that have already incorporated some implicit knowledge about the data.\\
 
