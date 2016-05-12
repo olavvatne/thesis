@@ -62,7 +62,7 @@
 \newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
 #1\ignorespaces
 }
-%\setlength{\parindent}{0pt}
+\setlength{\parindent}{0pt}
 \usepackage{todonotes}
 \presetkeys{todonotes}{color=blue!20, bordercolor=white}{}
 \begin{document}
@@ -99,7 +99,7 @@ This thesis presents a brief introduction to aerial road detection, and semantic
 
 The bootstrapping method incorporates the model's  own predictions in the cross-entropy loss function, which modifies the label targets through a convex combination between the prediction and the label.\\
 
-In addition, the thesis investigates curriculum learning and it's impact on classifier accuracy. A curriculum strategy is defined, which estimates example difficulty. The classifier is trained by presenting "easier" examples at the beginning, and then gradually introduce "harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
+The thesis investigates curriculum learning and it's impact on classifier accuracy. A curriculum strategy is defined, which estimates example difficulty. The classifier is trained by presenting "easier" examples at the beginning, and then gradually introduce "harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
 
 The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task, and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However this result was not significant.
 
@@ -174,7 +174,7 @@ This chapter aims at giving an introduction to the thesis. This includes a brief
 
 \chapter{Background Theory and Motivation}\label{T-B}
 \label{cha:TheoryAndBackground}
-This chapter presents background theory and related works related to the research goal and questions.In section \ref{sec:BackgroundAndMotivation} topics such as \ac{CNN}, label noise and road extraction system are briefly introduced. The structured literature review is outlined in Section \ref{sec:literature_resources}. The relevant research found by the structured literature review are then presented in Section \ref{sec:related_works}. Finally, Section \ref{sec:backgroundDiscussion} concludes the chapter by a background discussion \todo{Valid use of finally?}.
+This chapter presents background theory and related works related to the research goal and questions.In section \ref{sec:BackgroundAndMotivation} topics such as \ac{CNN}, label noise and road extraction system are briefly introduced. The structured literature review is outlined in Section \ref{sec:literature_resources}. The relevant research found by the structured literature review are then presented in Section \ref{sec:related_works}. Finally, Section \ref{sec:backgroundDiscussion} concludes the chapter by a background discussion.
 \input{background_theory}
 
 \input{structured_literature_review}
@@ -187,7 +187,7 @@ This chapter presents background theory and related works related to the researc
 
 \chapter{Methods}
 \label{cha:architectureAndModel}
-This chapter will describe the architecture, and the methods that were needed in order to investigate the research questions presented in Section \ref{sec:Goals and Research Questions}. An overview of the system and it's components can be found in Section \ref{sec:systemOverview}. Section \ref{sec:network} presents the architecture, regularization, optimization and data preprocessing used for the convolutional neural network. Furthermore, the methods specifically related to the research questions can be found in Section \ref{sec:curriculum_Learning} and Section \ref{sec:bootstrapping_loss}. These sections outline  and bootstrapping loss  in detail. The datasets used are described in Section \ref{sec:datasets}, and in Section \ref{sec:methods_implementation_details} implementation details can be found.
+This chapter will describe the architecture, and the methods that were needed in order to investigate the research questions presented in Section \ref{sec:Goals and Research Questions}. An overview of the system and it's components can be found in Section \ref{sec:systemOverview}. Section \ref{sec:network} presents the architecture, regularization, optimization and data preprocessing used for the convolutional neural network. Furthermore, the methods specifically related to the research questions can be found in Section \ref{sec:bootstrapping_loss} and Section \ref{sec:curriculum_Learning}. These sections outline  and bootstrapping loss  in detail. The datasets used are described in Section \ref{sec:datasets}, and in Section \ref{sec:methods_implementation_details} implementation details can be found.
 
 \input{system_overview}
 
@@ -227,7 +227,7 @@ In Chapter \ref{cha:TheoryAndBackground}, the thesis presented background theory
 
 Chapter \ref{cha:architectureAndModel}, presented a detailed description about the selected methods and the aerial image datasets. This included, a presentation of the default hyperparameters, the architecture, the optimization and regularization methods used by the \ac{CNN}. The chapter also described how the Norwegian Roads Dataset was constructed from aerial imagery and existing map data, and why it is compelling to test the proposed methods with this type of dataset.\\
 
-Experimental results from the proposed methods and the road detection system was presented in Chapter \ref{cha:ResearchAndResults}. First, the design of the experiments were described, and the basis for conducting them. Then, the specific details and parameters for each experiment were listed. Finally, the results were presented, and then discussed. The results showed that the curriculum learning approach was promising. In contrast, the results from using the bootstrapping loss were slightly positive, but unsignificant. The qualitative analysis of the best performing road detection system, showed that a lot of the supposedly incorrect predictions, is arguably a result of inaccurate label maps.\\
+Experimental results from the proposed methods and the road detection system was presented in Chapter \ref{cha:ResearchAndResults}. First, the design of the experiments were described, and the basis for conducting them. Then, the specific details and parameters for each experiment were listed. Finally, the results were presented, and then discussed. The results showed that the curriculum learning approach was promising. In contrast, the results from using the bootstrapping loss were slightly positive, but unsignificant. The qualitative analysis of one of the best performing road detection system, showed that a lot of the supposedly incorrect predictions, is arguably a result of inaccurate label maps.\\
 
 \input{summaryDiscussion}
 
