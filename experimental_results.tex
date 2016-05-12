@@ -103,19 +103,24 @@ The precision and recall breakeven values from Experiment E5 and Experiment E4, 
 \end{figure}
 
 \begin{table}
-\caption[Curriculum learning results]{Curriculum learning results.}
+\caption[Curriculum learning results]{Curriculum learning results. test loss p-values computed by the Welch's t test between samples from two distributions. If the value is below 0.1, it is plausible that the samples originate from different distributions.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+l ^l ^l ^r}\hline
+\begin{tabular}{+l ^l ^l ^r ^r ^r}\hline
 \rowstyle{\bfseries}
-  Experiment & $\mathbf{D_0}$ & Dataset & Breakeven\\\hline
-  Baseline & 1.0 & Norwegian & 0.6105 \\
-  Curriculum &0.15 & Norwegian & 0.6264 \\
-  Curriculum &0.25 & Norwegian & \textbf{0.6292} \\
-  Curriculum &0.35 & Norwegian & 0.6269 \\\hline
-  Baseline &1.0& Massachusetts & 0.7211 \\
-  Curriculum &0.25& Massachusetts & 0.\textbf{7353} \\
-  Anti-curriculum &0.25 & Massachusetts & 0.6904 \\\hline
+  Experiment & $\mathbf{D_0}$ & Dataset & Breakeven & Test loss & P-value\\\hline
+  E4 - Baseline &1.0& Massachusetts & 0.7211 & - \\
+  E4 - Curriculum &0.25& Massachusetts & 0.\textbf{7353} & 0.01023 \\
+  E4 - Anti-curriculum &0.25 & Massachusetts & 0.6904 & 0.00057 \\\hline
+  E5 - Baseline & 1.00 & Norwegian & 0.6105 & -  \\
+  E5 - Curriculum &0.15 & Norwegian & 0.6264 & 0.18160 \\
+  E5 - Curriculum &0.25 & Norwegian & \textbf{0.6292} & 0.00817 \\
+  E5 - Curriculum &0.35 & Norwegian & 0.6269 & 0.00017 \\\hline
+  E6 - Baseline & 1.00 & Massachusetts & 0.7836 & - \\
+  E6 - Curriculum &0.25 & Massachusetts & 0.7880 & 0.01519 \\
+  E6 - Baseline, gradual &1.00 & Massachusetts & 0.7952 & - \\
+  E6 - Curriculum, gradual &0.25 & Massachusetts & \textbf{0.8088} & 0.00007 \\
+  \hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
