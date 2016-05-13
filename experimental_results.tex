@@ -58,7 +58,8 @@ The difference between bootstrapping and confident bootstrapping is evident in F
 \end{figure}
 
 \begin{table}
-\caption[Bootstrapping results]{Bootstrapping results. P-values are computed for the test loss. If a p-value is below 0.1, it is plausible that the samples originate from different distributions. The second column shows the percentage of artificial omission noise.}
+\caption[Bootstrapping results]{Bootstrapping results. A p-value is computed for each test loss. If a p-value is below 0.1, it is plausible that the samples originate from different distributions. The second column shows the \% of artificial omission noise.}
+ \vspace{-0.65cm}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+l ^l ^l ^r ^r ^r}\hline
@@ -245,8 +246,8 @@ In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall cu
   System & breakeven & best network\\\hline
   M1 - Network & 0.8341 & 0.8413\\
   M2 - Network & 0.8494 & 0.8627\\
-  \cite{MnihThesis}\tablefootnote{Number of repetitions unclear} & 0.8873 & \\
-  \cite{saito_building_and_roads}\tablefootnote{Number of repetitions unclear} & 0.8866& \\\hline
+  \cite{MnihThesis}\tablefootnote{The number of experiment runs is unclear} & 0.8873 & \\
+  \cite{saito_building_and_roads}\tablefootnote{See footnote 1} & 0.8866& \\\hline
   N1 - Network & 0.7508 & 0.7620 \\\hline
 \end{tabular}
 \label{tab:results_curriculum_learning_breakeven}
