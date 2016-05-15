@@ -2,14 +2,14 @@
 \label{sec:bootstrapping_loss}
 Normally, the loss function calculates the loss assuming the labels are correct. But many datasets contain label noise, which will result in the learner being penalized for making a correct prediction if the label happens to be inconsistent. According to \cite{Reed_noisy_labels_bootstrapping}, tweaking the loss function by incorporating the network's own predictions can yield improved robustness to inconsistent labelling. Whereas other approaches \citep{Mnih_aerial_images_noisy}\citep{Sukhbaatar_noisy_network_learning} explicitly model the noise distribution, the proposed loss function utilizes the implicit knowledge acquired by the network during optimization. The bootstrapping method, computes the loss by a convex combination of the model prediction q and the label y. Additionally, this thesis propose a variation of the bootstrapping loss function, which only incorporate confident predictions. \\
 
-The bootstrapping loss function uses the current model prediction $q$ and the noisy training label $y$ in a convex combination, which result in a modified target. Except for this, the loss function is similar to the cross-entropy loss function\todo{Is it though?}.The prediction's contribution to the convex combination is decided by the $\beta$ parameter. The bootstrapping loss for the aerial road detection system is defined below:
+The bootstrapping loss function uses the current model prediction $q$ and the noisy training label $y$ in a convex combination, which result in a modified target. Apart from that, the loss function is similar to the cross-entropy loss function. The prediction's contribution to the convex combination is decided by the $\beta$ parameter. The bootstrapping loss for the aerial road detection system is defined below:
 
  \begin{flalign*}
   \mathcal{L}_{\text{hard}}(q,y) =&  - \sum\limits_{i=1}^{w_m^2} [\beta y_i + (1-\beta)\mathbb{1}_{q_i > 0.5}]\log(q_i)  \\
                     & - \sum\limits_{i=1}^{w_m^2} [\beta (1-y_i) + (1-\beta)(1-\mathbb{1}_{q_i > 0.5})]\log(1 - q_i) 
  \end{flalign*}
 
-\noindent where $\mathbb{1}_{q_i > 0.5}$ is the MAP estimate of the model prediction $q$ \todo{Why is this important?}. For the task of road detection it is simply a threshold operation. All probabilities above 0.5 are set to 1, otherwise 0. This is the reason why this loss function is denoted hard. A soft version of bootstrapping where the predictions $q_i$ are used directly, has also been tested by \cite{Reed_noisy_labels_bootstrapping} , but generally performed worse than the bootstrapping hard variant.\\
+\noindent where $\mathbb{1}_{q_i > 0.5}=1$ if the road prediction probability $q_i$ for pixel $i$ is above $0.5$. For the task of road detection it is simply a threshold operation. In multi-class classification, $\mathbb{1}_{q_i > 0.5}$ is replaced by the \ac{MAP} estimate, as described in Section \ref{sec:related_works}. This is also the reason why this loss function is denoted hard. A soft version of bootstrapping where the predictions $q_i$ are used directly, has also been tested by \cite{Reed_noisy_labels_bootstrapping} , but generally performed worse than the bootstrapping hard variant.\\
 
 Bootstrapping loss combined with gradient descent, results in an EM-like algorithm. In the E-step the modified targets are generated, whereas in the M-step the network weights are adjusted to better predict the modified targets. The goal is for the learner to rely less on the inconsistent labels, and develop more consistent implicit knowledge, which in turn further improves the quality of the modified targets.\\
  
@@ -22,7 +22,7 @@ Since, the task involves the binary task of discriminating road pixels from non-
  
 \noindent where $\mathbb{1}_{q_i > 0.8}$ and $\mathbb{1}_{q_i < 0.2}$ are threshold operations which only keep fairly confident predictions. For the task of road detection, this translates to saying pixel predictions above 0.8 are most likely road pixels, and predictions below 0.2 are likely to be non-road pixels.\\
 
-In the actual implementation, the $\beta$ parameter is annealed from the max value $\beta_{max}$, down to the minimum value of $\beta_{min}$, starting from epoch $M$. This is because the learner should have some implicit knowledge before using it's predictions to modify the target. This is similar to the approach \todo{Just a bit of the approach. The method entirely different} by \cite{Sukhbaatar_noisy_network_learning}. The configurable parameters for bootstrapping can be found in Table \ref{tab:bootstrapping_parameters}.\\
+In the actual implementation, the $\beta$ parameter is annealed from the max value $\beta_{max}$, down to the minimum value of $\beta_{min}$, starting from epoch $M$. This is because the learner should have some implicit knowledge before using it's predictions to modify the target. The configurable parameters for bootstrapping can be found in Table \ref{tab:bootstrapping_parameters}.\\
 
 \begin{table}[htp]
 \caption[Hyperparameters for bootstrapping loss]{Hyperparameters for bootstrapping loss.}

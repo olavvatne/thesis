@@ -163,7 +163,7 @@ The bootstrapping approach tweaks the loss function to be a convex combination o
 
 $$\mathcal{L}(q,y) = - \sum\limits_{k=1}^L [\beta y_k + (1-\beta)z_k]log(q_k),$$
 
-where $z_k$ is assigned a value of 1 for the most probable class $q_i$, given the data. \\
+where $z_k$ is assigned a value of 1 only for the most probable class $l \in L$, according to the class prediction probabilities $q_k$. This is denoted $z_k := \mathbb{1}[k = \text{argmax}\ q_i, i=1\dots L]$, and is the \ac{MAP} estimate  of $q$ given the data $x$. \\
 
 This approach was tested on several image tasks, and yielded substantial improvements for several datasets. For all tasks, deep neural networks were trained and used as the baseline. The networks that were modified to include perceptual consistency were trained by fine-tuning the baseline parameters. \\
 

@@ -2,7 +2,7 @@
 \label{sec:futureWork}
 This section presents future work, such as how to further verify the proposed curriculum strategy and bootstrapping loss function. In addition, this section will suggest further improvements for the road detection system.\\
 
-The most compelling improvement of the road detection system, is by incorporating \ac{CRF} or a post processing neural network, as described in Section \ref{sec:related_works}. This was demonstrated by \cite{Kluckner_semantic_height} and \cite{Mnih_aerial_images_noisy} \todo{Correct cites?}, and yielded improvements in precision and recall and accuracy.\todo{Expand here?} \\
+The most compelling improvement of the road detection system, is by incorporating \ac{CRF} or a post processing neural network, as described in Section \ref{sec:related_works}. This was demonstrated by \cite{Kluckner_semantic_height} and \cite{Mnih_aerial_images_noisy} \todo{Correct cites?}, and yielded accuracy improvements. \\
 
 To use the road predictions further in GIS applications, the binary prediction images should be converted into road-line vectors. To do this, the predictions images has to be combined, and the resulting segmentation image must be cleaned. Methods from computer vision might be applicable for this work. For instance in \citep{Song_road_extraction_svm}, shape descriptions was extracted from the segmentation images, which can be used to measure density and shape index. Based on these values, shapes which have measurements not characteristic of roads can be removed by a threshold operation. In addition, morphological operations, such as thinning or skeletonization , can be used to reduce the segmented road regions down to one pixel thick lines. \todo{How to convert into vectors}\\
 
