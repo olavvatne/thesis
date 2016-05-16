@@ -2,7 +2,7 @@
 \label{sec:experimentalResults}
 \subsection{Bootstrapping for Imagery with Noisy Labels}
 \label{sec:results_bootstrapping}
-The results from Experiment E1 and E2 comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E1_boot_mass} and Figure \ref{fig:E2_boot_norway}. The plots in the first figure shows the performance of models trained on patch examples from the Massachusetts Roads Dataset, whereas the second figure show results from training on patch examples from the Norwegian Roads Dataset. Experiment E2 also includes the performance of confident bootstrapping. \todo{og tabell til slutt. Ta ut caption og putt i tekst. Beskrive tabell bedre. Fjerne experimental design artifically added noise. Ikke resultat, nevn heller i setup. Være konsekvent i figurer. }\\
+The results from Experiment E1 and E2 comparing the bootstrapping methods and the baseline method at several levels of label noise, are displayed in Figure \ref{fig:E1_boot_mass} and Figure \ref{fig:E2_boot_norway}. The plots in the first figure shows the performance of models trained on patch examples from the Massachusetts Roads Dataset, whereas the second figure show results from training on patch examples from the Norwegian Roads Dataset. Experiment E2 also includes the performance of confident bootstrapping. The results from Experiment E3 are displayed in Figure \ref{fig:E3_boot_norway_vbase}. This experiment did not add any artificial omission noise, but utilized the label set N50.\\
 
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
@@ -32,13 +32,13 @@ The results from Experiment E1 and E2 comparing the bootstrapping methods and th
 \caption[E2 - Robustness of bootstrapping for increasing amount of label noise]{E2 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E2_boot_norway}
 \end{figure}
 
-Figure \ref{fig:E1_boot_mass_loss} displays the test loss at different levels of label noise for Experiment E1. The baseline test loss, which utilizes the cross-entropy loss function, seems to generally increase as the noise level is increased. The bootstrapping loss function has a lower test loss compared to the baseline for noise levels above 10 percent.\\
+Figure \ref{fig:E1_boot_mass_loss} displays the test loss at different levels of label noise for Experiment E1. The baseline test loss seems to generally increase as the noise level is increased. The bootstrapping loss function has a lower test loss compared to the baseline for noise levels above 10 percent.\\
 
 Figure \ref{fig:E1_boot_mass_pr} displays the precision and recall breakeven points for increasing levels of label noise, and shows a trend of decreasing values.  At around 20 percent, the breakeven point of bootstrapping surpasses the baseline. However, the difference in performance seems to be small.\\
 
-In Figure \ref{fig:E2_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. The test loss plots does not seem to increase as much as expected. Though, the precision and recall breakeven points of the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E2_boot_norway_pr}. Although the bootstrapping methods behave a bit more erratic, the plot seems to be decreasing at a slower rate. The plots also show that the overall difference in performance is small. Detailed figures of the precision and recall curves and test loss per epoch plots for each level of label noise can be found in Appendix \ref{app:fullE5results}. \\
+In Figure \ref{fig:E2_boot_norway_loss}, the test loss for bootstrapping and confident bootstrapping are consistently lower than the baseline. The test loss plots does not seem to increase as much as expected. Though, the precision and recall breakeven points of the baseline, decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E2_boot_norway_pr}. Although the bootstrapping methods behave a bit more erratic, the plots seems to be decreasing at a slower rate. The plots also show that the overall difference in performance is small. Detailed figures of the precision and recall curves, and test loss per epoch plots for each level of label noise can be found in Appendix \ref{app:fullE5results}. \\
 
-A slightly different approach has been taken for Experiment E3. The road detection system has in this experiment been trained with labels from the label set N50, without adding artificial noise. The result from this experiment is displayed in Figure \ref{fig:E3_boot_norway_vbase}.\\
+The difference between bootstrapping and confident bootstrapping is clear in Figure \ref{fig:E3_boot_norway_vbase_loss}, which shows the test loss per epoch for Experiment E3. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increases in value. In terms of test loss, confident bootstrapping performed comparably to the baseline, while the regular bootstrapping performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E3_boot_norway_vbase_pr}. Both bootstrapping methods have better relaxed precision values  for every level of recall. \\
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
@@ -53,8 +53,6 @@ A slightly different approach has been taken for Experiment E3. The road detecti
 \hspace*{\fill} % separation between the subfigures
 \caption[E3 - Comparison of loss functions for Norwegian Roads Dataset Vbase]{E3 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E3_boot_norway_vbase}
 \end{figure}
-
-The difference between bootstrapping and confident bootstrapping is evident in Figure \ref{fig:E3_boot_norway_vbase_loss}. After epoch 90, the factor $\beta$ is decreased in favour of the model predictions. The test loss of confident bootstrapping sees an immediate decrease compared to the baseline, whereas the bootstrapping test loss increase in value. In terms of test loss, the confident bootstrapping loss function performed comparably to the baseline loss function, while the regular bootstrapping loss function performed worse. However, this result is not evident from the precision and recall curve, displayed in Figure \ref{fig:E3_boot_norway_vbase_pr}. Both bootstrapping methods have better relaxed precision values  for every level of recall. \\
 
 The results from Experiment E1, E2 and E3 are displayed in Table \ref{tab:results_bootstrapping_breakeven}. The table contains a row for every test, which includes  the percentage of artificial omission noise, precision and recall breakeven point, test loss and a p-value. The p-values are computed by the Welch's t-test from test loss samples of two different methods. For instance, the p-value of {\it E1 - bootstrapping 0\%} are computed by the test loss samples of {\it E1 - Bootstrapping 0\%} and {\it E1 - Baseline 0\%}.  If a p-value is below the significance level of 0.1, it is plausible that the samples originate from a distribution different from the distribution of the baseline samples. For the most part, the bootstrapping results are not statistically significant\todo{Need to check this}.\\
 
@@ -105,7 +103,7 @@ The results from Experiment E1, E2 and E3 are displayed in Table \ref{tab:result
 
 \subsection{Curriculum Learning with Aerial Imagery}
 \label{sec:results_curriculum_learning_aerial_imagery}
-Curriculum learning was tested in Experiment E4, E5 and E6. Results from Experiment E4 are displayed in Table \ref{fig:E4_curriculum_mass}, whereas results from Experiment E5 are displayed in Table \ref{fig:E5_curriculum_norway}. In addition, Experiment E4 explores anti-curriculum learning, while Experiment E5 tests patch datasets constructed with various difficulty thresholds $D_0$. Finally, Experiment E6 investigates gradual curriculum learning and the performance of only training with the first stage of a curriculum patch dataset.\\
+Curriculum learning was tested in Experiment E4, E5 and E6. Results from Experiment E4 are displayed in Figure \ref{fig:E4_curriculum_mass}, whereas results from Experiment E5 are displayed in Figure \ref{fig:E5_curriculum_norway}. In addition, Experiment E4 explored anti-curriculum learning, while Experiment E5 tested patch datasets constructed with various difficulty thresholds $D_0$. Finally, Experiment E6 investigated gradual curriculum learning and the performance of only training with the first stage of a curriculum patch dataset. The results from this experiment can be found in Figure \ref{fig:E6_curriculum_inexperienced}.\\
 
 Experiment E4 was conducted using the Massachusetts Roads Dataset. In Figure \ref{fig:E4_curr_mass_loss}, the switch from stage 0 to stage 1 at epoch 50 is clearly visible for the \textit{curriculum} and \textit{anti-curriculum} test loss plots. The network trained with the curriculum patch dataset, performed better than the baseline as seen in Figure \ref{fig:E4_curr_mass_loss} and Figure \ref{fig:E4_curr_mass_pr}. The test loss gap between the \textit{baseline} and \textit{curriculum} is largest before epoch 50, but is still maintained to a lesser extent after. The precision and recall breakeven point of \textit{curriculum} is above that of the \textit{baseline} as well.   \\
 
@@ -165,7 +163,7 @@ An interesting trend between the thresholds $D_0$ and the loss, is that decreasi
 
 Figure \ref{fig:E6_curriculum_inexperienced} shows the results from Experiment E6. The patch datasets in this experiment were created from a teacher that was trained with the same number of training examples as the patch datasets. Curriculum learning still achieved a higher test loss and gave better relaxed precision for all levels of releaxed recall, compared to the baseline.\\
 
-Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_inexperienced_pr} illustrate the performance of training with only the first stage of the patch datasets. As expected, the first stage baseline has a lower breakeven point than the two stage baseline. More surprisingly, the first stage curriculum outperformed both the baseline and the curriculum, both in terms of breakeven point and test loss. However, at recall levels less than 0.4, the precision of the first stage curriculum decreases rapidly. \\
+Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_inexperienced_pr} illustrate the performance of training with only the first stage of the patch datasets. As expected, the first stage baseline has a lower breakeven point than the two stage baseline. More surprisingly, the first stage curriculum outperformed both the baseline and the curriculum, both in terms of breakeven point and test loss. However, at recall levels less than 0.4, the precision of the first stage curriculum decreases rapidly. The test loss of the curriculum and baseline plot  increased substantially at epoch 60, when the stage switching occurred. \\
 
 %This shows that the curriculum strategy is effective at filtering out inconsistent labels, and with a suitable difficulty threshold $D_0$ can provides enough example variability in the first stage training set. Another possible reason for this result, is the sudden training set switch at epoch 60, which dramatically increases the test loss. \\
 
@@ -196,16 +194,15 @@ Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_ine
 \caption[E6 - Results from experiments with an less experienced teacher ]{E6 - Results from experiments with an less experienced teacher model.} \label{fig:E6_curriculum_inexperienced}
 \end{figure}
 
-This was further explored by creating two additional patch datasets, with 5 stages each. The first stage has 108000 examples, while the other 4 stages contain 54000 examples each. Subsequent stages replaces the training set, by assigning each example to a random position in the training set. Because the positions are picked by random sampling with replacement, only around 40\% of the existing examples in the training set are replaced at each switch. This results in a more gradual transition of the difficulty distribution. In Figure \ref{fig:E6_gradual_loss}, the stage switching with these patch datasets, results in the test loss being more stable.
-The baseline plot even decreases substantially after epoch 60. This is an improvement from the spiking behaviour from the two stage baseline. The gradual approach also shows promise in Figure \ref{fig:E6_curriculum_inexperienced}, where the curriculum plot achieves a breakeven point of 0.809, compared to the breakeven of 0.802 for the first stage curriculum. The gradual baseline approach only achieved a breakeven of 0.795.\\
+This was further explored by creating two additional patch datasets, with smaller stages that were gradually mixed into the training set. Subsequent stages replaced parts of the training set, by assigning each example to a random position in the training set. Because the positions are picked by random sampling with replacement, only around 40\% of the existing examples in the training set were replaced at each switch. This results in a more gradual transition of the difficulty distribution. As seen from Figure \ref{fig:E6_gradual_loss}, the test loss plots does not exhibit the same test loss increase after a stage switch. The baseline plot even decreases substantially after epoch 60. The gradual approach also seems promising in terms of precision and recall, as seen in Figure \ref{fig:E6_curriculum_inexperienced}. The network trained with a curriculum patch dataset achieved a breakeven point of 0.8088, compared to a breakeven of 0.7952 for the network trained with the baseline patch dataset.\\
 
 
 
-The precision and recall breakeven values from Experiment E4 and Experiment E5, are listed in Table \ref{tab:results_curriculum_learning_breakeven}, and shows that training with a curriculum strategy was beneficial for both datasets.\\
+The results from Experiment E4, E5 and E6, are listed in Table \ref{tab:results_curriculum_learning_breakeven}. Each row lists a test, and shows the difficulty threshold for that particular patch dataset, precision and recall breakeven point, test loss and a p-value. The p-values are computed for the test loss samples of the test and the baseline. The Welch's t test compare the test and baseline distribution. If a p-value is below the significance level of 0.1, it is plausible that the test and baseline samples originate from distinct distributions. The curriculum tests using a difficulty threshold of 0.25 and 0.35 have small p-values well below 0.1, which indicate that the results are sampled from the same underlying distribution. The results are statistically significant, and it is plausible that curriculum learning can improve the generalization accuracy of a convolutional neural network\todo{Can i say this for certain}. \\
 
 
 \begin{table}
-\caption[Curriculum learning results]{Curriculum learning results. P-values are computed for the test loss. The Welch's t test compare the experiment and baseline distribution. If a p-value is below 0.1, it is plausible that the samples originate from different distributions.}
+\caption[Curriculum learning results]{Curriculum learning results. }
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+p{3.3cm} ^l ^l ^r ^r ^r}\hline
@@ -231,10 +228,13 @@ The precision and recall breakeven values from Experiment E4 and Experiment E5, 
 
 \subsection{Road Detection System}
 \label{sec:results_road_detection_system}
-In Experiment E7, the road detection system was trained on a much larger patch dataset than in previous sections. In order for the patch dataset to fit in main memory, the examples were split into nine separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E7_performance_mass_lc}, where the loss increases slightly after a training set switch. The network converged to a \ac{MSE} test loss of 0.0232. \\
+In Experiment E7, the road detection network M1 was trained on a very larger patch dataset. In order for the patch dataset to fit in main memory, the examples were split into nine separate stages each containing 442800 training examples. The content of the training set was switched during training. These switches are noticeable in the training loss plot in Figure \ref{fig:E7_performance_mass_lc}, where the training loss increases slightly after a training set switch. The network converged to a test loss of 0.0232. In Figure \ref{fig:E7_performance_mass_pr}, the precision and recall curve of Network M1 is displayed.  \\
 
-In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall curve is displayed. The precision and recall breakeven point for the system is 0.8341. Comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}. These systems have been described in Section \ref{sec:related_works}.\\
+An additional road detection system was trained with a modified network architecture. This increased the number of adjustable model parameters considerably. This achieved a higher precision and recall breakeven point than Network M1. The same architecture was tested with a large patch dataset constructed from the Norwegian Roads Dataset.\\
 
+The precision and recall breakeven point of these networks and comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}. These systems have been described in Section \ref{sec:related_works}.\\
+
+ 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_lc_loss.png}
@@ -252,14 +252,14 @@ In Figure \ref{fig:E7_performance_mass_pr}, the averaged precision and recall cu
 \begin{table}[H]
 \caption[Road detection system results]{Road detection system results. The values in this table represent the precision and recall breakeven points achieved by the systems.}
 \centering
-\begin{tabular}{+l ^r ^r}\hline
+\begin{tabular}{+l ^l ^r ^r}\hline
 \rowstyle{\bfseries}
-  System & breakeven & best network\\\hline
-  M1 - Network & 0.8341 & 0.8413\\
-  M2 - Network & 0.8494 & 0.8627\\
-  \cite{MnihThesis}\tablefootnote{The number of experiment runs is unclear.} & 0.8873 & \\
-  \cite{saito_building_and_roads}\tablefootnote{See footnote 1.} & 0.8866& \\\hline
-  N1 - Network & 0.7508 & 0.7620 \\\hline
+  System & Dataset & Breakeven & Best network\\\hline
+  Network M1 & Massachusetts & 0.8341 & 0.8413\\
+  Network M2 & Massachusetts &0.8494 & 0.8627\\
+  \cite{MnihThesis}\tablefootnote{The number of experiment runs is unclear.} &Massachusetts & 0.8873 & \\
+  \cite{saito_building_and_roads}\tablefootnote{See footnote 1.} &Massachusetts & 0.8866& \\\hline
+  Network N1 &Norwegian & 0.7508 & 0.7620 \\\hline
 \end{tabular}
 \label{tab:results_curriculum_learning_breakeven}
 \end{table}
