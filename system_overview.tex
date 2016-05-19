@@ -13,7 +13,7 @@ The objective of the system is to detect and segment roads found in aerial color
 \end{center}
 \end{figure}
 
-The system shares many similarities to the patch-based deep neural network presented by \cite{Mnih_aerial_images_noisy}. The system produces a patch of predictions given a patch of pixel values, where each value indicate the probability of the input pixel representing a road. Given a $64 \times 64$ aerial image patch the system computes a $16 \times 16$ patch of probabilities. The probabilities indicate the presence of road for the pixels found in the center of the aerial image patch. An example of input image patch and the output prediction patch can be seen in Figure \ref{fig:system_data_patch}.  \\
+The system shares many similarities to the patch-based deep neural network presented by \cite{Mnih_aerial_images_noisy}. The system produces a patch of predictions given a patch of pixel values, where each value indicate the probability of the input pixel representing a road. Given a $64 \times 64$ aerial image patch, the system computes a $16 \times 16$ patch of probabilities. The probabilities indicate the presence of road for the pixels found in the center of the aerial image patch. An example of input image patch and the output prediction patch can be seen in Figure \ref{fig:system_data_patch}.  \\
 
 \begin{figure}[t]
 \begin{center}
@@ -23,6 +23,6 @@ The system shares many similarities to the patch-based deep neural network prese
 \end{center}
 \end{figure}
 
-The actual implementation consists of two primary components, and an optional storage and graphical user interface web server component. The components and how they related, can be seen in Figure \ref{fig:system_components}. The storage and user interface component is not integral to the task of road detection, but has been a helpful aid when conducting experiments. Additionally, the patch dataset creator component is interchangeable, and can easily accommodate other varieties of segmentation datasets. In relation to the research questions, the patch dataset creator component is altered when investigating curriculum learning, and the loss function of the \ac{CNN} component is replaced when bootstrapping loss is applied. \\
+The actual implementation consists of two primary components, and an optional storage and graphical user interface web server component. The components and how they related, can be seen in Figure \ref{fig:system_components}. The storage and user interface component is not integral to the task of road detection, but has been a helpful aid when conducting experiments. Additionally, the patch dataset creator component is interchangeable, and can easily accommodate other varieties of segmentation datasets. In relation to the research questions, the patch dataset creator component is altered when investigating curriculum learning, and the loss function of the \ac{CNN} component is replaced when bootstrapping is tested. \\
 
 
