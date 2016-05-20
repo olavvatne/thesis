@@ -1,6 +1,6 @@
-\section{Analysis}
+\section{Experimental Analysis}
 \label{sec:Discussion}
-In the following discussion, the results presented in the previous section will be analysed more in-depth. Furthermore, qualitative results from the road detection system are evaluated, and might illustrate why methods for dealing with noisy labels are important for this type of dataset.\\
+In the following analysis, the results presented in the previous section will be explored more in-depth. Furthermore, qualitative results from the road detection system are evaluated, and might illustrate why methods for dealing with noisy labels are important for this type of dataset.\\
 
 The \ac{CNN} and the proposed methods are in some sense comparable to the three groups of approaches for dealing with label noise, described in \ref{sec:background_label_noise}. The bootstrapping loss function is clearly a noise-tolerant approach, where the loss function is modified in an attempt to make the network more robust towards label noise. The \ac{CNN} and the regularization methods can be categorized as a noise-robust model. Whereas, curriculum learning in some sense can be described as a data cleansing method. The training set does not exclude any examples from all stages, or relabel examples. But, the ``simple" stages are created based on filtering techniques, where inconsistency between label and prediction determine whether an example is excluded from a training set stage.  \\
 
