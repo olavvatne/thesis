@@ -6,17 +6,16 @@ In order to run the core system the following dependencies are required:
 \item Theano
 \item Numpy
 \item Unirest
+\item Python Imaging Library (PIL)
 \end{itemize}
 
 The system has only been tested with Ubuntu 14.04, but it should be possible to run on both Windows and Linux as long as the listed dependencies have been installed. Ubuntu is highly recommended because of a more convenient installation process. \\
 
 A Nvidia GPU is also highly recommended for running the system. In most instances a GPU can give considerable speed improvements when training compared to a CPU. This is critical when having to deal with large datasets and models with millions of parameters. In order for Theano to efficiently use your GPU while training, CUDA Toolkit has to be installed. \\
 
-A graphical user interface can also be utilized for monitoring training. Running experiments can be stopped from this user interface, as well as a debugging option which display examples and model predictions. In addition all experiment data is stored as JSON, and can be viewed in the user interface. This includes, a loss graph, precision and recall curve and hyperparameters used while training. \\
+A graphical user interface can also be utilized for monitoring the training. Running experiments can be stopped from this user interface, as well as a debugging option which display examples and model predictions. In addition all experiment data and results are stored as JSON, and can be viewed in the user interface. This includes, a loss per epoch plot, precision and recall curve and hyperparameters configuration. \\
 
-The monitoring system can either be run locally, or installed on a server. All communication between the core system and the monitoring system is done by HTTP messaging. To enable monitoring, enable\_gui should be set to true in the core system's config file.
-
-Utilizing this monitoring system requires these dependencies:
+The monitoring system can either be run locally, or installed on a server. All communication between the core system and the monitoring system is done by HTTP messaging. To enable monitoring, {\it enable\_gui} should be set to true in the core system's config file. Furthermore, the url to the monitoring system's api must also be set for the {\it endpoint} parameter. in  Utilizing this monitoring system requires these dependencies:
 \begin{itemize}
 \item Node.js
 \item MongoDB
@@ -204,29 +203,28 @@ All tools which have been created for this thesis are listed below. The source c
 \item measurement.precisionrecall.py\\
 The tool creates the precision and recall curve. Command line options can be supplied.
 \item layer.visualize.py\\
-Opens a params.pkl file, containing the weight and hyperparameter configuration of a trained network, and created a visualization of the kernels from the network's input layer.
+Opens a params.pkl file, containing the weights and hyperparameter configuration of a trained network. It creates a visualization of the kernels in the network's input layer.
 \item distribution.curriculum\_diff.py\\
-Samples patches and create a histogram showing a patch dataset difficulty estimate distribution. Useful for setting threshold $D_\theta$. Also useful for verifying the content in a curriculum patch dataset stage.
+Samples patch examples and creates a histogram showing the patch dataset difficulty estimate distribution. Useful for setting the  threshold $D_\theta$ when conducting experiments. Also useful for verifying the content in a curriculum patch dataset stage.
 \item distribution.dataset\_std.py\\
-Tool for finding an estimate of dataset's standard deviation. Used by contrast normalization in the pre-processing step.
+Tool for finding an estimate of a dataset's standard deviation. This value is used by the contrast normalization in the pre-processing step.
 \item distribution.label\_dist\\
-Counts the percentage of road label pixels in a dataset.
+Counts the percentage of true label pixels in a dataset with binary labels.
 \item curriculum.dataset\_create.py\\
-Tool for pre-generate a curriculum patch dataset. Command line options can be passed, to select a teacher, the thresholds $D_\theta$, the teachers optimal thresholding value, and dataset. The tool also comes with a baseline option which generate a staged patch dataset without curating the content of each stage.
+Tool for pre-generating a curriculum patch dataset. Command line options can be supplied to, select a teacher, the thresholds $D_\theta$, the teacher's optimal threshold value, and dataset. The tool also comes with a baseline option which generate a staged patch dataset without curating the content of each stage.
 \item convert.alpha.py\\
-Converts a RGB dataset to RGBA. Python module PIL quirk, which makes RGBA better when rotating the aerial images. Areas not covered by pixels after a rotation, set to transparent with RGBA. With RGB, these pixels are set to black, which results in a lot of patch examples with no content.
+Converts a RGB dataset to RGBA. A quirk of the Python module PIL makes RGBA preferable when rotating an images. Areas not covered by pixels after a rotation, aare set to transparent with RGBA. With RGB, these pixels are set to black, which results in a lot of patch examples with no content.
 \item figure.average\_compare.py\\
-Averages experiment runs, and plots the averaged MSE loss and precision and recall curve from the test dataset. The tool also marks the precision and recall breakeven point in the Figure. The resulting figures are used for comparison purposes in this thesis.
+Averages experiment runs, and plots the averaged MSE loss and precision and recall curve from the test dataset. The tool also marks the precision and recall breakeven point for each plot. The resulting figures are used for comparison purposes in this thesis.
 \item figure.average\_loss.py\\
-Averages the test, validation and training loss from experiment replicates, and plots the result in a figure. 
+Averages the test, validation and training loss from experiment replicates, and plots the result in a loss per epoch plot. 
 \item figure.average\_noise\_levels\\
-Average the final MSE loss for each replicate experiment, and precision and recall breakeven. 
-The figures created by this tools, show the MSE loss and breakeven, over increasing levels of label noise.
+Averages the final epoch's test loss of an experiment. It also averages the precision and recall breakeven of each replicate experiment. The figures created by this tools, show the MSE loss and breakeven point, over increasing levels of label noise.
 \end{itemize}
 
 \section{Road Detection Systems Results}
 \label{app:roaddetectionresults}
-In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is 0.863. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is 0.765.  \\
+In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is 0.8627. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is 0.7620.  \\
 
 \begin{figure}[H]
 \begin{subfigure}{0.23\textwidth}
@@ -431,7 +429,7 @@ In this appendix results from the best performing convolutional neural networks 
 \section{Experiment E2 Results}
 \label{app:fullE5results}
 
-The results from Experiment E2, were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E2_all_lc}, while the precision and recall curves are depicted in Figure \ref{fig:E2_all_pr}. Each plot is the average from 10 separate runs.\\
+The results from Experiment E2 were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E2_all_lc}, while the precision and recall curve figures are depicted in Figure \ref{fig:E2_all_pr}. Each plot is the average of 10 separate runs.\\
 
 \begin{figure}[H]
 \begin{subfigure}{0.31\textwidth}
@@ -502,19 +500,16 @@ The results from Experiment E2, were summarised by plotting the final test loss 
 \todo[inline]{Remove this part!}
 \begin{itemize}
 \item Figure 4.6 update
-\item Check that chapter 4 renaming is reflected in entire document. 
-\item Ensure either by a footnote or something that road extraction and road detection and so forth is the same thing.
-\item Include line about bootstrapping results being inconclusive
+\item Ensure either by a footnote or something that road extraction and road detection and so forth is the same thing
+\item Further fix contribution in Chapter 1. It is ok now.
 \item Do I explain the better results for first stage in discussion? If not some material is commented out in results.
-\item Expand on cross-entropy loss function?
 \item Appendix for qqplots
 \item What does harder examples look like? Examples
 \item Example of road removal first paragraph Section 4.3.1, Maybe in appendix?
-\item Rerun precision and recall for teachers - and be specific if precise or relaxed precision.
+\item organize with s because of british english?
 \item Appendix for other results? Random noise results? 
 \item proof read
 \item Road extraction, road detection, semantic segmentation, patch-based. That they are the same thing needs to be integrated somewhere
-\item Check that installation guides and dependencies are correct - Appendix A, B, C
+\item Check that installation guides, or should they be removed because of length. They are in repositories so.. and dependencies are correct - Appendix A, B, C
 \item Proof read for incorrect future tense
-\item Check if repetitions of mnih  is unclear. Unclear in Saito confirmed
 \end{itemize}

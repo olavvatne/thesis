@@ -99,7 +99,7 @@ This thesis presents a brief introduction to aerial road detection, and semantic
 
 The bootstrapping method incorporates the model's  own predictions in the cross-entropy loss function, which modifies the label targets through a convex combination between the prediction and the label.\\
 
-The thesis investigates curriculum learning and its impact on classifier accuracy. A curriculum strategy is defined, which estimates example difficulty. The classifier is trained by presenting "easier" examples at the beginning, and then gradually introduce "harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
+The thesis investigates curriculum learning and its impact on classifier accuracy. A curriculum strategy is first defined, which estimates example difficulty. The classifier is then trained by presenting "easier" examples at the beginning, and then gradually introduce "harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
 
 The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task, and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However, this result was not statistically significant.
 
@@ -159,7 +159,7 @@ helpful advice and guidance throughout this project. \\
 
 \chapter{Introduction}
 \label{cha:Introduction}
-This chapter aims at giving an introduction to the thesis. This includes a brief presentation of the field of Photogrammetry, road extraction from aerial imagery and an introduction to the thesis' research questions. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Next, the research methods are described in Section \ref{sec:researchMethod}. The contributions of this thesis are outlined in Section \ref{sec:IntroContributions}, and Section \ref{sec:thesisStructure} presents an overview of the thesis structure.
+This chapter aims at giving an introduction to this thesis. This includes a brief presentation of the field of Photogrammetry, road extraction from aerial imagery and an introduction to the thesis' research questions. Section \ref{sec:BackgroundAndMotivation} outlines the background and motivation, and in Section \ref{sec:Goals and Research Questions} goals and research questions are presented. Next, the research methods are described in Section \ref{sec:researchMethod}. The contributions of this thesis are outlined in Section \ref{sec:IntroContributions}, and Section \ref{sec:thesisStructure} presents an overview of the thesis structure.
 
 \input{motivation}
 
@@ -175,7 +175,7 @@ This chapter aims at giving an introduction to the thesis. This includes a brief
 
 \chapter{Background Theory and Motivation}\label{T-B}
 \label{cha:TheoryAndBackground}
-This chapter presents background theory and related works related to the research goal and questions.In section \ref{sec:BackgroundAndMotivation} topics such as \ac{CNN}, label noise and road extraction system are briefly introduced. The structured literature review is outlined in Section \ref{sec:literature_resources}. The relevant research found by the structured literature review are then presented in Section \ref{sec:related_works}. Finally, Section \ref{sec:backgroundDiscussion} concludes the chapter by a background discussion.
+This chapter presents background theory and related works relevant to the research goal and questions. In Section \ref{sec:BackgroundAndMotivation} topics such as \ac{CNN}, label noise and road detection are briefly introduced. The structured literature review is outlined in Section \ref{sec:slr}. The relevant research found by the structured literature review are then presented in Section \ref{sec:related_works}. Finally, Section \ref{sec:backgroundDiscussion} concludes the chapter by a background discussion.
 \input{background_theory}
 
 \input{structured_literature_review}
