@@ -1,6 +1,6 @@
 \section{Semantic Segmentation with CNN}
 \label{sec:network}
-This section presents the structure of the convolutional neural network, as well as the details surrounding the optimization and regularization of the network. 
+This section presents the architecture of the convolutional neural network, as well as the details surrounding the optimization and regularization of the network. 
 
 \subsection{Patch-based Approach}
 This thesis formulates the problem of road segmentation in aerial images in the same manner as \cite{Mnih_roads_high_res_aerial_images} did. This patch-based approach is presented in detail in Section \ref{sec:related_works}. In short, the convolutional neural network should learn the label distribution:
@@ -34,7 +34,7 @@ Common for both convolutional layers and fully connected layers are the use of n
 
 $$ y = \sigma(aw + b),$$
 
-\noindent where $a$ and  $w$ is the unit's incoming activations and weights, $b$ is the bias and $\sigma$ is the non-linear activation function.\\
+\noindent where $a$ and  $w$ is\todo{are} the unit's incoming activations and weights, $b$ is the bias and $\sigma$ is the non-linear activation function.\\
 
 In the default hyperparameter configuration of this system, the output layer applies the logistic activation function, while the \ac{ReLU} activation function is used by the input and hidden layers. The logistic activation function is appropriate for the output layer, because it squashes any input to be between the value of 0 and 1. This is useful for the road detection system, where the activation of each output unit should predict a probability of whether the corresponding aerial image patch pixel belongs to the road class or not. The \ac{ReLU}, however, has been used for all other layers. This activation function has been shown to train deep neural networks faster. This non-linear activation function does not suffer from the gradient vanishing problem because it is non-saturating \citep{Krizhevsky_imagenet}. The activation functions are displayed in Figure \ref{fig:activation_functions}.\\
 
@@ -66,19 +66,19 @@ The specific network configuration values described in this section is the defau
   Parameter & Description & Value\\\hline
   $K^{(l)}$ & Number of kernels for convolutional layer $l$ & 64, 112, 80 \\
   $CLF^{(l)}$ & Filter size of convolutional layer $l$ & (13,13),(4,4),(3,3) \\
-  $CLS^{(l)}$ & Stride amount of convolutional layer $l$ & (4,4),(1,1),(1,1) \\
+  $CLS^{(l)}$ & Stride size of convolutional layer $l$ & (4,4),(1,1),(1,1) \\
   $CLP^{(l)}$ & Pool size of convolutional layer $l$ & (2,2),(1,1),(1,1) \\
   $\mathcal{L}$ & Loss function  & Cross-entropy \\
   Epochs & How many epochs of training & 100 \\
-  $\sigma^{(l)}$ & Transfer function for each layer $l$ & ReLU x4, sigmoid x1 \\
+  $\sigma^{(l)}$ & Activation function for each layer $l$ & ReLU x4, sigmoid x1 \\
   $h$ & Number of neurons in hidden layer & 4096 \\
-  $p^{(l)}$ & Dropout rate for a layer $l$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
+  $p^{(l)}$ & Dropout rate for layer $l$ & 1.0, 0.9, 0.8, 0.5, 1.0 \\
   $ES_{init}$  & Initial early stopping patience in iterations & 100 000 \\
   $ES_{inc}$ & Increase factor for patience & 2 \\
   $ES_{thres}$  & Necessary improvement of validation loss before increasing patience & 0.997 \\
   $a$ & Learning rate & 0.0014 \\
   $a_{decrease}$ & learning rate decrease factor & 0.95 \\
-  $\lambda$ & L2 Weight decay strength & 0.0001 \\
+  $\lambda$ & L2 weight decay strength & 0.0001 \\
   $m$ & Momentum & 0.9 \\
   $b$ & Batch size & 64 \\\hline
 \end{tabular}
@@ -103,7 +103,7 @@ Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nest
      &\theta_{t} = \theta_{t-1} + v_t,
 \end{flalign*}
 
-\noindent where $\theta_t$ is the model parameters, $v_t$ the velocity, $m$ the momentum decay, $a$ the current learning rate, and $\nabla f(\theta)$ is the gradient.\\
+\noindent where $\theta_t$ is the model parameters, $v_t$ the velocity, $m$ the momentum decay, $a$ the current learning rate, and $\nabla f(z)$ is the gradient.\\
 
 An important hyperparameter for gradient descent optimization methods is the learning rate $a$. In this implementation, the learning rate is annealed over time by step decay. The learning rate is decreased in a regular interval of epochs by some factor $a_{decrease}$ during optimization. \\
 
@@ -129,7 +129,7 @@ The dropout method forces the units to rely less on each other by randomly disab
      &y = \frac{1}{p^{(l)}} r\circ \sigma(W^{(l)}x + b^{(l)}),
 \end{flalign*}
 
-\noindent where $W$ and $b$ are the weights and biases of layer $l$, $x$ denote the input potentials, and $\sigma(z)$ is the activation function. $r$ is a vector of independent Bernoulli random variables, each having a probability of $p^{(l)}$ being 1 (and otherwise 0). The element-wise multiplication of this vector and the output vector of $\sigma(z)$, causes the activation of randomly picked units to be nullified. These units are essentially dropped out. Instead of scaling the outgoing weights at test time, the output activations are divided by $p^{(l)}$  during training, which should essentially give the same scaling effect.\\
+\noindent where $W$ and $b$ are the weights and biases of layer $l$, $x$ denote\todo{s} the input potentials, and $\sigma(z)$ is the activation function. $r$ is a vector of independent Bernoulli random variables, each having a probability of $p^{(l)}$ being 1 (and otherwise 0). The element-wise multiplication of this vector and the output vector of $\sigma(z)$, causes the activation of randomly picked units to be nullified. These units are essentially dropped out. Instead of scaling the outgoing weights at test time, the output activations are divided by $p^{(l)}$  during training, which should essentially give the same scaling effect.\\
 
 
 \subsection{Data Preprocessing}
