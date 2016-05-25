@@ -2,7 +2,7 @@
 \label{sec:methods_implementation_details}
 The road detection system was written in the Python programming language, and uses the open source library Theano \citep{bergstra_theano}. Theano enables the developer to define and evaluate mathematical expressions involving tensors. The library implements several useful features to develop \ac{CNN}s, such as backpropagation, convolution, and max pooling. Training deep neural networks on a \ac{GPU} can be considerably faster than on a \ac{CPU}, and Theano can utilize both the \ac{CPU} and \ac{GPU} without making any modifications to the code.\\
 
-However, the use of a \ac{GPU} was key in making the experiments feasible to run. The system has a lot of adjustable parameters and requires a big dataset in order to generalize well to the task of road detection. The experiments were conducted on a machine with a Nvidia GTX 980 \ac{GPU} with 4 gigabytes of video memory. \\
+However, the use of a \ac{GPU} was key in making the experiments feasible to run. The system has a lot of adjustable parameters and requires a big dataset in order to generalize well to the task of road detection. The experiments were conducted on a machine with an Nvidia GTX 980 \ac{GPU} with 4 gigabytes of video memory. \\
 
 Because the size of the training set in many cases exceeded the capacity of the video memory, the video memory only contains the model, validation set, test set, and a subset of the training set at any given time during training. A switching mechanism was implemented, where chunks of the training set residing in main memory were loaded onto the \ac{GPU} sequentially during an epoch of training.\\
 
