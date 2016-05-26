@@ -232,7 +232,7 @@ In Experiment E7, the road detection network M1 was trained on a very large patc
 
 An additional road detection system was trained with a modified network architecture. This increased the number of adjustable model parameters considerably. This achieved a higher precision and recall breakeven point than Network M1. The same architecture was tested with a large patch dataset constructed from the Norwegian Roads Dataset.\\
 
-The precision and recall breakeven point of these networks and comparable experiments conducted in other works, are listed in Table \ref{tab:results_curriculum_learning_breakeven}. These systems have been described in Section \ref{sec:related_works}.\\
+The precision and recall breakeven point of these networks and comparable experiments conducted in other works, are listed in Table \ref{tab:results_road_detection_breakeven}. These systems have been described in Section \ref{sec:related_works}.\\
 
  
 \begin{figure}
@@ -249,7 +249,7 @@ The precision and recall breakeven point of these networks and comparable experi
 \caption[E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset]{E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset.} \label{fig:E7_performance_mass}
 \end{figure}
 
-\begin{table}[H]
+\begin{table}[]
 \caption[Road detection system results]{Road detection system results. The values in this table represent the precision and recall breakeven points achieved by the systems.}
 \centering
 \begin{tabular}{+l ^l ^r ^r}\hline
@@ -261,5 +261,5 @@ The precision and recall breakeven point of these networks and comparable experi
   \cite{saito_building_and_roads}\tablefootnote{See footnote 1.} &Massachusetts & 0.8866& \\\hline
   Network N1 &Norwegian & 0.7508 & 0.7620 \\\hline
 \end{tabular}
-\label{tab:results_curriculum_learning_breakeven}
+\label{tab:results_road_detection_breakeven}
 \end{table}
