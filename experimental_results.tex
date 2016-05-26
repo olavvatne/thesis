@@ -105,7 +105,7 @@ The results from Experiment E1, E2 and E3 are displayed in Table \ref{tab:result
 \label{sec:results_curriculum_learning_aerial_imagery}
 Curriculum learning was tested in Experiment E4, E5, and E6. Results from Experiment E4 are displayed in Figure \ref{fig:E4_curriculum_mass}, whereas results from Experiment E5 are displayed in Figure \ref{fig:E5_curriculum_norway}. In addition, Experiment E4 explored anti-curriculum learning, while Experiment E5 tested patch datasets constructed with various difficulty thresholds $D_0$. Finally, Experiment E6 investigated gradual curriculum learning and the performance of only training with the first stage of a curriculum patch dataset. The results from this experiment can be found in Figure \ref{fig:E6_curriculum_inexperienced}.\\
 
-Experiment E4 was conducted using the Massachusetts Roads Dataset. In Figure \ref{fig:E4_curr_mass_loss}, the switch from stage 0 to stage 1 at epoch 50 is clearly visible for the \textit{curriculum} and \textit{anti-curriculum} test loss plots. The network trained with the curriculum patch dataset, performed better than the baseline as seen in Figure \ref{fig:E4_curr_mass_loss} and Figure \ref{fig:E4_curr_mass_pr}. The test loss gap between the \textit{baseline} and \textit{curriculum} is largest before epoch 50, but is still maintained to a lesser extent after this epoch. The precision and recall breakeven point of \textit{curriculum} is above that of the \textit{baseline} as well.   \\
+Experiment E4 was conducted using the Massachusetts Roads Dataset. In Figure \ref{fig:E4_curr_mass_loss}, the switch from stage 0 to stage 1 at epoch 50 is clearly visible for the \textit{curriculum} and \textit{anti-curriculum} test loss plots. The network trained with the curriculum patch dataset performed better than the baseline as seen in Figure \ref{fig:E4_curr_mass_loss} and Figure \ref{fig:E4_curr_mass_pr}. The test loss gap between the \textit{baseline} and \textit{curriculum} is largest before epoch 50, but is still maintained to a lesser extent after this epoch. The precision and recall breakeven point of \textit{curriculum} is above that of the \textit{baseline} as well.   \\
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
@@ -127,13 +127,13 @@ The training set difficulty distribution, according to the difficulty estimator 
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\linewidth]{figs/E4/E4-road-dist.png}
-\caption{Distribution for road patches.} \label{fig:E4_difficulty_distribution_road}
+\includegraphics[width=\linewidth]{figs/E4/E4-road-dist2.png}
+\caption{Distribution of road patches.} \label{fig:E4_difficulty_distribution_road}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
-\includegraphics[width=\linewidth]{figs/E4/E4-non_road-dist.png}
-\caption{Distribution for non-road patches.} \label{fig:E4_difficulty_distribution_nonroad}
+\includegraphics[width=\linewidth]{figs/E4/E4-non_road-dist2.png}
+\caption{Distribution of non-road patches.} \label{fig:E4_difficulty_distribution_nonroad}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \caption[E4 - Difficulty distribution]{E4 - Example difficulty distribution according to estimator $d(y,q)$. } \label{fig:E4_difficulty_distribution}
@@ -159,7 +159,7 @@ Observing the plots in Figure \ref{fig:E5_curr_norway_loss}, the switch from sta
 
 In Figure \ref{fig:E5_curr_norway_pr}, the networks trained with a curriculum strategy shows \todo{show?} an improved relaxed precision for all levels of recall compared to the baseline.\\
 
-An interesting trend between the thresholds $D_0$ and the test loss is that decreasing the difficulty threshold, does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performed worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35}.\\
+An interesting trend between the thresholds $D_0$ and the test loss is that decreasing the difficulty threshold does not necessarily produce better results. The patch dataset \textit{Curriculum 0.15} has the easiest first stage, yet performed worse than \textit{Curriculum 0.25} and \textit{Curriculum 0.35}.\\
 
 Figure \ref{fig:E6_curriculum_inexperienced} shows the results from Experiment E6. The patch datasets in this experiment were created by the use of a teacher classifier that was trained with the same number of training examples as the patch datasets. Curriculum learning still achieved a higher test loss and gave better relaxed precision for all levels of relaxed recall, compared to the baseline.\\
 
@@ -178,12 +178,12 @@ Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_ine
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_pr_two_stage.png}
-\caption{Precision and recall comparisons for two stage dataset.} \label{fig:E6_curriculum_inexperienced_pr}
+\caption{Precision and recall comparisons with two stage dataset.} \label{fig:E6_curriculum_inexperienced_pr}
 \end{subfigure}
 
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_gradual.png}
-\caption{Test loss for dataset with gradual stage switching} \label{fig:E6_gradual_loss}
+\caption{Test loss with dataset with gradual stage switching} \label{fig:E6_gradual_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
@@ -191,7 +191,7 @@ Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_ine
 \caption{Precision and recall for dataset with gradual stage switching.} \label{fig:E6_gradual_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E6 - Results from experiments with an less experienced teacher ]{E6 - Results from experiments with an less experienced teacher model.} \label{fig:E6_curriculum_inexperienced}
+\caption[E6 - Results from experiments with a less experienced teacher ]{E6 - Results from experiments with an less experienced teacher model.} \label{fig:E6_curriculum_inexperienced}
 \end{figure}
 
 This was further explored by creating two additional patch datasets, with smaller stages that were gradually mixed into the training set. Subsequent stages replaced parts of the training set, by assigning each example to a random position in the training set. Because the positions are picked by random sampling with replacement, only around 40\% of the existing examples in the training set were replaced at each switch. This results in a more gradual transition of the difficulty distribution. As seen from Figure \ref{fig:E6_gradual_loss}, the test loss plots do not exhibit the same test loss increase after a stage switch. The baseline plot even decreases substantially after epoch 60. The gradual approach also seems promising in terms of precision and recall, as seen in Figure \ref{fig:E6_curriculum_inexperienced}. The network trained with a curriculum patch dataset achieved a breakeven point of 0.8088, compared to a breakeven of 0.7952 for the network trained with the baseline patch dataset.\\

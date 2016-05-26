@@ -81,7 +81,7 @@ This experiment involved measuring the performance between a baseline and  a cur
 \label{tab:key_parameter_E4}
 \end{table}
 
-The experiment's \todo{better than of after?} curriculum teacher was trained with a patch dataset of 442800 examples, sampled from Massachusetts Roads Dataset. The teacher classifier was trained for 272 epochs. It achieved a \ac{MSE} test loss of 0.0225, and a relaxed precision and recall breakeven point of 0.79.\\
+The experiment's \todo{better than of after?} curriculum teacher was trained with a patch dataset of 442800 examples, sampled from Massachusetts Roads Dataset. The teacher classifier was trained for 272 epochs. It achieved a \todo{an?} \ac{MSE} test loss of 0.0225, and a relaxed precision and recall breakeven point of 0.79.\\
 
 \subsubsection{E5 - Curriculum Learning with Norwegian Roads Dataset}
 Experiment E5 had a similar setup to Experiment E4. There were four different patch datasets, each with two stages. The baseline patch dataset was created by random sampling, whereas the others were created by a curriculum strategy. Three different curriculum patch datasets were tested, where each stage $0$ had a different $D_{0}$ threshold value.\\
@@ -109,7 +109,7 @@ The default network configuration was used for \todo{Må skjekke, spurt Ollie} t
 
 \subsubsection{E6 - Curriculum Learning with an Inexperienced Teacher}
 While Experiment E4 and E5 had teachers that were trained with over 400000 examples, this  
-experiment assumed that there is a limited amount of patches available. The teacher of this experiment was therefore only trained with 221600 examples, which is the same number of examples in each patch dataset. The model was trained for 156 epochs, and achieved a \ac{MSE} test loss of 0.0253, and a relaxed precision and recall breakeven point of 0.79.\\
+experiment assumed that there is a limited amount of patches available. The teacher of this experiment was therefore only trained with 221600 examples, which is the same number of examples in each patch dataset. The model was trained for 156 epochs, and achieved a \todo{an} \ac{MSE} test loss of 0.0253, and a relaxed precision and recall breakeven point of 0.79.\\
 
 In the experiment involving gradually increasing the difficulty of the training set, there were 326800 examples in total, split between $N=5$ stages. The first stage had 110800 examples, whereas the remaining stages had 54000 examples each. In the baseline, the difficulty threshold $D_\theta$ was set to 1 for every stage. The first stage of the curriculum patch dataset only allowed examples with a difficulty below 0.25. The key parameters of Experiment E6, are displayed in Table \ref{tab:key_parameter_E6}\\
 
