@@ -99,11 +99,11 @@
 \section*{Abstract}
 This thesis presents a brief introduction to aerial road detection and semantic segmentation of images. Datasets based on aerial imagery is often automatically generated from existing map data, which causes the dataset to be afflicted by label noise. Supervised training with datasets having inconsistent labeling will penalize the classifier for making correct predictions, and can impact the resulting performance. The thesis investigates different approaches to decrease the impact of noisy labels in deep neural networks. This includes modifying the loss function by the bootstrapping method, and adjusting the training regime through the use of curriculum learning.\\
 
-The bootstrapping method incorporates the model's  own predictions in the cross-entropy loss function. This loss function modifies the label targets through a convex combination between the prediction and the label.\\
+The bootstrapping method incorporates the predictions of the model in the cross-entropy loss function. This loss function modifies the label targets through a convex combination between the prediction and the label.\\
 
 The thesis investigates curriculum learning and its impact on classifier accuracy. A curriculum strategy is first defined, which estimates example difficulty. The classifier is then trained by presenting ``easier" examples at the beginning, and then gradually introduce ``harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
 
-The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task, and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However, this result was not statistically significant.
+The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However, this result was not statistically significant.
 
 \clearpage
 \selectlanguage{norsk} 
@@ -201,7 +201,7 @@ This chapter presents background theory and related works relevant to the resear
 
 \chapter{Methods}
 \label{cha:architectureAndModel}
-This chapter will describe the architecture and the methods that were needed in order to investigate the research questions presented in Section \ref{sec:Goals and Research Questions}. An overview of the system and its components can be found in Section \ref{sec:systemOverview}. Section \ref{sec:network} presents the architecture, regularization, optimization, and data preprocessing used for \todo{by} the convolutional neural network. Furthermore, the methods specifically related to the research questions can be found in Section \ref{sec:bootstrapping_loss} and Section \ref{sec:curriculum_Learning}. These sections outline curriculum learning and bootstrapping loss in detail. The datasets used are described in Section \ref{sec:datasets}, and implementation details can be found in Section \ref{sec:methods_implementation_details}.
+This chapter will describe the architecture and the methods that were needed in order to investigate the research questions presented in Section \ref{sec:Goals and Research Questions}. An overview of the system and its components can be found in Section \ref{sec:systemOverview}. Section \ref{sec:network} presents the architecture, regularization, optimization, and data preprocessing utilized by the convolutional neural network. Furthermore, the methods specifically related to the research questions can be found in Section \ref{sec:bootstrapping_loss} and Section \ref{sec:curriculum_Learning}. These sections outline curriculum learning and bootstrapping loss in detail. The datasets used are described in Section \ref{sec:datasets}, and implementation details can be found in Section \ref{sec:methods_implementation_details}.
 
 \input{system_overview}
 

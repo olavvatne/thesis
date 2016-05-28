@@ -109,7 +109,7 @@ The default network configuration was used for \todo{ for, spurt Ollie} the netw
 
 \subsubsection{E6 - Curriculum Learning with an Inexperienced Teacher}
 While Experiment E4 and E5 had teachers that were trained with over 400000 examples, this  
-experiment assumed that there is a limited amount of patches available. The teacher of this experiment was therefore only trained with 221600 examples, which is the same number of examples in each patch dataset. The model was trained for 156 epochs, and achieved an \ac{MSE} test loss of 0.0253, and a relaxed precision and recall breakeven point of 0.79.\\
+experiment assumed that there is a limited amount of patches available. The teacher of this experiment was therefore only trained with 221600 examples, which is the same number of examples in each patch dataset. The teacher classifier was trained for 156 epochs, and achieved an \ac{MSE} test loss of 0.0253, and a relaxed precision and recall breakeven point of 0.79.\\
 
 In the experiment involving gradually increasing the difficulty of the training set, there were 326800 examples in total, split between $N=5$ stages. The first stage had 110800 examples, whereas the remaining stages had 54000 examples each. In the baseline, the difficulty threshold $D_\theta$ was set to 1 for every stage. The first stage of the curriculum patch dataset only allowed examples with a difficulty below 0.25. The key parameters of Experiment E6, are displayed in Table \ref{tab:key_parameter_E6}.\\
 
@@ -135,7 +135,7 @@ In the experiment involving gradually increasing the difficulty of the training 
 \subsubsection{E7 - Performance of the Road Detection System}
 The performance of the road detection system was tested in Experiment E7. The M1 network utilized a patch dataset with 3985200 examples that were randomly sampled from the Massachusetts Roads Dataset. The network was trained for 300 epochs, unless early stopping terminated the optimization at an earlier point. In order to train with such a large dataset, the network trained with only a subset of the examples at any given epoch. The training data was switched with another subset at every $epoch\mod30=0$, starting from epoch 50. At any given epoch, the network was optimized by a total of 442800 examples. Any discrepancies from the default network configuration are listed in Table \ref{tab:key_parameter_E7}.\\
 
-In addition to the M1 network, Network M2 and N1 further tested the road detection performance on both aerial imagery datasets. The default network architecture was altered in both networks, as seen in Table  \ref{tab:key_parameter_E7}. This resulted in a significant increase in adjustable parameters compared to M1. Both networks utilized the {\it confident bootstrapping} loss function, and were trained by curriculum patch datasets. The curriculum teachers of Experiment E4 and E5 were used to create the patch datasets.\\
+In addition to the M1 network, Network M2 and N1 further tested the road detection performance on both road datasets. The default network architecture was altered in both networks, as seen in Table  \ref{tab:key_parameter_E7}. This resulted in a significant increase in adjustable parameters compared to M1. Both networks utilized the {\it confident bootstrapping} loss function, and were trained by curriculum patch datasets. The curriculum teachers of Experiment E4 and E5 were used to create the patch datasets.\\
 
 \begin{table}[p]
 \caption[Parameters of Experiment E7]{Key parameters of Experiment E7.}
