@@ -40,7 +40,7 @@ Opens a params.pkl file, containing the weights and hyperparameter configuration
 Samples patch examples and creates a histogram showing the patch dataset difficulty estimate distribution. Useful for setting the  threshold $D_\theta$ when conducting experiments. Also useful for verifying the content in a curriculum patch dataset stage.
 \item distribution.dataset\_std.py\\
 Tool for finding an estimate of a dataset's standard deviation. This value is used by the contrast normalization in the pre-processing step.
-\item distribution.label\_dist\\
+\item distribution.label\_dist.py\\
 Counts the percentage of true label pixels in a dataset with binary labels.
 \item curriculum.dataset\_create.py\\
 Tool for pre-generating a curriculum patch dataset. Command line options can be supplied to, select a teacher, the thresholds $D_\theta$, the teacher's optimal threshold value, and dataset. The tool also comes with a baseline option which generate a staged patch dataset without curating the content of each stage.
@@ -50,7 +50,7 @@ Converts a RGB dataset to RGBA. A quirk of the Python module PIL makes RGBA pref
 Averages experiment runs, and plots the averaged MSE loss and precision and recall curve from the test dataset. The tool also marks the precision and recall breakeven point for each plot. The resulting figures are used for comparison purposes in this thesis.
 \item figure.average\_loss.py\\
 Averages the test, validation and training loss from experiment replicates, and plots the result in a loss per epoch plot. 
-\item figure.average\_noise\_levels\\
+\item figure.average\_noise\_levels.py\\
 Averages the final epoch's test loss of an experiment. It also averages the precision and recall breakeven of each replicate experiment. The figures created by this tools, show the MSE loss and breakeven point, over increasing levels of label noise.
 \end{itemize}
 
@@ -361,11 +361,13 @@ The results from Experiment E2 were summarised by plotting the final test loss a
 \end{figure}
 
 
-\section{TODOs which apply to entire thesis}
-\todo[inline]{Remove this part!}
-\begin{itemize}
-\item proof read (second time, and be vary of incorrect tense. Also look out for long sentences, and tedious language. If used is used to often, make some fixes here as well)
-\item What does harder examples look like? Examples
-\item Example of road removal first paragraph Section 4.3.1, Maybe in appendix?
-\item Appendix Random noise results. Random noise and omission noise comparison, test loss summary. Small text? 
-\end{itemize}
+%\section{TODOs which apply to entire thesis}
+%\todo[inline]{Remove this part!}
+%\begin{itemize}
+%\item proof read (second time, and be vary of incorrect tense. Also look out for long %sentences, and tedious language. If used is used to often, make some fixes here as well)
+%\item What does harder examples look like? Examples
+%\item 5.1 cut?
+%\item Title Road detection in aerial imagery?
+%\item Example of road removal first paragraph Section 4.3.1, Maybe in appendix?
+%\item Appendix Random noise results. Random noise and omission noise comparison, test loss %summary. Small text? 
+%\end{itemize}
