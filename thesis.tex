@@ -97,24 +97,24 @@
 \clearpage
 
 \section*{Abstract}
-This thesis presents a brief introduction to aerial road detection and semantic segmentation of images. Datasets based on aerial imagery is often automatically generated from existing map data, which causes the dataset to be afflicted by label noise. Supervised training with datasets having inconsistent labeling will penalize the classifier for making correct predictions, and can impact the resulting performance. The thesis investigates different approaches to decrease the impact of noisy labels in deep neural networks. This includes modifying the loss function by the bootstrapping method, and adjusting the training regime through the use of curriculum learning.\\
+This thesis presents a brief introduction to aerial road detection and semantic segmentation of images. Datasets based on aerial imagery is often automatically generated from existing map data, which causes the dataset to be afflicted by label noise. Supervised training with datasets containing inconsistent labeling will penalize the classifier for making correct predictions, and can impact the resulting performance. The thesis investigates different approaches to decrease the impact of noisy labels in deep neural networks. This includes modifying the loss function by the bootstrapping method, and adjusting the training regime through the use of curriculum learning.\\
 
 The bootstrapping method incorporates the predictions of the model in the cross-entropy loss function. This loss function modifies the label targets through a convex combination between the prediction and the label.\\
 
 The thesis investigates curriculum learning and its impact on classifier accuracy. A curriculum strategy is first defined, which estimates example difficulty. The classifier is then trained by presenting ``easier" examples at the beginning, and then gradually introduce ``harder" examples to the training set. This thesis proposes a curriculum strategy based on estimating inconsistency between a prediction made by a teacher model and the corresponding label.\\
 
-The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However, this result was not statistically significant.
+The results from this thesis demonstrate that curriculum learning can improve generalization accuracy for the road detection task, and that a curriculum strategy based on estimating inconsistency is valid. Applying the bootstrapping loss function showed some robustness to the label noise present in aerial imagery. However, this result was not statistically significant.
 
 \clearpage
 \selectlanguage{norsk} 
 \section*{Sammendrag}
-Denne masteroppgaven undersøker temaer som deteksjon av veier fra flyfoto og semantisk segmentering av bilder. Datasett basert på flyfoto er ofte generert automatisk fra eksisterende kart data. Dette kan føre til datasett som inneholder feil i målbildene. Veiledet læring med slike datasett vil potensielt føre til at klassifieringsalgoritmen blir straffet for korrekte prediksjoner. Dette kan påvirke ytelsen til algoritmen. Oppgaven undersøker derfor ulike måter å redusere de negative konsekvensene som kan oppstå ved bruk av motsigende målbilder, spesielt for dype nevrale nettverk. Den første metoden er kalt bootstrapping og endrer på tapsfunksjonen til nettverket. Den andre metoden, curriculum learning, strukturerer treningssettet som læringsalgoritmen trener på.\\
+Denne masteroppgaven undersøker temaer som deteksjon av veier fra flyfoto og semantisk segmentering av bilder. Datasett basert på flyfoto er ofte generert automatisk fra eksisterende kartdata. Dette kan føre til datasett som inneholder feil i målbildene. Veiledet læring med slike datasett vil potensielt føre til at klassifieringsalgoritmen blir straffet for korrekte prediksjoner, noe som kan påvirke ytelsen til algoritmen. Oppgaven undersøker derfor ulike måter å redusere de negative konsekvensene som kan oppstå ved bruk av motsigende målbilder, spesielt for dype nevrale nettverk. Den første metoden er kalt bootstrapping og endrer på tapsfunksjonen til nettverket. Den andre metoden, curriculum learning, strukturerer treningssettet som læringsalgoritmen trener på.\\
 
 Bootstrapping metoden tar i bruk klassifieringsalgoritmens egne prediksjoner i tapsfunksjonen. Den modifiserte tapsfunksjonen produserer et nytt mål basert på prediksjonen og målbildet.\\
 
-Videre tester oppgaven ut curriculum learning og hvordan dette påvirker nøy\-aktig\-heten til et dypt nevralt nettverk. Først må en strategi for hvordan man strukturer treningssettet bli utformet. Denne strategien  må kunne sortere treningssettet fra lette til vanskelige eksempler. I denne oppgaven blir vanskelighetsgraden til et eksempel estimert ved å se på ulikheten mellom et målbilde og en prediksjonen gjort av en lærer algoritme.\\
+Videre tester oppgaven ut curriculum learning og hvordan dette påvirker nøy\-aktig\-heten til et dypt nevralt nettverk. Først må en strategi for hvordan man strukturer treningssettet bli utformet. Denne strategien  må kunne sortere treningssettet fra lette til vanskelige eksempler. I denne oppgaven blir vanskelighetsgraden til et eksempel estimert ved å se på ulikheten mellom et målbilde og en prediksjonen gjort av en lærer-algoritme.\\
 
-Ut i fra oppgavens resultater ser man at curriculum learning kan øke den generelle nøyaktigheten til en algoritme trent til å gjenkjenne veier i flyfoto. Sorteringsstrategien ser også ut til å fungere bra. Resultatene fra bootstrapping metoden var derimot mindre overbevisende. Selv om metoden viste seg å være en anelse mer robust mot motsigende mål, var det ikke statistisk signifikans i resultatene.
+Ut ifra oppgavens resultater ser man at curriculum learning kan øke den generelle nøyaktigheten til en algoritme trent til å gjenkjenne veier i flyfoto. Sorteringsstrategien ser også ut til å fungere bra. Resultatene fra bootstrapping metoden var derimot mindre overbevisende. Selv om metoden viste seg å være en anelse mer robust mot motsigende mål, var det ikke statistisk signifikans i resultatene.
 \selectlanguage{english} 
 \clearpage
 
@@ -241,7 +241,7 @@ In Chapter \ref{cha:TheoryAndBackground}, the thesis presented background theory
 
 Chapter \ref{cha:architectureAndModel} presented a detailed description of the selected methods and the aerial image datasets. This included a presentation of the default hyperparameters, the architecture, the optimization and regularization methods used by the \ac{CNN}, the bootstrapping loss function, and the curriculum strategy. The chapter also described how the Norwegian Roads Dataset was constructed from aerial imagery and existing map data, and why it is compelling to test the proposed methods with this type of dataset.\\
 
-Experimental results from the proposed methods and the road detection system were presented in Chapter \ref{cha:ResearchAndResults}. First, the design of each experiment was described, and the basis for conducting them \todo{RAR}. Then, the specific details and parameters for each experiment were listed. Finally, the results were presented and then analyzed.\\
+Experimental results from the proposed methods and the road detection system were presented in Chapter \ref{cha:ResearchAndResults}. First, the design of each experiment was described. Then, the specific details and parameters for each experiment were listed. Finally, the results were presented and then analyzed.\\
 
 \input{summaryDiscussion}
 

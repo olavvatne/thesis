@@ -32,9 +32,9 @@ The results from Experiment E1 and E2, comparing the bootstrapping methods and t
 \caption[E2 - Robustness of bootstrapping for increasing amount of label noise]{E2 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E2_boot_norway}
 \end{figure}
 
-Figure \ref{fig:E1_boot_mass_loss} displays the test loss at different levels of label noise. The baseline test loss seems to increase slightly as the noise level is increased. The bootstrapping loss function has a lower test loss compared to the baseline for \todo{sjekk} noise levels above 10 percent.\\
+Figure \ref{fig:E1_boot_mass_loss} displays the test loss at different levels of label noise. The baseline test loss seems to increase slightly as the noise level is increased. The bootstrapping loss function has a lower test loss compared to the baseline for noise levels above 10 percent.\\
 
-Figure \ref{fig:E1_boot_mass_pr} displays the precision and recall breakeven points for \todo{SJEKK} increasing levels of label noise, and shows a trend of decreasing values.  At around 20 percent, the breakeven point of bootstrapping surpasses the baseline. However, the difference in performance seems to be small.\\
+Figure \ref{fig:E1_boot_mass_pr} displays the precision and recall breakeven points for increasing levels of label noise, and shows a trend of decreasing values.  At around 20 percent, the breakeven point of bootstrapping surpasses the baseline. However, the difference in performance seems to be small.\\
 
 In Figure \ref{fig:E2_boot_norway_loss}, the test loss of bootstrapping and confident bootstrapping is consistently lower than the baseline. The test loss plots do not seem to increase as much as expected. However, the precision and recall breakeven points of the baseline decrease with increasing levels of omission noise. This can be seen in Figure \ref{fig:E2_boot_norway_pr}. Although the bootstrapping methods behave a bit more erratic, the plots seem to be decreasing at a slightly slower rate. The plots also show that the overall difference in performance is small. Detailed figures of the precision and recall curves, and test loss per epoch plots of each level of label noise can be found in Appendix \ref{app:fullE5results}. \\
 
