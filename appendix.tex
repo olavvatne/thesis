@@ -84,9 +84,9 @@ One way of verifying that a population does not violate the normality assumption
 \end{figure}
 
 
-\section{Increasing Levels of Random Noise Experiment}
+\section{Random Noise Experiment}
 \label{app:randomnoiseexperiment}
-This appendix presents an additional experiment that tested the robustness of the different loss functions on labels with increasing levels of random noise. The noise was artificially added by flipping random label pixels until a certain percentage of label pixels had been flipped. The bottom row of Figure \ref{fig:app_E8_noise_flipping} displays a label image with different levels of random noise. Furthermore, comparable omission noise examples can be found in the top row of this figure.
+This appendix presents an additional experiment that tested the robustness of the different loss functions on labels with increasing levels of random noise. The noise was artificially added by flipping random label pixels until a certain percentage of label pixels had been flipped. The bottom row of Figure \ref{fig:app_E8_noise_flipping} displays a label image with different levels of random noise. Furthermore, comparable omission noise examples can be found in the top row of this figure.\\
 
 
 \begin{figure}[!b]
@@ -127,7 +127,6 @@ Networks were trained on 221600 examples for 100 epochs, with a learning rate of
 The results in Figure \ref{fig:app_E8_summary}, show a steeper increase in test loss for increasing levels of noise, compared to Experiment E1 and E2. With no random label noise, the baseline performed slightly better than the bootstrapping methods. However, the test losses at 20\% and 40\% show that bootstrapping has a considerably lower test loss compared to the baseline. The gap in test loss also seems to be increasing. The confident bootstrapping has a test loss comparable to bootstrapping at 20\% label noise. However, this test loss improvement is not maintained towards 40\% label noise. \\
 
 In Figure \ref{fig:app_E8_lc}, test loss per epoch plots are displayed. These show the averaged training run achieved at 20\% label noise. The bootstrapping plots and the baseline have similar results until epoch 60. At epoch 60, the test loss of both bootstrapping methods decreases rapidly, to a level well below the baseline. This epoch is also when the $\beta$ parameter was gradually decreased from $1.0$ to $0.8$.
-
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E8/summary.png}
@@ -141,11 +140,8 @@ In Figure \ref{fig:app_E8_lc}, test loss per epoch plots are displayed. These sh
 \caption[Label flipping results]{The test loss results of artificially increasing the level of random noise in labels.}
 \label{fig:app_E8}
 \end{figure}
+The results shows that bootstrapping seems to provide robustness against random label flipping. This is evident from the decrease in test loss after epoch 60, when the loss function starts modifying the labels using the model predictions. Figure \ref{fig:app_E8_summary} also shows an increasing gap between the test losses of bootstrapping and the baseline. Whereas the results of Experiment E1 and E2 were inconclusive, these results are significant. However, this type of label noise is unrealistic in the aerial image datasets used in this thesis. The label maps are often generated from existing map data. This process would not produce this type of label noise. however, this experiment suggests that bootstrapping can be applicable in some domains. \pagebreak
 
-The results shows that bootstrapping seems to provide robustness against random label flipping. This is evident from the decrease in test loss after epoch 60, when the loss function starts modifying the labels using the model predictions. Figure \ref{fig:app_E8_summary} also shows an increasing gap between the test losses of bootstrapping and the baseline. Whereas the results of Experiment E1 and E2 were inconclusive, these results are significant. However, this type of label noise is unrealistic in the aerial image datasets used in this thesis. The label maps are often generated from existing map data. This process would not produce this type of label noise. however, this experiment suggests that bootstrapping can be applicable in some domains. 
-
-
-\pagebreak
 \section{Road Detection Systems Results}
 \label{app:roaddetectionresults}
 In this appendix results from the best performing convolutional neural networks are displayed. The precision and recall breakeven point of the model trained on the Massachusetts Roads Dataset is 0.8627. Whereas, the breakeven point for the best model trained on the Norwegian Roads Dataset is 0.7620.
@@ -422,6 +418,4 @@ The results from Experiment E2 were summarised by plotting the final test loss a
 %\item What does harder examples look like? Examples
 %\item 5.1 cut?
 %\item Title Road detection in aerial imagery?
-%\item Example of road removal first paragraph Section 4.3.1, Maybe in appendix?
-%\item Appendix Random noise results. Random noise and omission noise comparison, test loss %summary. Small text? 
 %\end{itemize}
