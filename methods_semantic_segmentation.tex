@@ -108,12 +108,10 @@ Nesterov momentum is a variation of momentum. Unlike standard momentum, the Nest
 An important hyperparameter for gradient descent optimization methods is the learning rate $a$. In this implementation, the learning rate is annealed over time by step decay. The learning rate is decreased in a regular interval of epochs by some factor $a_{decrease}$ during optimization. \\
 
 The default loss function of the system is cross-entropy loss, which in the context of the patch-based approach is denoted:
-
 \begin{flalign*}
   \mathcal{L}_{\text{cross-entropy}}(q,y) =&  - \frac{1}{w_m^2} \sum\limits_{i=1}^{w_m^2} [y_i \log(q_i) + (1 -y_i)\log(1-q_i)],  \\ 
  \end{flalign*}
-
-\noindent where $q$ and $y$ are the prediction and label patch. Each of the patches has $w_m^2$ probabilities and label values, that are used for computing the element-wise cross-entropy. Cross-entropy loss is non-negative and moves towards 0 as the network improves at the task. Given a training label and a predicted output, the loss function measure how well a neural network fits the training data. In addition, the backpropagation computes gradients based on the output of this loss function. At each iteration of training, the loss is minimized by slightly adjusting the weights of the network in the direction of these gradients.\\
+where $q$ and $y$ are the prediction and label patch. Each of the patches has $w_m^2$ probabilities and label values, that are used for computing the element-wise cross-entropy. Cross-entropy loss is non-negative and moves towards 0 as the network improves at the task. Given a training label and a predicted output, the loss function measure how well a neural network fits the training data. In addition, the backpropagation computes gradients based on the output of this loss function. At each iteration of training, the loss is minimized by slightly adjusting the weights of the network in the direction of these gradients.\\
 
 \subsection{Regularization}
 To avoid overfitting the training data, and hopefully achieve better generalization, different regularization schemes are applied during optimization, such as L2 weight decay, early stopping, and dropout. The classifier's task is to learn the regularities found in the mappings between the data and labels in the training set. However, the training set also contains sampling errors and accidental patterns not relevant to the task at hand. Without regularization, a classifier will learn the useful, but also the erroneous regularities a bit too well, and can, therefore, start to overfit the data. \\
