@@ -117,15 +117,15 @@ In the experiment involving gradually increasing the difficulty of the training 
 \caption[Parameters of Experiment E6]{Key parameters of Experiment E6.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+p{2.5cm} ^p{9.5cm}}\hline
+\begin{tabular}{+p{2.8cm} ^p{9.4cm}}\hline
 \rowstyle{\bfseries}
   Method & Parameters \\\hline
   Baseline & 120 epochs, s=221600, $D_{0} = 1.0$,  $D_{1} = 1.0$, $t_{start} = 60$\\
   Curriculum & 120 epochs, s=221600, $D_{0} = 0.25$, $D_{1} = 1.0$, $t_{start} = 60$ \\
-  Baseline, First stage only & 120 epochs, s=221600, $D_{0} = 1.0$\\
-  Curriculum, First stage only & 120 epochs, s=221600, $D_{0} = 0.25$ \\
-  Baseline, Gradual & 120 epochs, s=326800, $D_{\theta} = 1.0, \theta \in \{0, 1, 2, 3, 4\}$, $t_{start} = 60$,  $t_{stage} = 15$\\
-  Curriculum, Gradual & 120 epochs, s=326800, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4\}$ , $t_{start} = 60$,  $t_{stage} = 15$ \\\hline
+  Baseline, \newline First stage only & 120 epochs, s=221600, $D_{0} = 1.0$\\
+  Curriculum, \newline First stage only & 120 epochs, s=221600, $D_{0} = 0.25$ \\
+  Baseline, \newline Gradual & 120 epochs, s=326800, $D_{\theta} = 1.0, \theta \in \{0, 1, 2, 3, 4\}$, $t_{start} = 60$,  $t_{stage} = 15$\\
+  Curriculum, \newline Gradual & 120 epochs, s=326800, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4\}$ , $t_{start} = 60$,  $t_{stage} = 15$ \\\hline
 \end{tabular}
 \end{adjustbox}
 \end{center}
@@ -141,12 +141,12 @@ In addition to the M1 network, Network M2 and N1 further tested the road detecti
 \caption[Parameters of Experiment E7]{Key parameters of Experiment E7.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
-\begin{tabular}{+p{2.4cm} ^p{9.8cm}}\hline
+\begin{tabular}{+p{2.8cm} ^p{9.4cm}}\hline
 \rowstyle{\bfseries}
   Method & Parameters \\\hline
   M1-Massachusetts, cross-entropy, no-curriculum & 300 epochs, $s=3985200$, $a=0.0015$, $b=128$, $\mathcal{L}$ = cross-entropy, $ES_{init}$ = 400000  \\
-  M2-Massachusetts, bootstrapping, curriculum & 85 epochs, $s=1772800$, $a=0.0025$,$a_{decrease}=0.9$ $b=128$, $m=0.93$, $\mathcal{L}$ = confident bootstrapping, $ES_{init}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
-    N3 - Norway, bootstrapping, curriculum & 85 epochs, $s=1760000$, $a=0.0025$, $a_{decrease}=0.9$, $b=128$, $m=0.93$ $\mathcal{L}$ = confident bootstrapping, $ES_{init}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
+  M2-Massachusetts, confident,\newline curriculum & 85 epochs, $s=1772800$, $a=0.0025$,$a_{decrease}=0.9$ $b=128$, $m=0.93$, $\mathcal{L}$ = confident bootstrapping, $ES_{init}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
+    N3 - Norwegian, confident,\newline curriculum & 85 epochs, $s=1760000$, $a=0.0025$, $a_{decrease}=0.9$, $b=128$, $m=0.93$ $\mathcal{L}$ = confident bootstrapping, $ES_{init}$ = 500000, $K^{(0)}=120$, $CLF^{(0)}=(16,16)$, $CLF^{(1)}=(8,8)$, $CLS^{(0)}=(2,2)$, $p^{0,1,2}=0.85$, $D_{0} = 0.25$, $D_{\theta} = 1.0, \theta \in \{1,2,3,4,5,6\}$ , $t_{start} = 30$,  $t_{stage} = 15$  \\
   \hline
 \end{tabular}
 \end{adjustbox}
