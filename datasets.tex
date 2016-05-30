@@ -10,15 +10,15 @@ Each aerial image has an accompanying identically sized binary label image, whic
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/Mass_roads_data_example2.png}
-\caption{Aerial image} \label{fig:mass_roads_example_data}
+\caption{Aerial image.} \label{fig:mass_roads_example_data}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/Mass_roads_label_example2.png}
-\caption{Label image} \label{fig:mass_roads_example_label}
+\caption{Label image.} \label{fig:mass_roads_example_label}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[Massachusetts Roads Dataset]{Image and label example taken from test set in Massachusetts Roads Dataset.} \label{fig:mass_roads_example}
+\caption[The Massachusetts Roads Dataset]{Image and label example taken from test set in the Massachusetts Roads Dataset.} \label{fig:mass_roads_example}
 \end{figure}
 
 
@@ -44,20 +44,20 @@ The quality of the generated label maps might also present a challenge to a mach
 \begin{figure}[h]
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/nor_examples/1191_highway_n50.png}
-\caption{Divided highways} \label{fig:norwegian_roads_highway_n50}
+\caption{Divided highways.} \label{fig:norwegian_roads_highway_n50}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/nor_examples/1177_roundabout_n50.png}
-\caption{Roundabout} \label{fig:norwegian_roads_roundabout_n50}
+\caption{Roundabout.} \label{fig:norwegian_roads_roundabout_n50}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/nor_examples/1157_missing_n50.png}
-\caption{Private road} \label{fig:norwegian_roads_missing_n50}
+\caption{Private road.} \label{fig:norwegian_roads_missing_n50}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[Inconsistent labelling in Norwegian Roads Dataset N50]{Examples of inconsistent labelling found in the Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_examples_n50}
+\caption[Inconsistent labeling in the Norwegian Roads Dataset N50]{Examples of inconsistent labeling found in the Norwegian Roads Dataset N50.} \label{fig:norwegian_roads_examples_n50}
 \end{figure}
 
 In addition to the set of label images generated from N50, the dataset also includes an alternate set of label images generated from the road centerline vector database, Vbase \citep{Kartverket_vbase}. This database has more accurate road centerline vectors. There are still omission and registration errors present in this label image set, but to a less extent. Surfaces that share spectral similarities to asphalt, such as private roads and parking areas, have not been marked, similar to the Massachusetts Roads Dataset. The difference in accuracy between N50 and Vbase can be seen by comparing Figure \ref{fig:norwegian_roads_examples_n50} and Figure \ref{fig:norwegian_roads_examples_vbase}. A minor downside of using this alternate vector database is that Vbase provides fewer road segment properties, which have resulted in a smaller set of line thicknesses applied to the label images.\\
@@ -65,17 +65,17 @@ In addition to the set of label images generated from N50, the dataset also incl
 \begin{figure}[h]
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/nor_examples/1191_highway_vbase.png}
-\caption{Divided highways} \label{fig:norwegian_roads_highway_vbase}
+\caption{Divided highways.} \label{fig:norwegian_roads_highway_vbase}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/nor_examples/1177_roundabout_vbase.png}
-\caption{Roundabout} \label{fig:norwegian_roads_roundabout_vbase}
+\caption{Roundabout.} \label{fig:norwegian_roads_roundabout_vbase}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.31\textwidth}
 \includegraphics[width=\linewidth]{figs/datasets/nor_examples/1157_missing_vbase.png}
-\caption{Private road} \label{fig:norwegian_roads_missing_vbase}
+\caption{Private road.} \label{fig:norwegian_roads_missing_vbase}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \caption[Road centerline vector quality of Vbase]{Examples of road centerline vector quality in Vbase.} \label{fig:norwegian_roads_examples_vbase}

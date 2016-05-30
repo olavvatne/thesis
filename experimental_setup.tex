@@ -46,7 +46,7 @@ Experiment E2 tested the robustness towards label noise for the Norwegian Roads 
 In contrast to Experiment E2, this experiment tested the effect bootstrapping had on labels with a lot of registration noise. The training set consisted of examples from the Norwegian Roads Dataset N50. The label set N50 has coarser road centerline vectors, which result in a lot of registration noise compared to the other aerial image datasets. The experiment optimized models with  $s = 165 000$ patch examples, for 140 epochs. The learning rate $a$ was slightly lower than the default. The bootstrapping parameter $\beta$ was gradually decreased from $\beta_{max}=1.0$ at epoch $M=90$, to $\beta_{min}=0.8$. Essentially, the bootstrapping loss functions incorporated its own predictions starting from epoch 90. Any improvements should, therefore, be seen in the test loss after this epoch. In addition, the confident bootstrapping loss function was also tested in this experiment. A summary of the experiment and key parameters can be found in Table \ref{tab:key_parameter_E3}.\\
 
 \begin{table}[H]
-\caption[Parameters of E3]{Key parameters of E3.}
+\caption[Parameters of Experiment E3]{Key parameters of Experiment E3.}
 \begin{center}
 \begin{adjustbox}{max width=\textwidth}
 \begin{tabular}{+p{2.2cm} ^p{10cm}}\hline

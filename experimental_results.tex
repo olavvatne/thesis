@@ -7,29 +7,29 @@ The results from Experiment E1 and E2, comparing the bootstrapping methods and t
 \begin{figure}
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E1/E1-lc-noise.png}
-\caption{MSE test loss} \label{fig:E1_boot_mass_loss}
+\caption{MSE test loss.} \label{fig:E1_boot_mass_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.48\textwidth}
 \includegraphics[width=\linewidth]{figs/E1/E1-pr-noise.png}
-\caption{Precision and recall breakeven} \label{fig:E1_boot_mass_pr}
+\caption{Precision and recall breakeven.} \label{fig:E1_boot_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E1 - Robustness of bootstrapping with  Massachusetts Roads Dataset]{E1 - Robustness of bootstrapping for increasing amount of label noise. Massachusetts Roads Dataset} \label{fig:E1_boot_mass}
+\caption[E1 - Robustness of bootstrapping in the Massachusetts Roads Dataset]{E1 - Robustness of bootstrapping for increasing amounts of label noise in the Massachusetts Roads Dataset.} \label{fig:E1_boot_mass}
 \end{figure}
 
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E2/E2-lc-noise.png}
-\caption{MSE test loss} \label{fig:E2_boot_norway_loss}
+\caption{MSE test loss.} \label{fig:E2_boot_norway_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E2/E2-pr-noise.png}
-\caption{Precision and recall breakeven} \label{fig:E2_boot_norway_pr}
+\caption{Precision and recall breakeven.} \label{fig:E2_boot_norway_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E2 - Robustness of bootstrapping for increasing amount of label noise]{E2 - Robustness of bootstrapping for increasing amount of label noise. Norwegian Roads Dataset} \label{fig:E2_boot_norway}
+\caption[E2 - Robustness of bootstrapping in the Norwegian Roads Dataset]{E2 - Robustness of bootstrapping for increasing amounts of label noise in the Norwegian Roads Dataset.} \label{fig:E2_boot_norway}
 \end{figure}
 
 Figure \ref{fig:E1_boot_mass_loss} displays the test loss at different levels of label noise. The baseline test loss seems to increase slightly as the noise level is increased. The bootstrapping loss function has a lower test loss compared to the baseline for noise levels above 10 percent.\\
@@ -51,7 +51,7 @@ The difference between bootstrapping and confident bootstrapping is clear in Fig
 \caption{Precision and recall comparison.} \label{fig:E3_boot_norway_vbase_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E3 - Comparison of loss functions for Norwegian Roads Dataset Vbase]{E3 - Comparison of loss functions for Norwegian Roads Dataset Vbase. The training set consists of labels with omission noise, and severe levels registration noise.} \label{fig:E3_boot_norway_vbase}
+\caption[E3 - Comparison of loss functions using the Norwegian Roads Dataset Vbase]{E3 - Comparison of loss functions using the Norwegian Roads Dataset Vbase. The training set consists of labels affected by omission and registration noise.} \label{fig:E3_boot_norway_vbase}
 \end{figure}
 
 The results from Experiment E1, E2, and E3 are displayed in Table \ref{tab:results_bootstrapping_breakeven}. The table contains a row for every test, which includes  the percentage of artificial omission noise, precision and recall breakeven point, test loss, and a p-value. The p-values were computed by the Welch's t-test from test loss samples of two different methods. For instance, the p-value of {\it E1 - bootstrapping 0\%} are computed by the test loss samples of {\it E1 - Bootstrapping 0\%} and {\it E1 - Baseline 0\%}.  If a p-value is below the significance level of 0.05, it is plausible that the samples originate from a population different from the population of the baseline samples. The bootstrapping test loss results were not statistically significant.\\
@@ -110,7 +110,7 @@ Experiment E4 was conducted using the Massachusetts Roads Dataset. In Figure \re
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E4/E4-lc.png}
-\caption{Comparison of test loss} \label{fig:E4_curr_mass_loss}
+\caption{Comparison of test loss.} \label{fig:E4_curr_mass_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
@@ -118,7 +118,7 @@ Experiment E4 was conducted using the Massachusetts Roads Dataset. In Figure \re
 \caption{Precision and recall comparisons.} \label{fig:E4_curr_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E4 - Performance of curriculum learning for Massachusetts Roads Dataset]{E4 - Performance of curriculum learning and anti-curriculum learning for Massachusetts Roads Dataset} \label{fig:E4_curriculum_mass}
+\caption[E4 - Performance of curriculum learning with the Massachusetts Roads Dataset]{E4 - Performance of curriculum learning and anti-curriculum learning using the Massachusetts Roads Dataset.} \label{fig:E4_curriculum_mass}
 \end{figure}
 
 Training with an anti-curriculum strategy, where the first stage consists of harder examples, seemed to do worse than both the \textit{baseline} and \textit{curriculum}. This is especially evident in the test loss plot, where the test loss stagnates at around epoch 25, and starts to overfit towards epoch 50. From epoch 50 when stage 1 examples entered the training set, there is a dramatic decrease in test loss. The test loss decrease continues at a steady pace until epoch 85. Yet, the final performance of anti-curriculum learning is substantially lower than both the baseline and curriculum learning, as illustrated by the breakeven points in Figure \ref{fig:E4_curr_mass_pr}.\\
@@ -144,7 +144,7 @@ In Experiment E5, the road detection system was trained on four different patch 
 \begin{figure}[h]
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E5/E5-lc.png}
-\caption{Comparison of test loss} \label{fig:E5_curr_norway_loss}
+\caption{Comparison of test loss.} \label{fig:E5_curr_norway_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
@@ -152,7 +152,7 @@ In Experiment E5, the road detection system was trained on four different patch 
 \caption{Precision and recall comparisons.} \label{fig:E5_curr_norway_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E5 - Performance of curriculum learning for Norwegian Roads Dataset Vbase]{E5 - Performance of curriculum learning at different thresholds, $D_{0}$ for Norwegian Roads Dataset Vbase} \label{fig:E5_curriculum_norway}
+\caption[E5 - Performance of curriculum learning with the Norwegian Roads Dataset Vbase]{E5 - Performance of curriculum learning at different thresholds, $D_{0}$ using the Norwegian Roads Dataset Vbase.} \label{fig:E5_curriculum_norway}
 \end{figure}
 
 Observing the plots in Figure \ref{fig:E5_curr_norway_loss}, the switch from stage 0 to stage 1 is clearly visible at epoch 50. The increase in test loss is most severe in the datasets formed by a curriculum strategy. Leading up to epoch 50, the curriculum plots show an increasing gap in test loss if compared to the baseline plot. After the switch, the curriculum datasets still outperform the baseline dataset, even though the example distribution of stage 1 are the same for all patch datasets.\\
@@ -170,8 +170,7 @@ Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_ine
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_two_stage.png}
-
-\caption{Test loss for two stage dataset}
+\caption{Test loss for two stage dataset.}
 \vspace{0.4cm} 
 \label{fig:E6_curriculum_inexperienced_loss}
 \end{subfigure}
@@ -183,14 +182,13 @@ Figure \ref{fig:E6_curriculum_inexperienced_loss} and \ref{fig:E6_curriculum_ine
 
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_lc_gradual.png}
-\caption{Test loss with dataset with gradual stage switching} \label{fig:E6_gradual_loss}
+\caption{Test loss with dataset with gradual stage switching.} \label{fig:E6_gradual_loss}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E6/E6_pr_gradual.png}
 \caption{Precision and recall for dataset with gradual stage switching.} \label{fig:E6_gradual_pr}
 \end{subfigure}
-\hspace*{\fill} % separation between the subfigures
 \caption[E6 - Results from experiments with a less experienced teacher ]{E6 - Results from experiments with an less experienced teacher model.} \label{fig:E6_curriculum_inexperienced}
 \end{figure}
 
@@ -238,7 +236,7 @@ The precision and recall breakeven point of these networks and comparable experi
 \begin{figure}
 \begin{subfigure}{0.5\textwidth}
 \includegraphics[width=\linewidth]{figs/E7/E7_lc_loss.png}
-\caption{MSE loss} \label{fig:E7_performance_mass_lc}
+\caption{MSE loss.} \label{fig:E7_performance_mass_lc}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
 \begin{subfigure}{0.5\textwidth}
@@ -246,10 +244,10 @@ The precision and recall breakeven point of these networks and comparable experi
 \caption{Precision and recall.} \label{fig:E7_performance_mass_pr}
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\caption[E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset]{E7 - Performance of the M1 road detection system trained with Massachusetts Roads Dataset.} \label{fig:E7_performance_mass}
+\caption[E7 - Performance of the M1 road detection system trained with the Massachusetts Roads Dataset]{E7 - Performance of the M1 road detection system trained with the Massachusetts Roads Dataset.} \label{fig:E7_performance_mass}
 \end{figure}
 
-\begin{table}[]
+\begin{table}[h]
 \caption[Road detection system results]{Road detection system results. The values in this table represent the precision and recall breakeven points achieved by the systems.}
 \centering
 \begin{tabular}{+l ^l ^r ^r}\hline
