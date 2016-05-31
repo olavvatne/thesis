@@ -82,16 +82,16 @@ This was tested in Network M2, which used a different stride and kernel sizing. 
 The same network configuration, loss function, and training regime were tested with the Norwegian Roads Dataset Vbase in Network N1. The precision and recall breakeven point of this network was substantially lower. There are probably several reasons for this. First, the lower \ac{GSD} of this dataset implies that image  patches of $64 \times 64$ pixels convey less context compared to similarly sized patches from the Massachusetts Roads Dataset. This might reduce the network's ability to discriminate between road and non-road pixels in situations where surrounding context is key. Second, the results from the two roads datasets cannot be directly compared because they are different. The Norwegian Roads Dataset has images of varying image quality, and depict a wide range of topographical features. Furthermore, The Vbase label set has been rasterized with ill-suited line thicknesses for roads that are particularly wide or narrow. The examples in Figure \ref{fig:ill-suited} illustrate this. 
 
 \begin{figure}
-\begin{subfigure}{0.28\textwidth}
-\includegraphics[width=0.73\textwidth]{figs/illsuited_label.jpg}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=0.30\textwidth]{figs/illsuited_label.jpg}
 \caption{Non-road pixels superimposed.} \label{fig:ill-suited_example1}
-\vspace{0.5cm} % separation vertically between the subfigures
 \end{subfigure}
 \hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.58\textwidth}
-\includegraphics[width=\textwidth]{figs/illsuited_label2.jpg}
+\begin{subfigure}{0.5\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{figs/illsuited_label2.jpg}
 \caption{Road pixels superimposed.} \label{fig:ill-suited_example2}
-\vspace{0.9cm} % separation vertically between the subfigures
 \end{subfigure}
 
 \caption[Examples of ill-suited line thickness]{Examples of ill-suited line thickness.} \label{fig:ill-suited}
