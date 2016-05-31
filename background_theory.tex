@@ -61,7 +61,7 @@ To do automatic road detection, supervised learning is often employed. This requ
 \caption[Example from the Norwegian Roads Dataset]{Image and label example from the training set of the Norwegian Roads Dataset.} \label{fig:background_dataset_example}
 \end{figure}
 
-From these large training set images, smaller training set patches are extracted. The supervised learning algorithm is given a patch dataset $d$ containing $N$ training examples in the form $d=\{(s_1, m_1),...,(s_N, m_N)\}$, where $s_i$ is an aerial image patch and $m_i$ is the corresponding ground truth label. Examples of aerial image patches and labels can be found in Figure \ref{fig:examples_background}. The learning algorithm's task is to learn a suitable mapping from the input space of aerial imagery to the output space of road ground truth. In neural networks, this mapping is typically learned by minimizing the cross-entropy loss by gradient descent optimization.\\
+From these large training set images, smaller training set patches are extracted. The supervised learning algorithm is given a patch dataset $d$ containing $N$ training examples in the form $d=\{(s_1, m_1),...,(s_N, m_N)\}$, where $s_i$ is an aerial image patch and $m_i$ is the corresponding ground truth label. Examples of aerial image patches and labels can be found in Figure \ref{fig:examples_background}. The learning algorithm's task is to learn a suitable mapping from the input space of aerial images to the output space of road ground truth. In neural networks, this mapping is typically learned by minimizing the cross-entropy loss by gradient descent optimization.\\
 
 \begin{figure}
 \begin{center}
