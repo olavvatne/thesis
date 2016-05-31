@@ -13,9 +13,9 @@ The system has only been tested with Ubuntu 14.04, but it should be possible to 
 
 A Nvidia GPU is also highly recommended for running the system. In most instances a GPU can give considerable speed improvements when training compared to a CPU. This is critical when having to deal with large datasets and models with millions of parameters. In order for Theano to efficiently use your GPU while training, CUDA Toolkit has to be installed. \\
 
-A graphical user interface can also be utilized for monitoring the training. Running experiments can be stopped from this user interface, as well as a debugging option which display examples and model predictions. In addition all experiment data and results are stored as JSON, and can be viewed in the user interface. This includes, a loss per epoch plot, precision and recall curve and hyperparameters configuration. \\
+A graphical user interface can also be utilized for monitoring the training. Running experiments can be stopped from this user interface, as well as a debugging option which displays examples and model predictions. In addition all experiment data and results are stored as JSON, and can be viewed in the user interface. This includes, a loss per epoch plot, precision and recall curve and hyperparameter configuration. \\
 
-The monitoring system can either be run locally, or installed on a server. All communication between the core system and the monitoring system is done by HTTP messaging. To enable monitoring, {\it enable\_gui} should be set to true in the core system's config file. Furthermore, the url to the monitoring system's api must also be set for the {\it endpoint} parameter. in  Utilizing this monitoring system requires these dependencies:
+The monitoring system can either be run locally, or installed on a server. All communication between the core system and the monitoring system is done by HTTP messaging. To enable monitoring, {\it enable\_gui} must be set to true in the core system's config file. Furthermore, the url to the monitoring system's api has to be set for the {\it endpoint} parameter. Utilizing this monitoring system requires these dependencies:
 \begin{itemize}
 \item Node.js
 \item MongoDB
@@ -43,22 +43,22 @@ Samples patch examples and creates a histogram showing the patch dataset difficu
 \item distribution.dataset\_std.py\\
 Tool for finding an estimate of a dataset's standard deviation. This value is used by the contrast normalization in the pre-processing step.
 \item distribution.label\_dist.py\\
-Counts the percentage of true label pixels in a dataset with binary labels.
+Counts the percentage of true label pixels in a dataset.
 \item curriculum.dataset\_create.py\\
-Tool for pre-generating a curriculum patch dataset. Command line options can be supplied to select a teacher, the thresholds $D_\theta$, the teacher's optimal threshold value, and dataset. The tool also comes with a baseline option which generate a staged patch dataset without curating the content of each stage.
+Tool for pre-generating a curriculum patch dataset. Command line options can be supplied to select a teacher, the thresholds $D_\theta$, the teacher's optimal threshold value, and dataset. The tool comes with a baseline option that generates a staged patch dataset without curating the content of each stage.
 \item distribution.statistics.py\\
 The tool performs the Welch's t-test between two populations and Shapiro-Wilk normality test for each population. The tool also displays normal Q-Q plots generated from the samples of the experiment runs. 
 \item figure.average\_compare.py\\
-Averages experiment runs, and plots the averaged MSE loss and precision and recall curve from the test dataset. The tool also marks the precision and recall breakeven point for each plot. The resulting figures are used for comparison purposes in this thesis.
+Averages experiment runs, and plots the averaged MSE loss and precision and recall curve from the test dataset. The tool also marks the precision and recall breakeven point of each plot. The resulting figures are used for comparison purposes in this thesis.
 \item figure.average\_loss.py\\
-Averages the test, validation and training loss from experiment replicates and plots the result in a loss per epoch plot. 
+Averages the test, validation and training loss of experiment replicates and plots the result in a loss per epoch plot. 
 \item figure.average\_noise\_levels.py\\
-Averages the final epoch's test loss of an experiment. It also averages the precision and recall breakeven point of each noise level. The figures created by this tool shows the MSE test loss and breakeven point over increasing levels of label noise.
+Averages the test losses of experiments' final epoch. It also averages the precision and recall breakeven point of each noise level. The figures created by this tool shows the MSE test loss and breakeven point over increasing levels of label noise.
 \end{itemize}
 
 \section{Experiment Population Normality Assumption}
 \label{app:normality}
-The Welch's t test assumes that the samples are independent, and drawn from an approximately normal distributed population. In this appendix, the assumption of normality is explored further.\\
+The Welch's t-test assumes that the samples are independent, and drawn from an approximately normal distributed population. In this appendix, the assumption of normality is explored further.\\
 
 One way of verifying that a population does not violate the normality assumption is to create a normal Q-Q plot. These plots plot each sample based on its quantile and the corresponding theoretical quantile expected from a normal distribution. The population samples are normally distributed if the plotted points approximately fit a 45 degree line. The normal Q-Q plots comparing the test loss populations of {\it Experiment E1 - 0\% omission noise} to normal distributions can be found in Figure \ref{fig:normality_baseline} and Figure \ref{fig:normality_bootstrapping}. The plots are clearly affected by sample variability caused by the small sample sizes. This can be seen in Figure \ref{fig:normality_random}, where samples randomly picked from a normal distribution are plotted.  This plot is created from 10 randomly drawn samples from a normal distribution with mean and variance equal to that of the baseline population. Figure \ref{fig:normality_random100} displays the normal Q-Q plot of 100 random samples drawn from a similar normal distribution. This plot fits the line more closely than \ref{fig:normality_random}. Because of the small sample sizes, it can be hard to confidently assess whether the experiment populations are normally distributed or not. At least there does not seem to be any compelling evidence in the available sample data to suggest that the populations are clearly deviating from a normal distribution. This was also confirmed by the Shapiro-Wilk normality test.\\
 
@@ -89,39 +89,8 @@ One way of verifying that a population does not violate the normality assumption
 \section{Experiment E2 Results}
 \label{app:fullE5results}
 The results from Experiment E2 were summarised by plotting the final test loss and precision and breakeven point for increasing levels of omission noise. In this appendix, the test loss figures for every noise rate is shown in Figure \ref{fig:E2_all_lc}, while the precision and recall curve figures are depicted in Figure \ref{fig:E2_all_pr}.
-\begin{figure}[H]
-\begin{subfigure}{0.31\textwidth}
-\includegraphics[width=\textwidth]{figs/E2/pr_0.png}
-\caption{ 0\% } \label{fig:app_E2_0_pr}
-\vspace{-0.1cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.31\textwidth}
-\includegraphics[width=\textwidth]{figs/E2/pr_1.png}
-\caption{10\% } \label{fig:app_E2_1_pr}
-\vspace{-0.1cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.31\textwidth}
-\includegraphics[width=\textwidth]{figs/E2/pr_2.png}
-\caption{20\% } \label{fig:app_E2_2_pr}
-\vspace{-0.1cm} % separation vertically between the subfigures
-\end{subfigure}
-\begin{subfigure}{0.31\textwidth}
-\includegraphics[width=\textwidth]{figs/E2/pr_3.png}
-\caption{ 30\%} \label{fig:app_E2_3_pr}
-\vspace{-0.1cm} % separation vertically between the subfigures
-\end{subfigure}
-\hspace*{\fill} % separation between the subfigures
-\begin{subfigure}{0.31\textwidth}
-\includegraphics[width=\textwidth]{figs/E2/pr_4.png}
-\caption{40\%} \label{fig:app_E2_4_pr}
-\vspace{-0.1cm} % separation vertically between the subfigures
-\end{subfigure}
-\vspace{-0.6\baselineskip}
-\caption[E2 - Precision and recall plots for several levels of omission noise]{E2 - Precision and recall plots for several levels of omission noise.} \label{fig:E2_all_pr}
-\end{figure}
-\vspace{-0.7cm}
+
+
 \begin{figure}[H]
 \begin{subfigure}{0.3\textwidth}
 \includegraphics[width=\textwidth]{figs/E2/lc_0.png}
@@ -154,7 +123,39 @@ The results from Experiment E2 were summarised by plotting the final test loss a
 \vspace{-0.6\baselineskip}
 \caption[E2 - Test loss comparisons for several levels of omission noise]{E2 - Test loss comparisons for several levels of omission noise.} \label{fig:E2_all_lc}
 \end{figure}
-
+\vspace{-0.7cm}
+\begin{figure}[H]
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E2/pr_0.png}
+\caption{ 0\% } \label{fig:app_E2_0_pr}
+\vspace{-0.1cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E2/pr_1.png}
+\caption{10\% } \label{fig:app_E2_1_pr}
+\vspace{-0.1cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E2/pr_2.png}
+\caption{20\% } \label{fig:app_E2_2_pr}
+\vspace{-0.1cm} % separation vertically between the subfigures
+\end{subfigure}
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E2/pr_3.png}
+\caption{ 30\%} \label{fig:app_E2_3_pr}
+\vspace{-0.1cm} % separation vertically between the subfigures
+\end{subfigure}
+\hspace*{\fill} % separation between the subfigures
+\begin{subfigure}{0.31\textwidth}
+\includegraphics[width=\textwidth]{figs/E2/pr_4.png}
+\caption{40\%} \label{fig:app_E2_4_pr}
+\vspace{-0.1cm} % separation vertically between the subfigures
+\end{subfigure}
+\vspace{-0.6\baselineskip}
+\caption[E2 - Precision and recall plots for several levels of omission noise]{E2 - Precision and recall plots for several levels of omission noise.} \label{fig:E2_all_pr}
+\end{figure}
 
 \section{Random Noise Experiment}
 \label{app:randomnoiseexperiment}
@@ -194,7 +195,7 @@ This appendix presents an additional experiment that tested the robustness of th
 \caption[Artifical noise examples]{Examples of different levels of artifical noise added to a label image. The top row shows increasing levels of omission noise, while the bottom row illustrates increasing levels of random label flipping noise. } \label{fig:app_E8_noise_flipping}
 \end{figure}
 
-Networks were trained on 221600 examples for 100 epochs, with a learning rate of 0.0025, no curriculum learning, first layer kernel sizing of $K_0=64$, and a batch size of 64. Apart from that, the network architecture is similar to that of Network M2 in Experiment E7.\\
+Networks were trained on 221600 examples for 100 epochs, with a learning rate of 0.0025, no curriculum learning, number of kernels in first layer $K_0=64$, and a batch size of 64. Apart from that, the network architecture is similar to that of Network M2 in Experiment E7.\\
 
 The results in Figure \ref{fig:app_E8_summary}, show a steeper increase in test loss for increasing levels of noise, compared to Experiment E1 and E2. With no random label noise, the baseline performed slightly better than the bootstrapping methods. However, the test losses at 20\% and 40\% show that bootstrapping has a considerably lower test loss compared to the baseline. The gap in test loss also seems to be increasing. The confident bootstrapping has a test loss comparable to bootstrapping at 20\% label noise. However, this test loss improvement is not maintained towards 40\% label noise. \\
 
@@ -212,7 +213,7 @@ In Figure \ref{fig:app_E8_lc}, test loss per epoch plots are displayed. These sh
 \caption[Label flipping results]{The test loss results of artificially increasing the level of random noise in labels.}
 \label{fig:app_E8}
 \end{figure}
-The results shows that bootstrapping seems to provide robustness against random label flipping. This is evident from the decrease in test loss after epoch 60, when the loss function starts modifying the labels using the model predictions. Figure \ref{fig:app_E8_summary} also shows an increasing gap between the test losses of bootstrapping and the baseline. Whereas the results of Experiment E1 and E2 were inconclusive, these results are significant. However, this type of label noise is unrealistic in the aerial image datasets used in this thesis. The label maps are often generated from existing map data. This process would not produce this type of label noise. however, this experiment suggests that bootstrapping can be applicable in some domains. \pagebreak
+The results shows that bootstrapping seems to provide robustness against random label flipping. This is evident from the decrease in test loss after epoch 60 when the loss function starts modifying the labels using the model predictions. Figure \ref{fig:app_E8_summary} also shows an increasing gap between the test losses of bootstrapping and the baseline. Whereas the results of Experiment E1 and E2 were inconclusive, these results are significant. However, this type of label noise is unrealistic in the aerial image datasets used in this thesis. The label maps are often generated from existing map data. This process would not produce this type of label noise. however, this experiment suggests that bootstrapping can be applicable in some domains. \pagebreak
 
 \section{Road Detection Results}
 \label{app:roaddetectionresults}
